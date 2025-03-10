@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: SolarPanel
   m_EditorClassIdentifier: 
   prefab: {fileID: 2092416675136403838, guid: d117188d8cdbe414f9323478555ba1fb, type: 3}
-  cost: 10
+  cost: 20

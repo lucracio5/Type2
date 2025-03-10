@@ -11,9 +11,9 @@ public class MapPointer : MonoBehaviour
     GameObject cursor;
     MapCell current_cell;
     public GameObject[] cursors;
-    int activeCursor;
-    public GameObject[] prefabs;
+    public int activeCursor;
     public GameObject Gamemanager;
+    public Building_Scriptable_Object[] buildings;
 
 
 
@@ -50,11 +50,10 @@ public class MapPointer : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && current_cell != null)
         {
             int prefabs_index = activeCursor - 1;
-            Debug.Log(Gamemanager.GetComponent<Variable_Tracker>().money);
-            if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= 20)
+            if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
-                current_cell.Add_building(prefabs[prefabs_index]);
-                Gamemanager.GetComponent<Variable_Tracker>().money -= 20;
+                current_cell.Add_building(buildings[prefabs_index].prefab);
+                Gamemanager.GetComponent<Variable_Tracker>().money -= buildings[prefabs_index].cost;
                 
                 //current_cell.ChangeHeight(1);
             }

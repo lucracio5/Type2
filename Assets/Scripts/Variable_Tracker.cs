@@ -8,6 +8,7 @@ public class Variable_Tracker : MonoBehaviour
     public int Energy = 0;
     public Text text;
     public int money;
+    public int speed;
     void Start()
     {
         money = 100;
@@ -25,5 +26,17 @@ public class Variable_Tracker : MonoBehaviour
             money += 10;
 
         }
+    }
+    public void Speed1()
+    {
+        speed = 1;
+    }
+    public void Speed2()
+    {
+        speed = 2;
+    }
+    public void Speed5()
+    {
+        speed = 5;
     }
 }
