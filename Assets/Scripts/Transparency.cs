@@ -1,0 +1,31 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class Transparency: MonoBehaviour
+{
+    // Start is called before the first frame update
+    private float time;
+    public float transparency = 0.2f;
+    void Start()
+    {
+        this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
+    }
+
+    // Update is called once per frame
+    void Update()
+    {
+        time += Time.deltaTime;
+        if (time > 0.5)
+        {
+            if(transparency < 1)
+            {
+                transparency = transparency + 0.1f;
+            }
+            this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
+            time = 0;
+   
+        }
+
+    }
+}
