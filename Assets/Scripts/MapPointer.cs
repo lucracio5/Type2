@@ -6,7 +6,7 @@ using UnityEngine;
 public class MapPointer : MonoBehaviour
 {
     [SerializeField]
-    GameObject pointer;
+    //GameObject pointer;
     MoonMapMaker map;
     GameObject cursor;
     MapCell current_cell;
