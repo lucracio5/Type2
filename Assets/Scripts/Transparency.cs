@@ -10,8 +10,9 @@ public class Transparency: MonoBehaviour
     public GameObject Gamemanager;
     void Start()
     {
-        this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
         Gamemanager = GameObject.Find("Game Manager");
+        this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
+        
     }
 
     // Update is called once per frame
