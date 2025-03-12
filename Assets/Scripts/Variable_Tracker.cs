@@ -22,7 +22,7 @@ public class Variable_Tracker : MonoBehaviour
     {
         RenderSettings.skybox.SetFloat("_Rotation", rotate_speed*Time.time*speed);
         text.text = "Energy: "+Energy.ToString()+" $"+money+" Lunar Regolith:"+ Regolith.ToString();
-        if(Regolith > 2)
+        if(Regolith >= 2)
         {
             Regolith -= 2;
             money += 50;

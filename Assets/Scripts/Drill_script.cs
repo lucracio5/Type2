@@ -35,7 +35,7 @@ public class Drill_script: MonoBehaviour
             time = 0f;
 
         }
-        Debug.Log(timer2);
+        
         timer2 += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
         if (loaded && timer2 > 10)
         {
@@ -43,10 +43,10 @@ public class Drill_script: MonoBehaviour
             {
                 Gamemanager.GetComponent<Variable_Tracker>().Energy -= 50;
                 Gamemanager.GetComponent<Variable_Tracker>().Regolith += 1;
-                Debug.Log("test");
+                
             }
             timer2 = 0f;
-            Debug.Log("Test2"); 
+            
         }
 
     }
