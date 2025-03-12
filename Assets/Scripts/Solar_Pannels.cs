@@ -18,7 +18,7 @@ public class Solar_Pannels: MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        time += Time.deltaTime* Gamemanager.GetComponent<Variable_Tracker>().speed;
         if (time > 1)
         {
             if (transparency < 1)
