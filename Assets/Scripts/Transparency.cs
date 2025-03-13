@@ -7,15 +7,18 @@ public class Transparency: MonoBehaviour
     // Start is called before the first frame update
     private float time;
     public float transparency = 0.2f;
+    public GameObject Gamemanager;
     void Start()
     {
+        Gamemanager = GameObject.Find("Game Manager");
         this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
+        
     }
 
     // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime;
+        time += Time.deltaTime*Gamemanager.GetComponent<Variable_Tracker>().speed;
         if (time > 0.5)
         {
             if(transparency < 1)

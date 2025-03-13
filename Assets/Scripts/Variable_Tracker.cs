@@ -9,6 +9,8 @@ public class Variable_Tracker : MonoBehaviour
     public Text text;
     public int money;
     public int speed;
+    public float rotate_speed = 0.01f;
+    public int Regolith = 0;
     void Start()
     {
         money = 100;
@@ -18,24 +20,24 @@ public class Variable_Tracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
-        text.text = "Energy: "+Energy.ToString()+" $"+money;
-        if(Energy > 100)
+        RenderSettings.skybox.SetFloat("_Rotation", rotate_speed*Time.time*speed);
+        text.text = "Energy: "+Energy.ToString()+" $"+money+" Lunar Regolith:"+ Regolith.ToString();
+        if(Regolith >= 2)
         {
-            Energy -= 100;
-            money += 10;
+            Regolith -= 2;
+            money += 50;
 
         }
     }
-    public void Speed1()
+    public void speed1()
     {
         speed = 1;
     }
-    public void Speed2()
+    public void speed2()
     {
         speed = 2;
     }
-    public void Speed5()
+    public void speed5()
     {
         speed = 5;
     }

@@ -6,12 +6,12 @@ using UnityEngine;
 public class MapPointer : MonoBehaviour
 {
     [SerializeField]
-    GameObject pointer;
+    //GameObject pointer;
     MoonMapMaker map;
     GameObject cursor;
     MapCell current_cell;
     public GameObject[] cursors;
-    public int activeCursor;
+    int activeCursor;
     public GameObject Gamemanager;
     public Building_Scriptable_Object[] buildings;
 
@@ -88,6 +88,12 @@ public class MapPointer : MonoBehaviour
     {
         cursors[activeCursor].gameObject.SetActive(false);
         activeCursor = 3;
+        cursors[activeCursor].gameObject.SetActive(true);
+    }
+    public void Button5()
+    {
+        cursors[activeCursor].gameObject.SetActive(false);
+        activeCursor = 4;
         cursors[activeCursor].gameObject.SetActive(true);
     }
 
