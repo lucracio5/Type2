@@ -47,7 +47,7 @@ public class MapPointer : MonoBehaviour
 
 
         
-        if (Input.GetMouseButtonDown(0) && current_cell != null)
+        if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building == null)
         {
             int prefabs_index = activeCursor - 1;
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)

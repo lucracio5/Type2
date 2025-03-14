@@ -25,9 +25,9 @@ public class Solar_Pannels: MonoBehaviour
             {
                 transparency += 0.1f;
             }
-            else
+            else if (Gamemanager.GetComponent<Variable_Tracker>().energy < Gamemanager.GetComponent<Variable_Tracker>().max_energy)
             {
-                Gamemanager.GetComponent<Variable_Tracker>().Energy += 1;
+                Gamemanager.GetComponent<Variable_Tracker>().energy += 1;
             }
             this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
             time = 0;

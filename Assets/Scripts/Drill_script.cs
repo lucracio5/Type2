@@ -39,9 +39,9 @@ public class Drill_script: MonoBehaviour
         timer2 += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
         if (loaded && timer2 > 10)
         {
-            if (Gamemanager.GetComponent<Variable_Tracker>().Energy > 50)
+            if (Gamemanager.GetComponent<Variable_Tracker>().energy > 50 && Gamemanager.GetComponent<Variable_Tracker>().max_mining > Gamemanager.GetComponent<Variable_Tracker>().Regolith)
             {
-                Gamemanager.GetComponent<Variable_Tracker>().Energy -= 50;
+                Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
                 Gamemanager.GetComponent<Variable_Tracker>().Regolith += 1;
                 
             }
