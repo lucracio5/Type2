@@ -96,5 +96,11 @@ public class MapPointer : MonoBehaviour
         activeCursor = 4;
         cursors[activeCursor].gameObject.SetActive(true);
     }
+    public void Button6()
+    {
+        cursors[activeCursor].gameObject.SetActive(false);
+        activeCursor = 5;
+        cursors[activeCursor].gameObject.SetActive(true);
+    }
 
 }
