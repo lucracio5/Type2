@@ -3,7 +3,9 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.UI;
+using UnityEngine.UIElements;
 using static UnityEngine.EventSystems.EventTrigger;
+using UISlider = UnityEngine.UI.Slider;
 
 public class Variable_Tracker : MonoBehaviour
 {
@@ -13,12 +15,13 @@ public class Variable_Tracker : MonoBehaviour
     public int speed;
     public float rotate_speed = 0.01f;
     public int Regolith = 0;
-    public Slider energy_slider;
-    public Slider mining_slider;
+    public UISlider energy_slider;
+    public UISlider mining_slider;
     public int max_energy = 300;
     public Text energy_text;
     public Text mining_text;
     public int max_mining;
+    public GameObject panel;
     void Start()
     {
         money = 100;
@@ -50,5 +53,9 @@ public class Variable_Tracker : MonoBehaviour
     {
         money += Regolith * 25;
         Regolith = 0;
+    }
+    public void Test()
+    {
+       panel.SetActive(false);
     }
 }

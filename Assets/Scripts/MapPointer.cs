@@ -14,6 +14,7 @@ public class MapPointer : MonoBehaviour
     int activeCursor;
     public GameObject Gamemanager;
     public Building_Scriptable_Object[] buildings;
+    public GameObject panel;
 
 
 
@@ -59,9 +60,9 @@ public class MapPointer : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && current_cell != null)
+        if (Input.GetMouseButtonDown(1) && current_cell != null && current_cell.building != null)
         {
-            current_cell.ChangeHeight(-1);
+           panel.gameObject.SetActive(true);
         }
     }
 

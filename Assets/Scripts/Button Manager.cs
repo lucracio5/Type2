@@ -31,4 +31,5 @@ public class ButtonManager: MonoBehaviour
         money += Regolith * 25;
         Regolith = 0;
     }
+
 }
