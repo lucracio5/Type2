@@ -26,6 +26,7 @@ public class MapPointer : MonoBehaviour
         map = GetComponent<MoonMapMaker>();
         activeCursor = 0;
         Gamemanager = GameObject.Find("Game Manager");
+        panel_text2.text = "test";
     }
 
 
@@ -69,11 +70,13 @@ public class MapPointer : MonoBehaviour
            panel_text.text = current_cell.building.name;
             if (current_cell.building.GetComponentInChildren<Drill_script>() != null)
             {
-                panel_text2.text = "Total Regolith colected: "+current_cell.building.GetComponent<Drill_script>().total_collected.ToString();
+                panel_text2.text = "Total Regolith colected: "+current_cell.building.GetComponentInChildren<Drill_script>().total_collected.ToString();
+                Debug.Log(current_cell.building.GetComponentInChildren<Drill_script>().return_total().ToString());
             }
             else if(current_cell.building.GetComponentInChildren<Solar_Pannels>() != null)
             {
-                panel_text2.text = "Total Energy colected: " + current_cell.building.GetComponent<Solar_Pannels>().total_collected.ToString();
+                panel_text2.text = "Total Energy colected: " + current_cell.building.GetComponentInChildren<Solar_Pannels>().total_collected.ToString();
+                Debug.Log(current_cell.building.GetComponentInChildren<Solar_Pannels>().return_total().ToString());
             }
             else
             {

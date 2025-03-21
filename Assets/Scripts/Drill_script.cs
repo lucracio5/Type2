@@ -19,6 +19,10 @@ public class Drill_script: MonoBehaviour
     }
 
     // Update is called once per frame
+    public int return_total()
+    {
+        return total_collected;
+    }
     void Update()
     {
         time += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
