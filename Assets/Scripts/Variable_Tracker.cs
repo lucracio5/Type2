@@ -12,7 +12,7 @@ public class Variable_Tracker : MonoBehaviour
     public int energy = 0;
     public Text text;
     public int money;
-    public int speed;
+    public int speed = 1;
     public float rotate_speed = 0.01f;
     public int Regolith = 0;
     public UISlider energy_slider;
@@ -25,6 +25,7 @@ public class Variable_Tracker : MonoBehaviour
     void Start()
     {
         money = 100;
+        speed = 1;
 
     }
     // Update is called once per frame
@@ -36,6 +37,7 @@ public class Variable_Tracker : MonoBehaviour
         mining_text.text = Regolith.ToString() + "/" + max_mining.ToString();
         energy_slider.value = energy;
         mining_slider.value = Regolith;
+
     }
     public void speed1()
     {

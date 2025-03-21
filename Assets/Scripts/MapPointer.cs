@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class MapPointer : MonoBehaviour
 {
@@ -15,6 +16,8 @@ public class MapPointer : MonoBehaviour
     public GameObject Gamemanager;
     public Building_Scriptable_Object[] buildings;
     public GameObject panel;
+    public Text panel_text;
+    public Text panel_text2;
 
 
 
@@ -63,6 +66,20 @@ public class MapPointer : MonoBehaviour
         if (Input.GetMouseButtonDown(1) && current_cell != null && current_cell.building != null)
         {
            panel.gameObject.SetActive(true);
+           panel_text.text = current_cell.building.name;
+            if (current_cell.building.GetComponentInChildren<Drill_script>() != null)
+            {
+                panel_text2.text = "Total Regolith colected: "+current_cell.building.GetComponent<Drill_script>().total_collected.ToString();
+            }
+            else if(current_cell.building.GetComponentInChildren<Solar_Pannels>() != null)
+            {
+                panel_text2.text = "Total Energy colected: " + current_cell.building.GetComponent<Solar_Pannels>().total_collected.ToString();
+            }
+            else
+            {
+                panel_text2.gameObject.SetActive(false);
+            }
+
         }
     }
 

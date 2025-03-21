@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c1a89b3c64f1e49b4f9b568fe55680, type: 3}
   m_Name: Drill
   m_EditorClassIdentifier: 
-  prefab: {fileID: 8925207939902175888, guid: 5973c5464c0ad5c4c8a37e2b0b383c2f, type: 3}
+  prefab: {fileID: 3099534231738222790, guid: 9aaa8cde0fe2df541884b2c3c10171b1, type: 3}
   cost: 50

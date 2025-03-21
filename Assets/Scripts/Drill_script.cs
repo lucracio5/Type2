@@ -9,6 +9,7 @@ public class Drill_script: MonoBehaviour
     public GameObject Gamemanager;
     public bool loaded = false;
     private float timer2;
+    public int total_collected;
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
@@ -43,7 +44,10 @@ public class Drill_script: MonoBehaviour
             {
                 Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
                 Gamemanager.GetComponent<Variable_Tracker>().Regolith += 1;
-                
+                total_collected++;
+                Debug.Log(total_collected);
+
+
             }
             timer2 = 0f;
             
