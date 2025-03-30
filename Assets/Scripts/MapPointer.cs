@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.UI;
 using UnityEngine;
+using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
 public class MapPointer : MonoBehaviour
@@ -52,12 +53,12 @@ public class MapPointer : MonoBehaviour
 
 
         
-        if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building == null)
+        if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building == null && !EventSystem.current.IsPointerOverGameObject())
         {
             int prefabs_index = activeCursor - 1;
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
-                current_cell.Add_building(buildings[prefabs_index].prefab);
+                current_cell.Add_building(prefabs_index);
                 Gamemanager.GetComponent<Variable_Tracker>().money -= buildings[prefabs_index].cost;
                 
                 //current_cell.ChangeHeight(1);

@@ -39,7 +39,7 @@ public class Solar_Pannels: MonoBehaviour
             {
                 Gamemanager.GetComponent<Variable_Tracker>().energy += 1;
                 total_collected= total_collected + 1;
-                Debug.Log(total_collected);
+                
             }
             this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
             time = 0;

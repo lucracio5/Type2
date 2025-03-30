@@ -79,7 +79,10 @@ public class MoonMapMaker : MonoBehaviour
         }
 
         mapCells[0].ChangeHeight(0);
-
+        mapCells[1208].Add_building(1);
+        mapCells[1206].Add_building(0);
+        mapCells[1200].Add_building(4);
+        mapCells[1200].Add_building(3);
     }
 
 
@@ -138,6 +141,10 @@ public class MoonMapMaker : MonoBehaviour
 
         return result;
     }
+    public void Destroy_building(GameObject building)
+    {
+        DestroyImmediate(building, true);
+    }
 
 }
 
@@ -155,6 +162,7 @@ public class MapCell
     public int height = 0;
     public int[] neighbors = {-1, -1, -1, -1, -1, -1, -1, -1};
     public GameObject building;
+    
     
     public MapCell(int x, int y, int width)
     {
@@ -188,11 +196,16 @@ public class MapCell
         edge_verts[14] = mid_verts[7] - width;
         edge_verts[15] = mid_verts[0] - width;
     }
-    public void Add_building(GameObject add_building)
+    public void Add_building(int build_index)
     {
-        building = add_building;
+        if(building != null)
+        {
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(building);
+        }
+        MapPointer Mappointer = GameObject.Find("Map").GetComponent<MapPointer>();
+        building = Mappointer.buildings[build_index].prefab;
         centerpoint = map.verts[center];
-        GameObject value = Object.Instantiate(add_building, centerpoint, Quaternion.identity);
+        GameObject value = Object.Instantiate(building, centerpoint, Quaternion.identity);
         value.gameObject.SetActive(true);
     }
     public void ChangeHeight(int height_change)
