@@ -79,10 +79,10 @@ public class MoonMapMaker : MonoBehaviour
         }
 
         mapCells[0].ChangeHeight(0);
-        mapCells[1208].Add_building(1);
-        mapCells[1206].Add_building(0);
-        mapCells[1200].Add_building(4);
-        mapCells[1200].Add_building(3);
+        mapCells[1170].Add_building(3);
+        mapCells[1172].Add_building(0);
+        mapCells[1174].Add_building(4);
+        mapCells[1176].Add_building(2);
     }
 
 
