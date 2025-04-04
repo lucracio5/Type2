@@ -10,21 +10,42 @@ using UISlider = UnityEngine.UI.Slider;
 public class Variable_Tracker : MonoBehaviour
 {
     public int energy = 0;
-    public Text text;
+    public int regolith = 0;
+    public int water = 100;
+    public int population = 10;
+    public int food = 100;
+    public int O2 = 100;
     public int money;
-    public int speed = 1;
-    public float rotate_speed = 0.01f;
-    public int Regolith = 0;
+
     public UISlider energy_slider;
     public UISlider mining_slider;
     public UISlider O2_slider;
-    public int max_energy = 300;
+    public UISlider water_slider;
+    public UISlider food_slider;
+    public UISlider population_slider;
+
     public Text energy_text;
     public Text mining_text;
     public Text O2_text;
-    public int max_mining;
+    public Text water_text;
+    public Text food_text;
+    public Text population_text;
+    public Text money_text;
+
+    public int max_energy = 300;
+    public int max_mining = 10;
+    public int max_water = 100;
+    public int max_food = 100;
+    public int max_O2 = 100;
+    public int max_population = 10;
+
+    
+    
+    public int speed = 1;
+    public float rotate_speed = 0.01f;
+   
     public GameObject panel;
-    public int O2;
+   
 
     void Start()
     {
@@ -36,11 +57,22 @@ public class Variable_Tracker : MonoBehaviour
     void Update()
     {
         RenderSettings.skybox.SetFloat("_Rotation", rotate_speed * Time.time);
-        text.text = money.ToString();
+
+        money_text.text = money.ToString();
         energy_text.text= energy.ToString()+"/"+max_energy.ToString();
-        mining_text.text = Regolith.ToString() + "/" + max_mining.ToString();
+        mining_text.text = regolith.ToString() + "/" + max_mining.ToString();
+        O2_text.text = O2.ToString() + "/" + max_O2.ToString();
+        water_text.text = water.ToString() + "/" + max_water.ToString();
+        food_text.text = food.ToString() + "/" + max_food.ToString();
+        population_text.text = population.ToString() + "/" + max_population.ToString();
+
         energy_slider.value = energy;
-        mining_slider.value = Regolith;
+        mining_slider.value = regolith;
+        water_slider.value = water;
+        food_slider.value = food;
+        population_slider.value = population;
+        O2_slider.value = O2;
+
 
     }
     public void speed1()
@@ -57,8 +89,8 @@ public class Variable_Tracker : MonoBehaviour
     }
     public void Sell_materials()
     {
-        money += Regolith * 25;
-        Regolith = 0;
+        money += regolith * 25;
+        regolith = 0;
     }
     public void Test()
     {
