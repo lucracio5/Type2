@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.049081936, g: 0.046693355, b: 0.03512148, a: 1}
+  m_IndirectSpecularColor: {r: 0.04636766, g: 0.043987416, b: 0.03256904, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -470,7 +470,7 @@ GameObject:
   - component: {fileID: 93907533}
   m_Layer: 5
   m_Name: Water Bar
-  m_TagString: Untagged
+  m_TagString: Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -562,7 +562,7 @@ GameObject:
   - component: {fileID: 150314387}
   m_Layer: 5
   m_Name: Mining_text
-  m_TagString: Untagged
+  m_TagString: Bar Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -773,7 +773,7 @@ GameObject:
   - component: {fileID: 252463041}
   m_Layer: 5
   m_Name: Food Bar
-  m_TagString: Untagged
+  m_TagString: Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -937,7 +937,7 @@ GameObject:
   - component: {fileID: 328228469}
   m_Layer: 5
   m_Name: Mining Bar
-  m_TagString: Untagged
+  m_TagString: Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1602,7 +1602,7 @@ GameObject:
   - component: {fileID: 456290080}
   m_Layer: 5
   m_Name: Energy Text
-  m_TagString: Untagged
+  m_TagString: Bar Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1680,7 +1680,7 @@ GameObject:
   - component: {fileID: 475411638}
   m_Layer: 5
   m_Name: O2 Bar
-  m_TagString: Untagged
+  m_TagString: Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -1977,7 +1977,7 @@ GameObject:
   - component: {fileID: 579250712}
   m_Layer: 5
   m_Name: Energy Bar
-  m_TagString: Untagged
+  m_TagString: Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2274,7 +2274,7 @@ GameObject:
   - component: {fileID: 621894546}
   m_Layer: 5
   m_Name: Energy Text
-  m_TagString: Untagged
+  m_TagString: Bar Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -2995,7 +2995,7 @@ GameObject:
   - component: {fileID: 837359871}
   m_Layer: 5
   m_Name: Energy Text
-  m_TagString: Untagged
+  m_TagString: Bar Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -3706,6 +3706,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1013954938}
   - component: {fileID: 1013954939}
+  - component: {fileID: 1013954940}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -3748,11 +3749,26 @@ MonoBehaviour:
   Regolith: 0
   energy_slider: {fileID: 579250712}
   mining_slider: {fileID: 328228469}
+  O2_slider: {fileID: 0}
   max_energy: 300
   energy_text: {fileID: 1663703812}
   mining_text: {fileID: 150314387}
+  O2_text: {fileID: 0}
   max_mining: 10
   panel: {fileID: 1787769523}
+  O2: 0
+--- !u!114 &1013954940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013954937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ef621e492e044a44d9d4811291e08d17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1038728153
 GameObject:
   m_ObjectHideFlags: 0
@@ -5300,7 +5316,7 @@ GameObject:
   - component: {fileID: 1420768111}
   m_Layer: 5
   m_Name: Energy Text
-  m_TagString: Untagged
+  m_TagString: Bar Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5735,7 +5751,7 @@ GameObject:
   - component: {fileID: 1663703812}
   m_Layer: 5
   m_Name: Energy Text
-  m_TagString: Untagged
+  m_TagString: Bar Text
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -5813,7 +5829,7 @@ GameObject:
   - component: {fileID: 1697249712}
   m_Layer: 5
   m_Name: Population Bar
-  m_TagString: Untagged
+  m_TagString: Bar
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

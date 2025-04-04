@@ -17,11 +17,14 @@ public class Variable_Tracker : MonoBehaviour
     public int Regolith = 0;
     public UISlider energy_slider;
     public UISlider mining_slider;
+    public UISlider O2_slider;
     public int max_energy = 300;
     public Text energy_text;
     public Text mining_text;
+    public Text O2_text;
     public int max_mining;
     public GameObject panel;
+    public int O2;
 
     void Start()
     {

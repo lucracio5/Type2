@@ -11,6 +11,8 @@ TagManager:
   - 3
   - 4
   - 5
+  - Bar
+  - Bar Text
   layers:
   - Default
   - TransparentFX
