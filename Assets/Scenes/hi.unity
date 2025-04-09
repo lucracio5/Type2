@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.0027523283, g: 0.0027523283, b: 0.0027523283, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3706,7 +3706,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1013954938}
   - component: {fileID: 1013954939}
-  - component: {fileID: 1013954940}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -3743,10 +3742,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   energy: 0
   regolith: 0
-  water: 200
+  water: 100
   population: 10
   food: 100
-  O2: 0
+  O2: 100
   money: 0
   energy_slider: {fileID: 579250712}
   mining_slider: {fileID: 328228469}
@@ -3761,46 +3760,15 @@ MonoBehaviour:
   food_text: {fileID: 1420768111}
   population_text: {fileID: 456290080}
   money_text: {fileID: 1012479783}
-  max_energy: 300
+  max_energy: 100
   max_mining: 10
-  max_water: 500
-  max_food: 300
+  max_water: 100
+  max_food: 100
   max_O2: 100
   max_population: 10
   speed: 0
   rotate_speed: 0.02
   panel: {fileID: 1787769523}
---- !u!114 &1013954940
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013954937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ef621e492e044a44d9d4811291e08d17, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  energy_slider: {fileID: 0}
-  mining_slider: {fileID: 0}
-  O2_slider: {fileID: 0}
-  water_slider: {fileID: 0}
-  food_slider: {fileID: 0}
-  population_slider: {fileID: 0}
-  energy_text: {fileID: 0}
-  mining_text: {fileID: 0}
-  O2_text: {fileID: 0}
-  water_text: {fileID: 0}
-  food_text: {fileID: 0}
-  population_text: {fileID: 0}
-  Gamemanager: {fileID: 0}
-  energy: 0
-  regolith: 0
-  water: 0
-  population: 0
-  food: 0
-  O2: 0
 --- !u!1 &1038728153
 GameObject:
   m_ObjectHideFlags: 0

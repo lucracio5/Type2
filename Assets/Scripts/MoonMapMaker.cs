@@ -85,7 +85,7 @@ public class MoonMapMaker : MonoBehaviour
         mapCells[1176].Add_building(2);
     }
 
-
+    
     public void DownTris(int _origin)
     {
         tris.Add(_origin); 
@@ -145,6 +145,7 @@ public class MoonMapMaker : MonoBehaviour
     {
         DestroyImmediate(building, true);
     }
+   
 
 }
 

@@ -1,3 +1,4 @@
+using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
@@ -6,6 +7,7 @@ using UnityEngine.UI;
 using UnityEngine.UIElements;
 using static UnityEngine.EventSystems.EventTrigger;
 using UISlider = UnityEngine.UI.Slider;
+using System.IO;
 
 public class Variable_Tracker : MonoBehaviour
 {
@@ -39,13 +41,15 @@ public class Variable_Tracker : MonoBehaviour
     public int max_O2 = 100;
     public int max_population = 10;
 
-    
-    
+
+
     public int speed = 1;
     public float rotate_speed = 0.01f;
-   
+
     public GameObject panel;
-   
+    public GameObject Gamemanager = GameObject.Find("Game Manager");
+
+
 
     void Start()
     {
@@ -59,7 +63,7 @@ public class Variable_Tracker : MonoBehaviour
         RenderSettings.skybox.SetFloat("_Rotation", rotate_speed * Time.time);
 
         money_text.text = money.ToString();
-        energy_text.text= energy.ToString()+"/"+max_energy.ToString();
+        energy_text.text = energy.ToString() + "/" + max_energy.ToString();
         mining_text.text = regolith.ToString() + "/" + max_mining.ToString();
         O2_text.text = O2.ToString() + "/" + max_O2.ToString();
         water_text.text = water.ToString() + "/" + max_water.ToString();
@@ -78,6 +82,7 @@ public class Variable_Tracker : MonoBehaviour
     public void speed1()
     {
         speed = 1;
+        //Gamemanager.SaveData();
     }
     public void speed2()
     {
@@ -94,6 +99,54 @@ public class Variable_Tracker : MonoBehaviour
     }
     public void Test()
     {
-       panel.SetActive(false);
+        panel.SetActive(false);
+    }
+
+
+    public class SaveAndLoad: MonoBehaviour
+    {
+        public GameObject Gamemanager;
+        void Start()
+        {
+            Gamemanager = GameObject.Find("Game Manager");
+            LoadData();
+        }
+
+        public void SaveData()
+        {
+            SaveDataModel model = new SaveDataModel();
+            model.Map = Gamemanager.GetComponent<MoonMapMaker>().mapCells;
+            model.energy = Gamemanager.GetComponent<Variable_Tracker>().energy;
+            model.regolith = Gamemanager.GetComponent<Variable_Tracker>().regolith; 
+            model.water = Gamemanager.GetComponent<Variable_Tracker>().water;
+            model.population = Gamemanager.GetComponent<Variable_Tracker>().population;
+            model.food = Gamemanager.GetComponent<Variable_Tracker>().food;
+            model.O2 = Gamemanager.GetComponent<Variable_Tracker>().O2;
+            model.money = Gamemanager.GetComponent<Variable_Tracker>().money;
+
+            string json = JsonUtility.ToJson(model);
+            File.WriteAllText(Application.persistentDataPath + "/save.json", json);
+            Debug.Log("Writing file to: " + Application.persistentDataPath);
+        }
+
+        void LoadData()
+        {
+            SaveDataModel model = JsonUtility.FromJson<SaveDataModel>(File.ReadAllText(Application.persistentDataPath + "/save.json"));
+        }
+    }
+
+    [Serializable]
+    public class SaveDataModel
+    {
+        public List<MapCell> Map;
+        public int energy;
+        public int regolith;
+        public int water;
+        public int population;
+        public int food;
+        public int O2;
+        public int money;
+
+
     }
 }
