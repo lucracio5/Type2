@@ -43,23 +43,15 @@ public class Variable_Tracker : MonoBehaviour
 
 
 
-    public int speed = 1;
+    public int speed;
     public float rotate_speed = 0.01f;
 
     public GameObject panel;
-    public GameObject Gamemanager;
-
-    public bool save;
-    public bool load;
-
-
-
-
+    public GameObject map;
     void Start()
     {
-        money = 100;
+        SaveSystem.Load();
         speed = 1;
-        Gamemanager = GameObject.Find("Game Manager");
 
     }
     // Update is called once per frame
@@ -97,6 +89,10 @@ public class Variable_Tracker : MonoBehaviour
     {
         speed = 5;
     }
+    public void Save_button()
+    {
+        SaveSystem.Save();
+    }
     public void Sell_materials()
     {
         money += regolith * 25;
@@ -112,14 +108,14 @@ public class Variable_Tracker : MonoBehaviour
     public void Save(ref VariableSaveData data)
     {
         //SaveDataModel model = new SaveDataModel();
-        data.Map = Gamemanager.GetComponent<MoonMapMaker>().mapCells;
-        data.energy = Gamemanager.GetComponent<Variable_Tracker>().energy;
-        data.regolith = Gamemanager.GetComponent<Variable_Tracker>().regolith;
-        data.water = Gamemanager.GetComponent<Variable_Tracker>().water;
-        data.population = Gamemanager.GetComponent<Variable_Tracker>().population;
-        data.food = Gamemanager.GetComponent<Variable_Tracker>().food;
-        data.O2 = Gamemanager.GetComponent<Variable_Tracker>().O2;
-        data.money = Gamemanager.GetComponent<Variable_Tracker>().money;
+        data.Map = map.GetComponent<MoonMapMaker>().mapCells;
+        data.energy = energy;
+        data.regolith = regolith;
+        data.water = water;
+        data.population = population;
+        data.food = food;
+        data.O2 = O2;
+        data.money = money;
 
         //string json = JsonUtility.ToJson(model);
         //File.WriteAllText(Application.persistentDataPath + "/save.json", json);
@@ -130,14 +126,14 @@ public class Variable_Tracker : MonoBehaviour
    public void LoadData(VariableSaveData data)
    {
             //SaveDataModel model = JsonUtility.FromJson<SaveDataModel>(File.ReadAllText(Application.persistentDataPath + "/save.json"));
-        Gamemanager.GetComponent<MoonMapMaker>().mapCells = data.Map;
-        Gamemanager.GetComponent<Variable_Tracker>().energy = data.energy;
-        Gamemanager.GetComponent<Variable_Tracker>().regolith = data.regolith;
-        Gamemanager.GetComponent<Variable_Tracker>().water = data.water;
-        Gamemanager.GetComponent<Variable_Tracker>().population = data.population;
-        Gamemanager.GetComponent<Variable_Tracker>().food = data.food;
-        Gamemanager.GetComponent<Variable_Tracker>().O2 = data.O2;
-        Gamemanager.GetComponent<Variable_Tracker>().money = data.money;
+        GetComponent<MoonMapMaker>().mapCells = data.Map;
+        energy = data.energy;
+        regolith = data.regolith;
+        water = data.water;
+        population = data.population;
+        food = data.food;
+        O2 = data.O2;
+        money = data.money;
    }
     
 

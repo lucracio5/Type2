@@ -49,7 +49,7 @@ public class Drill_script: MonoBehaviour
                 Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
                 Gamemanager.GetComponent<Variable_Tracker>().regolith += 1;
                 total_collected++;
-                Debug.Log(total_collected);
+                //Debug.Log(total_collected);
 
 
             }

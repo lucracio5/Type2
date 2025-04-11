@@ -10,10 +10,15 @@ public class SaveSystem
 {   
     public static SaveData _saveData = new SaveData();
     public static GameObject Gamemanager;
-    public void Start()
+    public static void EnsureGameManager()
     {
-        Gamemanager = GameObject.Find("Game Manager");
+        if (Gamemanager == null)
+        {
+            Gamemanager = GameObject.Find("Game Manager");
+        }
+            
     }
+
 
     [System.Serializable]
     public struct SaveData
@@ -33,30 +38,28 @@ public class SaveSystem
     }
     public static void HandleSaveData()
     {
+        EnsureGameManager();
         Gamemanager.GetComponent<Variable_Tracker>().Save(ref _saveData.variableSave);
     }
     public static void Load()
     {
-        string saveContent = File.ReadAllText(SavefileName());
+        if (!File.Exists(SavefileName()))
+        {
+            Debug.LogWarning("Save file not found, creating new save data.");
+            _saveData = new SaveData(); 
+            return;
+        }
 
-        _saveData = _saveData = JsonUtility.FromJson<SaveData>(saveContent);
-        //JsonUtility.FromJson<VariableSaveData>(saveContent);
+        string saveContent = File.ReadAllText(SavefileName());
+        _saveData = JsonUtility.FromJson<SaveData>(saveContent);
         HandleLoadData();
     }
+
     public static void HandleLoadData()
     {
+        EnsureGameManager();
         Gamemanager.GetComponent<Variable_Tracker>().LoadData(_saveData.variableSave);
     }
-    private void Update()
-    {
-        if (Gamemanager.GetComponent<Variable_Tracker>().save)
-        {
-            SaveSystem.Save();
-        }
-        if (Gamemanager.GetComponent<Variable_Tracker>().load)
-        {
-            SaveSystem.Load();
-        }
-    }
+   
   
 }
