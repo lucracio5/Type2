@@ -47,7 +47,11 @@ public class Variable_Tracker : MonoBehaviour
     public float rotate_speed = 0.01f;
 
     public GameObject panel;
-    public GameObject Gamemanager = GameObject.Find("Game Manager");
+    public GameObject Gamemanager;
+
+    public bool save;
+    public bool load;
+
 
 
 
@@ -55,6 +59,7 @@ public class Variable_Tracker : MonoBehaviour
     {
         money = 100;
         speed = 1;
+        Gamemanager = GameObject.Find("Game Manager");
 
     }
     // Update is called once per frame
@@ -103,40 +108,41 @@ public class Variable_Tracker : MonoBehaviour
     }
 
 
-    public class SaveAndLoad: MonoBehaviour
+
+    public void Save(ref VariableSaveData data)
     {
-        public GameObject Gamemanager;
-        void Start()
-        {
-            Gamemanager = GameObject.Find("Game Manager");
-            LoadData();
-        }
+        //SaveDataModel model = new SaveDataModel();
+        data.Map = Gamemanager.GetComponent<MoonMapMaker>().mapCells;
+        data.energy = Gamemanager.GetComponent<Variable_Tracker>().energy;
+        data.regolith = Gamemanager.GetComponent<Variable_Tracker>().regolith;
+        data.water = Gamemanager.GetComponent<Variable_Tracker>().water;
+        data.population = Gamemanager.GetComponent<Variable_Tracker>().population;
+        data.food = Gamemanager.GetComponent<Variable_Tracker>().food;
+        data.O2 = Gamemanager.GetComponent<Variable_Tracker>().O2;
+        data.money = Gamemanager.GetComponent<Variable_Tracker>().money;
 
-        public void SaveData()
-        {
-            SaveDataModel model = new SaveDataModel();
-            model.Map = Gamemanager.GetComponent<MoonMapMaker>().mapCells;
-            model.energy = Gamemanager.GetComponent<Variable_Tracker>().energy;
-            model.regolith = Gamemanager.GetComponent<Variable_Tracker>().regolith; 
-            model.water = Gamemanager.GetComponent<Variable_Tracker>().water;
-            model.population = Gamemanager.GetComponent<Variable_Tracker>().population;
-            model.food = Gamemanager.GetComponent<Variable_Tracker>().food;
-            model.O2 = Gamemanager.GetComponent<Variable_Tracker>().O2;
-            model.money = Gamemanager.GetComponent<Variable_Tracker>().money;
-
-            string json = JsonUtility.ToJson(model);
-            File.WriteAllText(Application.persistentDataPath + "/save.json", json);
-            Debug.Log("Writing file to: " + Application.persistentDataPath);
-        }
-
-        void LoadData()
-        {
-            SaveDataModel model = JsonUtility.FromJson<SaveDataModel>(File.ReadAllText(Application.persistentDataPath + "/save.json"));
-        }
+        //string json = JsonUtility.ToJson(model);
+        //File.WriteAllText(Application.persistentDataPath + "/save.json", json);
+        //Debug.Log("Writing file to: " + Application.persistentDataPath);
     }
+        
 
-    [Serializable]
-    public class SaveDataModel
+   public void LoadData(VariableSaveData data)
+   {
+            //SaveDataModel model = JsonUtility.FromJson<SaveDataModel>(File.ReadAllText(Application.persistentDataPath + "/save.json"));
+        Gamemanager.GetComponent<MoonMapMaker>().mapCells = data.Map;
+        Gamemanager.GetComponent<Variable_Tracker>().energy = data.energy;
+        Gamemanager.GetComponent<Variable_Tracker>().regolith = data.regolith;
+        Gamemanager.GetComponent<Variable_Tracker>().water = data.water;
+        Gamemanager.GetComponent<Variable_Tracker>().population = data.population;
+        Gamemanager.GetComponent<Variable_Tracker>().food = data.food;
+        Gamemanager.GetComponent<Variable_Tracker>().O2 = data.O2;
+        Gamemanager.GetComponent<Variable_Tracker>().money = data.money;
+   }
+    
+
+    [System.Serializable]
+    public struct VariableSaveData
     {
         public List<MapCell> Map;
         public int energy;
@@ -149,4 +155,7 @@ public class Variable_Tracker : MonoBehaviour
 
 
     }
+
+
+
 }
