@@ -108,7 +108,7 @@ public class Variable_Tracker : MonoBehaviour
     public void Save(ref VariableSaveData data)
     {
         //SaveDataModel model = new SaveDataModel();
-        data.Map = map.GetComponent<MoonMapMaker>().mapCells;
+        //data.Map = map.GetComponent<MoonMapMaker>().mapCells;
         data.energy = energy;
         data.regolith = regolith;
         data.water = water;
@@ -125,8 +125,8 @@ public class Variable_Tracker : MonoBehaviour
 
    public void LoadData(VariableSaveData data)
    {
-            //SaveDataModel model = JsonUtility.FromJson<SaveDataModel>(File.ReadAllText(Application.persistentDataPath + "/save.json"));
-        GetComponent<MoonMapMaker>().mapCells = data.Map;
+    
+        //map.GetComponent<MoonMapMaker>().mapCells = data.Map;
         energy = data.energy;
         regolith = data.regolith;
         water = data.water;
@@ -140,7 +140,7 @@ public class Variable_Tracker : MonoBehaviour
     [System.Serializable]
     public struct VariableSaveData
     {
-        public List<MapCell> Map;
+        //public List<MapCell> Map;
         public int energy;
         public int regolith;
         public int water;
