@@ -52,6 +52,8 @@ public class Variable_Tracker : MonoBehaviour
     {
         SaveSystem.Load();
         speed = 1;
+        InvokeRepeating("Oxygen", 1f, 1f);
+        InvokeRepeating("LifeSuport", 0f, 300f);
 
     }
     // Update is called once per frame
@@ -74,12 +76,16 @@ public class Variable_Tracker : MonoBehaviour
         population_slider.value = population;
         O2_slider.value = O2;
 
+        if (O2 < 0 || food < 0 || water < 0)
+        {
+            Debug.Log("Game Over");
+        }
+
 
     }
     public void speed1()
     {
         speed = 1;
-        //Gamemanager.SaveData();
     }
     public void speed2()
     {
@@ -102,13 +108,20 @@ public class Variable_Tracker : MonoBehaviour
     {
         panel.SetActive(false);
     }
+    public void Oxygen()
+    {
+        O2 -= population;
+    }
+    public void LifeSuport()
+    {
+        food -= population;
+        water -= population;
+    }
 
 
 
     public void Save(ref VariableSaveData data)
     {
-        //SaveDataModel model = new SaveDataModel();
-        //data.Map = map.GetComponent<MoonMapMaker>().mapCells;
         data.energy = energy;
         data.regolith = regolith;
         data.water = water;
@@ -117,9 +130,6 @@ public class Variable_Tracker : MonoBehaviour
         data.O2 = O2;
         data.money = money;
 
-        //string json = JsonUtility.ToJson(model);
-        //File.WriteAllText(Application.persistentDataPath + "/save.json", json);
-        //Debug.Log("Writing file to: " + Application.persistentDataPath);
     }
         
 

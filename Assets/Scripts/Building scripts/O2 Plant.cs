@@ -27,10 +27,11 @@ public class O2Plant : MonoBehaviour
             {
                 transparency = transparency + 0.1f;
             }
-            else if (Gamemanager.GetComponent<Variable_Tracker>().energy < Gamemanager.GetComponent<Variable_Tracker>().max_energy)
+            else if (Gamemanager.GetComponent<Variable_Tracker>().O2 < Gamemanager.GetComponent<Variable_Tracker>().max_O2)
             {
-                Gamemanager.GetComponent<Variable_Tracker>().O2 += 1;
-                total_collected = total_collected + 1;
+                Gamemanager.GetComponent<Variable_Tracker>().O2 += 20;
+                total_collected = total_collected + 20;
+                Gamemanager.GetComponent<Variable_Tracker>().energy -= 1;
 
             }
             this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
