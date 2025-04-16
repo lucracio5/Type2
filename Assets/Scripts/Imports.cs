@@ -25,10 +25,18 @@ public class Imports : MonoBehaviour
     {
         panel.SetActive(false);
     }
+    public void foodImport()
+    {
+
+    }
+    public void waterImport()
+    {
+
+    }
     public void Update()
     {
         next_timer += Time.deltaTime* Gamemanager.GetComponent<Variable_Tracker>().speed;
-        Next_delivery.text = "Time Untuil Next Delivery: "+((int)(next_import_time - next_timer)).ToString();
+        Next_delivery.text = "Time Untuil Next Ship: "+((int)(next_import_time - next_timer)).ToString();
         Food_text.text = "Food at " + Gamemanager.GetComponent<Variable_Tracker>().food + "%";
         Water_text.text = "Food at " + Gamemanager.GetComponent<Variable_Tracker>().water + "%";
         if (next_timer >= next_import_time)
