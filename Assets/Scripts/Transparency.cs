@@ -8,10 +8,12 @@ public class Transparency: MonoBehaviour
     private float time;
     public float transparency = 0.2f;
     public GameObject Gamemanager;
+    public bool placed;
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
         this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
+        placed = false;
         
     }
 

@@ -85,7 +85,7 @@ public class Imports : MonoBehaviour
     public void Update()
     {
         next_timer += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
-        Next_delivery.text = "Time Untuil Next Ship: " + ((int)(next_import_time - next_timer)).ToString();
+        Next_delivery.text = "Time Until Next Ship: " + ((int)(next_import_time - next_timer)).ToString();
         Food_text.text = "Food at " + Gamemanager.GetComponent<Variable_Tracker>().food + "%";
         Water_text.text = "Food at " + Gamemanager.GetComponent<Variable_Tracker>().water + "%";
         if (imports[0] != null)
@@ -112,17 +112,20 @@ public class Imports : MonoBehaviour
         Debug.Log("Import time!");
         for (int i = 0; i < imports.Length; i++)
         {
-            if (imports[i].text == "Food Import")
+            if (imports[1] != null)
             {
-                Gamemanager.GetComponent<Variable_Tracker>().food += 10;
-                Gamemanager.GetComponent<Variable_Tracker>().money -= imports[i].cost;
+                if (imports[i].text == "Food Import")
+                {
+                    Gamemanager.GetComponent<Variable_Tracker>().food += 10;
+                    Gamemanager.GetComponent<Variable_Tracker>().money -= imports[i].cost;
+                }
+                else if (imports[i].text == "Water Import")
+                {
+                    Gamemanager.GetComponent<Variable_Tracker>().water += 10;
+                    Gamemanager.GetComponent<Variable_Tracker>().money -= imports[i].cost;
+                }
+                imports[i] = null;
             }
-            else if(imports[i].text == "Water Import")
-            {
-                Gamemanager.GetComponent<Variable_Tracker>().water += 10;
-                Gamemanager.GetComponent<Variable_Tracker>().money -= imports[i].cost;
-            }
-            imports[i] = null;
         }
         for (int i = 0; i < outputs.Length; i++)
         {

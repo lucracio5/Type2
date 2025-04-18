@@ -81,9 +81,13 @@ public class MoonMapMaker : MonoBehaviour
 
         mapCells[0].ChangeHeight(0);
         mapCells[1170].Add_building(3);
+        mapCells[1170].building.GetComponent<Solar_Pannels>().placed = true;
         mapCells[1172].Add_building(0);
+        mapCells[1170].building.GetComponent<O2Plant>().placed = true;
         mapCells[1174].Add_building(4);
+        mapCells[1170].building.GetComponent<Transparency>().placed = true;
         mapCells[1176].Add_building(2);
+        
         mesh.GetComponent<Renderer>().material = material;
 
     }
