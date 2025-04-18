@@ -53,7 +53,7 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Load();
         speed = 1;
         InvokeRepeating("Oxygen", 1f, 1f);
-        InvokeRepeating("LifeSuport", 0f, 300f);
+        InvokeRepeating("LifeSuport", 0f, 120f);
 
     }
     // Update is called once per frame
