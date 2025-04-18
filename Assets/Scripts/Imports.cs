@@ -115,10 +115,12 @@ public class Imports : MonoBehaviour
             if (imports[i].text == "Food Import")
             {
                 Gamemanager.GetComponent<Variable_Tracker>().food += 10;
+                Gamemanager.GetComponent<Variable_Tracker>().money -= imports[i].cost;
             }
             else if(imports[i].text == "Water Import")
             {
-                Gamemanager.GetComponent<Variable_Tracker>().water += 10; 
+                Gamemanager.GetComponent<Variable_Tracker>().water += 10;
+                Gamemanager.GetComponent<Variable_Tracker>().money -= imports[i].cost;
             }
             imports[i] = null;
         }
