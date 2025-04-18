@@ -48,13 +48,12 @@ public class Variable_Tracker : MonoBehaviour
 
     public GameObject panel;
     public GameObject map;
-    void Start()
+    public void Begin()
     {
         SaveSystem.Load();
         speed = 1;
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
-
     }
     // Update is called once per frame
     void Update()
@@ -129,14 +128,26 @@ public class Variable_Tracker : MonoBehaviour
         data.food = food;
         data.O2 = O2;
         data.money = money;
-
+        data.Map = "";
+        foreach(MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
+        {
+            data.Map += cell.contents.ToString() + ",";
+        }
+        data.Map = data.Map.Remove(data.Map.Length - 1);
     }
         
 
    public void LoadData(VariableSaveData data)
    {
-    
-        //map.GetComponent<MoonMapMaker>().mapCells = data.Map;
+        MoonMapMaker map = GameObject.Find("Map").GetComponent<MoonMapMaker>(); ;
+        string[] cells = data.Map.Split(',');
+        for(int i = 0; i < cells.Length;i++)
+        {
+            if (cells[i] != "-1")// && map.mapCells[i].building == null
+            {
+                map.mapCells[i].Add_building(Int32.Parse(cells[i]));
+            }
+        }
         energy = data.energy;
         regolith = data.regolith;
         water = data.water;
@@ -150,7 +161,7 @@ public class Variable_Tracker : MonoBehaviour
     [System.Serializable]
     public struct VariableSaveData
     {
-        //public List<MapCell> Map;
+        public string Map;
         public int energy;
         public int regolith;
         public int water;

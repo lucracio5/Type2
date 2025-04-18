@@ -15,6 +15,7 @@ public class MoonMapMaker : MonoBehaviour
     int vert_width;
     public List<MapCell> mapCells = new List<MapCell>();
     public Material material;
+    public GameObject Gamemanager;
 
 
     // Start is called before the first frame update
@@ -81,17 +82,21 @@ public class MoonMapMaker : MonoBehaviour
 
         mapCells[0].ChangeHeight(0);
         mapCells[1170].Add_building(3);
-        mapCells[1170].building.GetComponent<Solar_Pannels>().placed = true;
+        //mapCells[1170].building.GetComponent<Solar_Pannels>().placed = true;
         mapCells[1172].Add_building(0);
-        mapCells[1170].building.GetComponent<O2Plant>().placed = true;
+        //mapCells[1170].building.GetComponent<O2Plant>().placed = true;
         mapCells[1174].Add_building(4);
-        mapCells[1170].building.GetComponent<Transparency>().placed = true;
+        //mapCells[1170].building.GetComponent<Transparency>().placed = true;
         mapCells[1176].Add_building(2);
-        
-        mesh.GetComponent<Renderer>().material = material;
 
+        //mesh.GetComponent<Renderer>().material = material;
+         StartCoroutine(DelayedBegin());
     }
-
+    IEnumerator DelayedBegin()
+    {
+        yield return null; // Wait one frame
+        Gamemanager.GetComponent<Variable_Tracker>().Begin();
+    }
 
     public void DownTris(int _origin)
     {
@@ -148,9 +153,12 @@ public class MoonMapMaker : MonoBehaviour
 
         return result;
     }
-    public void Destroy_building(GameObject building)
+    public void Destroy_building(MapCell cell)
     {
-        DestroyImmediate(building, true);
+        if (cell.building != null)
+        {
+            Destroy(cell.building);
+        }
     }
    
 
@@ -168,10 +176,11 @@ public class MapCell
     int[] mid_verts = new int[8];
     int[] edge_verts = new int[16];
     public int height = 0;
-    public int[] neighbors = {-1, -1, -1, -1, -1, -1, -1, -1};
+    public int[] neighbors = {-1, -1, -1, -1, -1, -1, -1, -1 };
     public GameObject building;
-    
-    
+    public int contents = -1;
+
+
     public MapCell(int x, int y, int width)
     {
         map = GameObject.Find("Map").GetComponent<MoonMapMaker>();
@@ -206,15 +215,24 @@ public class MapCell
     }
     public void Add_building(int build_index)
     {
+        
         if(building != null)
         {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(building);
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
         }
         MapPointer Mappointer = GameObject.Find("Map").GetComponent<MapPointer>();
-        building = Mappointer.buildings[build_index].prefab;
+        contents = build_index;
         centerpoint = map.verts[center];
-        GameObject value = Object.Instantiate(building, centerpoint, Quaternion.identity);
-        value.gameObject.SetActive(true);
+        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
+        building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+        building.gameObject.SetActive(true);
+        
+    }
+    public string encode_cell()
+    {
+        string result = "";
+        result += contents.ToString();
+        return result;
     }
     public void ChangeHeight(int height_change)
     {
