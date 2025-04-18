@@ -14,6 +14,7 @@ public class MoonMapMaker : MonoBehaviour
     public List<int> tris = new List<int>();
     int vert_width;
     public List<MapCell> mapCells = new List<MapCell>();
+    public Material material;
 
 
     // Start is called before the first frame update
@@ -83,9 +84,11 @@ public class MoonMapMaker : MonoBehaviour
         mapCells[1172].Add_building(0);
         mapCells[1174].Add_building(4);
         mapCells[1176].Add_building(2);
+        mesh.GetComponent<Renderer>().material = material;
+
     }
 
-    
+
     public void DownTris(int _origin)
     {
         tris.Add(_origin); 
