@@ -25,7 +25,7 @@ public class O2Plant : MonoBehaviour
         time += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
         if (time > 0.5)
         {
-            if (transparency < 1)
+            if (transparency < 1 && !placed)
             {
                 transparency = transparency + 0.1f;
             }
@@ -35,7 +35,13 @@ public class O2Plant : MonoBehaviour
                 total_collected = total_collected + 20;
                 Gamemanager.GetComponent<Variable_Tracker>().energy -= 1;
                 placed = true;
+                transparency = 1;
 
+            }
+            else
+            {
+                placed = true;
+                transparency = 1;
             }
             this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
             time = 0;

@@ -21,12 +21,19 @@ public class Transparency: MonoBehaviour
     void Update()
     {
         time += Time.deltaTime*Gamemanager.GetComponent<Variable_Tracker>().speed;
+        
         if (time > 0.5)
         {
-            if(transparency < 1)
+            if (transparency < 1 && !placed)
             {
                 transparency = transparency + 0.1f;
             }
+            else
+            {
+                placed = true;
+                transparency = 1;
+            }
+                
             this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
             time = 0;
    
