@@ -1,43 +1,97 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class Transparency: MonoBehaviour
+public class Transparency : MonoBehaviour
 {
-    // Start is called before the first frame update
     private float time;
     public float transparency = 0.2f;
-    public GameObject Gamemanager;
     public bool placed;
+    private MeshRenderer meshRenderer;
+    private GameObject Gamemanager;
+
+
+
     void Start()
     {
+        meshRenderer = GetComponent<MeshRenderer>();
         Gamemanager = GameObject.Find("Game Manager");
-        this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
-        placed = false;
-        
+
+        if (!placed)
+        {
+            transparency = 0.2f;
+            SetGrayscaleColor(transparency);
+        }
+        else
+        {
+            transparency = 1f;
+            SetGrayscaleColor(1f);
+        }
     }
 
-    // Update is called once per frame
     void Update()
     {
-        time += Time.deltaTime*Gamemanager.GetComponent<Variable_Tracker>().speed;
-        
-        if (time > 0.5)
+        time += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
+
+        if (time > 0.5f)
         {
-            if (transparency < 1 && !placed)
+            if (transparency < 1f && !placed)
             {
-                transparency = transparency + 0.1f;
+                transparency += 0.1f;
             }
             else
             {
                 placed = true;
-                transparency = 1;
+                transparency = 1f;
             }
-                
-            this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
-            time = 0;
-   
-        }
 
+            SetGrayscaleColor(transparency);
+            time = 0f;
+        }
     }
+    void SetGrayscaleColor(float alpha)
+    {
+        // Lazily grab the renderer if it hasn't been set yet
+        if (meshRenderer == null)
+            meshRenderer = GetComponentInChildren<MeshRenderer>();
+
+        if (meshRenderer != null)
+        {
+            Color c = new Color(alpha, alpha, alpha, alpha);
+            meshRenderer.material.color = c;
+        }
+        else
+        {
+            Debug.LogError($"Transparency on {gameObject.name} couldn't find a MeshRenderer!");
+        }
+    }
+
+    public void ForceOpaque()
+    {
+        // Make sure meshRenderer is initialized here, too
+        if (meshRenderer == null)
+            meshRenderer = GetComponentInChildren<MeshRenderer>();
+
+        transparency = 1f;
+        placed = true;
+        SetGrayscaleColor(1f);
+    }
+
+
+
+    /*
+
+    void SetGrayscaleColor(float alpha)
+    {
+        Color c = new Color(alpha, alpha, alpha, alpha); // Match drill's grayscale fade
+        meshRenderer.material.color = c;
+    }
+
+    public void ForceOpaque()
+    {
+        transparency = 1f;
+        placed = true;
+        SetGrayscaleColor(1f);
+    }
+
+    */
 }

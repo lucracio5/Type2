@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 1379935153084818001}
   - component: {fileID: 1703360485802916815}
   - component: {fileID: 8477504893217487906}
+  - component: {fileID: 3392253277878609542}
   m_Layer: 0
   m_Name: Oxygen Building
   m_TagString: Untagged
@@ -96,9 +97,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a654404241115fd4ab803d9bb8a001b6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  transparency: 0.2
   Gamemanager: {fileID: 0}
   total_collected: 0
+--- !u!114 &3392253277878609542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720767462433093873}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3b99255f47e0e734b8e36b5f8b6bf8b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  transparency: 0.2
+  placed: 0
 --- !u!1 &5677844620230241935
 GameObject:
   m_ObjectHideFlags: 0

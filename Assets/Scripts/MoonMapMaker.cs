@@ -81,22 +81,21 @@ public class MoonMapMaker : MonoBehaviour
         }
 
         mapCells[0].ChangeHeight(0);
-        mapCells[1170].Add_building(3);
-        //mapCells[1170].building.GetComponent<Solar_Pannels>().placed = true;
-        mapCells[1172].Add_building(0);
-        //mapCells[1170].building.GetComponent<O2Plant>().placed = true;
-        mapCells[1174].Add_building(4);
-        //mapCells[1170].building.GetComponent<Transparency>().placed = true;
-        mapCells[1176].Add_building(2);
+        mapCells[1170].Add_saved_building(3);
+        mapCells[1172].Add_saved_building(0);
+        mapCells[1174].Add_saved_building(4);
+        mapCells[1176].Add_saved_building(2);
 
-        //mesh.GetComponent<Renderer>().material = material;
-         StartCoroutine(DelayedBegin());
+        StartCoroutine(DelayedBegin());
     }
+
+    ///*
     IEnumerator DelayedBegin()
     {
         yield return null; // Wait one frame
         Gamemanager.GetComponent<Variable_Tracker>().Begin();
     }
+    //*/
 
     public void DownTris(int _origin)
     {
@@ -213,7 +212,7 @@ public class MapCell
         edge_verts[14] = mid_verts[7] - width;
         edge_verts[15] = mid_verts[0] - width;
     }
-    public void Add_building(int build_index)
+    public void Add_building(int build_index) //Add building with fade in
     {
         
         if(building != null)
@@ -227,6 +226,31 @@ public class MapCell
         building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
         building.gameObject.SetActive(true);
         
+    }
+    public void Add_saved_building(int build_index) //Add building without fade in called in the load part
+    {
+
+        if (building != null)
+        {
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
+        }
+        MapPointer Mappointer = GameObject.Find("Map").GetComponent<MapPointer>();
+        contents = build_index;
+        centerpoint = map.verts[center];
+        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
+        building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+        building.gameObject.SetActive(true);
+        Transparency t = building.GetComponentInChildren<Transparency>();
+        if (t != null)
+        {
+
+            t.ForceOpaque();
+        }
+        else
+            Debug.LogWarning("transperencey is null");
+
+
+
     }
     public string encode_cell()
     {

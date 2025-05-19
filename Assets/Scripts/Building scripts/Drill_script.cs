@@ -4,18 +4,13 @@ using UnityEngine;
 
 public class Drill_script: MonoBehaviour
 {
-    private float time;
-    public float transparency = 0.2f;
     public GameObject Gamemanager;
-    public bool placed;
-    private float timer2;
+    private float timer;
     public int total_collected;
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
-        this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
         this.transform.eulerAngles = new Vector3(-90, -0, 0);
-        placed = false;
 
     }
 
@@ -26,25 +21,8 @@ public class Drill_script: MonoBehaviour
     }
     void Update()
     {
-        time += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
-        if (time > 0.5)
-        {
-            if (transparency < 1 &&  !placed)
-            {
-                transparency = transparency + 0.1f;
-            }
-            else
-            {
-                placed = true;
-                transparency = 1;
-            }
-            this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
-            time = 0f;
-
-        }
-        
-        timer2 += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
-        if (placed && timer2 > 10)
+        timer += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
+        if (GetComponent<Transparency>().placed && timer > 10)
         {
             if (Gamemanager.GetComponent<Variable_Tracker>().energy > 50 && Gamemanager.GetComponent<Variable_Tracker>().max_mining > Gamemanager.GetComponent<Variable_Tracker>().regolith)
             {
@@ -55,7 +33,7 @@ public class Drill_script: MonoBehaviour
 
 
             }
-            timer2 = 0f;
+            timer = 0f;
             
         }
 

@@ -4,49 +4,35 @@ using UnityEngine;
 
 public class O2Plant : MonoBehaviour
 {
-    // Start is called before the first frame update
-    // Start is called before the first frame update
     private float time;
-    public float transparency = 0.2f;
     public GameObject Gamemanager;
+    Variable_Tracker tracker;
     public int total_collected;
-    public bool placed;
+    private int i;
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
-        this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
-        placed = false;
-
+        tracker = Gamemanager.GetComponent<Variable_Tracker>();
     }
 
-    // Update is called once per frame
     void Update()
     {
         time += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
-        if (time > 0.5)
+        if (time > 0.1f)
         {
-            if (transparency < 1 && !placed)
-            {
-                transparency = transparency + 0.1f;
-            }
-            else if (Gamemanager.GetComponent<Variable_Tracker>().O2 < Gamemanager.GetComponent<Variable_Tracker>().max_O2)
-            {
-                Gamemanager.GetComponent<Variable_Tracker>().O2 += 20;
-                total_collected = total_collected + 20;
-                Gamemanager.GetComponent<Variable_Tracker>().energy -= 1;
-                placed = true;
-                transparency = 1;
-
-            }
-            else
-            {
-                placed = true;
-                transparency = 1;
-            }
-            this.GetComponent<MeshRenderer>().material.color = new Color(transparency, transparency, transparency, transparency);
+            int availableRoom = Gamemanager.GetComponent<Variable_Tracker>().max_O2 - Gamemanager.GetComponent<Variable_Tracker>().O2;
+            int addedO2 = Mathf.Min(4, availableRoom); // 4 * 0.1 = 40/sec
+            Gamemanager.GetComponent<Variable_Tracker>().O2 += addedO2;
+            total_collected += addedO2;
             time = 0;
-
+            if(i > 10)
+            {
+                Gamemanager.GetComponent<Variable_Tracker>().energy -= 1;
+                i = 0;
+            }
+            i++;
         }
+
 
     }
 }

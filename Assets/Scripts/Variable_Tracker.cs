@@ -18,6 +18,7 @@ public class Variable_Tracker : MonoBehaviour
     public int food = 100;
     public int O2 = 100;
     public int money;
+    public AudioSource ui_click;
 
     public UISlider energy_slider;
     public UISlider mining_slider;
@@ -48,10 +49,17 @@ public class Variable_Tracker : MonoBehaviour
 
     public GameObject panel;
     public GameObject map;
+    public void Start()
+    {
+        //Begin();
+    }
+
+
     public void Begin()
     {
         SaveSystem.Load();
         speed = 1;
+        Time.timeScale = 1;
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
     }
@@ -145,7 +153,7 @@ public class Variable_Tracker : MonoBehaviour
         {
             if (cells[i] != "-1")// && map.mapCells[i].building == null
             {
-                map.mapCells[i].Add_building(Int32.Parse(cells[i]));
+                map.mapCells[i].Add_saved_building(Int32.Parse(cells[i]));
             }
         }
         energy = data.energy;
