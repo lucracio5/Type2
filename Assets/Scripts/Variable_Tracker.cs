@@ -18,7 +18,7 @@ public class Variable_Tracker : MonoBehaviour
     public int food = 100;
     public int O2 = 100;
     public int money;
-    public AudioSource ui_click;
+    
 
     public UISlider energy_slider;
     public UISlider mining_slider;
@@ -42,7 +42,7 @@ public class Variable_Tracker : MonoBehaviour
     public int max_O2 = 100;
     public int max_population = 10;
 
-
+    Audio_manager audio_manager;
 
     public int speed;
     public float rotate_speed = 0.01f;
@@ -52,6 +52,7 @@ public class Variable_Tracker : MonoBehaviour
     public void Start()
     {
         //Begin();
+        
     }
 
 
@@ -62,6 +63,7 @@ public class Variable_Tracker : MonoBehaviour
         Time.timeScale = 1;
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
+        audio_manager = GetComponent<Audio_manager>();
     }
     // Update is called once per frame
     void Update()
@@ -93,18 +95,22 @@ public class Variable_Tracker : MonoBehaviour
     public void speed1()
     {
         speed = 1;
+        
     }
     public void speed2()
     {
         speed = 2;
+        audio_manager.PlayUIclick();
     }
     public void speed5()
     {
         speed = 5;
+        audio_manager.PlayUIclick();
     }
     public void Save_button()
     {
         SaveSystem.Save();
+        audio_manager.PlayUIclick();
     }
     public void Sell_materials()
     {

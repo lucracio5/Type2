@@ -19,6 +19,7 @@ public class MapPointer : MonoBehaviour
     public GameObject panel;
     public Text panel_text;
     public Text panel_text2;
+    Audio_manager audio_manager;
 
 
 
@@ -28,6 +29,7 @@ public class MapPointer : MonoBehaviour
         activeCursor = 0;
         Gamemanager = GameObject.Find("Game Manager");
         panel_text2.text = "test";
+        audio_manager = Gamemanager.GetComponent<Audio_manager>(); 
     }
 
 
@@ -93,36 +95,42 @@ public class MapPointer : MonoBehaviour
         cursors[activeCursor].gameObject.SetActive(false); 
         activeCursor = 0;
         cursors[activeCursor].gameObject.SetActive(true);
+        audio_manager.PlayUIclick();
     }
     public void Button2()
     {
         cursors[activeCursor].gameObject.SetActive(false);
         activeCursor = 1;
         cursors[activeCursor].gameObject.SetActive(true);
+        audio_manager.PlayUIclick();
     }
     public void Button3()
     {
         cursors[activeCursor].gameObject.SetActive(false);
         activeCursor = 2;
         cursors[activeCursor].gameObject.SetActive(true);
+        audio_manager.PlayUIclick();
     }
     public void Button4()
     {
         cursors[activeCursor].gameObject.SetActive(false);
         activeCursor = 3;
         cursors[activeCursor].gameObject.SetActive(true);
+        audio_manager.PlayUIclick();
     }
     public void Button5()
     {
         cursors[activeCursor].gameObject.SetActive(false);
         activeCursor = 4;
         cursors[activeCursor].gameObject.SetActive(true);
+        audio_manager.PlayUIclick();
     }
     public void Button6()
     {
         cursors[activeCursor].gameObject.SetActive(false);
         activeCursor = 5;
         cursors[activeCursor].gameObject.SetActive(true);
+        audio_manager.PlayUIclick();
     }
 
 }
