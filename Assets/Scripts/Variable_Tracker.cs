@@ -43,6 +43,7 @@ public class Variable_Tracker : MonoBehaviour
     public int max_population = 10;
 
     Audio_manager audio_manager;
+    public GameObject GameoverText;
 
     public int speed;
     public float rotate_speed = 0.01f;
@@ -88,6 +89,8 @@ public class Variable_Tracker : MonoBehaviour
         if (O2 < 0 || food < 0 || water < 0)
         {
             Debug.Log("Game Over");
+            GameoverText.SetActive(true);
+            speed = 0;
         }
 
 
