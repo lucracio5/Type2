@@ -20,6 +20,8 @@ public class Imports2: MonoBehaviour
     public TMP_Text output2;
     public TMP_Text output3;
 
+    public TMP_Text shipArrivalText;
+
     public float timer;
     public float deliveryInterval = 60f;
 
@@ -27,10 +29,12 @@ public class Imports2: MonoBehaviour
 
     private List<ImportItem> importQueue = new();
     private List<OutputItem> outputQueue = new();
+    Audio_manager audio_manager;
 
     private void Start()
     {
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
+        audio_manager = GameObject.Find("Game Manager").GetComponent<Audio_manager>();
     }
 
     private void Update()
@@ -88,6 +92,9 @@ public class Imports2: MonoBehaviour
     private void ProcessShip()
     {
         Debug.Log("Ship has arrived!");
+        audio_manager.PlayLanding();
+        StartCoroutine(ShowShipArrivalMessage());
+
 
         foreach (var item in importQueue)
         {
@@ -110,7 +117,20 @@ public class Imports2: MonoBehaviour
         importQueue.Clear();
         outputQueue.Clear(); // You can add logic here to sell items, etc.
     }
+    private IEnumerator ShowShipArrivalMessage()
+    {
+        
+        shipArrivalText.text = "A new shipment has arrived!";
+        for(int i = 0;i <= 4; i++)
+        {
+            shipArrivalText.gameObject.SetActive(true);
+            yield return new WaitForSeconds(0.5f);
+            shipArrivalText.gameObject.SetActive(false);
+            yield return new WaitForSeconds(0.5f);
+        }
+    }
 }
+
 
 public class ImportItem
 {

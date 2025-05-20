@@ -5,15 +5,24 @@ using UnityEngine;
 public class Audio_manager : MonoBehaviour
 {
     public AudioClip ui_click;
-    private AudioSource audioSource;
+    public AudioClip Landing;
+    public AudioSource SFX;
+    public AudioSource Music;
     void Start()
     {
-        audioSource = GetComponent<AudioSource>();
+        if (!Music.isPlaying)
+        {
+            Music.Play();
+        }
     }
 
     // Update is called once per frame
     public void PlayUIclick()
     {
-        audioSource.PlayOneShot(ui_click);
+        SFX.PlayOneShot(ui_click);
+    }
+    public void PlayLanding()
+    {
+        SFX.PlayOneShot(Landing);
     }
 }

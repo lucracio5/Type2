@@ -40,7 +40,7 @@ public class Pausemenu: MonoBehaviour
     }
     public void Back_to_menu()
     {
-        
+        game_is_paused = false;
         SceneManager.LoadScene("Start Menu");
     }
 }
