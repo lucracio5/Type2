@@ -20,6 +20,7 @@ public class MapPointer : MonoBehaviour
     public Text panel_text2;
     Audio_manager audio_manager;
     public GameObject LaunchPanel;
+    public GameObject SciencePanel;
 
 
 
@@ -69,9 +70,16 @@ public class MapPointer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) && current_cell != null && current_cell.building != null)
         {
+            print(current_cell.building.tag);
             if (current_cell.building.tag == "Launchpad")
             {
                 LaunchPanel.SetActive(true);
+                audio_manager.PlayOpen();
+            }
+            else if (current_cell.building.tag == "Dome")
+            {
+                SciencePanel.SetActive(true);
+                audio_manager.PlayOpen();
             }
             else
             {

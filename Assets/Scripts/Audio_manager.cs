@@ -4,9 +4,11 @@ using UnityEngine;
 
 public class Audio_manager : MonoBehaviour
 {
-    public AudioClip ui_click;
-    public AudioClip Landing;
-    public AudioClip failed_ui_click;
+    [SerializeField] AudioClip ui_click;
+    [SerializeField] AudioClip Landing;
+    [SerializeField] AudioClip failed_ui_click;
+    [SerializeField] AudioClip new_unlock;
+    [SerializeField] AudioClip ui_open;
     public AudioSource SFX;
     public AudioSource Music;
     void Start()
@@ -29,5 +31,13 @@ public class Audio_manager : MonoBehaviour
     public void PlayFailedClick()
     {
         SFX.PlayOneShot(failed_ui_click);
+    }
+    public void PlayUnlock()
+    {
+        SFX.PlayOneShot(new_unlock);
+    }
+    public void PlayOpen()
+    {
+        SFX.PlayOneShot(ui_open);
     }
 }

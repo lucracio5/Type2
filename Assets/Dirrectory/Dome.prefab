@@ -10,12 +10,12 @@ GameObject:
   m_Component:
   - component: {fileID: 6959093385053881186}
   m_Layer: 0
-  m_Name: Dome Prefab
-  m_TagString: Cursor
+  m_Name: Dome
+  m_TagString: Dome
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &6959093385053881186
 Transform:
   m_ObjectHideFlags: 0
@@ -46,7 +46,7 @@ GameObject:
   - component: {fileID: 2745551873682168317}
   m_Layer: 0
   m_Name: Space Dome
-  m_TagString: Untagged
+  m_TagString: Dome
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -128,3 +128,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3b99255f47e0e734b8e36b5f8b6bf8b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  transparency: 0.2
+  placed: 0
