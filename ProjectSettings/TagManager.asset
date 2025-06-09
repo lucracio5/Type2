@@ -13,6 +13,7 @@ TagManager:
   - 5
   - Bar
   - Bar Text
+  - Launchpad
   layers:
   - Default
   - TransparentFX

@@ -72,7 +72,10 @@ public class Imports2: MonoBehaviour
         if (tracker.money >= 20 && tracker.food < tracker.max_food && importQueue.Count < 3)
         {
             importQueue.Add(new ImportItem("Food Import", 20, () => tracker.food = Mathf.Min(tracker.food + 10, tracker.max_food)));
+            audio_manager.PlayUIclick();
         }
+        else 
+            audio_manager.PlayFailedClick();
     }
 
     public void QueueWaterImport()
@@ -80,14 +83,20 @@ public class Imports2: MonoBehaviour
         if (tracker.money >= 20 && tracker.water < tracker.max_water && importQueue.Count < 3)
         {
             importQueue.Add(new ImportItem("Water Import", 20, () => tracker.water = Mathf.Min(tracker.water + 10, tracker.max_water)));
+            audio_manager.PlayUIclick();
         }
+        else
+            audio_manager.PlayFailedClick();
     }
     public void QueueRegoligthExport()
     {
         if (tracker.regolith - outputQueue.Count >= 1 && outputQueue.Count < 3)
         {
             outputQueue.Add(new OutputItem("Regolith Export", 25));
+            audio_manager.PlayUIclick();
         }
+        else
+            audio_manager.PlayFailedClick();
     }
     private void ProcessShip()
     {

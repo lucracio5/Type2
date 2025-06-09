@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.046680123, g: 0.04428079, b: 0.032878485, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -724,7 +724,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &155305214
 RectTransform:
   m_ObjectHideFlags: 0
@@ -1012,18 +1012,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1013954941}
         m_TargetAssemblyTypeName: Imports2, Assembly-CSharp
         m_MethodName: QueueWaterImport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1013954943}
-        m_TargetAssemblyTypeName: Audio_manager, Assembly-CSharp
-        m_MethodName: PlayUIclick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -1749,6 +1737,7 @@ MonoBehaviour:
   panel: {fileID: 1787769523}
   panel_text: {fileID: 869154906}
   panel_text2: {fileID: 1045330454}
+  LaunchPanel: {fileID: 155305213}
 --- !u!1 &379060849
 GameObject:
   m_ObjectHideFlags: 0
@@ -2743,7 +2732,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Food Import
+  m_text: Food Import - 20$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -2770,8 +2759,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -4551,7 +4540,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Water Import
+  m_text: Water Import - 20$
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -4578,8 +4567,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 24
-  m_fontSizeBase: 24
+  m_fontSize: 19
+  m_fontSizeBase: 19
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -5133,18 +5122,6 @@ MonoBehaviour:
       - m_Target: {fileID: 1013954941}
         m_TargetAssemblyTypeName: Imports2, Assembly-CSharp
         m_MethodName: QueueFoodImport
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
-      - m_Target: {fileID: 1013954943}
-        m_TargetAssemblyTypeName: Audio_manager, Assembly-CSharp
-        m_MethodName: PlayUIclick
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -6105,6 +6082,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ui_click: {fileID: 8300000, guid: 34b838f1b8eb53b4c95c0add23896414, type: 3}
   Landing: {fileID: 8300000, guid: e0a83019a1a3e4945b400c9079e0f198, type: 3}
+  failed_ui_click: {fileID: 8300000, guid: 1e94004038342dd49bc3a4c6ffc6d479, type: 3}
   SFX: {fileID: 1013954942}
   Music: {fileID: 1013954944}
 --- !u!82 &1013954944
@@ -9002,18 +8980,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1013954943}
-        m_TargetAssemblyTypeName: Audio_manager, Assembly-CSharp
-        m_MethodName: PlayUIclick
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!114 &1522721371
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11565,7 +11531,7 @@ GameObject:
   m_Component:
   - component: {fileID: 543450653027268321}
   m_Layer: 0
-  m_Name: uploads_files_4785228_Untitled
+  m_Name: Backround
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

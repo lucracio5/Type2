@@ -6,6 +6,7 @@ public class Audio_manager : MonoBehaviour
 {
     public AudioClip ui_click;
     public AudioClip Landing;
+    public AudioClip failed_ui_click;
     public AudioSource SFX;
     public AudioSource Music;
     void Start()
@@ -24,5 +25,9 @@ public class Audio_manager : MonoBehaviour
     public void PlayLanding()
     {
         SFX.PlayOneShot(Landing);
+    }
+    public void PlayFailedClick()
+    {
+        SFX.PlayOneShot(failed_ui_click);
     }
 }

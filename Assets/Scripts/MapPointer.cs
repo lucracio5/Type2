@@ -19,6 +19,7 @@ public class MapPointer : MonoBehaviour
     public Text panel_text;
     public Text panel_text2;
     Audio_manager audio_manager;
+    public GameObject LaunchPanel;
 
 
 
@@ -68,22 +69,34 @@ public class MapPointer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(1) && current_cell != null && current_cell.building != null)
         {
-           panel.gameObject.SetActive(true);
-           panel_text.text = current_cell.building.name;
-            if (current_cell.building.GetComponentInChildren<Drill_script>() != null)
+            if (current_cell.building.tag == "Launchpad")
             {
-                panel_text2.text = "Total Regolith colected: "+current_cell.building.GetComponentInChildren<Drill_script>().total_collected.ToString();
-                Debug.Log(current_cell.building.GetComponentInChildren<Drill_script>().return_total().ToString());
-            }
-            else if(current_cell.building.GetComponentInChildren<Solar_Pannels>() != null)
-            {
-                panel_text2.text = "Total Energy colected: " + current_cell.building.GetComponentInChildren<Solar_Pannels>().total_collected.ToString();
-                Debug.Log(current_cell.building.GetComponentInChildren<Solar_Pannels>().return_total().ToString());
+                LaunchPanel.SetActive(true);
             }
             else
             {
-                panel_text2.gameObject.SetActive(false);
+                panel.gameObject.SetActive(true);
+                panel_text.text = current_cell.building.name;
+                if (current_cell.building.GetComponentInChildren<Drill_script>() != null)
+                {
+                    panel_text2.text = "Total Regolith colected: " + current_cell.building.GetComponentInChildren<Drill_script>().total_collected.ToString();
+                    Debug.Log(current_cell.building.GetComponentInChildren<Drill_script>().return_total().ToString());
+                }
+                else if (current_cell.building.GetComponentInChildren<Solar_Pannels>() != null)
+                {
+                    panel_text2.text = "Total Energy colected: " + current_cell.building.GetComponentInChildren<Solar_Pannels>().total_collected.ToString();
+                    Debug.Log(current_cell.building.GetComponentInChildren<Solar_Pannels>().return_total().ToString());
+                }
+                else
+                {
+                    panel_text2.gameObject.SetActive(false);
+                }
             }
+
+
+
+
+          
 
         }
     }

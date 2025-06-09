@@ -115,11 +115,6 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Save();
         audio_manager.PlayUIclick();
     }
-    public void Sell_materials()
-    {
-        money += regolith * 25;
-        regolith = 0;
-    }
     public void Test()
     {
         panel.SetActive(false);
