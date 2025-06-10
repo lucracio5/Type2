@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c1a89b3c64f1e49b4f9b568fe55680, type: 3}
   m_Name: Hydroponics
   m_EditorClassIdentifier: 
-  prefab: {fileID: 7666852117137118224, guid: 15f61b5a31ae1b3468a2ff72e1f03d20, type: 3}
+  prefab: {fileID: 3724006477272394822, guid: 12571fa50395e6548bfe6ea0c722193e, type: 3}
   cost: 50

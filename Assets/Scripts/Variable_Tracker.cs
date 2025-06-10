@@ -52,10 +52,12 @@ public class Variable_Tracker : MonoBehaviour
     public GameObject map;
 
     public bool Hydro_unlock = false;
+    public UnityEngine.UI.Button HydroButton;
     public void Start()
     {
         //Begin();
-        
+        HydroButton.interactable = false;
+
     }
 
 
@@ -93,6 +95,10 @@ public class Variable_Tracker : MonoBehaviour
             Debug.Log("Game Over");
             GameoverText.SetActive(true);
             speed = 0;
+        }
+        if(Hydro_unlock)
+        {
+            HydroButton.interactable = true;
         }
 
 

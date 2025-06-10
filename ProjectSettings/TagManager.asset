@@ -15,6 +15,7 @@ TagManager:
   - Bar Text
   - Launchpad
   - Dome
+  - Hydro
   layers:
   - Default
   - TransparentFX
