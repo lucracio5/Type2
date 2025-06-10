@@ -14,6 +14,7 @@ public class Jobs : MonoBehaviour
     public int science_poins;
     public int xp;
     public TMP_Text science_points_text;
+    public TMP_Text other_science_points_text;
     private float timer;
 
     void Start()
@@ -38,6 +39,7 @@ public class Jobs : MonoBehaviour
         }
         xp_bar.value = xp;
         science_points_text.text = science_poins+" points";
+        other_science_points_text.text = science_poins + " points";
     }
     public void addJobs(int amount)
     {

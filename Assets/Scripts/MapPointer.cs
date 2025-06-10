@@ -61,7 +61,15 @@ public class MapPointer : MonoBehaviour
             int prefabs_index = activeCursor - 1;
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
-                current_cell.Add_building(prefabs_index);
+                
+                if (prefabs_index != 1)
+                {
+                    current_cell.Add_building(prefabs_index);
+                }
+                else
+                {
+                    current_cell.Add_building(5);
+                }
                 Gamemanager.GetComponent<Variable_Tracker>().money -= buildings[prefabs_index].cost;
                 
                 //current_cell.ChangeHeight(1);
@@ -128,6 +136,7 @@ public class MapPointer : MonoBehaviour
     {
         cursors[activeCursor].gameObject.SetActive(false);
         activeCursor = 2;
+        print(activeCursor);
         cursors[activeCursor].gameObject.SetActive(true);
         audio_manager.PlayUIclick();
     }
