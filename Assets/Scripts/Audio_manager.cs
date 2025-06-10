@@ -9,6 +9,7 @@ public class Audio_manager : MonoBehaviour
     [SerializeField] AudioClip failed_ui_click;
     [SerializeField] AudioClip new_unlock;
     [SerializeField] AudioClip ui_open;
+    [SerializeField] AudioClip ship_takeoff;
     public AudioSource SFX;
     public AudioSource Music;
     void Start()
@@ -26,6 +27,7 @@ public class Audio_manager : MonoBehaviour
     }
     public void PlayLanding()
     {
+        SFX.Stop();
         SFX.PlayOneShot(Landing);
     }
     public void PlayFailedClick()
@@ -40,4 +42,5 @@ public class Audio_manager : MonoBehaviour
     {
         SFX.PlayOneShot(ui_open);
     }
+    
 }

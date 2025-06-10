@@ -31,8 +31,11 @@ public class Imports2: MonoBehaviour
     private List<OutputItem> outputQueue = new();
     Audio_manager audio_manager;
 
+    public Animator shipAnimator;
+
     private void Start()
     {
+        shipAnimator = GameObject.Find("Rocket").GetComponent<Animator>();
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
         audio_manager = GameObject.Find("Game Manager").GetComponent<Audio_manager>();
     }
@@ -43,11 +46,21 @@ public class Imports2: MonoBehaviour
 
         UpdateUIText();
 
+
         if (timer >= deliveryInterval)
         {
             timer = 0;
             ProcessShip();
         }
+        else if (timer >= deliveryInterval-1.5)
+        {
+            shipAnimator.SetTrigger("ShipArriving");
+            Invoke("PlayLanding", 6.8f);
+        }
+    }
+    private void PlayLanding()
+    {
+        audio_manager.PlayLanding();
     }
 
     private void UpdateUIText()
