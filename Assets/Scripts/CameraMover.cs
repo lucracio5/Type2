@@ -10,6 +10,7 @@ public class CameraMover : MonoBehaviour
     [SerializeField] private float zMin = -200f;
     [SerializeField] private float zMax = 30f;
     [SerializeField] private float speed = 10f;
+    [SerializeField] private float zoomSpeed = 10f;
     private float lastMousePosX;
     private float lastMousePosY;
 
@@ -17,6 +18,13 @@ public class CameraMover : MonoBehaviour
 
     // Update is called once per frame
     void Update()
+    {
+        MoveCamera();
+        ZoomCamera();
+    }
+
+    // Moves the camera based on mouse input
+    void MoveCamera()
     {
         Vector3 mousePos = Input.mousePosition; // Get the current mouse position in screen coordinates
 
@@ -36,10 +44,17 @@ public class CameraMover : MonoBehaviour
             transform.position.y,
             Mathf.Clamp(transform.position.z, zMin + 1, zMax - 1)
             );
-        } 
+        }
 
         //updates the last mouse position
         lastMousePosX = mousePos.x;
         lastMousePosY = mousePos.y;
+    }
+
+
+    void ZoomCamera()
+    {
+        Vector3 scrollDelta = Input.mouseScrollDelta; // Get the mouse scroll delta
+        Camera.main.fieldOfView = Camera.main.fieldOfView - scrollDelta.y * zoomSpeed; // Adjust the field of view based on the scroll delta
     }
 }
