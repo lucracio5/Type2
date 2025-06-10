@@ -6,7 +6,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Imports2: MonoBehaviour
+public class Imports2 : MonoBehaviour
 {
     public GameObject panel;
     public TMP_Text nextDeliveryText;
@@ -52,15 +52,20 @@ public class Imports2: MonoBehaviour
             timer = 0;
             ProcessShip();
         }
-        else if (timer >= deliveryInterval-1.5)
+        else if (timer >= deliveryInterval - 1.5)
         {
-            shipAnimator.SetTrigger("ShipArriving");
-            Invoke("PlayLanding", 6.8f);
+            shipAnimator.SetBool("Arriving", true);
+            Invoke("PlayLanding", 8f);
+            Invoke("NotArrving", 16f);
         }
     }
     private void PlayLanding()
     {
         audio_manager.PlayLanding();
+    }
+    private void NotArrving()
+    {
+        shipAnimator.SetBool("Arriving", false);
     }
 
     private void UpdateUIText()
@@ -87,7 +92,7 @@ public class Imports2: MonoBehaviour
             importQueue.Add(new ImportItem("Food Import", 20, () => tracker.food = Mathf.Min(tracker.food + 10, tracker.max_food)));
             audio_manager.PlayUIclick();
         }
-        else 
+        else
             audio_manager.PlayFailedClick();
     }
 
@@ -141,9 +146,9 @@ public class Imports2: MonoBehaviour
     }
     private IEnumerator ShowShipArrivalMessage()
     {
-        
+
         shipArrivalText.text = "A new shipment has arrived!";
-        for(int i = 0;i <= 4; i++)
+        for (int i = 0; i <= 4; i++)
         {
             shipArrivalText.gameObject.SetActive(true);
             yield return new WaitForSeconds(0.5f);
