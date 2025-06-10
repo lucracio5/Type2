@@ -50,6 +50,8 @@ public class Variable_Tracker : MonoBehaviour
 
     public GameObject panel;
     public GameObject map;
+
+    public bool Hydro_unlock = false;
     public void Start()
     {
         //Begin();
