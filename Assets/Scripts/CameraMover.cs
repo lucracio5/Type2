@@ -11,6 +11,8 @@ public class CameraMover : MonoBehaviour
     [SerializeField] private float zMax = 30f;
     [SerializeField] private float speed = 10f;
     [SerializeField] private float zoomSpeed = 10f;
+    [SerializeField] private float minFOV = 12f;
+    [SerializeField] private float maxFOV = 92f;
     private float lastMousePosX;
     private float lastMousePosY;
 
@@ -55,6 +57,17 @@ public class CameraMover : MonoBehaviour
     void ZoomCamera()
     {
         Vector3 scrollDelta = Input.mouseScrollDelta; // Get the mouse scroll delta
-        Camera.main.fieldOfView = Camera.main.fieldOfView - scrollDelta.y * zoomSpeed; // Adjust the field of view based on the scroll delta
+
+        bool cameraZoomIsInBounds = Camera.main.fieldOfView > minFOV && Camera.main.fieldOfView < maxFOV; // Check if the camera zoom is within bounds
+        if (cameraZoomIsInBounds)
+        {
+            Camera.main.fieldOfView = Camera.main.fieldOfView - scrollDelta.y * zoomSpeed; // Adjust the field of view based on the scroll delta
+        }
+        else
+        {
+            Camera.main.fieldOfView = Mathf.Clamp(Camera.main.fieldOfView - scrollDelta.y * zoomSpeed, minFOV, maxFOV); // Clamp the field of view to the specified limits
+        }
+
+
     }
 }
