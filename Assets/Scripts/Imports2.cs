@@ -54,13 +54,18 @@ public class Imports2: MonoBehaviour
         }
         else if (timer >= deliveryInterval-1.5)
         {
-            shipAnimator.SetTrigger("ShipArriving");
-            Invoke("PlayLanding", 6.8f);
+            shipAnimator.SetBool("Arriving",true);
+            Invoke("PlayLanding", 8f);
+            Invoke("NotArrving", 16f);
         }
     }
     private void PlayLanding()
     {
         audio_manager.PlayLanding();
+    }
+    private void NotArrving()
+    {
+        shipAnimator.SetBool("Arriving", false);
     }
 
     private void UpdateUIText()
