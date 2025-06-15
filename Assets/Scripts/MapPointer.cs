@@ -21,6 +21,7 @@ public class MapPointer : MonoBehaviour
     Audio_manager audio_manager;
     public GameObject LaunchPanel;
     public GameObject SciencePanel;
+    public GameObject SolarPanelPanel;
 
 
 
@@ -87,6 +88,11 @@ public class MapPointer : MonoBehaviour
             else if (current_cell.building.tag == "Dome")
             {
                 SciencePanel.SetActive(true);
+                audio_manager.PlayOpen();
+            }
+            else if (current_cell.building.tag == "Solar Panel")
+            {
+                SolarPanelPanel.SetActive(true);
                 audio_manager.PlayOpen();
             }
             else

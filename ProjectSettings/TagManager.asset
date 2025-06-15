@@ -16,6 +16,8 @@ TagManager:
   - Launchpad
   - Dome
   - Hydro
+  - Panel
+  - Solar Panel
   layers:
   - Default
   - TransparentFX
