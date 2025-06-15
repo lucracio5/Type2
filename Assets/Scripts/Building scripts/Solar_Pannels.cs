@@ -11,19 +11,20 @@ public class Solar_Pannels: MonoBehaviour
     public int total_collected;
     public int dirt_level;
     public int dirt_chance;
-    public TMP_Text text;
-    public TMP_Text otherText;
+    public TMP_Text Solartext1;
+    public TMP_Text Solartext2;
 
-
+    
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
         dirt_chance = 1;
-        text = GameObject.Find("Clean_level").GetComponent<TextMeshProUGUI>();
-        otherText = GameObject.Find("Total").GetComponent<TextMeshProUGUI>();
+        Solartext1 = Gamemanager.GetComponent<Variable_Tracker>().returnSolar1();
+        Solartext2 = Gamemanager.GetComponent<Variable_Tracker>().returnSolar2();
 
         //Energy = Gamemanager.GetComponent<Variable_Tracker>().Energy;
     }
+  
 
     // Update is called once per frame
 
@@ -60,8 +61,8 @@ public class Solar_Pannels: MonoBehaviour
 
             }
         }
-        text.text = dirt_level_return();
-        otherText.text = "total colected ="+total_collected.ToString();
+        Solartext1.text = dirt_level_return();
+        Solartext2.text = "total colected ="+total_collected.ToString();
     }
     public void clean()
     {

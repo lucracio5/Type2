@@ -8,6 +8,7 @@ using UnityEngine.UIElements;
 using static UnityEngine.EventSystems.EventTrigger;
 using UISlider = UnityEngine.UI.Slider;
 using System.IO;
+using TMPro;
 
 public class Variable_Tracker : MonoBehaviour
 {
@@ -53,13 +54,24 @@ public class Variable_Tracker : MonoBehaviour
 
     public bool Hydro_unlock = false;
     public UnityEngine.UI.Button HydroButton;
+
+    public TMP_Text Solartext1;
+    public TMP_Text Solartext2;
+
     public void Start()
     {
         //Begin();
         HydroButton.interactable = false;
 
     }
-
+    public TMP_Text returnSolar1()
+    {
+        return Solartext1;
+    }
+    public TMP_Text returnSolar2()
+    {
+        return Solartext2;
+    }
 
     public void Begin()
     {
