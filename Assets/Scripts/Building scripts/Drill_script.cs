@@ -27,11 +27,10 @@ public class Drill_script: MonoBehaviour
             if (Gamemanager.GetComponent<Variable_Tracker>().energy > 50 && Gamemanager.GetComponent<Variable_Tracker>().max_mining > Gamemanager.GetComponent<Variable_Tracker>().regolith)
             {
                 Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
+
                 Gamemanager.GetComponent<Variable_Tracker>().regolith += 1;
                 total_collected++;
                 //Debug.Log(total_collected);
-
-
             }
             timer = 0f;
             
