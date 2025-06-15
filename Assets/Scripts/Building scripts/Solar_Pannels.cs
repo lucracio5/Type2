@@ -8,10 +8,13 @@ public class Solar_Pannels: MonoBehaviour
     private float time;
     public GameObject Gamemanager;
     public int total_collected;
+    public int dirt_level;
+    public int dirt_chance;
 
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
+        dirt_chance = 10;
         //Energy = Gamemanager.GetComponent<Variable_Tracker>().Energy;
     }
 
@@ -32,14 +35,50 @@ public class Solar_Pannels: MonoBehaviour
         {
             if (Gamemanager.GetComponent<Variable_Tracker>().energy < Gamemanager.GetComponent<Variable_Tracker>().max_energy && GetComponent<Transparency>().placed)
             {
-                Gamemanager.GetComponent<Variable_Tracker>().energy += 1;
-                total_collected= total_collected + 1;
+                int num = Random.Range(0, 1001);
+
+                if (num > dirt_level)
+                {
+                    Gamemanager.GetComponent<Variable_Tracker>().energy += 1;
+                    total_collected = total_collected + 1;
+                }
+                if (num > dirt_chance && dirt_level < 1000)
+                {
+                    dirt_level += 250;
+                }
+
+                time = 0;
+
+
+
             }
-            time = 0;
-
-            
-
         }
-
+    }
+    public void clean()
+    {
+        dirt_level = 0;
+    }
+    public string dirt_level_return()
+    {
+        if (dirt_level == 0)
+        {
+            return "clean";
+        }
+        else if(dirt_level == 250)
+        {
+            return "mostly clean";
+        }
+        else if (dirt_level == 500)
+        {
+            return "dirty";
+        }
+        else if (dirt_level == 750)
+        {
+            return "very dirty";
+        }
+        else
+        {
+            return "filthy";
+        }
     }
 }
