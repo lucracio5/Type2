@@ -189,8 +189,8 @@ public class Variable_Tracker : MonoBehaviour
         food = data.food;
         O2 = data.O2;
         money = data.money;
-        jobs.xp = data.xp;
-        jobs.science_poins = data.science_points;
+        //jobs.xp = data.xp;
+        //jobs.science_poins = data.science_points;
 
    }
     
@@ -206,10 +206,10 @@ public class Variable_Tracker : MonoBehaviour
         public int food;
         public int O2;
         public int money;
-        public int xp;
-        public int science_points;
-        public int science_jobs;
-        public int cleaning_jobs;
+        //public int xp;
+        //public int science_points;
+        //public int science_jobs;
+        //public int cleaning_jobs;
 
 
     }
