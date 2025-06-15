@@ -13,6 +13,7 @@ public class Jobs : MonoBehaviour
     public int open_jobs;
     public Variable_Tracker tracker;
     public TMP_Text text;
+    public TMP_Text clean_text;
     public int science_poins;
     public int xp;
     public TMP_Text science_points_text;
@@ -28,11 +29,12 @@ public class Jobs : MonoBehaviour
     void Update()
     {
         text.text = science_jobs + "/" + tracker.population;
+        clean_text.text = cleaning_jobs + "/" + tracker.population;
         timer += Time.deltaTime * tracker.speed;
-        if (timer >= 5)
+        if (timer >= 2)
         {
             timer = 0;
-            xp += science_jobs*3;
+            xp += science_jobs*2;
             CleanDirtyPanels();
 
         }
@@ -60,6 +62,7 @@ public class Jobs : MonoBehaviour
     }
     public void addCleaningJobs(int amount)
     {
+        
         if (science_jobs + amount + cleaning_jobs <= tracker.population)
         {
             cleaning_jobs += amount;

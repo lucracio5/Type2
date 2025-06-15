@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
 
@@ -10,11 +11,17 @@ public class Solar_Pannels: MonoBehaviour
     public int total_collected;
     public int dirt_level;
     public int dirt_chance;
+    public TMP_Text text;
+    public TMP_Text otherText;
+
 
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
-        dirt_chance = 10;
+        dirt_chance = 1;
+        text = GameObject.Find("Clean_level").GetComponent<TextMeshProUGUI>();
+        otherText = GameObject.Find("Total").GetComponent<TextMeshProUGUI>();
+
         //Energy = Gamemanager.GetComponent<Variable_Tracker>().Energy;
     }
 
@@ -44,7 +51,7 @@ public class Solar_Pannels: MonoBehaviour
                 }
                 if (num > dirt_chance && dirt_level < 1000)
                 {
-                    dirt_level += 250;
+                    dirt_level += 10;
                 }
 
                 time = 0;
@@ -53,6 +60,8 @@ public class Solar_Pannels: MonoBehaviour
 
             }
         }
+        text.text = dirt_level_return();
+        otherText.text = "total colected ="+total_collected.ToString();
     }
     public void clean()
     {
@@ -64,15 +73,15 @@ public class Solar_Pannels: MonoBehaviour
         {
             return "clean";
         }
-        else if(dirt_level == 250)
+        else if(0 < dirt_level && dirt_level <= 250)
         {
             return "mostly clean";
         }
-        else if (dirt_level == 500)
+        else if (250 < dirt_level && dirt_level <= 500)
         {
             return "dirty";
         }
-        else if (dirt_level == 750)
+        else if (500 < dirt_level && dirt_level <= 750)
         {
             return "very dirty";
         }
