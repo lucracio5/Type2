@@ -25,14 +25,12 @@ public class O2Plant : MonoBehaviour
             Gamemanager.GetComponent<Variable_Tracker>().O2 += addedO2;
             total_collected += addedO2;
             time = 0;
-            if(i > 10)
+            if (i > 10 && Gamemanager.GetComponent<Variable_Tracker>().energy >= 1)
             {
                 Gamemanager.GetComponent<Variable_Tracker>().energy -= 1;
                 i = 0;
             }
             i++;
         }
-
-
     }
 }

@@ -124,8 +124,10 @@ public class Variable_Tracker : MonoBehaviour
             HydroButton.interactable = true;
         }
         
-
-    
+        if (energy <= 0) {
+            energy = 0;  //Clamps the minumum value of energy to 0
+            Debug.Log("Energy is at 0");
+        } 
     }
     public void speed1()
     {
