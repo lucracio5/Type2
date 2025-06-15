@@ -15,9 +15,9 @@ public class CameraMover : MonoBehaviour
     [SerializeField] private float zMin = -200f;
     [SerializeField] private float zMax = 30f;
 
-    [SerializeField] private float movementSpeed = 10f;
-    [SerializeField] private float zoomSpeed = 15f;
-    [SerializeField] private float rotationSpeed = 5f;
+    [SerializeField] private float movementSpeed = 15f;
+    [SerializeField] private float zoomSpeed = 5f;
+    [SerializeField] private float rotationSpeed = 20f;
 
     [SerializeField] private float minFOV = 12f;
     [SerializeField] private float maxFOV = 92f;
@@ -27,6 +27,13 @@ public class CameraMover : MonoBehaviour
 
     private float curDeltaX;
     private float curDeltaY;
+
+
+
+    void Start() 
+    {
+        ResetCamera(); //resets the camera's position by default
+    }
 
     // Update is called once per frame
     void Update()
@@ -55,10 +62,21 @@ public class CameraMover : MonoBehaviour
     void MoveCamera()
     {
         bool cameraIsInBounds = transform.position.x > xMin && transform.position.x < xMax && transform.position.z > zMin && transform.position.z < zMax;
+
         if (cameraIsInBounds && Input.GetMouseButton(1)) // If the right mouse button is pressed and the camera is within bounds, move the camera
         {
-            transform.position = transform.position + new Vector3(curDeltaX * movementSpeed * Time.deltaTime, 0, curDeltaY * movementSpeed * Time.deltaTime);
+            //Defines vectors for the local right and forward
+            Vector3 rightVector = transform.right;
+            Vector3 forwardVector = transform.forward;
+            
+            //flattens the y value because I want the height to stay consistant
+            rightVector.y = 0;
+            forwardVector.y = 0;
+
+            Vector3 movementThisFrame = (rightVector * curDeltaX + forwardVector * curDeltaY) * -1 * movementSpeed * Time.deltaTime;//new Vector3(curDeltaX * movementSpeed * Time.deltaTime, 0, curDeltaY * movementSpeed * Time.deltaTime);
+            transform.position += movementThisFrame;
         }
+
         else if (!cameraIsInBounds) // If the camera is out of bounds, snap the camera position to within the bounds
         {
             transform.position = new Vector3(
@@ -67,10 +85,9 @@ public class CameraMover : MonoBehaviour
             Mathf.Clamp(transform.position.z, zMin + 1, zMax - 1)
             );
         }
-
     }
 
-
+    // Zooms the camera based on mouse input
     void ZoomCamera()
     {
         Vector3 scrollDelta = Input.mouseScrollDelta; // Get the mouse scroll delta
@@ -86,18 +103,18 @@ public class CameraMover : MonoBehaviour
         }
     }
 
+    // Rotates the camera based on mouse input
     void RotateCamera() {
         if (Input.GetMouseButton(2)) // If the scroll wheel button is pressed, rotate the camera
         {
-            transform.Rotate(-1f * curDeltaY * rotationSpeed * Time.deltaTime, curDeltaX * rotationSpeed * Time.deltaTime, 0); //rotate the camera about the x and y axis
-            //Debug.Log("curDeltaX: " + curDeltaX + ", curDeltaY: " + curDeltaY);
+            transform.RotateAround(transform.position, Vector3.up, curDeltaX * rotationSpeed * Time.deltaTime); //Rotate left-right (about y axis)
         }
     }
 
-    //resets the camera to its default state
+    // Resets the camera to its default state
     public void ResetCamera() {
         transform.position = defaultPosition;
         Camera.main.fieldOfView = defaultFOV;
-        transform.Rotate(defaultRotation);
+        transform.eulerAngles = defaultRotation;
     }
 }
