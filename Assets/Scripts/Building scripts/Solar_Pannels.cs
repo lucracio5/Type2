@@ -70,21 +70,18 @@ public class Solar_Pannels: MonoBehaviour
     }
     public string dirt_level_return()
     {
-        if (dirt_level == 0)
+       
+        if(0 <= dirt_level && dirt_level <= 250)
         {
             return "clean";
         }
-        else if(0 < dirt_level && dirt_level <= 250)
-        {
-            return "mostly clean";
-        }
         else if (250 < dirt_level && dirt_level <= 500)
         {
-            return "dirty";
+            return "mostly dirty";
         }
         else if (500 < dirt_level && dirt_level <= 750)
         {
-            return "very dirty";
+            return "dirty";
         }
         else
         {

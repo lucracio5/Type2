@@ -14,7 +14,7 @@ public class Jobs : MonoBehaviour
     public Variable_Tracker tracker;
     public TMP_Text text;
     public TMP_Text clean_text;
-    public int science_poins;
+    public int science_points;
     public int xp;
     public TMP_Text science_points_text;
     public TMP_Text other_science_points_text;
@@ -41,11 +41,11 @@ public class Jobs : MonoBehaviour
         if (xp > 1000)
         {
             xp = 0;
-            science_poins += 1;
+            science_points += 1;
         }
         xp_bar.value = xp;
-        science_points_text.text = science_poins+" points";
-        other_science_points_text.text = science_poins + " points";
+        science_points_text.text = science_points+" points";
+        other_science_points_text.text = science_points + " points";
     }
     public void addScienceJobs(int amount)
     {

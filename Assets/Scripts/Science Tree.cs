@@ -24,7 +24,7 @@ public class ScienceTree : MonoBehaviour
     }
     public void Hydroponics()
     {
-        if(jobs.science_poins >= 3 && !tracker.Hydro_unlock)
+        if(jobs.science_points >= 3 && !tracker.Hydro_unlock)
         {
            manager.PlayUnlock();
            tracker.Hydro_unlock = true;
