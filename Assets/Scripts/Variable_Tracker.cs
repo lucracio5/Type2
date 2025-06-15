@@ -113,11 +113,11 @@ public class Variable_Tracker : MonoBehaviour
         population_slider.value = population;
         O2_slider.value = O2;
 
-        if (O2 < 0 || food < 0 || water < 0)
+        if (O2 <= 0 || food <= 0 || water <= 0)
         {
             Debug.Log("Game Over");
             GameoverText.SetActive(true);
-            speed = 0;
+            Time.timeScale = 0;
         }
         if(Hydro_unlock)
         {

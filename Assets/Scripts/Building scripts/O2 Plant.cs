@@ -20,12 +20,16 @@ public class O2Plant : MonoBehaviour
         time += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
         if (time > 0.1f)
         {
-            int availableRoom = Gamemanager.GetComponent<Variable_Tracker>().max_O2 - Gamemanager.GetComponent<Variable_Tracker>().O2;
-            int addedO2 = Mathf.Min(4, availableRoom); // 4 * 0.1 = 40/sec
-            Gamemanager.GetComponent<Variable_Tracker>().O2 += addedO2;
-            total_collected += addedO2;
+            
+            if (Gamemanager.GetComponent<Variable_Tracker>().energy >= 1)
+            {
+                int availableRoom = Gamemanager.GetComponent<Variable_Tracker>().max_O2 - Gamemanager.GetComponent<Variable_Tracker>().O2;
+                int addedO2 = Mathf.Min(4, availableRoom); // 4 * 0.1 = 40/sec
+                Gamemanager.GetComponent<Variable_Tracker>().O2 += addedO2;
+                total_collected += addedO2;
+            }
             time = 0;
-            if (i > 10 && Gamemanager.GetComponent<Variable_Tracker>().energy >= 1)
+            if (i > 10)
             {
                 Gamemanager.GetComponent<Variable_Tracker>().energy -= 1;
                 i = 0;
