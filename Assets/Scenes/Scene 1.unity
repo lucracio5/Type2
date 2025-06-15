@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.047837026, g: 0.04548081, b: 0.034051638, a: 1}
+  m_IndirectSpecularColor: {r: 0.048468642, g: 0.046092644, b: 0.034579765, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6665,7 +6665,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &638786040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11296,6 +11296,8 @@ MonoBehaviour:
   map: {fileID: 371189360}
   Hydro_unlock: 0
   HydroButton: {fileID: 617184618}
+  Solartext1: {fileID: 1238356344}
+  Solartext2: {fileID: 1747933452}
 --- !u!114 &1013954941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -11336,7 +11338,7 @@ AudioSource:
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 34b838f1b8eb53b4c95c0add23896414, type: 3}
   m_PlayOnAwake: 0
-  m_Volume: 1
+  m_Volume: 0.259
   m_Pitch: 1
   Loop: 0
   Mute: 0
@@ -27135,7 +27137,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -8, y: 21}
+  m_AnchoredPosition: {x: -8, y: -44}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1747933452

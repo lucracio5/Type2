@@ -44,6 +44,7 @@ public class Variable_Tracker : MonoBehaviour
     public int max_population = 10;
 
     Audio_manager audio_manager;
+    Jobs jobs;
     public GameObject GameoverText;
 
     public int speed;
@@ -60,8 +61,9 @@ public class Variable_Tracker : MonoBehaviour
 
     public void Start()
     {
-        //Begin();
+        Begin();
         HydroButton.interactable = false;
+        jobs = GetComponent<Jobs>();
 
     }
     public TMP_Text returnSolar1()
@@ -187,6 +189,9 @@ public class Variable_Tracker : MonoBehaviour
         food = data.food;
         O2 = data.O2;
         money = data.money;
+        jobs.xp = data.xp;
+        jobs.science_poins = data.science_points;
+
    }
     
 
@@ -201,6 +206,10 @@ public class Variable_Tracker : MonoBehaviour
         public int food;
         public int O2;
         public int money;
+        public int xp;
+        public int science_points;
+        public int science_jobs;
+        public int cleaning_jobs;
 
 
     }
