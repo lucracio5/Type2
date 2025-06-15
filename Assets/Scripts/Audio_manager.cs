@@ -10,8 +10,10 @@ public class Audio_manager : MonoBehaviour
     [SerializeField] AudioClip new_unlock;
     [SerializeField] AudioClip ui_open;
     [SerializeField] AudioClip ship_takeoff;
+    [SerializeField] AudioClip low_energy_siren;
     public AudioSource SFX;
     public AudioSource Music;
+    public AudioSource LowEnergySiren;
     void Start()
     {
         if (!Music.isPlaying)
@@ -41,6 +43,13 @@ public class Audio_manager : MonoBehaviour
     public void PlayOpen()
     {
         SFX.PlayOneShot(ui_open);
+    }
+    public void PlayLowEnergySiren() {
+        LowEnergySiren.loop = true;
+        LowEnergySiren.Play();
+    }
+    public void StopLowEnergySiren() {
+        LowEnergySiren.Stop();
     }
     
 }
