@@ -59,12 +59,15 @@ public class Variable_Tracker : MonoBehaviour
     public TMP_Text Solartext1;
     public TMP_Text Solartext2;
 
+    public int xp;
+    public int science_points;
+    public int science_jobs;
+    public int cleaning_jobs;
+
     public void Start()
     {
         Begin();
         HydroButton.interactable = false;
-        jobs = GetComponent<Jobs>();
-
     }
     public TMP_Text returnSolar1()
     {
@@ -80,9 +83,15 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Load();
         speed = 1;
         Time.timeScale = 1;
+        jobs = GetComponent<Jobs>();
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
         audio_manager = GetComponent<Audio_manager>();
+        jobs.xp = xp;
+        jobs.science_points = science_points;
+        jobs.science_jobs = science_jobs;
+        jobs.cleaning_jobs = cleaning_jobs;
+
     }
     // Update is called once per frame
     void Update()
@@ -114,8 +123,9 @@ public class Variable_Tracker : MonoBehaviour
         {
             HydroButton.interactable = true;
         }
+        
 
-
+    
     }
     public void speed1()
     {
@@ -134,6 +144,10 @@ public class Variable_Tracker : MonoBehaviour
     }
     public void Save_button()
     {
+        xp = jobs.xp;
+        science_points = jobs.science_points;
+        science_jobs = jobs.science_jobs;
+        cleaning_jobs = jobs.cleaning_jobs;
         SaveSystem.Save();
         audio_manager.PlayUIclick();
     }
@@ -163,7 +177,13 @@ public class Variable_Tracker : MonoBehaviour
         data.O2 = O2;
         data.money = money;
         data.Map = "";
-        foreach(MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
+        data.xp = xp;
+        data.science_points = science_points; 
+        data.science_jobs = science_jobs;
+        data.cleaning_jobs = cleaning_jobs;
+        data.hydro_unlock = Hydro_unlock;
+
+        foreach (MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
         {
             data.Map += cell.contents.ToString() + ",";
         }
@@ -189,9 +209,11 @@ public class Variable_Tracker : MonoBehaviour
         food = data.food;
         O2 = data.O2;
         money = data.money;
-        //jobs.xp = data.xp;
-        //jobs.science_poins = data.science_points;
-
+        xp = data.xp;
+        science_points = data.science_points;
+        science_jobs = data.science_jobs;
+        cleaning_jobs = data.cleaning_jobs;
+        Hydro_unlock = data.hydro_unlock;
    }
     
 
@@ -206,10 +228,11 @@ public class Variable_Tracker : MonoBehaviour
         public int food;
         public int O2;
         public int money;
-        //public int xp;
-        //public int science_points;
-        //public int science_jobs;
-        //public int cleaning_jobs;
+        public int xp;
+        public int science_points;
+        public int science_jobs;
+        public int cleaning_jobs;
+        public bool hydro_unlock;
 
 
     }
