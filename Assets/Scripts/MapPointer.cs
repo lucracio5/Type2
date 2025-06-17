@@ -24,7 +24,7 @@ public class MapPointer : MonoBehaviour
     public GameObject SolarPanelPanel;
     public GameObject DomePanel;
 
-
+    
 
     void Start()
     {
