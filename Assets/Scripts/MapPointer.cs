@@ -23,7 +23,7 @@ public class MapPointer : MonoBehaviour
     public GameObject SciencePanel;
     public GameObject SolarPanelPanel;
 
-
+    
 
     void Start()
     {
