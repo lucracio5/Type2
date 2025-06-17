@@ -3598,6 +3598,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: ad763de780708f54d9f8bcc88e0c65a0, type: 2}
   - {fileID: 11400000, guid: 629b5ffb727236a4397c41be971fa752, type: 2}
   - {fileID: 11400000, guid: a1e7a6e73ed4f5d44aaafc6286ecd81a, type: 2}
+  - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
   panel: {fileID: 1787769523}
   panel_text: {fileID: 869154906}
   panel_text2: {fileID: 1045330454}
@@ -8036,7 +8037,7 @@ Transform:
   m_GameObject: {fileID: 815824564}
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -650.7551, y: -298.9491, z: -23.185833}
+  m_LocalPosition: {x: 0, y: -2.59, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -11168,7 +11169,6 @@ GameObject:
   - component: {fileID: 1013954941}
   - component: {fileID: 1013954943}
   - component: {fileID: 1013954942}
-  - component: {fileID: 1013954949}
   - component: {fileID: 1013954944}
   - component: {fileID: 1013954948}
   - component: {fileID: 1013954946}
@@ -11234,7 +11234,7 @@ MonoBehaviour:
   max_food: 100
   max_O2: 100
   max_population: 10
-  GameoverText: {fileID: 302365937}
+  GameoverText: {fileID: 1062847514}
   speed: 1
   rotate_speed: 0.02
   panel: {fileID: 1787769523}
@@ -11390,7 +11390,7 @@ MonoBehaviour:
   ui_open: {fileID: 8300000, guid: 052c4815414d7a742b3e1fa587e15bdf, type: 3}
   ship_takeoff: {fileID: 8300000, guid: 405fa4f252148094cbb2c3f409caf6c2, type: 3}
   low_energy_siren: {fileID: 8300000, guid: 51eaf878329cc054cbe4d91e1e532bd5, type: 3}
-  SFX: {fileID: 1013954949}
+  SFX: {fileID: 1013954942}
   Music: {fileID: 1013954944}
   LowEnergySiren: {fileID: 1013954948}
 --- !u!82 &1013954944
@@ -11555,102 +11555,6 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
   m_audioClip: {fileID: 8300000, guid: 51eaf878329cc054cbe4d91e1e532bd5, type: 3}
-  m_PlayOnAwake: 0
-  m_Volume: 1
-  m_Pitch: 1
-  Loop: 0
-  Mute: 0
-  Spatialize: 0
-  SpatializePostEffects: 0
-  Priority: 128
-  DopplerLevel: 1
-  MinDistance: 1
-  MaxDistance: 500
-  Pan2D: 0
-  rolloffMode: 0
-  BypassEffects: 0
-  BypassListenerEffects: 0
-  BypassReverbZones: 0
-  rolloffCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    - serializedVersion: 3
-      time: 1
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  panLevelCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  spreadCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 0
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
-  reverbZoneMixCustomCurve:
-    serializedVersion: 2
-    m_Curve:
-    - serializedVersion: 3
-      time: 0
-      value: 1
-      inSlope: 0
-      outSlope: 0
-      tangentMode: 0
-      weightedMode: 0
-      inWeight: 0.33333334
-      outWeight: 0.33333334
-    m_PreInfinity: 2
-    m_PostInfinity: 2
-    m_RotationOrder: 4
---- !u!82 &1013954949
-AudioSource:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013954937}
-  m_Enabled: 1
-  serializedVersion: 4
-  OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 0
   m_Volume: 1
   m_Pitch: 1
@@ -30479,7 +30383,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37f4cd425cca0492d8546819df87e7de, type: 2}
+  - {fileID: 2100000, guid: b8ea525ae99aa4a41be77f36a7b91262, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -30715,9 +30619,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7529232941248805462}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 381.32892, y: -72.54544, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 1.5899999, z: 0}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 815824565}
@@ -30856,7 +30760,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37f4cd425cca0492d8546819df87e7de, type: 2}
+  - {fileID: 2100000, guid: b8ea525ae99aa4a41be77f36a7b91262, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31132,7 +31036,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37f4cd425cca0492d8546819df87e7de, type: 2}
+  - {fileID: 2100000, guid: b8ea525ae99aa4a41be77f36a7b91262, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31210,7 +31114,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37f4cd425cca0492d8546819df87e7de, type: 2}
+  - {fileID: 2100000, guid: b8ea525ae99aa4a41be77f36a7b91262, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -31283,7 +31187,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 37f4cd425cca0492d8546819df87e7de, type: 2}
+  - {fileID: 2100000, guid: b8ea525ae99aa4a41be77f36a7b91262, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

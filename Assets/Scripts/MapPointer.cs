@@ -85,7 +85,7 @@ public class MapPointer : MonoBehaviour
                 LaunchPanel.SetActive(true);
                 audio_manager.PlayOpen();
             }
-            else if (current_cell.building.tag == "Dome")
+            else if (current_cell.building.tag == "Science")
             {
                 SciencePanel.SetActive(true);
                 audio_manager.PlayOpen();
