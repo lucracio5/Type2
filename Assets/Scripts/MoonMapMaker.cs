@@ -86,6 +86,7 @@ public class MoonMapMaker : MonoBehaviour
         mapCells[1174].Add_saved_building(4);
         mapCells[1176].Add_saved_building(2);
         mapCells[994].Add_saved_building(1);
+        mapCells[1000].Add_saved_building(6);
 
         StartCoroutine(DelayedBegin());
     }

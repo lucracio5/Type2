@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67c1a89b3c64f1e49b4f9b568fe55680, type: 3}
-  m_Name: Dome
+  m_Name: Science Building
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3113625620917422968, guid: edaa168381b355c4085956e95cd47a6b, type: 3}
-  cost: 30
+  prefab: {fileID: 3501093903690423818, guid: 9164af86f2580bd46bb2af40eb9cfb6e, type: 3}
+  cost: 20
