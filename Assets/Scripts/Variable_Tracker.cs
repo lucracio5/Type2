@@ -64,6 +64,10 @@ public class Variable_Tracker : MonoBehaviour
     public int science_jobs;
     public int cleaning_jobs;
 
+    public void Awake()
+    {
+        max_population = 0;
+    }
     public void Start()
     {
         Begin();

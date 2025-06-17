@@ -19,10 +19,11 @@ public class Hydroponics : MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime * Gamemanger.GetComponent<Variable_Tracker>().speed;
-        if(timer > hydrotime && tracker.food <= 98)
+        if(timer > hydrotime && tracker.food <= 98 && tracker.water > 5 && tracker.energy > 5)
         {
             tracker.food += 2;
             tracker.water -= 1;
+            tracker.energy -= 1;
             timer = 0;
         }
     }
