@@ -5,19 +5,24 @@ using UnityEngine;
 
 public class PopulationBuilding : MonoBehaviour
 {
+    public Variable_Tracker tracker;
+    public 
+
     // Start is called before the first frame update
     void Start()
     {
+        tracker = GetComponent<Variable_Tracker>();
+    }
+
+
+    public void UpdateInfo() {
         
     }
 
-    public void pop()
-    {
-        GameObject Gamemanager = GameObject.Find("Gamemanager");
-        Gamemanager.GetComponent<Variable_Tracker>().max_population = Gamemanager.GetComponent<Variable_Tracker>().max_population + 10;
-        Debug.Log(Gamemanager.GetComponent<Variable_Tracker>().max_population);
+    int NumDomesInScene() {
+        GameObject[] allDomes = GameObject.FindGameObjectsWithTag("Dome");
+        return allDomes.Length;
     }
-
 
     string RandomName() {
         string randomFullName;
