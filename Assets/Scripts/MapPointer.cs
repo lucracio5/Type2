@@ -71,6 +71,12 @@ public class MapPointer : MonoBehaviour
                 {
                     current_cell.Add_building(5);
                 }
+                if (prefabs_index == 0)
+                {
+                    Gamemanager.GetComponent<Variable_Tracker>().max_population += 10;
+                }
+                
+                
                 Gamemanager.GetComponent<Variable_Tracker>().money -= buildings[prefabs_index].cost;
                 
                 //current_cell.ChangeHeight(1);
