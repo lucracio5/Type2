@@ -52,7 +52,7 @@ public class Solar_Pannels: MonoBehaviour
                 }
                 if (num > dirt_chance && dirt_level < 1000)
                 {
-                    dirt_level += 10;
+                    dirt_level += 20;
                 }
 
                 time = 0;

@@ -135,7 +135,7 @@ public class MapPointer : MonoBehaviour
         }
     }
 
-    public void ChangeActiveCursor(int cursor)
+    public void ChangeActiveCursor(int cursor) //Changes the cursor by disabling other cursor first then turning on new cursor
     {
         if (0 <= cursor && cursor <= cursors.Length)
         {
@@ -146,6 +146,8 @@ public class MapPointer : MonoBehaviour
     }
 
     //I thinks it might be more efficient to have a way to detect the button pressed somehow I tried adding tags but I dont know how to get those tags from the button object
+    //These are triggered by the buttons in the shop now but are probably incecacary since it can just run both functions from the button
+    /*
     public void Button()
     {
         ChangeActiveCursor(0);
@@ -176,5 +178,6 @@ public class MapPointer : MonoBehaviour
         ChangeActiveCursor(5);
         audio_manager.PlayUIclick();
     }
+    */
 
 }

@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Oxygen Building
   m_EditorClassIdentifier: 
   prefab: {fileID: 5677844620230241935, guid: 92956404955d30744b35f9bb19092e3e, type: 3}
-  cost: 20
+  cost: 30

@@ -9,6 +9,7 @@ using static UnityEngine.EventSystems.EventTrigger;
 using UISlider = UnityEngine.UI.Slider;
 using System.IO;
 using TMPro;
+using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Variable_Tracker : MonoBehaviour
 {
@@ -45,6 +46,7 @@ public class Variable_Tracker : MonoBehaviour
 
     Audio_manager audio_manager;
     Jobs jobs;
+    ScienceTree tree;
     public GameObject GameoverText;
 
     public int speed;
@@ -53,8 +55,7 @@ public class Variable_Tracker : MonoBehaviour
     public GameObject panel;
     public GameObject map;
 
-    public bool Hydro_unlock = false;
-    public UnityEngine.UI.Button HydroButton;
+    
     
     public UnityEngine.UI.Button shop_button;
     public TMP_Text shop_text;
@@ -67,11 +68,12 @@ public class Variable_Tracker : MonoBehaviour
     public int science_points;
     public int science_jobs;
     public int cleaning_jobs;
+    public bool Hydro_Unlock;
 
     public void Start()
     {
         Begin();
-        HydroButton.interactable = false;
+        
     }
     public TMP_Text returnSolar1()
     {
@@ -88,6 +90,7 @@ public class Variable_Tracker : MonoBehaviour
         speed = 1;
         Time.timeScale = 1;
         jobs = GetComponent<Jobs>();
+        tree = GetComponent<ScienceTree>();
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
         audio_manager = GetComponent<Audio_manager>();
@@ -95,6 +98,8 @@ public class Variable_Tracker : MonoBehaviour
         jobs.science_points = science_points;
         jobs.science_jobs = science_jobs;
         jobs.cleaning_jobs = cleaning_jobs;
+        tree.Hydro_unlock = Hydro_Unlock;
+
 
     }
     // Update is called once per frame
@@ -125,10 +130,7 @@ public class Variable_Tracker : MonoBehaviour
             GameoverText.SetActive(true);
             Time.timeScale = 0;
         }
-        if(Hydro_unlock)
-        {
-            HydroButton.interactable = true;
-        }
+        
         
         
     }
@@ -153,6 +155,7 @@ public class Variable_Tracker : MonoBehaviour
         science_points = jobs.science_points;
         science_jobs = jobs.science_jobs;
         cleaning_jobs = jobs.cleaning_jobs;
+        Hydro_Unlock = tree.Hydro_unlock;
         SaveSystem.Save();
         audio_manager.PlayUIclick();
     }
@@ -208,7 +211,7 @@ public class Variable_Tracker : MonoBehaviour
         data.science_points = science_points; 
         data.science_jobs = science_jobs;
         data.cleaning_jobs = cleaning_jobs;
-        data.hydro_unlock = Hydro_unlock;
+        data.hydro_unlock = Hydro_Unlock;
 
         foreach (MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
         {
@@ -240,7 +243,7 @@ public class Variable_Tracker : MonoBehaviour
         science_points = data.science_points;
         science_jobs = data.science_jobs;
         cleaning_jobs = data.cleaning_jobs;
-        Hydro_unlock = data.hydro_unlock;
+        Hydro_Unlock = data.hydro_unlock;
    }
     
 
