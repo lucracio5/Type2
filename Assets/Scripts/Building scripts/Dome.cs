@@ -5,7 +5,7 @@ using UnityEngine;
 using TMPro;
 
 
-public class DomeBuilding : MonoBehaviour
+public class Dome : MonoBehaviour
 {
     public GameObject Gamemanager;
     public Variable_Tracker tracker;
