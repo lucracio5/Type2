@@ -221,13 +221,16 @@ public class MapCell
         {
             GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
         }
-        MapPointer Mappointer = GameObject.Find("Map").GetComponent<MapPointer>();
+        //MapPointer Mappointer = GameObject.Find("Map").GetComponent<MapPointer>();
         contents = build_index;
         centerpoint = map.verts[center];
         GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
         building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
         building.gameObject.SetActive(true);
-        
+        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+        GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
+
+
     }
     public void Add_saved_building(int build_index) //Add building without fade in called in the load part
     {

@@ -55,6 +55,10 @@ public class Variable_Tracker : MonoBehaviour
 
     public bool Hydro_unlock = false;
     public UnityEngine.UI.Button HydroButton;
+    
+    public UnityEngine.UI.Button shop_button;
+    public TMP_Text shop_text;
+    public bool cancel = false;
 
     public TMP_Text Solartext1;
     public TMP_Text Solartext2;
@@ -164,6 +168,28 @@ public class Variable_Tracker : MonoBehaviour
     {
         food -= population;
         water -= population;
+    }
+    public void Shop_button_1()
+    {
+        shop_button.GetComponent<UnityEngine.UI.Image>().color = Color.blue;
+        shop_text.text = "Shop";
+        cancel = false;
+    }
+    public void Shop_button_2()
+    {
+        shop_button.GetComponent<UnityEngine.UI.Image>().color = Color.red;
+        shop_text.text = "Cancel";
+        cancel = true;
+
+    }
+    public void map_cancel()
+    {
+        if (cancel)
+        {
+            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+            Shop_button_1();
+            
+        }
     }
 
 

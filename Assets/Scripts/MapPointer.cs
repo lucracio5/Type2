@@ -12,7 +12,7 @@ public class MapPointer : MonoBehaviour
     GameObject cursor;
     MapCell current_cell;
     public GameObject[] cursors;
-    int activeCursor;
+    public int activeCursor;
     public GameObject Gamemanager;
     public Building_Scriptable_Object[] buildings;
     public GameObject panel;
@@ -135,48 +135,45 @@ public class MapPointer : MonoBehaviour
         }
     }
 
+    public void ChangeActiveCursor(int cursor)
+    {
+        if (0 <= cursor && cursor <= cursors.Length)
+        {
+            cursors[activeCursor].gameObject.SetActive(false);
+            activeCursor = cursor;
+            cursors[activeCursor].gameObject.SetActive(true);
+        }
+    }
+
     //I thinks it might be more efficient to have a way to detect the button pressed somehow I tried adding tags but I dont know how to get those tags from the button object
     public void Button()
     {
-        cursors[activeCursor].gameObject.SetActive(false); 
-        activeCursor = 0;
-        cursors[activeCursor].gameObject.SetActive(true);
+        ChangeActiveCursor(0);
         audio_manager.PlayUIclick();
     }
     public void Button2()
     {
-        cursors[activeCursor].gameObject.SetActive(false);
-        activeCursor = 1;
-        cursors[activeCursor].gameObject.SetActive(true);
+        ChangeActiveCursor(1);
         audio_manager.PlayUIclick();
     }
     public void Button3()
     {
-        cursors[activeCursor].gameObject.SetActive(false);
-        activeCursor = 2;
-        print(activeCursor);
-        cursors[activeCursor].gameObject.SetActive(true);
+        ChangeActiveCursor(2);
         audio_manager.PlayUIclick();
     }
     public void Button4()
     {
-        cursors[activeCursor].gameObject.SetActive(false);
-        activeCursor = 3;
-        cursors[activeCursor].gameObject.SetActive(true);
+        ChangeActiveCursor(3);
         audio_manager.PlayUIclick();
     }
     public void Button5()
     {
-        cursors[activeCursor].gameObject.SetActive(false);
-        activeCursor = 4;
-        cursors[activeCursor].gameObject.SetActive(true);
+        ChangeActiveCursor(4);
         audio_manager.PlayUIclick();
     }
     public void Button6()
     {
-        cursors[activeCursor].gameObject.SetActive(false);
-        activeCursor = 5;
-        cursors[activeCursor].gameObject.SetActive(true);
+        ChangeActiveCursor(5);
         audio_manager.PlayUIclick();
     }
 
