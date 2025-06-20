@@ -225,10 +225,14 @@ public class MapCell
         contents = build_index;
         centerpoint = map.verts[center];
         GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
-        building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+        building = Object.Instantiate(instance, centerpoint, Quaternion.identity); 
         building.gameObject.SetActive(true);
         GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
         GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
+        if (build_index == 6)
+        {
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 1].building = building;
+        }
 
 
     }
@@ -253,6 +257,18 @@ public class MapCell
         }
         else
             Debug.LogWarning("transperencey is null");
+        
+        
+        
+        if (build_index == 6)
+        {
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building;
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building;
+        }
+       
+        
 
 
 
