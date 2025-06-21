@@ -24,6 +24,7 @@ public class MapPointer : MonoBehaviour
     public GameObject SolarPanelPanel;
     public GameObject DomePanel;
 
+    public float cursorYOffset;
     
 
     void Start()
@@ -47,7 +48,7 @@ public class MapPointer : MonoBehaviour
             cursor.SetActive(true);
             Vector3 hitpoint = hit.point;
             MapCell cell = map.NearestCell(hitpoint);
-            cursor.transform.position = cell.centerpoint;
+            cursor.transform.position = cell.centerpoint + new Vector3(0, cursorYOffset, 0);
             current_cell = cell;
         }
         else
