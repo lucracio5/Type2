@@ -239,6 +239,18 @@ public class MapCell
             GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
             GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width) - 1].building = building; //no results
         }
+        if (build_index == 5)
+        {
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 1].building = building;//Right 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 2].building = building;//Right 2
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building; //up 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2*map_width].building = building; //up 2
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 2*map_width].building = building; // back 2
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width) - 1].building = building; //no results
+        }
 
 
     }
@@ -274,8 +286,15 @@ public class MapCell
             GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
             GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width)-1].building = building; //no results
         }
-       
-        
+        if (build_index == 5)
+        {
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building; //up 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width) - 1].building = building; //no results
+        }
+
 
 
 
