@@ -18,6 +18,8 @@ TagManager:
   - Hydro
   - Panel
   - Solar Panel
+  - Science
+  - UIPanel
   layers:
   - Default
   - TransparentFX

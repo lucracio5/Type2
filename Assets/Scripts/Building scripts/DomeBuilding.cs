@@ -1,3 +1,6 @@
+//is attatched to the panel, not the prefab because I fucking hated dealing with the prefabs and
+//there's no reason for this script to be on the prefab (as no matter what dome you click, they will display the same stuff)
+
 using System.Collections;
 using System.Collections.Generic;
 using UnityEditor.Build.Content;
@@ -5,34 +8,60 @@ using UnityEngine;
 using TMPro;
 
 
-public class Dome : MonoBehaviour
+public class DomeBuilding : MonoBehaviour
 {
     public GameObject Gamemanager;
-    public Variable_Tracker tracker;
+    public GameObject DomePanel;
+    [HideInInspector] public Variable_Tracker tracker;
     [SerializeField] private TMP_Text totalPopulationTextObject;
     [SerializeField] private TMP_Text namesTextObject;
 
-    private string totalPopulation;
+    [SerializeField] private TMP_Text domesTextObject;
+    [SerializeField] private GameObject contentObject;
 
     // Start is called before the first frame update
     void Start()
     {
-        Gamemanager = GameObject.Find("Game Manager");
         tracker = Gamemanager.GetComponent<Variable_Tracker>();
     }
 
     void Update() 
     {
-        if (Input.GetKeyDown(KeyCode.P))
-        {
-            UpdateInfo();
-        }
+        if (DomePanel.activeInHierarchy) UpdateInfo(); //updates whenever the panel is active
     }
 
 
     public void UpdateInfo() //updates values, is only called when the panel is opened (for optimization)
-    { 
+    {
+        UpdateNames();
 
+        //Adds all of the names from variableTracker to the text object
+        string allNames = "";
+        for (int i = 0; i < tracker.crewNames.Count; i++)
+        {
+            //if (i == tracker.crewNames.Count - 1) allNames += "and " + tracker.crewNames[i]; //if this is the last name
+            //else
+            //{
+                allNames += i + ". " + tracker.crewNames[i] + "\n";
+            //}
+        }
+
+        //Sets the new text onto the objects        
+        namesTextObject.SetText(allNames);
+        totalPopulationTextObject.SetText("Total Population: " + tracker.population.ToString());
+        domesTextObject.SetText("Domes: " + NumDomesInScene());
+
+
+        //Resizes objects accordingly
+        RectTransform contentRect = contentObject.GetComponent<RectTransform>();
+        RectTransform namesRect = namesTextObject.GetComponent<RectTransform>();
+        contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, namesRect.rect.height);
+    }
+
+
+    //Updates the names in the variable tracker
+    void UpdateNames()
+    {
         //if there are no names generated, generate them
         if (tracker.crewNames.Count == 0)
         {
@@ -57,23 +86,12 @@ public class Dome : MonoBehaviour
             int excessNames = tracker.crewNames.Count - tracker.population; //How ever many extra names there are
             tracker.crewNames.RemoveRange(tracker.crewNames.Count - excessNames /*at what index to remove from*/, excessNames /*how many to remove*/); //removes however many extra names there were
         }
-
-        //Adds all of the names from variableTracker to the text object
-        string allNames = "";
-        foreach (string name in tracker.crewNames)
-        {
-            allNames += name + ", "; //add each name to the string
-        }
-
-        Debug.Log(allNames);
-        namesTextObject.SetText(allNames);
-
-        totalPopulationTextObject.SetText(tracker.population.ToString());
     }
+
 
     int NumDomesInScene() {
         GameObject[] allDomes = GameObject.FindGameObjectsWithTag("Dome");
-        return allDomes.Length;
+        return allDomes.Length / 2; //Because each dome actually makes 2 things that are tagged domes
     }
 
     string RandomName() {

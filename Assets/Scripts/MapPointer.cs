@@ -104,7 +104,7 @@ public class MapPointer : MonoBehaviour
             }
             else if (current_cell.building.tag == "Dome")
             {
-                SolarPanelPanel.SetActive(true);
+                DomePanel.SetActive(true);
                 audio_manager.PlayOpen();
             }
             else
