@@ -84,7 +84,7 @@ public class MapPointer : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(1) && current_cell != null && current_cell.building != null)
+        if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building != null)
         {
             print(current_cell.building.tag);
             if (current_cell.building.tag == "Launchpad")
