@@ -23,6 +23,7 @@ public class MapPointer : MonoBehaviour
     public GameObject SciencePanel;
     public GameObject SolarPanelPanel;
     public GameObject DomePanel;
+    public bool clickable;
 
     public float cursorYOffset;
     
@@ -33,7 +34,8 @@ public class MapPointer : MonoBehaviour
         activeCursor = 0;
         Gamemanager = GameObject.Find("Game Manager");
         panel_text2.text = "test";
-        audio_manager = Gamemanager.GetComponent<Audio_manager>(); 
+        audio_manager = Gamemanager.GetComponent<Audio_manager>();
+        clickable = true;
     }
 
 
@@ -64,7 +66,7 @@ public class MapPointer : MonoBehaviour
             int prefabs_index = activeCursor - 1;
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
-                
+                clickable = false;
                 if (prefabs_index != 1)
                 {
                     current_cell.Add_building(prefabs_index);
@@ -77,6 +79,7 @@ public class MapPointer : MonoBehaviour
                 {
                     Gamemanager.GetComponent<Variable_Tracker>().max_population += 10;
                 }
+                Invoke("temp_off_ui", 0.1f);
                 
                 
                 Gamemanager.GetComponent<Variable_Tracker>().money -= buildings[prefabs_index].cost;
@@ -85,7 +88,7 @@ public class MapPointer : MonoBehaviour
             }
         }
 
-        if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building != null)
+        if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building != null && clickable)
         {
             print(current_cell.building.tag);
             if (current_cell.building.tag == "Launchpad")
@@ -135,7 +138,10 @@ public class MapPointer : MonoBehaviour
 
         }
     }
-
+    public void temp_off_ui()
+    {
+        clickable = true;
+    }
     public void ChangeActiveCursor(int cursor) //Changes the cursor by disabling other cursor first then turning on new cursor
     {
         if (0 <= cursor && cursor <= cursors.Length)
