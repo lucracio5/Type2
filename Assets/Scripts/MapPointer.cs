@@ -67,6 +67,8 @@ public class MapPointer : MonoBehaviour
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
                 clickable = false;
+                
+                /*
                 if (prefabs_index != 1)
                 {
                     current_cell.Add_building(prefabs_index);
@@ -75,6 +77,7 @@ public class MapPointer : MonoBehaviour
                 {
                     current_cell.Add_building(5);
                 }
+                */
                 if (prefabs_index == 0)
                 {
                     Gamemanager.GetComponent<Variable_Tracker>().max_population += 10;

@@ -42,7 +42,7 @@ public class DomeBuilding : MonoBehaviour
             //if (i == tracker.crewNames.Count - 1) allNames += "and " + tracker.crewNames[i]; //if this is the last name
             //else
             //{
-                allNames += i + ". " + tracker.crewNames[i] + "\n";
+                allNames += i+1 + ". " + tracker.crewNames[i] + "\n";
             //}
         }
 

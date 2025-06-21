@@ -10,9 +10,11 @@ public class ScienceTree : MonoBehaviour
     public Variable_Tracker tracker;
     public Jobs jobs;
     [SerializeField] Button hydrobutton;
+    [SerializeField] Button nuclear_unlock_button;
     [SerializeField] Button Hydro_buy;
     [SerializeField] Button Nuclear_buy;
     public bool Hydro_unlock = false;
+    public bool Nuclear_unlock = false;
     void Start()
     {
         manager = GetComponent<Audio_manager>();
@@ -34,6 +36,15 @@ public class ScienceTree : MonoBehaviour
         {
             Hydro_buy.interactable = false;
         }
+        if (Nuclear_unlock)
+        {
+            Nuclear_buy.interactable = true;
+
+        }
+        else
+        {
+            Nuclear_buy.interactable = false;
+        }
     }
     public void Hydroponics()
     {
@@ -43,6 +54,20 @@ public class ScienceTree : MonoBehaviour
            Hydro_unlock = true;
            hydrobutton.interactable = false;
            jobs.science_points -= 3;
+        }
+        else
+        {
+            manager.PlayFailedClick();
+        }
+    }
+    public void NUKE()
+    {
+        if (jobs.science_points >= 20 && !Nuclear_unlock)
+        {
+            manager.PlayUnlock();
+            Nuclear_unlock = true;
+            nuclear_unlock_button.interactable = false;
+            jobs.science_points -= 20;
         }
         else
         {

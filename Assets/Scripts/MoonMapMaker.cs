@@ -85,7 +85,8 @@ public class MoonMapMaker : MonoBehaviour
         mapCells[1172].Add_saved_building(0);
         mapCells[1174].Add_saved_building(4);
         mapCells[1176].Add_saved_building(2);
-        mapCells[994].Add_saved_building(1);
+        mapCells[1178].Add_saved_building(2);
+        mapCells[994].Add_saved_building(7);
         mapCells[1000].Add_saved_building(6);
 
         StartCoroutine(DelayedBegin());
@@ -239,6 +240,7 @@ public class MapCell
     public void Add_saved_building(int build_index) //Add building without fade in called in the load part
     {
 
+        
         if (building != null)
         {
             GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);

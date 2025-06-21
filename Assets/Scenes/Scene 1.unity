@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04805161, g: 0.04568451, b: 0.034207113, a: 1}
+  m_IndirectSpecularColor: {r: 0.04739636, g: 0.04500734, b: 0.033512264, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4740,6 +4740,7 @@ MonoBehaviour:
   SolarPanelPanel: {fileID: 638786039}
   DomePanel: {fileID: 1581358444}
   clickable: 0
+  cursorYOffset: 0
 --- !u!1 &379060849
 GameObject:
   m_ObjectHideFlags: 0
@@ -13495,7 +13496,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1013954938}
   - component: {fileID: 1013954939}
-  - component: {fileID: 1013954949}
   - component: {fileID: 1013954941}
   - component: {fileID: 1013954943}
   - component: {fileID: 1013954942}
@@ -13540,6 +13540,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 804b198c9355bf549be0085511c8708c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  canDie: 0
   energy: -50
   regolith: 0
   water: 100
@@ -13863,9 +13864,11 @@ MonoBehaviour:
   tracker: {fileID: 0}
   jobs: {fileID: 0}
   hydrobutton: {fileID: 1740378640}
+  nuclear_unlock_button: {fileID: 549151139}
   Hydro_buy: {fileID: 1048778885}
   Nuclear_buy: {fileID: 549151139}
   Hydro_unlock: 0
+  Nuclear_unlock: 0
 --- !u!114 &1013954947
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13978,18 +13981,6 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
---- !u!114 &1013954949
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1013954937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2a38fd34086963f4fb43ad46d8792183, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1013954950
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -25060,14 +25051,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538489323}
   serializedVersion: 8
-  lengthInSec: 30
+  lengthInSec: 10
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -25135,8 +25126,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 15
-      minScalar: 5
+      scalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -25188,7 +25179,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -25896,9 +25887,9 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 2.8201437
-          outSlope: 2.8201437
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
@@ -25906,8 +25897,8 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.35459185
           value: 1
-          inSlope: 1.4100718
-          outSlope: 1.4100718
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -25915,17 +25906,17 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.6147959
           value: 1
-          inSlope: -1.2980132
-          outSlope: -1.2980132
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
           time: 1
-          value: 0
-          inSlope: -2.5960264
-          outSlope: -2.5960264
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -30193,7 +30184,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1602442615
 RectTransform:
   m_ObjectHideFlags: 0
