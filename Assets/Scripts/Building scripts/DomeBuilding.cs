@@ -16,6 +16,8 @@ public class DomeBuilding : MonoBehaviour
     [SerializeField] private TMP_Text totalPopulationTextObject;
     [SerializeField] private TMP_Text namesTextObject;
 
+    [SerializeField] private TMP_Text domesTextObject;
+    [SerializeField] private GameObject contentObject;
 
     // Start is called before the first frame update
     void Start()
@@ -32,21 +34,28 @@ public class DomeBuilding : MonoBehaviour
     public void UpdateInfo() //updates values, is only called when the panel is opened (for optimization)
     {
         UpdateNames();
-        
+
         //Adds all of the names from variableTracker to the text object
         string allNames = "";
         for (int i = 0; i < tracker.crewNames.Count; i++)
         {
-            if (i == tracker.crewNames.Count - 1) allNames += "and " + tracker.crewNames[i]; //if this is the last name
-            else
-            {
-                allNames += tracker.crewNames[i] + ", ";
-            }
+            //if (i == tracker.crewNames.Count - 1) allNames += "and " + tracker.crewNames[i]; //if this is the last name
+            //else
+            //{
+                allNames += i + ". " + tracker.crewNames[i] + "\n";
+            //}
         }
 
-        Debug.Log(allNames);
+        //Sets the new text onto the objects        
         namesTextObject.SetText(allNames);
         totalPopulationTextObject.SetText("Total Population: " + tracker.population.ToString());
+        domesTextObject.SetText("Domes: " + NumDomesInScene());
+
+
+        //Resizes objects accordingly
+        RectTransform contentRect = contentObject.GetComponent<RectTransform>();
+        RectTransform namesRect = namesTextObject.GetComponent<RectTransform>();
+        contentRect.SetSizeWithCurrentAnchors(RectTransform.Axis.Vertical, namesRect.rect.height);
     }
 
 
@@ -82,7 +91,7 @@ public class DomeBuilding : MonoBehaviour
 
     int NumDomesInScene() {
         GameObject[] allDomes = GameObject.FindGameObjectsWithTag("Dome");
-        return allDomes.Length;
+        return allDomes.Length / 2; //Because each dome actually makes 2 things that are tagged domes
     }
 
     string RandomName() {
