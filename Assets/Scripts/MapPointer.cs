@@ -64,20 +64,12 @@ public class MapPointer : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building == null && !EventSystem.current.IsPointerOverGameObject())
         {
             int prefabs_index = activeCursor - 1;
+            Debug.Log("Build Index at click =  " + prefabs_index);
+            Debug.Log(prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost);
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
                 clickable = false;
-                
-                /*
-                if (prefabs_index != 1)
-                {
-                    current_cell.Add_building(prefabs_index);
-                }
-                else
-                {
-                    current_cell.Add_building(5);
-                }
-                */
+                current_cell.Add_building(prefabs_index);
                 if (prefabs_index == 0)
                 {
                     Gamemanager.GetComponent<Variable_Tracker>().max_population += 10;
@@ -155,39 +147,6 @@ public class MapPointer : MonoBehaviour
         }
     }
 
-    //I thinks it might be more efficient to have a way to detect the button pressed somehow I tried adding tags but I dont know how to get those tags from the button object
-    //These are triggered by the buttons in the shop now but are probably incecacary since it can just run both functions from the button
-    /*
-    public void Button()
-    {
-        ChangeActiveCursor(0);
-        audio_manager.PlayUIclick();
-    }
-    public void Button2()
-    {
-        ChangeActiveCursor(1);
-        audio_manager.PlayUIclick();
-    }
-    public void Button3()
-    {
-        ChangeActiveCursor(2);
-        audio_manager.PlayUIclick();
-    }
-    public void Button4()
-    {
-        ChangeActiveCursor(3);
-        audio_manager.PlayUIclick();
-    }
-    public void Button5()
-    {
-        ChangeActiveCursor(4);
-        audio_manager.PlayUIclick();
-    }
-    public void Button6()
-    {
-        ChangeActiveCursor(5);
-        audio_manager.PlayUIclick();
-    }
-    */
+
 
 }

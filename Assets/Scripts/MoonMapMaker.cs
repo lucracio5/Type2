@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
+using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
 
 public class MoonMapMaker : MonoBehaviour
@@ -86,8 +87,8 @@ public class MoonMapMaker : MonoBehaviour
         mapCells[1174].Add_saved_building(4);
         mapCells[1176].Add_saved_building(2);
         mapCells[1178].Add_saved_building(2);
-        mapCells[994].Add_saved_building(7);
-        mapCells[1000].Add_saved_building(6);
+        mapCells[994].Add_saved_building(6);
+        mapCells[1000].Add_saved_building(7);
 
         StartCoroutine(DelayedBegin());
     }
@@ -218,11 +219,11 @@ public class MapCell
     public void Add_building(int build_index) //Add building with fade in
     {
         
+        Debug.Log("Build Index at add building =  "+build_index);
         if(building != null)
         {
             GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
         }
-        //MapPointer Mappointer = GameObject.Find("Map").GetComponent<MapPointer>();
         contents = build_index;
         centerpoint = map.verts[center];
         GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
@@ -230,9 +231,13 @@ public class MapCell
         building.gameObject.SetActive(true);
         GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
         GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
-        if (build_index == 6)
+        if (build_index == 7)
         {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 1].building = building;
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building; //up 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
+            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width) - 1].building = building; //no results
         }
 
 
@@ -245,7 +250,6 @@ public class MapCell
         {
             GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
         }
-        MapPointer Mappointer = GameObject.Find("Map").GetComponent<MapPointer>();
         contents = build_index;
         centerpoint = map.verts[center];
         GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
@@ -262,7 +266,7 @@ public class MapCell
         
         
         
-        if (build_index == 6)
+        if (build_index == 7)
         {
             GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
             GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
