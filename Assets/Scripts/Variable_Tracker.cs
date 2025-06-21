@@ -13,6 +13,9 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Variable_Tracker : MonoBehaviour
 {
+    public bool canDie = false; //only for tetsing / debugging
+
+
     public int energy = 0;
     public int regolith = 0;
     public int water = 100;
@@ -126,7 +129,8 @@ public class Variable_Tracker : MonoBehaviour
 
         population_slider.maxValue = max_population;
 
-        if (O2 <= 0 || food <= 0 || water <= 0)
+
+        if ((O2 <= 0 || food <= 0 || water <= 0) && canDie) //REMOVE CAN DIE AFTER DEBUGGING, NOT PART OF GAME
         {
             Debug.Log("Game Over");
             GameoverText.SetActive(true);
