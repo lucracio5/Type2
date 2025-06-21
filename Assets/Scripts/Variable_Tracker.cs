@@ -37,6 +37,8 @@ public class Variable_Tracker : MonoBehaviour
     public Text population_text;
     public Text money_text;
 
+    public List<string> crewNames = new List<string>();
+    
     public int max_energy = 300;
     public int max_mining = 10;
     public int max_water = 100;
