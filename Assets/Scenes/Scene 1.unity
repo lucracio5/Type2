@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04758922, g: 0.045187242, b: 0.03367807, a: 1}
+  m_IndirectSpecularColor: {r: 0.047811665, g: 0.045424134, b: 0.033914458, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -4877,7 +4877,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &367621673
 RectTransform:
   m_ObjectHideFlags: 0
@@ -7535,7 +7535,7 @@ MonoBehaviour:
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
+          m_IntArgument: 6
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
@@ -14268,7 +14268,7 @@ MonoBehaviour:
   tracker: {fileID: 0}
   jobs: {fileID: 0}
   hydrobutton: {fileID: 1740378640}
-  nuclear_unlock_button: {fileID: 0}
+  nuclear_unlock_button: {fileID: 950411285}
   Hydro_buy: {fileID: 1048778885}
   Nuclear_buy: {fileID: 549151139}
   Hydro_unlock: 0
@@ -25455,14 +25455,14 @@ ParticleSystem:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1538489323}
   serializedVersion: 8
-  lengthInSec: 30
+  lengthInSec: 10
   simulationSpeed: 1
   stopAction: 0
   cullingMode: 0
   ringBufferMode: 0
   ringBufferLoopRange: {x: 0, y: 1}
   emitterVelocityMode: 1
-  looping: 0
+  looping: 1
   prewarm: 0
   playOnAwake: 1
   useUnscaledTime: 0
@@ -25530,8 +25530,8 @@ ParticleSystem:
     startLifetime:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 15
-      minScalar: 5
+      scalar: 2
+      minScalar: 1
       maxCurve:
         serializedVersion: 2
         m_Curve:
@@ -25583,7 +25583,7 @@ ParticleSystem:
     startSpeed:
       serializedVersion: 2
       minMaxState: 3
-      scalar: 0.5
+      scalar: 10
       minScalar: 0
       maxCurve:
         serializedVersion: 2
@@ -26291,9 +26291,9 @@ ParticleSystem:
         m_Curve:
         - serializedVersion: 3
           time: 0
-          value: 0
-          inSlope: 2.8201437
-          outSlope: 2.8201437
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0
@@ -26301,8 +26301,8 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.35459185
           value: 1
-          inSlope: 1.4100718
-          outSlope: 1.4100718
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -26310,17 +26310,17 @@ ParticleSystem:
         - serializedVersion: 3
           time: 0.6147959
           value: 1
-          inSlope: -1.2980132
-          outSlope: -1.2980132
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
           outWeight: 0.33333334
         - serializedVersion: 3
-          time: 1
-          value: 0
-          inSlope: -2.5960264
-          outSlope: -2.5960264
+          time: 0.992268
+          value: 1
+          inSlope: 0
+          outSlope: 0
           tangentMode: 34
           weightedMode: 0
           inWeight: 0.33333334
@@ -30588,7 +30588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1602442615
 RectTransform:
   m_ObjectHideFlags: 0
@@ -37064,20 +37064,6 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &1896926148690556789
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4930394275338901762}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 3b99255f47e0e734b8e36b5f8b6bf8b0, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  transparency: 0.2
-  placed: 0
 --- !u!4 &1995557728238815696
 Transform:
   m_ObjectHideFlags: 0
@@ -37119,7 +37105,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -18.274536, y: -334.80444, z: -111.92242}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 3940015193684355215}
@@ -37248,7 +37234,7 @@ Transform:
   m_GameObject: {fileID: 4930394275338901762}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -0, y: 0, z: 0}
+  m_LocalPosition: {x: -4.83, y: 0, z: 2.32}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -37307,7 +37293,6 @@ GameObject:
   - component: {fileID: 3940015193684355215}
   - component: {fileID: 8520588616350652413}
   - component: {fileID: 1046070646994293072}
-  - component: {fileID: 1896926148690556789}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
