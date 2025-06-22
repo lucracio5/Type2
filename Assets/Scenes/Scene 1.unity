@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.047074176, g: 0.04466591, b: 0.033232477, a: 1}
+  m_IndirectSpecularColor: {r: 0.04645466, g: 0.044094704, b: 0.032734998, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -16901,8 +16901,8 @@ ParticleSystem:
     startColor:
       serializedVersion: 2
       minMaxState: 2
-      minColor: {r: 0.8584906, g: 0.15261821, b: 0.052643314, a: 1}
-      maxColor: {r: 0.77772254, g: 0.9528302, b: 0.16629584, a: 1}
+      minColor: {r: 0, g: 0.19448258, b: 0.9622642, a: 1}
+      maxColor: {r: 0.1647059, g: 0.9529412, b: 0.8182296, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -25635,8 +25635,8 @@ ParticleSystem:
         m_RotationOrder: 4
     startColor:
       serializedVersion: 2
-      minMaxState: 0
-      minColor: {r: 1, g: 1, b: 1, a: 1}
+      minMaxState: 2
+      minColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0.38431373}
       maxColor: {r: 0.8679245, g: 0.8679245, b: 0.8679245, a: 0.38431373}
       maxGradient:
         serializedVersion: 2
@@ -30588,7 +30588,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1602442615
 RectTransform:
   m_ObjectHideFlags: 0
