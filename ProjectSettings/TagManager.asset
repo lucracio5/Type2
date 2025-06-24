@@ -20,6 +20,7 @@ TagManager:
   - Solar Panel
   - Science
   - UIPanel
+  - Power Plant
   layers:
   - Default
   - TransparentFX

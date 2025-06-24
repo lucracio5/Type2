@@ -23,6 +23,7 @@ public class MapPointer : MonoBehaviour
     public GameObject SciencePanel;
     public GameObject SolarPanelPanel;
     public GameObject DomePanel;
+    public GameObject NuclearPanel;
     public bool clickable;
 
     public float cursorYOffset;
@@ -87,22 +88,23 @@ public class MapPointer : MonoBehaviour
             if (current_cell.building.tag == "Launchpad")
             {
                 LaunchPanel.SetActive(true);
-                audio_manager.PlayOpen();
             }
             else if (current_cell.building.tag == "Science")
             {
                 SciencePanel.SetActive(true);
-                audio_manager.PlayOpen();
             }
             else if (current_cell.building.tag == "Solar Panel")
             {
                 SolarPanelPanel.SetActive(true);
-                audio_manager.PlayOpen();
             }
             else if (current_cell.building.tag == "Dome")
             {
                 DomePanel.SetActive(true);
-                audio_manager.PlayOpen();
+            }
+            else if (current_cell.building.tag == "Power Plant")
+            {
+                NuclearPanel.SetActive(true);
+                
             }
             else
             {
@@ -123,11 +125,11 @@ public class MapPointer : MonoBehaviour
                     panel_text2.gameObject.SetActive(false);
                 }
             }
+            audio_manager.PlayOpen();
 
 
 
 
-          
 
         }
     }
