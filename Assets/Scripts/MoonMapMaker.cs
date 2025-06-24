@@ -4,6 +4,7 @@ using System.Security.Cryptography;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class MoonMapMaker : MonoBehaviour
 {
@@ -219,39 +220,116 @@ public class MapCell
     public void Add_building(int build_index) //Add building with fade in
     {
         
-        Debug.Log("Build Index at add building =  "+build_index);
-        if(building != null)
+        if(build_index != 5)
         {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
-        }
-        contents = build_index;
-        centerpoint = map.verts[center];
-        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
-        building = Object.Instantiate(instance, centerpoint, Quaternion.identity); 
-        building.gameObject.SetActive(true);
-        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
-        GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
-        if (build_index == 7)
-        {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building; //up 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width) - 1].building = building; //no results
+            MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
+            if (building != null)
+            {
+                maker.Destroy_building(this);
+            }
+            contents = build_index;
+            centerpoint = map.verts[center];
+            GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
+            building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+            building.gameObject.SetActive(true);
+            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
+            if (build_index == 7)
+            {
+                maker.mapCells[cell_number - 1].building = building;//left 1
+                maker.mapCells[cell_number - 2].building = building;//left 2
+                maker.mapCells[cell_number - map_width].building = building; //up 1
+                maker.mapCells[cell_number + map_width].building = building; // back 1
+                maker.mapCells[(cell_number + map_width) - 1].building = building; //no results
+            }
         }
         if (build_index == 5)
         {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 1].building = building;//Right 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 2].building = building;//Right 2
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building; //up 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2*map_width].building = building; //up 2
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + 2*map_width].building = building; // back 2
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width) - 1].building = building; //no results
+            MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
+            if (building != null)
+            {
+                maker.Destroy_building(this);
+            }
+            contents = 8;
+            centerpoint = map.verts[center];
+            GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[8].prefab;
+            building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+            building.gameObject.SetActive(true);
+            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
+
+
+
+            Debug.Log("Cell Number =" + cell_number);
+            Debug.Log(map_width);
+            Debug.Log("Cell_number - 1 or Left 1 =" +(cell_number - 1));
+            Debug.Log("(cell_number + map_width)-1] or Back 1 left 1 " +((cell_number + map_width) - 1));
+            Debug.Log("1 + (2 * map_width) // back 2 R 1=" + (cell_number + 1 + (2 * map_width)));
+
+        
+
+            
+            maker.mapCells[cell_number - 1].add_marker(); //left 1
+            maker.mapCells[cell_number - 2].add_marker();//left 2
+            maker.mapCells[cell_number + 1].add_marker(); //right 1 
+            maker.mapCells[cell_number + 2].add_marker(); //right 2
+            maker.mapCells[cell_number - map_width].add_marker(); //up 1
+            maker.mapCells[cell_number - 2*map_width].add_marker(); //up 2
+            maker.mapCells[cell_number + map_width].add_marker(); //back 1
+            maker.mapCells[cell_number + 2* map_width].add_marker(); //back 2
+            maker.mapCells[cell_number + 1 + (2 * map_width)].add_marker(); //back 2 left 1,2,3
+            maker.mapCells[cell_number + 2 + (2 * map_width)].add_marker();
+            maker.mapCells[cell_number + 3 + (2 * map_width)].add_marker();
+            maker.mapCells[cell_number - 1 + (2 * map_width)].add_marker(); //back 2 right 1,2,3
+            maker.mapCells[cell_number - 2 + (2 * map_width)].add_marker();
+            maker.mapCells[cell_number - 3 + (2 * map_width)].add_marker();
+
+            maker.mapCells[cell_number + 1 + (map_width)].add_marker(); //back 1 right 1,2,3, left 1,2,3
+            maker.mapCells[cell_number + 2 + (map_width)].add_marker();
+            maker.mapCells[cell_number + 3 + (map_width)].add_marker();
+            maker.mapCells[cell_number - 1 + (map_width)].add_marker();
+            maker.mapCells[cell_number - 2 + (map_width)].add_marker();
+            maker.mapCells[cell_number - 3 + (map_width)].add_marker();
+
+            maker.mapCells[cell_number - map_width +1].add_marker(); //up 1 Right 1
+            maker.mapCells[cell_number - map_width + map_width + 1].add_marker(); //up 2 Right 1
+
+            maker.mapCells[cell_number - map_width - 1].add_marker(); //up 1 Left 1
+            maker.mapCells[cell_number - map_width - 2].add_marker(); //up 1 Left 2
+            maker.mapCells[cell_number - map_width + map_width - 1].add_marker(); //up 2 Left 1
+            maker.mapCells[cell_number - map_width + map_width - 2].add_marker(); //up 2 Left 1
+
+            /*
+            maker.mapCells[cell_number - 2].building = building;//left 2
+            maker.mapCells[cell_number + 1].building = building;//Right 1
+            maker.mapCells[cell_number + 2].building = building;//Right 2
+            maker.mapCells[cell_number - map_width].building = building; //up 1
+            maker.mapCells[cell_number - 2*map_width].building = building; //up 2
+            maker.mapCells[cell_number + map_width+ map_width].building = building; // back 1
+            maker.mapCells[cell_number + 2*map_width].building = building; // back 2
+            maker.mapCells[cell_number + 1 + (2 * map_width)].building = building;// back 2 R 1
+            maker.mapCells[cell_number + + 1 + (2 * map_width)].building = building; // back 2 R 2
+            maker.mapCells[cell_number + 2 * map_width + 3].building = building; // back 2 R 3
+            maker.mapCells[(cell_number + map_width)-1].building = building; //no results
+            */
         }
 
+
+    }
+    public void add_marker()
+    {
+        MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
+        if (building != null)
+        {
+            maker.Destroy_building(this);
+        }
+        contents = 8;
+        centerpoint = map.verts[center];
+        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[8].prefab;
+        building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+        building.gameObject.SetActive(true);
+        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+        GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
 
     }
     public void Add_saved_building(int build_index) //Add building without fade in called in the load part
@@ -288,16 +366,38 @@ public class MapCell
         }
         if (build_index == 5)
         {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building; //up 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width) - 1].building = building; //no results
+            Debug.Log("Cell Number =" + cell_number);
+            Debug.Log(map_width);
+            Debug.Log("Cell_number - 1 or Left 1 =" + (cell_number - 1));
+            Debug.Log("(cell_number + map_width)-1] or Back 1 left 1 " + ((cell_number + map_width) - 1));
+            Debug.Log("1 + (2 * map_width) // back 2 R 1=" + (cell_number + 1 + (2 * map_width)));
+
+            /*
+            add_marker(cell_number - 1);
+            add_marker(cell_number - 2);
+            add_marker(cell_number + 1);
+            add_marker(cell_number + 2);
+            add_marker(cell_number - map_width);
+            add_marker(cell_number - 2 * map_width);
+            add_marker(cell_number + map_width);
+            add_marker(cell_number + 2 * map_width);
+            add_marker(cell_number + 1 + (2 * map_width));
+
+            
+            maker.mapCells[cell_number - 1].building = building;//left 1
+            maker.mapCells[cell_number - 2].building = building;//left 2
+            maker.mapCells[cell_number + 1].building = building;//Right 1
+            maker.mapCells[cell_number + 2].building = building;//Right 2
+            maker.mapCells[cell_number - map_width].building = building; //up 1
+            maker.mapCells[cell_number - 2*map_width].building = building; //up 2
+            maker.mapCells[cell_number + map_width].building = building; // back 1
+            maker.mapCells[cell_number + 2*map_width].building = building; // back 2
+            maker.mapCells[cell_number + 1 + (2 * map_width)].building = building;// back 2 R 1
+            maker.mapCells[cell_number + 2 * map_width + 2].building = building; // back 2 R 2
+            maker.mapCells[cell_number + 2 * map_width + 3].building = building; // back 2 R 3
+            maker.mapCells[(cell_number + map_width)-1].building = building; //no results
+            */
         }
-
-
-
-
     }
     public string encode_cell()
     {
