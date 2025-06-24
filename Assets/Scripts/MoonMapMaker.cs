@@ -219,9 +219,6 @@ public class MapCell
     }
     public void Add_building(int build_index) //Add building with fade in
     {
-        
-        if(build_index != 5)
-        {
             MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
             if (building != null)
             {
@@ -242,80 +239,49 @@ public class MapCell
                 maker.mapCells[cell_number + map_width].building = building; // back 1
                 maker.mapCells[(cell_number + map_width) - 1].building = building; //no results
             }
-        }
         if (build_index == 5)
         {
-            MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
-            if (building != null)
-            {
-                maker.Destroy_building(this);
-            }
-            contents = 8;
-            centerpoint = map.verts[center];
-            GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[8].prefab;
-            building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
-            building.gameObject.SetActive(true);
-            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
-            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
 
+            maker.mapCells[cell_number - (map_width * 2) - 1].make_clickable(build_index, building); //up 2 right 1
+            maker.mapCells[cell_number - 1].make_clickable(build_index, building); //left 1
+            maker.mapCells[cell_number - 2].make_clickable(build_index, building);//left 2
+            maker.mapCells[cell_number + 1].make_clickable(build_index, building); //right 1 
+            maker.mapCells[cell_number + 2].make_clickable(build_index, building); //right 2
+            maker.mapCells[cell_number - map_width].make_clickable(build_index, building); //up 1
+            maker.mapCells[cell_number - 2 * map_width].make_clickable(build_index, building); //up 2
+            maker.mapCells[cell_number + map_width].make_clickable(build_index, building); //back 1
+            maker.mapCells[cell_number + 2 * map_width].make_clickable(build_index, building); //back 2
+            maker.mapCells[cell_number + 1 + (2 * map_width)].make_clickable(build_index, building); //back 2 left 1,2,3
+            maker.mapCells[cell_number + 2 + (2 * map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number + 3 + (2 * map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 1 + (2 * map_width)].make_clickable(build_index, building); //back 2 right 1,2,3
+            maker.mapCells[cell_number - 2 + (2 * map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 3 + (2 * map_width)].make_clickable(build_index, building);
 
+            maker.mapCells[cell_number + 1 + (map_width)].make_clickable(build_index, building); //back 1 right 1,2,3, left 1,2,3
+            maker.mapCells[cell_number + 2 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number + 3 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 1 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 2 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 3 + (map_width)].make_clickable(build_index, building);
 
-            Debug.Log("Cell Number =" + cell_number);
-            Debug.Log(map_width);
-            Debug.Log("Cell_number - 1 or Left 1 =" +(cell_number - 1));
-            Debug.Log("(cell_number + map_width)-1] or Back 1 left 1 " +((cell_number + map_width) - 1));
-            Debug.Log("1 + (2 * map_width) // back 2 R 1=" + (cell_number + 1 + (2 * map_width)));
+            maker.mapCells[cell_number - map_width -1].make_clickable(build_index, building); //up 1 Right 1
+            maker.mapCells[cell_number - map_width - map_width + 1].make_clickable(build_index, building); //up 2 Right 1
 
-        
+            maker.mapCells[cell_number - map_width + 1].make_clickable(build_index, building); //up 1 Left 1
+            maker.mapCells[cell_number - map_width + 2].make_clickable(build_index, building); //up 1 Left 2
+            maker.mapCells[cell_number - map_width * 2 + 1].make_clickable(build_index, building); //up 2 Left 1
+            maker.mapCells[cell_number - map_width*2 + 2].make_clickable(build_index, building); //up 2 Left 1
 
-            
-            maker.mapCells[cell_number - 1].add_marker(); //left 1
-            maker.mapCells[cell_number - 2].add_marker();//left 2
-            maker.mapCells[cell_number + 1].add_marker(); //right 1 
-            maker.mapCells[cell_number + 2].add_marker(); //right 2
-            maker.mapCells[cell_number - map_width].add_marker(); //up 1
-            maker.mapCells[cell_number - 2*map_width].add_marker(); //up 2
-            maker.mapCells[cell_number + map_width].add_marker(); //back 1
-            maker.mapCells[cell_number + 2* map_width].add_marker(); //back 2
-            maker.mapCells[cell_number + 1 + (2 * map_width)].add_marker(); //back 2 left 1,2,3
-            maker.mapCells[cell_number + 2 + (2 * map_width)].add_marker();
-            maker.mapCells[cell_number + 3 + (2 * map_width)].add_marker();
-            maker.mapCells[cell_number - 1 + (2 * map_width)].add_marker(); //back 2 right 1,2,3
-            maker.mapCells[cell_number - 2 + (2 * map_width)].add_marker();
-            maker.mapCells[cell_number - 3 + (2 * map_width)].add_marker();
-
-            maker.mapCells[cell_number + 1 + (map_width)].add_marker(); //back 1 right 1,2,3, left 1,2,3
-            maker.mapCells[cell_number + 2 + (map_width)].add_marker();
-            maker.mapCells[cell_number + 3 + (map_width)].add_marker();
-            maker.mapCells[cell_number - 1 + (map_width)].add_marker();
-            maker.mapCells[cell_number - 2 + (map_width)].add_marker();
-            maker.mapCells[cell_number - 3 + (map_width)].add_marker();
-
-            maker.mapCells[cell_number - map_width +1].add_marker(); //up 1 Right 1
-            maker.mapCells[cell_number - map_width + map_width + 1].add_marker(); //up 2 Right 1
-
-            maker.mapCells[cell_number - map_width - 1].add_marker(); //up 1 Left 1
-            maker.mapCells[cell_number - map_width - 2].add_marker(); //up 1 Left 2
-            maker.mapCells[cell_number - map_width + map_width - 1].add_marker(); //up 2 Left 1
-            maker.mapCells[cell_number - map_width + map_width - 2].add_marker(); //up 2 Left 1
-
-            /*
-            maker.mapCells[cell_number - 2].building = building;//left 2
-            maker.mapCells[cell_number + 1].building = building;//Right 1
-            maker.mapCells[cell_number + 2].building = building;//Right 2
-            maker.mapCells[cell_number - map_width].building = building; //up 1
-            maker.mapCells[cell_number - 2*map_width].building = building; //up 2
-            maker.mapCells[cell_number + map_width+ map_width].building = building; // back 1
-            maker.mapCells[cell_number + 2*map_width].building = building; // back 2
-            maker.mapCells[cell_number + 1 + (2 * map_width)].building = building;// back 2 R 1
-            maker.mapCells[cell_number + + 1 + (2 * map_width)].building = building; // back 2 R 2
-            maker.mapCells[cell_number + 2 * map_width + 3].building = building; // back 2 R 3
-            maker.mapCells[(cell_number + map_width)-1].building = building; //no results
-            */
         }
 
 
     }
+    public void make_clickable(int index, GameObject building)
+    {
+        GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number].building = building;//left 1
+    }
+    
     public void add_marker()
     {
         MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
@@ -335,7 +301,7 @@ public class MapCell
     public void Add_saved_building(int build_index) //Add building without fade in called in the load part
     {
 
-        
+        MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
         if (building != null)
         {
             GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
@@ -366,37 +332,38 @@ public class MapCell
         }
         if (build_index == 5)
         {
-            Debug.Log("Cell Number =" + cell_number);
-            Debug.Log(map_width);
-            Debug.Log("Cell_number - 1 or Left 1 =" + (cell_number - 1));
-            Debug.Log("(cell_number + map_width)-1] or Back 1 left 1 " + ((cell_number + map_width) - 1));
-            Debug.Log("1 + (2 * map_width) // back 2 R 1=" + (cell_number + 1 + (2 * map_width)));
 
-            /*
-            add_marker(cell_number - 1);
-            add_marker(cell_number - 2);
-            add_marker(cell_number + 1);
-            add_marker(cell_number + 2);
-            add_marker(cell_number - map_width);
-            add_marker(cell_number - 2 * map_width);
-            add_marker(cell_number + map_width);
-            add_marker(cell_number + 2 * map_width);
-            add_marker(cell_number + 1 + (2 * map_width));
+            maker.mapCells[cell_number - (map_width * 2) - 1].make_clickable(build_index, building); //up 2 right 1
+            maker.mapCells[cell_number - 1].make_clickable(build_index, building); //left 1
+            maker.mapCells[cell_number - 2].make_clickable(build_index, building);//left 2
+            maker.mapCells[cell_number + 1].make_clickable(build_index, building); //right 1 
+            maker.mapCells[cell_number + 2].make_clickable(build_index, building); //right 2
+            maker.mapCells[cell_number - map_width].make_clickable(build_index, building); //up 1
+            maker.mapCells[cell_number - 2 * map_width].make_clickable(build_index, building); //up 2
+            maker.mapCells[cell_number + map_width].make_clickable(build_index, building); //back 1
+            maker.mapCells[cell_number + 2 * map_width].make_clickable(build_index, building); //back 2
+            maker.mapCells[cell_number + 1 + (2 * map_width)].make_clickable(build_index, building); //back 2 left 1,2,3
+            maker.mapCells[cell_number + 2 + (2 * map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number + 3 + (2 * map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 1 + (2 * map_width)].make_clickable(build_index, building); //back 2 right 1,2,3
+            maker.mapCells[cell_number - 2 + (2 * map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 3 + (2 * map_width)].make_clickable(build_index, building);
 
-            
-            maker.mapCells[cell_number - 1].building = building;//left 1
-            maker.mapCells[cell_number - 2].building = building;//left 2
-            maker.mapCells[cell_number + 1].building = building;//Right 1
-            maker.mapCells[cell_number + 2].building = building;//Right 2
-            maker.mapCells[cell_number - map_width].building = building; //up 1
-            maker.mapCells[cell_number - 2*map_width].building = building; //up 2
-            maker.mapCells[cell_number + map_width].building = building; // back 1
-            maker.mapCells[cell_number + 2*map_width].building = building; // back 2
-            maker.mapCells[cell_number + 1 + (2 * map_width)].building = building;// back 2 R 1
-            maker.mapCells[cell_number + 2 * map_width + 2].building = building; // back 2 R 2
-            maker.mapCells[cell_number + 2 * map_width + 3].building = building; // back 2 R 3
-            maker.mapCells[(cell_number + map_width)-1].building = building; //no results
-            */
+            maker.mapCells[cell_number + 1 + (map_width)].make_clickable(build_index, building); //back 1 right 1,2,3, left 1,2,3
+            maker.mapCells[cell_number + 2 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number + 3 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 1 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 2 + (map_width)].make_clickable(build_index, building);
+            maker.mapCells[cell_number - 3 + (map_width)].make_clickable(build_index, building);
+
+            maker.mapCells[cell_number - map_width - 1].make_clickable(build_index, building); //up 1 Right 1
+            maker.mapCells[cell_number - map_width - map_width + 1].make_clickable(build_index, building); //up 2 Right 1
+
+            maker.mapCells[cell_number - map_width + 1].make_clickable(build_index, building); //up 1 Left 1
+            maker.mapCells[cell_number - map_width + 2].make_clickable(build_index, building); //up 1 Left 2
+            maker.mapCells[cell_number - map_width * 2 + 1].make_clickable(build_index, building); //up 2 Left 1
+            maker.mapCells[cell_number - map_width * 2 + 2].make_clickable(build_index, building); //up 2 Left 1
+
         }
     }
     public string encode_cell()
