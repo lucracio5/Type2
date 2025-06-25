@@ -6,6 +6,7 @@ public class BallTest : MonoBehaviour
 {
     public GameObject ballPrefab;     // Assign your ball prefab in the Inspector
     public float shootForce = 1000f;  // Adjust to taste
+    public Vector3 spawnOffset = new Vector3(0, -3, -3);
 
     Camera cam;
 
@@ -28,7 +29,7 @@ public class BallTest : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
         // Instantiate ball at camera position
-        GameObject ball = Instantiate(ballPrefab, cam.transform.position, Quaternion.identity);
+        GameObject ball = Instantiate(ballPrefab, cam.transform.position + spawnOffset, Quaternion.identity);
 
         // Ensure the ball has a Rigidbody
         Rigidbody rb = ball.GetComponent<Rigidbody>();
