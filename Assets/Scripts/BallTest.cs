@@ -6,6 +6,10 @@ public class BallTest : MonoBehaviour
 {
     public GameObject ballPrefab;     // Assign your ball prefab in the Inspector
     public float shootForce = 1000f;  // Adjust to taste
+    public float delay = 100; //in ms
+    public Vector3 spawnOffset = new Vector3(0, -3, -3);
+
+    float lastShootTime = -Mathf.Infinity; // Add this at the class level
 
     Camera cam;
 
@@ -16,9 +20,10 @@ public class BallTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))  // Left click
+        if (Input.GetMouseButton(0) && Time.time - lastShootTime >= delay / 1000)
         {
             ShootBall();
+            lastShootTime = Time.time;
         }
     }
 
@@ -28,7 +33,7 @@ public class BallTest : MonoBehaviour
         Ray ray = cam.ScreenPointToRay(Input.mousePosition);
 
         // Instantiate ball at camera position
-        GameObject ball = Instantiate(ballPrefab, cam.transform.position, Quaternion.identity);
+        GameObject ball = Instantiate(ballPrefab, cam.transform.position + spawnOffset, Quaternion.identity);
 
         // Ensure the ball has a Rigidbody
         Rigidbody rb = ball.GetComponent<Rigidbody>();
