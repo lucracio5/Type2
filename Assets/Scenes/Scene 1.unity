@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.047401994, g: 0.045057714, b: 0.03368655, a: 1}
+  m_IndirectSpecularColor: {r: 0.049276106, g: 0.046884432, b: 0.035298668, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15537,12 +15537,15 @@ MonoBehaviour:
   food: 100
   O2: 100
   money: 40
+  fuel: 0
   energy_slider: {fileID: 579250712}
   mining_slider: {fileID: 328228469}
   O2_slider: {fileID: 475411638}
   water_slider: {fileID: 93907533}
   food_slider: {fileID: 252463041}
   population_slider: {fileID: 1697249712}
+  energy2_slider: {fileID: 0}
+  fuel_slider: {fileID: 0}
   energy_text: {fileID: 1663703812}
   mining_text: {fileID: 150314387}
   O2_text: {fileID: 621894546}

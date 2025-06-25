@@ -23,6 +23,7 @@ public class Variable_Tracker : MonoBehaviour
     public int food = 100;
     public int O2 = 100;
     public int money;
+    public int fuel;
     
 
     public UISlider energy_slider;
@@ -31,6 +32,8 @@ public class Variable_Tracker : MonoBehaviour
     public UISlider water_slider;
     public UISlider food_slider;
     public UISlider population_slider;
+    public UISlider energy2_slider;
+    public UISlider fuel_slider;
 
     public Text energy_text;
     public Text mining_text;
@@ -39,6 +42,9 @@ public class Variable_Tracker : MonoBehaviour
     public Text food_text;
     public Text population_text;
     public Text money_text;
+    public Text energy2_text;
+    public Text fuel_text;
+
 
     public List<string> crewNames = new List<string>();
     
@@ -48,6 +54,7 @@ public class Variable_Tracker : MonoBehaviour
     public int max_food = 100;
     public int max_O2 = 100;
     public int max_population = 10;
+    public int max_fuel = 500;
 
     Audio_manager audio_manager;
     Jobs jobs;
@@ -114,6 +121,8 @@ public class Variable_Tracker : MonoBehaviour
 
         money_text.text = money.ToString();
         energy_text.text = energy.ToString() + "/" + max_energy.ToString();
+        energy2_text.text = energy.ToString() + "/" + max_energy.ToString();
+        fuel_text.text = fuel.ToString() + "/" + max_fuel.ToString();
         mining_text.text = regolith.ToString() + "/" + max_mining.ToString();
         O2_text.text = O2.ToString() + "/" + max_O2.ToString();
         water_text.text = water.ToString() + "/" + max_water.ToString();
@@ -121,13 +130,18 @@ public class Variable_Tracker : MonoBehaviour
         population_text.text = population.ToString() + "/" + max_population.ToString();
 
         energy_slider.value = energy;
+        energy2_slider.value = energy;
         mining_slider.value = regolith;
         water_slider.value = water;
         food_slider.value = food;
         population_slider.value = population;
         O2_slider.value = O2;
+        fuel_slider.value = fuel;
+
 
         population_slider.maxValue = max_population;
+        energy_slider.maxValue = max_energy;
+        energy2_slider.maxValue = max_energy;
 
 
         if ((O2 <= 0 || food <= 0 || water <= 0) && canDie) //REMOVE CAN DIE AFTER DEBUGGING, NOT PART OF GAME

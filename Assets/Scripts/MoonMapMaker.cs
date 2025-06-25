@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Security.Cryptography;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
+using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.Timeline;
 
@@ -332,7 +333,7 @@ public class MapCell
         }
         if (build_index == 5)
         {
-
+            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().max_energy = 500;
             maker.mapCells[cell_number - (map_width * 2) - 1].make_clickable(build_index, building); //up 2 right 1
             maker.mapCells[cell_number - 1].make_clickable(build_index, building); //left 1
             maker.mapCells[cell_number - 2].make_clickable(build_index, building);//left 2
