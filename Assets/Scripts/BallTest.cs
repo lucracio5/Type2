@@ -17,7 +17,7 @@ public class BallTest : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetMouseButtonDown(0))  // Left click
+        if (Input.GetMouseButton(0))  // Left click
         {
             ShootBall();
         }
