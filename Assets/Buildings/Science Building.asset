@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c1a89b3c64f1e49b4f9b568fe55680, type: 3}
   m_Name: Science Building
   m_EditorClassIdentifier: 
-  prefab: {fileID: 3501093903690423818, guid: 9164af86f2580bd46bb2af40eb9cfb6e, type: 3}
+  prefab: {fileID: 2730482250218621737, guid: af45cf0bbf520e745b0c4c72369ac0ae, type: 3}
   cost: 20
