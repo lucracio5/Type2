@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04752188, g: 0.045143194, b: 0.033674467, a: 1}
+  m_IndirectSpecularColor: {r: 0.048621386, g: 0.046247184, b: 0.034714427, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -2303,7 +2303,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0, y: 15.264}
+  m_AnchoredPosition: {x: 0, y: 15.263977}
   m_SizeDelta: {x: -156.9603, y: -69.472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155305215
@@ -15279,8 +15279,8 @@ Terrain:
   m_TreeBillboardDistance: 50
   m_TreeCrossFadeLength: 5
   m_TreeMaximumFullLODCount: 50
-  m_DetailObjectDistance: 80
-  m_DetailObjectDensity: 1
+  m_DetailObjectDistance: 750
+  m_DetailObjectDensity: 0.4
   m_HeightmapPixelError: 5
   m_SplatMapDistance: 1000
   m_HeightmapMaximumLOD: 0
@@ -16017,13 +16017,13 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1013954937}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 10b7f6193894c1645b0a20b4b729263f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   ballPrefab: {fileID: 3365020373541505974, guid: d816158dfff25124fa7fb3fd8413c3b6, type: 3}
-  shootForce: 1000
+  shootForce: 10000
   delay: 100
   spawnOffset: {x: 0, y: -3, z: -3}
 --- !u!1 &1019172834
@@ -16534,7 +16534,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
-  m_AnchoredPosition: {x: -7, y: 14.779999}
+  m_AnchoredPosition: {x: -7, y: 14.780029}
   m_SizeDelta: {x: 96.3389, y: 30}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1043848841
