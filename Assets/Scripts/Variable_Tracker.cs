@@ -48,7 +48,7 @@ public class Variable_Tracker : MonoBehaviour
 
     public List<string> crewNames = new List<string>();
     
-    public int max_energy = 300;
+    public int max_energy = 100;
     public int max_mining = 10;
     public int max_water = 100;
     public int max_food = 100;
@@ -111,6 +111,7 @@ public class Variable_Tracker : MonoBehaviour
         jobs.science_jobs = science_jobs;
         jobs.cleaning_jobs = cleaning_jobs;
         tree.Hydro_unlock = Hydro_Unlock;
+        max_energy = 100;
 
 
     }

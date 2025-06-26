@@ -31,11 +31,14 @@ public class Imports2 : MonoBehaviour
 
     public Animator shipAnimator;
 
+    public int max_queue;
+
     private void Start()
     {
         shipAnimator = GameObject.Find("Rocket").GetComponent<Animator>();
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
         audio_manager = GameObject.Find("Game Manager").GetComponent<Audio_manager>();
+        max_queue = 3;
     }
 
     private void Update()
@@ -85,7 +88,7 @@ public class Imports2 : MonoBehaviour
 
     public void QueueFoodImport()
     {
-        if (tracker.money >= 20 && tracker.food < tracker.max_food && importQueue.Count < 3)
+        if (tracker.money >= 20 && tracker.food < tracker.max_food && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Food Import", 20, () => tracker.food = Mathf.Min(tracker.food + 10, tracker.max_food)));
             audio_manager.PlayUIclick();
@@ -96,9 +99,19 @@ public class Imports2 : MonoBehaviour
 
     public void QueueWaterImport()
     {
-        if (tracker.money >= 20 && tracker.water < tracker.max_water && importQueue.Count < 3)
+        if (tracker.money >= 20 && tracker.water < tracker.max_water && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Water Import", 20, () => tracker.water = Mathf.Min(tracker.water + 10, tracker.max_water)));
+            audio_manager.PlayUIclick();
+        }
+        else
+            audio_manager.PlayFailedClick();
+    }
+    public void QueueFuelImport()
+    {
+        if (tracker.money >= 100 && tracker.fuel < tracker.max_fuel && importQueue.Count < max_queue)
+        {
+            importQueue.Add(new ImportItem("Nuclear Fuel", 100, () => tracker.fuel = Mathf.Min(tracker.fuel + 500, tracker.max_fuel)));
             audio_manager.PlayUIclick();
         }
         else
@@ -114,6 +127,7 @@ public class Imports2 : MonoBehaviour
         else
             audio_manager.PlayFailedClick();
     }
+
     private void ProcessShip()
     {
         Debug.Log("Ship has arrived!");
