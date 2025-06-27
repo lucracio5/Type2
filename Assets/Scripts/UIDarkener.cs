@@ -7,12 +7,13 @@ using UnityEngine;
 public class UIDarkener : MonoBehaviour
 {
     [SerializeField] private GameObject UiOverlayDarkener;
+    public CameraMover cameraMover;
 
     // Update is called once per frame
     void Update()
     {
-        //Debug.Log(UiOverlayDarkener.activeSelf);
         UiOverlayDarkener.SetActive(AnyPanelsOpen());
+        cameraMover.freezeCamera = AnyPanelsOpen();
     }
     
     bool AnyPanelsOpen() {

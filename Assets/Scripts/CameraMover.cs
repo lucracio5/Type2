@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class CameraMover : MonoBehaviour
 {
+    
+    [HideInInspector] public bool freezeCamera = false;
 
     [SerializeField] private Vector3 defaultPosition = new Vector3(150, 35, 0);
     [SerializeField] private Vector3 defaultRotation = new Vector3(20, 180, 0);
@@ -40,9 +42,11 @@ public class CameraMover : MonoBehaviour
     {
         TrackMouse();
 
-        MoveCamera();
-        ZoomCamera();
-        RotateCamera();
+        if (!freezeCamera) { //if the camera is allowed to move
+            MoveCamera();
+            ZoomCamera();
+            RotateCamera();
+        }
     }
 
 

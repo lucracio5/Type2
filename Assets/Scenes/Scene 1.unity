@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04821246, g: 0.045855433, b: 0.034408256, a: 1}
+  m_IndirectSpecularColor: {r: 0.04810138, g: 0.045728028, b: 0.034247447, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15020,6 +15020,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 5bec54605cb2be4429a571fb9fd7b0d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  freezeCamera: 0
   defaultPosition: {x: 150, y: 35, z: 0}
   defaultRotation: {x: 20, y: 180, z: 0}
   defaultFOV: 60
@@ -15991,6 +15992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   UiOverlayDarkener: {fileID: 101657742}
+  cameraMover: {fileID: 963194229}
 --- !u!114 &1013954951
 MonoBehaviour:
   m_ObjectHideFlags: 0
