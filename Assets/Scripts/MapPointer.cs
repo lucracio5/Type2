@@ -137,6 +137,8 @@ public class MapPointer : MonoBehaviour
     {
         clickable = true;
     }
+
+    
     public void ChangeActiveCursor(int cursor) //Changes the cursor by disabling other cursor first then turning on new cursor
     {
         if (0 <= cursor && cursor <= cursors.Length)
@@ -144,6 +146,10 @@ public class MapPointer : MonoBehaviour
             cursors[activeCursor].gameObject.SetActive(false);
             activeCursor = cursor;
             cursors[activeCursor].gameObject.SetActive(true);
+        }
+        if(cursor == 1)
+        {
+            GetComponent<MoonMapMaker>().show_markers();
         }
     }
 

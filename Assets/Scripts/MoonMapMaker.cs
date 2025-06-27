@@ -21,6 +21,67 @@ public class MoonMapMaker : MonoBehaviour
     public GameObject Gamemanager;
 
 
+
+    public List<MapCell> find_domes()
+    {
+        List <MapCell> Domes = new List<MapCell>();
+        foreach (MapCell cell in mapCells)
+        {
+            if (cell.contents == 0)
+            {
+                Domes.Add(cell);
+            }
+        }
+        return Domes;
+    }
+    public void show_markers()
+    {
+        List <MapCell> Domes = find_domes();
+        foreach (MapCell cell in Domes)
+        {
+            if (mapCells[cell.cell_number - 2].contents == -1) 
+            {
+                mapCells[cell.cell_number - 2].add_marker();
+            }
+            if (mapCells[cell.cell_number + 2].contents == -1)
+            {
+                mapCells[cell.cell_number + 2].add_marker();
+            }
+            if (mapCells[cell.cell_number - (cell.map_width*2)].contents == -1)
+            {
+                mapCells[cell.cell_number - (cell.map_width * 2)].add_marker();
+            }
+            if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == -1)
+            {
+                mapCells[cell.cell_number + (cell.map_width * 2)].add_marker();
+            }
+
+        }
+    }
+    public void Hide_markers()
+    {
+        List<MapCell> Domes = find_domes();
+        foreach (MapCell cell in Domes)
+        {
+            if (mapCells[cell.cell_number - 2].contents == 8)
+            {
+                Destroy_building(mapCells[cell.cell_number - 2]);
+            }
+            if (mapCells[cell.cell_number + 2].contents == 8)
+            {
+                Destroy_building(mapCells[cell.cell_number + 2]);  
+            }
+            if (mapCells[cell.cell_number - (cell.map_width * 2)].contents == 8)
+            {
+                Destroy_building(mapCells[cell.cell_number - (cell.map_width * 2)]);
+            }
+            if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == 8)
+            {
+                Destroy_building(mapCells[cell.cell_number + (cell.map_width * 2)]);
+            }
+
+        }
+    }
     // Start is called before the first frame update
     void Start()
     {
@@ -220,7 +281,9 @@ public class MapCell
     }
     public void Add_building(int build_index) //Add building with fade in
     {
-            MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
+        MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
+        if (build_index != 0)
+        {
             if (building != null)
             {
                 maker.Destroy_building(this);
@@ -232,15 +295,16 @@ public class MapCell
             building.gameObject.SetActive(true);
             GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
             GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
-            if (build_index == 7)
-            {
-                maker.mapCells[cell_number - 1].building = building;//left 1
-                maker.mapCells[cell_number - 2].building = building;//left 2
-                maker.mapCells[cell_number - map_width].building = building; //up 1
-                maker.mapCells[cell_number + map_width].building = building; // back 1
-                maker.mapCells[(cell_number + map_width) - 1].building = building; //no results
-            }
-        if (build_index == 5)
+        }      
+        if (build_index == 7)
+        {
+            maker.mapCells[cell_number - 1].building = building;//left 1
+            maker.mapCells[cell_number - 2].building = building;//left 2
+            maker.mapCells[cell_number - map_width].building = building; //up 1
+            maker.mapCells[cell_number + map_width].building = building; // back 1
+            maker.mapCells[(cell_number + map_width) - 1].building = building; //no results
+        }
+        else if (build_index == 5)
         {
 
             maker.mapCells[cell_number - (map_width * 2) - 1].make_clickable(build_index, building); //up 2 right 1
@@ -274,6 +338,10 @@ public class MapCell
             maker.mapCells[cell_number - map_width * 2 + 1].make_clickable(build_index, building); //up 2 Left 1
             maker.mapCells[cell_number - map_width*2 + 2].make_clickable(build_index, building); //up 2 Left 1
 
+        }
+        else if (build_index == 0)
+        {
+            GameObject[] allDomes = GameObject.FindGameObjectsWithTag("Dome");
         }
 
 
