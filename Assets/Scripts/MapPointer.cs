@@ -27,6 +27,7 @@ public class MapPointer : MonoBehaviour
     public bool clickable;
 
     public float cursorYOffset;
+    public UIDarkener uiDarkener; 
     
 
     void Start()
@@ -43,6 +44,9 @@ public class MapPointer : MonoBehaviour
 
     void Update()
     {
+        if (uiDarkener.AnyPanelsOpen()) clickable = false; //if any panels are open, you will not be able to click on buildings behind it
+        else clickable = true;
+
         cursor = cursors[activeCursor];
         RaycastHit hit;
         Ray ray = Camera.main.ScreenPointToRay(Input.mousePosition);

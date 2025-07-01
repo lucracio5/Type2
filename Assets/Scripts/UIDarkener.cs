@@ -16,7 +16,7 @@ public class UIDarkener : MonoBehaviour
         cameraMover.freezeCamera = AnyPanelsOpen();
     }
     
-    bool AnyPanelsOpen() {
+    public bool AnyPanelsOpen() {
         GameObject[] allPanels = GameObject.FindGameObjectsWithTag("UIPanel");
         return (allPanels.Length > 0); //if there are any open panels, they will be detected.
     }
