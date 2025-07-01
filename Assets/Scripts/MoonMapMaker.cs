@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using System.Security.Cryptography;
+using TMPro;
 using Unity.VisualScripting;
 using Unity.VisualScripting.FullSerializer;
 using UnityEditor.Build.Content;
@@ -43,22 +44,20 @@ public class MoonMapMaker : MonoBehaviour
             if (mapCells[cell.cell_number - 2].contents == -1) 
             {
                 mapCells[cell.cell_number - 2].add_marker();
-                print(cell);
             }
             if (mapCells[cell.cell_number + 2].contents == -1)
             {
                 mapCells[cell.cell_number + 2].add_marker();
-                print(cell);
             }
             if (mapCells[cell.cell_number - (cell.map_width*2)].contents == -1)
             {
                 mapCells[cell.cell_number - (cell.map_width * 2)].add_marker();
-                print(cell);
+                
             }
             if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == -1)
             {
                 mapCells[cell.cell_number + (cell.map_width * 2)].add_marker();
-                print(cell);
+                
             }
 
         }
@@ -396,50 +395,49 @@ public class MapCell
         }
         else if (build_index == 0)
         {
-            if (transparency == false)
+            if (building != null)
             {
+                if (building.tag != null)
+                {
+                    Debug.Log(building.tag);
+                }
+            }
+            else
+            {
+                Debug.Log("tag is null");
+            }
+           
+            
+           if (transparency == false)
+           {
                 contents = 0;
                 centerpoint = map.verts[center];
                 GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
                 building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
                 building.gameObject.SetActive(true);
                 building.GetComponentInChildren<Transparency>().ForceOpaque();
-
-
                 GameManager.GetComponent<Variable_Tracker>().max_population += 10;
-
-            }
-            maker.Hide_markers();
-        }
-        else if (build_index == 100)
-        {
-            Debug.LogWarning("Trying to Place");
-            
-            maker.Hide_markers();
-            contents = 0;
-            centerpoint = map.verts[center];
-            GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
-            building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
-            building.gameObject.SetActive(true);
-            GameManager.GetComponent<Variable_Tracker>().max_population += 10;
-
-            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
-            if (transparency == false)
-            {
-                if (building.GetComponentInChildren<Transparency>() != null)
-                {
-                    building.GetComponentInChildren<Transparency>().ForceOpaque();
-                }
-                else
-                    Debug.LogWarning("transperencey is null");
-
-            }
-            else
-            {
+           }
+           else if (building.tag == "Marker")
+           {
+                maker.Hide_markers(); 
+                
+                contents = 0;
+                centerpoint = map.verts[center];
+                GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
+                building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+                building.gameObject.SetActive(true);
+                building.GetComponentInChildren<Transparency>().ForceOpaque();
+                GameManager.GetComponent<Variable_Tracker>().max_population += 10;
                 GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
+                GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
             }
+
+            GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
+
         }
         GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+        
 
 
     }

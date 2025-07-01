@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04864888, g: 0.04626806, b: 0.03473741, a: 1}
+  m_IndirectSpecularColor: {r: 0.04815507, g: 0.045786075, b: 0.034297854, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -15563,7 +15563,7 @@ MonoBehaviour:
   max_water: 100
   max_food: 100
   max_O2: 100
-  max_population: 10
+  max_population: 0
   max_fuel: 500
   GameoverText: {fileID: 1062847514}
   speed: 1

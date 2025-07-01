@@ -69,11 +69,7 @@ public class MapPointer : MonoBehaviour
             {
                 clickable = false;
                 current_cell.Add_building(prefabs_index,true);
-               
                 Invoke("temp_off_ui", 0.1f);
-
-
-                
 
                 //current_cell.ChangeHeight(1);
             }
@@ -81,7 +77,7 @@ public class MapPointer : MonoBehaviour
 
         if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building != null && clickable)
         {
-            print(current_cell.building.tag);
+            
             if (current_cell.building.tag == "Launchpad")
             {
                 LaunchPanel.SetActive(true);
@@ -105,7 +101,8 @@ public class MapPointer : MonoBehaviour
             }
             else if (current_cell.building.tag == "Marker") 
             {
-                current_cell.Add_building(100, true);
+                current_cell.Add_building(0, true);
+
             }//Dont open the else panel
             else
             {

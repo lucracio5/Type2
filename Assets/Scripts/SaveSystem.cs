@@ -27,7 +27,7 @@ public class SaveSystem
     }
     public static string SavefileName()
     {
-        string Savefile = Application.persistentDataPath + "/savefile1" +".save";
+        string Savefile = Application.persistentDataPath + "/savefile2" +".save";
         return Savefile;
     }
     public static void Save()
