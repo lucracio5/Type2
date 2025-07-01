@@ -21,6 +21,7 @@ TagManager:
   - Science
   - UIPanel
   - Power Plant
+  - Marker
   layers:
   - Default
   - TransparentFX

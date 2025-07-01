@@ -6,6 +6,7 @@ using Unity.VisualScripting.FullSerializer;
 using UnityEditor.Build.Content;
 using UnityEngine;
 using UnityEngine.Timeline;
+using static UnityEditor.Timeline.TimelinePlaybackControls;
 
 public class MoonMapMaker : MonoBehaviour
 {
@@ -42,46 +43,63 @@ public class MoonMapMaker : MonoBehaviour
             if (mapCells[cell.cell_number - 2].contents == -1) 
             {
                 mapCells[cell.cell_number - 2].add_marker();
+                print(cell);
             }
             if (mapCells[cell.cell_number + 2].contents == -1)
             {
                 mapCells[cell.cell_number + 2].add_marker();
+                print(cell);
             }
             if (mapCells[cell.cell_number - (cell.map_width*2)].contents == -1)
             {
                 mapCells[cell.cell_number - (cell.map_width * 2)].add_marker();
+                print(cell);
             }
             if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == -1)
             {
                 mapCells[cell.cell_number + (cell.map_width * 2)].add_marker();
+                print(cell);
             }
 
         }
     }
+    
     public void Hide_markers()
     {
+        
         List<MapCell> Domes = find_domes();
         foreach (MapCell cell in Domes)
         {
             if (mapCells[cell.cell_number - 2].contents == 8)
             {
-                Destroy_building(mapCells[cell.cell_number - 2]);
+                remove_building(mapCells[cell.cell_number - 2]);
             }
             if (mapCells[cell.cell_number + 2].contents == 8)
             {
-                Destroy_building(mapCells[cell.cell_number + 2]);  
+                remove_building(mapCells[cell.cell_number + 2]);  
             }
             if (mapCells[cell.cell_number - (cell.map_width * 2)].contents == 8)
             {
-                Destroy_building(mapCells[cell.cell_number - (cell.map_width * 2)]);
+                remove_building(mapCells[cell.cell_number - (cell.map_width * 2)]);
             }
             if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == 8)
             {
-                Destroy_building(mapCells[cell.cell_number + (cell.map_width * 2)]);
+                remove_building(mapCells[cell.cell_number + (cell.map_width * 2)]);
             }
 
         }
+         
     }
+    public void remove_building(MapCell cell)
+    {
+        if (cell.building != null)
+        {
+            cell.contents = -1;
+            Destroy(cell.building);
+            cell.building = null;
+        }
+    }
+
     // Start is called before the first frame update
     void Start()
     {
@@ -145,13 +163,13 @@ public class MoonMapMaker : MonoBehaviour
         }
 
         mapCells[0].ChangeHeight(0);
-        mapCells[1170].Add_saved_building(3);
-        mapCells[1172].Add_saved_building(0);
-        mapCells[1174].Add_saved_building(4);
-        mapCells[1176].Add_saved_building(2);
-        mapCells[1178].Add_saved_building(2);
-        mapCells[994].Add_saved_building(6);
-        mapCells[1000].Add_saved_building(7);
+        mapCells[1170].Add_building(3);
+        mapCells[1172].Add_building(0);
+        mapCells[1174].Add_building(4);
+        mapCells[1176].Add_building(2);
+        mapCells[1178].Add_building(2);
+        mapCells[994].Add_building(6);
+        mapCells[1000].Add_building(7);
 
         StartCoroutine(DelayedBegin());
     }
@@ -279,10 +297,33 @@ public class MapCell
         edge_verts[14] = mid_verts[7] - width;
         edge_verts[15] = mid_verts[0] - width;
     }
-    public void Add_building(int build_index) //Add building with fade in
+
+    public void make_clickable(int index, GameObject building)
+    {
+        GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number].building = building;
+    }
+    
+    public void add_marker()
     {
         MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
-        if (build_index != 0)
+        if (building != null)
+        {
+            maker.Destroy_building(this);
+        }
+        contents = 8;
+        centerpoint = map.verts[center];
+        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[8].prefab;
+        building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+        building.gameObject.SetActive(true);
+        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+        GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
+
+    }
+    public void Add_building(int build_index,bool transparency = false) //Add building without fade in called in the load part
+    {
+        MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
+        GameObject GameManager = GameObject.Find("Game Manager");
+        if (build_index != 0 && build_index != 100)
         {
             if (building != null)
             {
@@ -293,9 +334,23 @@ public class MapCell
             GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
             building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
             building.gameObject.SetActive(true);
-            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
-            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
-        }      
+            GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
+            
+            if (transparency == false)
+            {
+                if (building.GetComponentInChildren<Transparency>() != null)
+                {
+                    building.GetComponentInChildren<Transparency>().ForceOpaque();
+                }
+                else
+                    Debug.LogWarning("transperencey is null");
+
+            }
+            else
+            {
+                GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
+            }
+        }
         if (build_index == 7)
         {
             maker.mapCells[cell_number - 1].building = building;//left 1
@@ -330,101 +385,6 @@ public class MapCell
             maker.mapCells[cell_number - 2 + (map_width)].make_clickable(build_index, building);
             maker.mapCells[cell_number - 3 + (map_width)].make_clickable(build_index, building);
 
-            maker.mapCells[cell_number - map_width -1].make_clickable(build_index, building); //up 1 Right 1
-            maker.mapCells[cell_number - map_width - map_width + 1].make_clickable(build_index, building); //up 2 Right 1
-
-            maker.mapCells[cell_number - map_width + 1].make_clickable(build_index, building); //up 1 Left 1
-            maker.mapCells[cell_number - map_width + 2].make_clickable(build_index, building); //up 1 Left 2
-            maker.mapCells[cell_number - map_width * 2 + 1].make_clickable(build_index, building); //up 2 Left 1
-            maker.mapCells[cell_number - map_width*2 + 2].make_clickable(build_index, building); //up 2 Left 1
-
-        }
-        else if (build_index == 0)
-        {
-            GameObject[] allDomes = GameObject.FindGameObjectsWithTag("Dome");
-        }
-
-
-    }
-    public void make_clickable(int index, GameObject building)
-    {
-        GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number].building = building;//left 1
-    }
-    
-    public void add_marker()
-    {
-        MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
-        if (building != null)
-        {
-            maker.Destroy_building(this);
-        }
-        contents = 8;
-        centerpoint = map.verts[center];
-        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[8].prefab;
-        building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
-        building.gameObject.SetActive(true);
-        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
-        GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
-
-    }
-    public void Add_saved_building(int build_index) //Add building without fade in called in the load part
-    {
-
-        MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
-        if (building != null)
-        {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().Destroy_building(this);
-        }
-        contents = build_index;
-        centerpoint = map.verts[center];
-        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].prefab;
-        building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
-        building.gameObject.SetActive(true);
-        Transparency t = building.GetComponentInChildren<Transparency>();
-        if (t != null)
-        {
-
-            t.ForceOpaque();
-        }
-        else
-            Debug.LogWarning("transperencey is null");
-        
-        
-        
-        if (build_index == 7)
-        {
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 1].building = building;//left 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - 2].building = building;//left 2
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number - map_width].building = building; //up 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[cell_number + map_width].building = building; // back 1
-            GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells[(cell_number + map_width)-1].building = building; //no results
-        }
-        if (build_index == 5)
-        {
-            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().max_energy = 500;
-            maker.mapCells[cell_number - (map_width * 2) - 1].make_clickable(build_index, building); //up 2 right 1
-            maker.mapCells[cell_number - 1].make_clickable(build_index, building); //left 1
-            maker.mapCells[cell_number - 2].make_clickable(build_index, building);//left 2
-            maker.mapCells[cell_number + 1].make_clickable(build_index, building); //right 1 
-            maker.mapCells[cell_number + 2].make_clickable(build_index, building); //right 2
-            maker.mapCells[cell_number - map_width].make_clickable(build_index, building); //up 1
-            maker.mapCells[cell_number - 2 * map_width].make_clickable(build_index, building); //up 2
-            maker.mapCells[cell_number + map_width].make_clickable(build_index, building); //back 1
-            maker.mapCells[cell_number + 2 * map_width].make_clickable(build_index, building); //back 2
-            maker.mapCells[cell_number + 1 + (2 * map_width)].make_clickable(build_index, building); //back 2 left 1,2,3
-            maker.mapCells[cell_number + 2 + (2 * map_width)].make_clickable(build_index, building);
-            maker.mapCells[cell_number + 3 + (2 * map_width)].make_clickable(build_index, building);
-            maker.mapCells[cell_number - 1 + (2 * map_width)].make_clickable(build_index, building); //back 2 right 1,2,3
-            maker.mapCells[cell_number - 2 + (2 * map_width)].make_clickable(build_index, building);
-            maker.mapCells[cell_number - 3 + (2 * map_width)].make_clickable(build_index, building);
-
-            maker.mapCells[cell_number + 1 + (map_width)].make_clickable(build_index, building); //back 1 right 1,2,3, left 1,2,3
-            maker.mapCells[cell_number + 2 + (map_width)].make_clickable(build_index, building);
-            maker.mapCells[cell_number + 3 + (map_width)].make_clickable(build_index, building);
-            maker.mapCells[cell_number - 1 + (map_width)].make_clickable(build_index, building);
-            maker.mapCells[cell_number - 2 + (map_width)].make_clickable(build_index, building);
-            maker.mapCells[cell_number - 3 + (map_width)].make_clickable(build_index, building);
-
             maker.mapCells[cell_number - map_width - 1].make_clickable(build_index, building); //up 1 Right 1
             maker.mapCells[cell_number - map_width - map_width + 1].make_clickable(build_index, building); //up 2 Right 1
 
@@ -434,6 +394,54 @@ public class MapCell
             maker.mapCells[cell_number - map_width * 2 + 2].make_clickable(build_index, building); //up 2 Left 1
 
         }
+        else if (build_index == 0)
+        {
+            if (transparency == false)
+            {
+                contents = 0;
+                centerpoint = map.verts[center];
+                GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
+                building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+                building.gameObject.SetActive(true);
+                building.GetComponentInChildren<Transparency>().ForceOpaque();
+
+
+                GameManager.GetComponent<Variable_Tracker>().max_population += 10;
+
+            }
+            maker.Hide_markers();
+        }
+        else if (build_index == 100)
+        {
+            Debug.LogWarning("Trying to Place");
+            
+            maker.Hide_markers();
+            contents = 0;
+            centerpoint = map.verts[center];
+            GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
+            building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+            building.gameObject.SetActive(true);
+            GameManager.GetComponent<Variable_Tracker>().max_population += 10;
+
+            GameObject.Find("Game Manager").GetComponent<Variable_Tracker>().Shop_button_1();
+            if (transparency == false)
+            {
+                if (building.GetComponentInChildren<Transparency>() != null)
+                {
+                    building.GetComponentInChildren<Transparency>().ForceOpaque();
+                }
+                else
+                    Debug.LogWarning("transperencey is null");
+
+            }
+            else
+            {
+                GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
+            }
+        }
+        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+
+
     }
     public string encode_cell()
     {

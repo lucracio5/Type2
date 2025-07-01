@@ -62,22 +62,19 @@ public class MapPointer : MonoBehaviour
 
 
         
-        if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building == null && !EventSystem.current.IsPointerOverGameObject())
+        if (Input.GetMouseButtonDown(0) && current_cell != null  && !EventSystem.current.IsPointerOverGameObject() && (current_cell.building == null || current_cell.building.tag == "Marker"))
         {
             int prefabs_index = activeCursor - 1;
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
                 clickable = false;
-                current_cell.Add_building(prefabs_index);
-                if (prefabs_index == 0)
-                {
-                    Gamemanager.GetComponent<Variable_Tracker>().max_population += 10;
-                }
+                current_cell.Add_building(prefabs_index,true);
+               
                 Invoke("temp_off_ui", 0.1f);
+
+
                 
-                
-                Gamemanager.GetComponent<Variable_Tracker>().money -= buildings[prefabs_index].cost;
-                
+
                 //current_cell.ChangeHeight(1);
             }
         }
@@ -104,8 +101,12 @@ public class MapPointer : MonoBehaviour
             else if (current_cell.building.tag == "Power Plant")
             {
                 NuclearPanel.SetActive(true);
-                
+
             }
+            else if (current_cell.building.tag == "Marker") 
+            {
+                current_cell.Add_building(100, true);
+            }//Dont open the else panel
             else
             {
                 panel.gameObject.SetActive(true);
@@ -125,7 +126,12 @@ public class MapPointer : MonoBehaviour
                     panel_text2.gameObject.SetActive(false);
                 }
             }
-            audio_manager.PlayOpen();
+
+            if(current_cell.building.tag != "Marker")
+            {
+                audio_manager.PlayOpen();
+            }
+            
 
 
 
@@ -147,10 +153,16 @@ public class MapPointer : MonoBehaviour
             activeCursor = cursor;
             cursors[activeCursor].gameObject.SetActive(true);
         }
+        
         if(cursor == 1)
         {
             GetComponent<MoonMapMaker>().show_markers();
+            cursors[activeCursor].gameObject.SetActive(false);
+            activeCursor = cursor;
+            cursors[activeCursor].gameObject.SetActive(true);
+
         }
+
     }
 
 
