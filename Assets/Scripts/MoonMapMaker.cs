@@ -436,25 +436,34 @@ public class MapCell
             {
                 if(maker.mapCells[cell_number - 1].building == null)
                 {
-                    maker.mapCells[cell_number - 1].Add_building(8);
+                    maker.mapCells[cell_number - 1].Add_building(9);
                 } 
             }
-            /*
-            if (mapCells[cell.cell_number + 2].contents == -1)
+            if (maker.mapCells[cell_number - (map_width * 2)].contents == 0)
             {
-                mapCells[cell.cell_number + 2].add_marker();
+                if (maker.mapCells[cell_number - (map_width)].building == null)
+                {
+                    maker.mapCells[cell_number - (map_width)].Add_building(9);
+                    maker.mapCells[cell_number + (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0);
+                }
             }
-            if (mapCells[cell.cell_number - (cell.map_width * 2)].contents == -1)
+            if (maker.mapCells[cell_number + 2].contents == 0)
             {
-                mapCells[cell.cell_number - (cell.map_width * 2)].add_marker();
-
+                if (maker.mapCells[cell_number + 1].building == null)
+                {
+                    maker.mapCells[cell_number + 1].Add_building(9);
+                }
             }
-            if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == -1)
+            if (maker.mapCells[cell_number + (map_width * 2)].contents == 0)
             {
-                mapCells[cell.cell_number + (cell.map_width * 2)].add_marker();
-
+                if (maker.mapCells[cell_number + (map_width)].building == null)
+                {
+                    maker.mapCells[cell_number + (map_width)].Add_building(9);
+                    maker.mapCells[cell_number + (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0);
+                }
             }
-            */
+       
+        
 
             GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
 
