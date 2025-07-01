@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.049111754, g: 0.046725944, b: 0.03515572, a: 1}
+  m_IndirectSpecularColor: {r: 0.04744143, g: 0.04504727, b: 0.03354691, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5576,6 +5576,7 @@ MonoBehaviour:
   NuclearPanel: {fileID: 225128954}
   clickable: 0
   cursorYOffset: 0
+  uiDarkener: {fileID: 1013954950}
 --- !u!1 &379060849
 GameObject:
   m_ObjectHideFlags: 0

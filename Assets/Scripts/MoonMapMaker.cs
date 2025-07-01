@@ -421,7 +421,6 @@ public class MapCell
            else if (building.tag == "Marker")
            {
                 maker.Hide_markers(); 
-                
                 contents = 0;
                 centerpoint = map.verts[center];
                 GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
@@ -431,7 +430,31 @@ public class MapCell
                 GameManager.GetComponent<Variable_Tracker>().max_population += 10;
                 GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
                 GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
+           }
+
+            if (maker.mapCells[cell_number - 2].contents == 0)
+            {
+                if(maker.mapCells[cell_number - 1].building == null)
+                {
+                    maker.mapCells[cell_number - 1].Add_building(8);
+                } 
             }
+            /*
+            if (mapCells[cell.cell_number + 2].contents == -1)
+            {
+                mapCells[cell.cell_number + 2].add_marker();
+            }
+            if (mapCells[cell.cell_number - (cell.map_width * 2)].contents == -1)
+            {
+                mapCells[cell.cell_number - (cell.map_width * 2)].add_marker();
+
+            }
+            if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == -1)
+            {
+                mapCells[cell.cell_number + (cell.map_width * 2)].add_marker();
+
+            }
+            */
 
             GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
 
