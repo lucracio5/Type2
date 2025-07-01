@@ -208,11 +208,13 @@ public class Variable_Tracker : MonoBehaviour
     }
     public void map_cancel()
     {
+        
         if (cancel)
         {
-            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+            map = GameObject.Find("Map");
+            map.GetComponent<MapPointer>().ChangeActiveCursor(0);
             Shop_button_1();
-            
+            map.GetComponent<MoonMapMaker>().Hide_markers();
         }
     }
 
@@ -250,7 +252,7 @@ public class Variable_Tracker : MonoBehaviour
         {
             if (cells[i] != "-1")// && map.mapCells[i].building == null
             {
-                map.mapCells[i].Add_saved_building(Int32.Parse(cells[i]));
+                map.mapCells[i].Add_building(Int32.Parse(cells[i]));
             }
         }
         energy = data.energy;
