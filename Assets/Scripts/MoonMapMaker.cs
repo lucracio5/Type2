@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using System.Security.Cryptography;
 using TMPro;
 using Unity.VisualScripting;
@@ -21,6 +22,7 @@ public class MoonMapMaker : MonoBehaviour
     public List<MapCell> mapCells = new List<MapCell>();
     public Material material;
     public GameObject Gamemanager;
+    public MapPointer Pointer;
 
 
 
@@ -160,15 +162,16 @@ public class MoonMapMaker : MonoBehaviour
                 }
             }
         }
-
-        mapCells[0].ChangeHeight(0);
-        mapCells[1170].Add_building(3);
-        mapCells[1172].Add_building(0);
-        mapCells[1174].Add_building(4);
-        mapCells[1176].Add_building(2);
-        mapCells[1178].Add_building(2);
-        mapCells[994].Add_building(6);
-        mapCells[1000].Add_building(7);
+        Pointer = GameObject.Find("Map").GetComponent<MapPointer>();
+        int un = Pointer.unplaceable_buildings;
+        //mapCells[0].ChangeHeight(0);
+        mapCells[1170].Add_building(3+(1-un));
+        mapCells[1172].Add_building(0+(1 - un));
+        mapCells[1174].Add_building(4 + (1 - un));
+        mapCells[1176].Add_building(2 + (1 - un));
+        mapCells[1178].Add_building(2 + (1 - un));
+        mapCells[994].Add_building(6 + (1 - un));
+        mapCells[1000].Add_building(7 + (1 - un));
 
         StartCoroutine(DelayedBegin());
     }
@@ -436,14 +439,14 @@ public class MapCell
             {
                 if(maker.mapCells[cell_number - 1].building == null)
                 {
-                    maker.mapCells[cell_number - 1].Add_building(9);
+                    maker.mapCells[cell_number - 1].Add_building(3);
                 } 
             }
             if (maker.mapCells[cell_number - (map_width * 2)].contents == 0)
             {
                 if (maker.mapCells[cell_number - (map_width)].building == null)
                 {
-                    maker.mapCells[cell_number - (map_width)].Add_building(9);
+                    maker.mapCells[cell_number - (map_width)].Add_building(3);
                     maker.mapCells[cell_number + (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0);
                 }
             }
@@ -451,14 +454,14 @@ public class MapCell
             {
                 if (maker.mapCells[cell_number + 1].building == null)
                 {
-                    maker.mapCells[cell_number + 1].Add_building(9);
+                    maker.mapCells[cell_number + 1].Add_building(3);
                 }
             }
             if (maker.mapCells[cell_number + (map_width * 2)].contents == 0)
             {
                 if (maker.mapCells[cell_number + (map_width)].building == null)
                 {
-                    maker.mapCells[cell_number + (map_width)].Add_building(9);
+                    maker.mapCells[cell_number + (map_width)].Add_building(3);
                     maker.mapCells[cell_number + (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0);
                 }
             }
