@@ -81,11 +81,19 @@ public class Variable_Tracker : MonoBehaviour
     public int science_jobs;
     public int cleaning_jobs;
     public bool Hydro_Unlock;
+    public int[][] roverSlotStats = new int[][]
+    {
+        new int[] { 1, 1, 1 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
+        new int[] { 1, 1, 1 }, // Slot 2
+        new int[] { 1, 1, 1 }, // Slot 3
+        new int[] { 1, 1, 1 }, // Slot 4
+        new int[] { 1, 1, 1 }  // Slot 5
+    };
 
     public void Start()
     {
         Begin();
-        
+
     }
     public TMP_Text returnSolar1()
     {
