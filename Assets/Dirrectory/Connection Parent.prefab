@@ -43,6 +43,7 @@ GameObject:
   - component: {fileID: 7362661426501312486}
   - component: {fileID: 7790536058790513470}
   - component: {fileID: 8293153904275523127}
+  - component: {fileID: 2357734468521839568}
   m_Layer: 0
   m_Name: Dome Conection
   m_TagString: Untagged
@@ -115,3 +116,19 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!208 &2357734468521839568
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7335588815666955912}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 4.9680004, y: 3.7430003, z: 1.4940001}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: -0.81600004, y: 1.669, z: -0.012}
+  m_TimeToStationary: 0.5
