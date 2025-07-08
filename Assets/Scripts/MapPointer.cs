@@ -67,12 +67,15 @@ public class MapPointer : MonoBehaviour
 
 
         
-        if (Input.GetMouseButtonDown(0) && current_cell != null  && !EventSystem.current.IsPointerOverGameObject() && (current_cell.building == null || current_cell.building.tag == "Marker"))
+        if (Input.GetMouseButtonDown(0) && current_cell != null  && !EventSystem.current.IsPointerOverGameObject() && activeCursor != 0 && (current_cell.building == null || current_cell.building.tag == "Marker"))
         {
             
-            int prefabs_index = activeCursor +(unplaceable_buildings + (1-unplaceable_buildings));
+            int prefabs_index = activeCursor-1;
+            prefabs_index = prefabs_index + unplaceable_buildings;
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
+                Debug.LogWarning(prefabs_index+" active cursor:"+activeCursor);
+
                 clickable = false;
                 current_cell.Add_building(prefabs_index,true);
                 Invoke("temp_off_ui", 0.1f);
@@ -107,7 +110,7 @@ public class MapPointer : MonoBehaviour
             }
             else if (current_cell.building.tag == "Marker") 
             {
-                current_cell.Add_building(1-unplaceable_buildings, true);
+                current_cell.Add_building(unplaceable_buildings, true);
 
             }//Dont open the else panel
             else

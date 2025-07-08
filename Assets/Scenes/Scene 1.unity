@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.048854455, g: 0.046474136, b: 0.034921702, a: 1}
+  m_IndirectSpecularColor: {r: 0.047722094, g: 0.045366265, b: 0.03394828, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -6145,8 +6145,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 78de6b045eb17354a83c7de8d33732ef, type: 2}
   - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
   - {fileID: 11400000, guid: 25a993be5875e2d4d98b62e0ad904814, type: 2}
-  - {fileID: 11400000, guid: 4d14f76d76d4c5347b72f861194fbf85, type: 2}
   - {fileID: 11400000, guid: a99a17507343e294b960351940cc76c9, type: 2}
+  - {fileID: 11400000, guid: 4d14f76d76d4c5347b72f861194fbf85, type: 2}
   - {fileID: 11400000, guid: a1e7a6e73ed4f5d44aaafc6286ecd81a, type: 2}
   - {fileID: 11400000, guid: 11668668149e7d94091ccbcd067642d1, type: 2}
   - {fileID: 11400000, guid: ad763de780708f54d9f8bcc88e0c65a0, type: 2}
@@ -6161,7 +6161,7 @@ MonoBehaviour:
   DomePanel: {fileID: 1581358444}
   NuclearPanel: {fileID: 225128954}
   clickable: 0
-  unplaceable_buildings: 0
+  unplaceable_buildings: 4
   cursorYOffset: 0
   uiDarkener: {fileID: 1013954950}
 --- !u!1 &379060849
