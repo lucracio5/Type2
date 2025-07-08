@@ -69,7 +69,8 @@ public class MapPointer : MonoBehaviour
         
         if (Input.GetMouseButtonDown(0) && current_cell != null  && !EventSystem.current.IsPointerOverGameObject() && (current_cell.building == null || current_cell.building.tag == "Marker"))
         {
-            int prefabs_index = activeCursor +(unplaceable_buildings - 1);
+            
+            int prefabs_index = activeCursor +(unplaceable_buildings + (1-unplaceable_buildings));
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
                 clickable = false;
