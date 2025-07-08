@@ -163,7 +163,6 @@ public class MoonMapMaker : MonoBehaviour
             }
         }
         Pointer = GameObject.Find("Map").GetComponent<MapPointer>();
-        int un = Pointer.unplaceable_buildings;
         //mapCells[0].ChangeHeight(0);
         mapCells[1170].Add_building(8);
         mapCells[1172].Add_building(4);
@@ -325,7 +324,7 @@ public class MapCell
     {
         Debug.Log("Prining " + build_index);
         MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
-        int un = GameObject.Find("Map").GetComponent<MapPointer>().unplaceable_buildings;
+        
         GameObject GameManager = GameObject.Find("Game Manager");
         if (build_index != 0 && build_index != 100)
         {
