@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 8227683663386352599}
   - component: {fileID: 6181874362425896733}
   m_Layer: 0
-  m_Name: Truck06
+  m_Name: Rover2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
