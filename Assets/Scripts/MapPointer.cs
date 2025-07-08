@@ -107,7 +107,7 @@ public class MapPointer : MonoBehaviour
             }
             else if (current_cell.building.tag == "Marker") 
             {
-                current_cell.Add_building(0, true);
+                current_cell.Add_building(1-unplaceable_buildings, true);
 
             }//Dont open the else panel
             else

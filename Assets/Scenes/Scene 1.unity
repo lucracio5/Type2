@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04894808, g: 0.04656543, b: 0.03500675, a: 1}
+  m_IndirectSpecularColor: {r: 0.048345856, g: 0.045973442, b: 0.034468267, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5922,6 +5922,7 @@ MonoBehaviour:
   tris: 
   material: {fileID: 2100000, guid: 0006fcb31694fac4ebfabd694543f865, type: 2}
   Gamemanager: {fileID: 1013954937}
+  Pointer: {fileID: 0}
 --- !u!114 &371189366
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -5946,16 +5947,16 @@ MonoBehaviour:
   activeCursor: 0
   Gamemanager: {fileID: 1013954937}
   buildings:
+  - {fileID: 11400000, guid: 78de6b045eb17354a83c7de8d33732ef, type: 2}
+  - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
+  - {fileID: 11400000, guid: 25a993be5875e2d4d98b62e0ad904814, type: 2}
   - {fileID: 11400000, guid: 4d14f76d76d4c5347b72f861194fbf85, type: 2}
+  - {fileID: 11400000, guid: a99a17507343e294b960351940cc76c9, type: 2}
   - {fileID: 11400000, guid: a1e7a6e73ed4f5d44aaafc6286ecd81a, type: 2}
   - {fileID: 11400000, guid: 11668668149e7d94091ccbcd067642d1, type: 2}
   - {fileID: 11400000, guid: ad763de780708f54d9f8bcc88e0c65a0, type: 2}
   - {fileID: 11400000, guid: 629b5ffb727236a4397c41be971fa752, type: 2}
   - {fileID: 11400000, guid: 02481d41ffe2d434186aa423c90411a9, type: 2}
-  - {fileID: 11400000, guid: 78de6b045eb17354a83c7de8d33732ef, type: 2}
-  - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
-  - {fileID: 11400000, guid: 25a993be5875e2d4d98b62e0ad904814, type: 2}
-  - {fileID: 11400000, guid: a99a17507343e294b960351940cc76c9, type: 2}
   panel: {fileID: 1787769523}
   panel_text: {fileID: 869154906}
   panel_text2: {fileID: 1045330454}
@@ -5965,6 +5966,7 @@ MonoBehaviour:
   DomePanel: {fileID: 1581358444}
   NuclearPanel: {fileID: 225128954}
   clickable: 0
+  unplaceable_buildings: 0
   cursorYOffset: 0
   uiDarkener: {fileID: 1013954950}
 --- !u!1 &379060849
@@ -10643,7 +10645,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &663762763
 RectTransform:
   m_ObjectHideFlags: 0

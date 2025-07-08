@@ -31,7 +31,7 @@ public class MoonMapMaker : MonoBehaviour
         List <MapCell> Domes = new List<MapCell>();
         foreach (MapCell cell in mapCells)
         {
-            if (cell.contents == 0)
+            if (cell.contents == Pointer.unplaceable_buildings)
             {
                 Domes.Add(cell);
             }
@@ -71,19 +71,19 @@ public class MoonMapMaker : MonoBehaviour
         List<MapCell> Domes = find_domes();
         foreach (MapCell cell in Domes)
         {
-            if (mapCells[cell.cell_number - 2].contents == 8)
+            if (mapCells[cell.cell_number - 2].contents == 2)
             {
                 remove_building(mapCells[cell.cell_number - 2]);
             }
-            if (mapCells[cell.cell_number + 2].contents == 8)
+            if (mapCells[cell.cell_number + 2].contents == 2)
             {
                 remove_building(mapCells[cell.cell_number + 2]);  
             }
-            if (mapCells[cell.cell_number - (cell.map_width * 2)].contents == 8)
+            if (mapCells[cell.cell_number - (cell.map_width * 2)].contents == 2)
             {
                 remove_building(mapCells[cell.cell_number - (cell.map_width * 2)]);
             }
-            if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == 8)
+            if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == 2)
             {
                 remove_building(mapCells[cell.cell_number + (cell.map_width * 2)]);
             }
@@ -165,13 +165,13 @@ public class MoonMapMaker : MonoBehaviour
         Pointer = GameObject.Find("Map").GetComponent<MapPointer>();
         int un = Pointer.unplaceable_buildings;
         //mapCells[0].ChangeHeight(0);
-        mapCells[1170].Add_building(3+(1-un));
-        mapCells[1172].Add_building(0+(1 - un));
-        mapCells[1174].Add_building(4 + (1 - un));
-        mapCells[1176].Add_building(2 + (1 - un));
-        mapCells[1178].Add_building(2 + (1 - un));
-        mapCells[994].Add_building(6 + (1 - un));
-        mapCells[1000].Add_building(7 + (1 - un));
+        mapCells[1170].Add_building(8);
+        mapCells[1172].Add_building(4);
+        mapCells[1174].Add_building(6);
+        mapCells[1176].Add_building(6);
+        mapCells[1178].Add_building(7);
+        mapCells[1004].Add_building(0);
+        mapCells[1000].Add_building(1);
 
         StartCoroutine(DelayedBegin());
     }
@@ -312,9 +312,9 @@ public class MapCell
         {
             maker.Destroy_building(this);
         }
-        contents = 8;
+        contents = 2;
         centerpoint = map.verts[center];
-        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[8].prefab;
+        GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[2].prefab;
         building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
         building.gameObject.SetActive(true);
         GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
@@ -323,6 +323,7 @@ public class MapCell
     }
     public void Add_building(int build_index,bool transparency = false) //Add building without fade in called in the load part
     {
+        Debug.Log("Prining " + build_index);
         MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
         int un = GameObject.Find("Map").GetComponent<MapPointer>().unplaceable_buildings;
         GameObject GameManager = GameObject.Find("Game Manager");
@@ -354,7 +355,7 @@ public class MapCell
                 GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
             }
         }
-        if (build_index == 7)
+        if (build_index == 1)
         {
             maker.mapCells[cell_number - 1].building = building;//left 1
             maker.mapCells[cell_number - 2].building = building;//left 2
@@ -362,7 +363,7 @@ public class MapCell
             maker.mapCells[cell_number + map_width].building = building; // back 1
             maker.mapCells[(cell_number + map_width) - 1].building = building; //no results
         }
-        else if (build_index == 5)
+        else if (build_index == 9)
         {
 
             maker.mapCells[cell_number - (map_width * 2) - 1].make_clickable(build_index, building); //up 2 right 1
@@ -397,7 +398,7 @@ public class MapCell
             maker.mapCells[cell_number - map_width * 2 + 2].make_clickable(build_index, building); //up 2 Left 1
 
         }
-        else if (build_index == 0)
+        else if (build_index == 4)
         {
             if (building != null)
             {
