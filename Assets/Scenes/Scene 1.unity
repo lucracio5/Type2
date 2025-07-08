@@ -6142,16 +6142,16 @@ MonoBehaviour:
   activeCursor: 0
   Gamemanager: {fileID: 1013954937}
   buildings:
+  - {fileID: 11400000, guid: 78de6b045eb17354a83c7de8d33732ef, type: 2}
+  - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
+  - {fileID: 11400000, guid: 25a993be5875e2d4d98b62e0ad904814, type: 2}
   - {fileID: 11400000, guid: 4d14f76d76d4c5347b72f861194fbf85, type: 2}
+  - {fileID: 11400000, guid: a99a17507343e294b960351940cc76c9, type: 2}
   - {fileID: 11400000, guid: a1e7a6e73ed4f5d44aaafc6286ecd81a, type: 2}
   - {fileID: 11400000, guid: 11668668149e7d94091ccbcd067642d1, type: 2}
   - {fileID: 11400000, guid: ad763de780708f54d9f8bcc88e0c65a0, type: 2}
   - {fileID: 11400000, guid: 629b5ffb727236a4397c41be971fa752, type: 2}
   - {fileID: 11400000, guid: 02481d41ffe2d434186aa423c90411a9, type: 2}
-  - {fileID: 11400000, guid: 78de6b045eb17354a83c7de8d33732ef, type: 2}
-  - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
-  - {fileID: 11400000, guid: 25a993be5875e2d4d98b62e0ad904814, type: 2}
-  - {fileID: 11400000, guid: a99a17507343e294b960351940cc76c9, type: 2}
   panel: {fileID: 1787769523}
   panel_text: {fileID: 869154906}
   panel_text2: {fileID: 1045330454}
