@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.048962124, g: 0.046579264, b: 0.035018448, a: 1}
+  m_IndirectSpecularColor: {r: 0.04916267, g: 0.046775572, b: 0.03520274, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -5557,16 +5557,16 @@ MonoBehaviour:
   activeCursor: 0
   Gamemanager: {fileID: 1013954937}
   buildings:
+  - {fileID: 11400000, guid: 78de6b045eb17354a83c7de8d33732ef, type: 2}
+  - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
+  - {fileID: 11400000, guid: 25a993be5875e2d4d98b62e0ad904814, type: 2}
+  - {fileID: 11400000, guid: a99a17507343e294b960351940cc76c9, type: 2}
   - {fileID: 11400000, guid: 4d14f76d76d4c5347b72f861194fbf85, type: 2}
   - {fileID: 11400000, guid: a1e7a6e73ed4f5d44aaafc6286ecd81a, type: 2}
   - {fileID: 11400000, guid: 11668668149e7d94091ccbcd067642d1, type: 2}
   - {fileID: 11400000, guid: ad763de780708f54d9f8bcc88e0c65a0, type: 2}
   - {fileID: 11400000, guid: 629b5ffb727236a4397c41be971fa752, type: 2}
   - {fileID: 11400000, guid: 02481d41ffe2d434186aa423c90411a9, type: 2}
-  - {fileID: 11400000, guid: 78de6b045eb17354a83c7de8d33732ef, type: 2}
-  - {fileID: 11400000, guid: 91724403f28589d41bb65e00adc03ba3, type: 2}
-  - {fileID: 11400000, guid: 25a993be5875e2d4d98b62e0ad904814, type: 2}
-  - {fileID: 11400000, guid: a99a17507343e294b960351940cc76c9, type: 2}
   panel: {fileID: 1787769523}
   panel_text: {fileID: 869154906}
   panel_text2: {fileID: 1045330454}
@@ -5576,6 +5576,7 @@ MonoBehaviour:
   DomePanel: {fileID: 1581358444}
   NuclearPanel: {fileID: 225128954}
   clickable: 0
+  unplaceable_buildings: 4
   cursorYOffset: 0
   uiDarkener: {fileID: 1013954950}
 --- !u!1 &379060849
@@ -15226,6 +15227,7 @@ GameObject:
   - component: {fileID: 1004249045}
   - component: {fileID: 1004249047}
   - component: {fileID: 1004249046}
+  - component: {fileID: 1004249048}
   m_Layer: 0
   m_Name: Main
   m_TagString: Untagged
@@ -15307,6 +15309,37 @@ Terrain:
   m_EnableHeightmapRayTracing: 1
   m_EnableTreesAndDetailsRayTracing: 0
   m_TreeMotionVectorModeOverride: 3
+--- !u!114 &1004249048
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1004249044}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7a5ac11cc976e418e8d13136b07e1f52, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_AgentTypeID: 0
+  m_CollectObjects: 0
+  m_Size: {x: 10, y: 10, z: 10}
+  m_Center: {x: 0, y: 2, z: 0}
+  m_LayerMask:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_UseGeometry: 0
+  m_DefaultArea: 0
+  m_GenerateLinks: 0
+  m_IgnoreNavMeshAgent: 1
+  m_IgnoreNavMeshObstacle: 1
+  m_OverrideTileSize: 0
+  m_TileSize: 256
+  m_OverrideVoxelSize: 0
+  m_VoxelSize: 1.3333334
+  m_MinRegionArea: 2
+  m_NavMeshData: {fileID: 23800000, guid: 8cda8884cecdff8409f6ed888222ec1e, type: 2}
+  m_BuildHeightMesh: 0
 --- !u!1 &1009516081
 GameObject:
   m_ObjectHideFlags: 0
