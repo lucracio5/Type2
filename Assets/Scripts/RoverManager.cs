@@ -2,13 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-using TMPro;  
+using TMPro;
 
 // Manages the stats and UI display for multiple rover slots in the game.
 // Handles initialization, stat retrieval, and updating the UI panel with the correct rover information.
 public class RoverManager : MonoBehaviour
 {
-    /*
     public Variable_Tracker variableTracker; // Reference to the Variable_Tracker script for accessing game variables
 
     // Base stats for all rovers (used for initialization)
@@ -26,7 +25,7 @@ public class RoverManager : MonoBehaviour
 
     // UI elements for displaying the rover's image and stats
     public TMP_Text roverNameText; // Text field for displaying the rover's name
-    public Image roverDisplayImage; 
+    public Image roverDisplayImage;
     public TMP_Text movementSpeedText;
     public TMP_Text miningSpeedText;
     public TMP_Text batteryLifeText;
@@ -34,7 +33,7 @@ public class RoverManager : MonoBehaviour
     // Sprites representing different rover appearances based on their overall level
     public Sprite Rover1Sprite;
     public Sprite Rover2Sprite;
-    public Sprite Rover3Sprite; 
+    public Sprite Rover3Sprite;
 
     // Array holding the stats for each rover slot.
     // Each int[] contains: [movementSpeed, miningSpeed, batteryLife]
@@ -47,12 +46,10 @@ public class RoverManager : MonoBehaviour
         if (variableTracker.roverSlotStats.Length > 0) //if roverSlotStats is already set in Variable_Tracker
         {
             roverSlotStats = variableTracker.roverSlotStats; // Use existing stats
-            Debug.Log("Rover stats loaded from Variable_Tracker.");
         }
         else
         {
             InitializeRoverStats(); // Initialize with default stats if not set
-            Debug.Log("Rover stats initialized with default values.");
         }
     }
 
@@ -78,10 +75,13 @@ public class RoverManager : MonoBehaviour
 
     void Update()
     {
-        if (Input.GetKey(KeyCode.S)) // Check if the S key is pressed
+        if (Input.GetKeyDown(KeyCode.S)) // Check if the S key is pressed
         {
-            OpenStatsPanel(4);
-            Debug.Log("Open Stats Panel for Rover Slot 4");
+            for (int i = 0; i < variableTracker.roverSlotStats.Length; i++)
+            {
+                // Log the stats of each rover slot to the console
+                Debug.Log("Rover Stats: Movement: " + variableTracker.roverSlotStats[i][0] + ", Mining: " + variableTracker.roverSlotStats[i][1] + ", Battery: " + variableTracker.roverSlotStats[i][2]);
+            }
         }
     }
 
@@ -132,5 +132,47 @@ public class RoverManager : MonoBehaviour
         // Activate the stats panel to display the rover's stats
         RoverStatsPanel.SetActive(true);
     }
-    */
+
+    public void increaseMovement(int roverID)
+    {
+        // Increase the movement speed of the specified rover
+        if (roverID >= 0 && roverID < roverSlotStats.Length)
+        {
+            roverSlotStats[roverID][0] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
+            Debug.Log("Increased movement speed for Rover " + (roverID + 1));
+        }
+        else
+        {
+            Debug.LogError("Invalid rover ID: " + roverID);
+        }
+    }
+
+    public void increaseMining(int roverID)
+    {
+        // Increase the movement speed of the specified rover
+        if (roverID >= 0 && roverID < roverSlotStats.Length)
+        {
+            roverSlotStats[roverID][1] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
+            Debug.Log("Increased movement speed for Rover " + (roverID + 1));
+        }
+        else
+        {
+            Debug.LogError("Invalid rover ID: " + roverID);
+        }
+    }
+
+    public void increaseBattery(int roverID)
+    {
+        // Increase the movement speed of the specified rover
+        if (roverID >= 0 && roverID < roverSlotStats.Length)
+        {
+            roverSlotStats[roverID][2] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
+            Debug.Log("Increased movement speed for Rover " + (roverID + 1));
+        }
+        else
+        {
+            Debug.LogError("Invalid rover ID: " + roverID);
+        }
+    }
+    
 }
