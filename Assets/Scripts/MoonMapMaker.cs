@@ -169,7 +169,7 @@ public class MoonMapMaker : MonoBehaviour
         mapCells[1174].Add_building(6);
         mapCells[1176].Add_building(6);
         mapCells[1178].Add_building(7);
-        mapCells[1004].Add_building(0);
+        mapCells[994].Add_building(0);
         mapCells[1000].Add_building(1);
 
         StartCoroutine(DelayedBegin());
@@ -322,11 +322,11 @@ public class MapCell
     }
     public void Add_building(int build_index,bool transparency = false) //Add building without fade in called in the load part
     {
-        Debug.Log("Prining " + build_index);
-        MoonMapMaker maker = GameObject.Find("Map").GetComponent<MoonMapMaker>();
+        //Debug.Log("Adding " + GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index]);
+        MoonMapMaker maker = map.GetComponent<MoonMapMaker>();
         
         GameObject GameManager = GameObject.Find("Game Manager");
-        if (build_index != 0 && build_index != 100)
+        if (build_index !=  map.GetComponent<MapPointer>().unplaceable_buildings && build_index != 100)
         {
             if (building != null)
             {
@@ -397,30 +397,19 @@ public class MapCell
             maker.mapCells[cell_number - map_width * 2 + 2].make_clickable(build_index, building); //up 2 Left 1
 
         }
-        else if (build_index == 4)
+        else if (build_index == map.GetComponent<MapPointer>().unplaceable_buildings)
         {
-            if (building != null)
-            {
-                if (building.tag != null)
-                {
-                    Debug.Log(building.tag);
-                }
-            }
-            else
-            {
-                Debug.Log("tag is null");
-            }
-           
-            
+           Debug.Log(transparency);
            if (transparency == false)
            {
                 contents = 0;
                 centerpoint = map.verts[center];
-                GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
+                GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[map.GetComponent<MapPointer>().unplaceable_buildings].prefab;
                 building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
                 building.gameObject.SetActive(true);
                 building.GetComponentInChildren<Transparency>().ForceOpaque();
                 GameManager.GetComponent<Variable_Tracker>().max_population += 10;
+                Debug.Log("placing a dome");
            }
            else if (building.tag == "Marker")
            {

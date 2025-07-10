@@ -8,6 +8,7 @@ using TMPro;
 // Handles initialization, stat retrieval, and updating the UI panel with the correct rover information.
 public class RoverManager : MonoBehaviour
 {
+    /*
     public Variable_Tracker variableTracker; // Reference to the Variable_Tracker script for accessing game variables
 
     // Base stats for all rovers (used for initialization)
@@ -131,4 +132,5 @@ public class RoverManager : MonoBehaviour
         // Activate the stats panel to display the rover's stats
         RoverStatsPanel.SetActive(true);
     }
+    */
 }
