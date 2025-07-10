@@ -159,7 +159,7 @@ public class MapPointer : MonoBehaviour
             cursors[activeCursor].gameObject.SetActive(true);
         }
         
-        if(cursor == 1)
+        if(cursor == unplaceable_buildings-1)
         {
             GetComponent<MoonMapMaker>().show_markers();
             cursors[activeCursor].gameObject.SetActive(false);
