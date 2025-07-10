@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 4860280678015324176}
   - component: {fileID: 6315296241334564405}
   - component: {fileID: 3327335887132552857}
+  - component: {fileID: 7003523247475222067}
   m_Layer: 0
   m_Name: default
   m_TagString: Untagged
@@ -111,7 +112,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 30e8c89e51c63e04b99c16d466e16901, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  energy_slider: {fileID: 0}
+--- !u!208 &7003523247475222067
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 692159371831105602}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 5.9340005, y: 3.4870002, z: 4.117}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 4.564, y: 3.463, z: -1.9240001}
+  m_TimeToStationary: 0.5
 --- !u!1 &7896072848060120249
 GameObject:
   m_ObjectHideFlags: 0

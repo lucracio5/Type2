@@ -683,6 +683,7 @@ GameObject:
   - component: {fileID: 2161776120948999943}
   - component: {fileID: 7408383247801540060}
   - component: {fileID: -169813342768279126}
+  - component: {fileID: 8932919903255375716}
   m_Layer: 0
   m_Name: Science Building 1
   m_TagString: Science
@@ -749,6 +750,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 340c0bf0a2ff6a24fb54a4d4f61a07c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!208 &8932919903255375716
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3501093903690423818}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 6.035, y: 2.955, z: 6.435}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 1.47, y: 0, z: -3}
+  m_TimeToStationary: 0.5
 --- !u!1 &4151170314748218445
 GameObject:
   m_ObjectHideFlags: 0

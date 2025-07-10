@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 1703360485802916815}
   - component: {fileID: 8477504893217487906}
   - component: {fileID: 3392253277878609542}
+  - component: {fileID: 7456166829288725599}
   m_Layer: 0
   m_Name: Oxygen Building
   m_TagString: Untagged
@@ -113,6 +114,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transparency: 0.2
   placed: 0
+--- !u!208 &7456166829288725599
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1720767462433093873}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 8.779, y: 4.9900002, z: 5.8550005}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 2.7500002, y: 4.6930003, z: 2.1920002}
+  m_TimeToStationary: 0.5
 --- !u!1 &5677844620230241935
 GameObject:
   m_ObjectHideFlags: 0

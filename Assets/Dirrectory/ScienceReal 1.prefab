@@ -2631,6 +2631,7 @@ GameObject:
   - component: {fileID: 2933002546658502411}
   - component: {fileID: 6355689608611544530}
   - component: {fileID: 4743129385161609012}
+  - component: {fileID: 3297012875625008330}
   m_Layer: 0
   m_Name: ScienceReal 1
   m_TagString: Science
@@ -2657,7 +2658,6 @@ Transform:
   - {fileID: 1748314242646166377}
   - {fileID: 5362501439986955080}
   - {fileID: 3470083509913115027}
-  - {fileID: 5362501439986955080}
   - {fileID: 4735769737983519099}
   - {fileID: 2966281416698712746}
   - {fileID: 2456177811671395256}
@@ -2716,6 +2716,22 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   transparency: 0.2
   placed: 1
+--- !u!208 &3297012875625008330
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7290628543094422296}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 6.035, y: 2.955, z: 6.435}
+  m_MoveThreshold: 0.1
+  m_Carve: 1
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 1.47, y: 0, z: -3}
+  m_TimeToStationary: 0.5
 --- !u!1 &7506285061300421977
 GameObject:
   m_ObjectHideFlags: 0
