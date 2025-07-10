@@ -164,11 +164,11 @@ public class MoonMapMaker : MonoBehaviour
         }
         Pointer = GameObject.Find("Map").GetComponent<MapPointer>();
         //mapCells[0].ChangeHeight(0);
-        mapCells[1170].Add_building(Pointer.unplaceable_buildings+3);
-        mapCells[1172].Add_building(4);
-        mapCells[1174].Add_building(6);
-        mapCells[1176].Add_building(6);
-        mapCells[1178].Add_building(7);
+        mapCells[1170].Add_building(Pointer.unplaceable_buildings+3); //Drill
+        mapCells[1172].Add_building(Pointer.unplaceable_buildings); //Dome
+        mapCells[1174].Add_building(Pointer.unplaceable_buildings+2); //Solar Panel
+        mapCells[1176].Add_building(Pointer.unplaceable_buildings+2);//Solar Panel
+        mapCells[1178].Add_building(Pointer.unplaceable_buildings+4);  //02
         mapCells[994].Add_building(0);
         mapCells[1000].Add_building(1);
         mapCells[1004].Add_building(4);

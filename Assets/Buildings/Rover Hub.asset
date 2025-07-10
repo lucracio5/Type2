@@ -12,5 +12,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 67c1a89b3c64f1e49b4f9b568fe55680, type: 3}
   m_Name: Rover Hub
   m_EditorClassIdentifier: 
-  prefab: {fileID: 0}
+  prefab: {fileID: 5884810521599558819, guid: 201894023abfbbc4e9fe48d7d4a47e25, type: 3}
   cost: 0
