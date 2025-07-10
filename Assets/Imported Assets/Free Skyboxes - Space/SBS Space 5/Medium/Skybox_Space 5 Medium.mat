@@ -50,11 +50,8 @@ Material:
     m_Ints: []
     m_Floats:
     - _Exposure: 1
-<<<<<<< HEAD
     - _Rotation: 0.04044131
-=======
-    - _Rotation: 0.105213284
->>>>>>> parent of 2540b0e (Forgot to save scene)
+
     m_Colors:
     - _Tint: {r: 0.5, g: 0.5, b: 0.5, a: 0.5}
   m_BuildTextureStacks: []

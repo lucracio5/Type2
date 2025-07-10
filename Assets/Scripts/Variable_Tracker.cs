@@ -126,7 +126,7 @@ public class Variable_Tracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        RenderSettings.skybox.SetFloat("_Rotation", rotate_speed * Time.time);
+        // RenderSettings.skybox.SetFloat("_Rotation", rotate_speed * Time.time);
 
         money_text.text = money.ToString();
         energy_text.text = energy.ToString() + "/" + max_energy.ToString();

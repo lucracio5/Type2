@@ -401,7 +401,6 @@ public class MapCell
         }
         else if (build_index == map.GetComponent<MapPointer>().unplaceable_buildings)
         {
-           Debug.Log(transparency);
            if (transparency == false)
            {
                 contents = 0;
