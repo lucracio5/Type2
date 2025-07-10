@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
@@ -70,12 +71,10 @@ public class MapPointer : MonoBehaviour
         if (Input.GetMouseButtonDown(0) && current_cell != null  && !EventSystem.current.IsPointerOverGameObject() && activeCursor != 0 && (current_cell.building == null || current_cell.building.tag == "Marker"))
         {
             
-            int prefabs_index = activeCursor-1;
-            prefabs_index = prefabs_index + unplaceable_buildings;
+            int prefabs_index = (unplaceable_buildings-1)+activeCursor;
             if (prefabs_index >= 0 && Gamemanager.GetComponent<Variable_Tracker>().money >= buildings[prefabs_index].cost)
             {
-                Debug.LogWarning(prefabs_index+" active cursor:"+activeCursor);
-
+ 
                 clickable = false;
                 current_cell.Add_building(prefabs_index,true);
                 Invoke("temp_off_ui", 0.1f);
@@ -160,7 +159,7 @@ public class MapPointer : MonoBehaviour
             cursors[activeCursor].gameObject.SetActive(true);
         }
         
-        if(cursor == 1)
+        if(cursor == unplaceable_buildings-1)
         {
             GetComponent<MoonMapMaker>().show_markers();
             cursors[activeCursor].gameObject.SetActive(false);

@@ -169,9 +169,9 @@ public class MoonMapMaker : MonoBehaviour
         mapCells[1174].Add_building(Pointer.unplaceable_buildings+2); //Solar Panel
         mapCells[1176].Add_building(Pointer.unplaceable_buildings+2);//Solar Panel
         mapCells[1178].Add_building(Pointer.unplaceable_buildings+4);  //02
-        mapCells[994].Add_building(0);
-        mapCells[1000].Add_building(1);
-        mapCells[1004].Add_building(4);
+        mapCells[994].Add_building(0);//Launchpad
+        mapCells[1000].Add_building(1); //Science
+        mapCells[1004].Add_building(4);//Rover Hub
 
 
         StartCoroutine(DelayedBegin());
@@ -411,7 +411,6 @@ public class MapCell
                 building.gameObject.SetActive(true);
                 building.GetComponentInChildren<Transparency>().ForceOpaque();
                 GameManager.GetComponent<Variable_Tracker>().max_population += 10;
-                Debug.Log("placing a dome");
            }
            else if (building.tag == "Marker")
            {
