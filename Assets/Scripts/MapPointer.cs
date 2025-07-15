@@ -110,6 +110,7 @@ public class MapPointer : MonoBehaviour
             else if (current_cell.building.tag == "Marker") 
             {
                 current_cell.Add_building(unplaceable_buildings, true);
+                Debug.Log("Adding via click");
 
             }//Dont open the else panel
             else
@@ -159,7 +160,7 @@ public class MapPointer : MonoBehaviour
             cursors[activeCursor].gameObject.SetActive(true);
         }
         
-        if(cursor == unplaceable_buildings-1)
+        if(cursor == 1)
         {
             GetComponent<MoonMapMaker>().show_markers();
             cursors[activeCursor].gameObject.SetActive(false);

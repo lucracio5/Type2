@@ -45,22 +45,26 @@ public class MoonMapMaker : MonoBehaviour
         {
             if (mapCells[cell.cell_number - 2].contents == -1) 
             {
-                mapCells[cell.cell_number - 2].add_marker();
+                mapCells[cell.cell_number - 2].add_marker(); //Right
             }
+            
             if (mapCells[cell.cell_number + 2].contents == -1)
             {
-                mapCells[cell.cell_number + 2].add_marker();
+                mapCells[cell.cell_number + 2].add_marker(); //Left
             }
+            
             if (mapCells[cell.cell_number - (cell.map_width*2)].contents == -1)
             {
-                mapCells[cell.cell_number - (cell.map_width * 2)].add_marker();
+                mapCells[cell.cell_number - (cell.map_width * 2)].add_marker(); //Forwards
                 
             }
+            
             if (mapCells[cell.cell_number + (cell.map_width * 2)].contents == -1)
             {
-                mapCells[cell.cell_number + (cell.map_width * 2)].add_marker();
+                mapCells[cell.cell_number + (cell.map_width * 2)].add_marker(); //Backwards
                 
             }
+            
 
         }
     }
@@ -364,7 +368,7 @@ public class MapCell
             maker.mapCells[cell_number + map_width].building = building; // back 1
             maker.mapCells[(cell_number + map_width) - 1].building = building; //no results
         }
-        else if (build_index == 9)
+        else if (build_index == map.GetComponent<MapPointer>().unplaceable_buildings+5)
         {
 
             maker.mapCells[cell_number - (map_width * 2) - 1].make_clickable(build_index, building); //up 2 right 1
@@ -401,70 +405,82 @@ public class MapCell
         }
         else if (build_index == map.GetComponent<MapPointer>().unplaceable_buildings)
         {
-           if (transparency == false)
-           {
-                contents = 0;
+            bool placing = false;
+            if (transparency == false)
+            {
+                contents = map.GetComponent<MapPointer>().unplaceable_buildings;
                 centerpoint = map.verts[center];
                 GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[map.GetComponent<MapPointer>().unplaceable_buildings].prefab;
                 building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
                 building.gameObject.SetActive(true);
                 building.GetComponentInChildren<Transparency>().ForceOpaque();
                 GameManager.GetComponent<Variable_Tracker>().max_population += 10;
-           }
-           else if (building.tag == "Marker")
-           {
-                maker.Hide_markers(); 
-                contents = 0;
-                centerpoint = map.verts[center];
-                GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[0].prefab;
-                building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
-                building.gameObject.SetActive(true);
-                building.GetComponentInChildren<Transparency>().ForceOpaque();
-                GameManager.GetComponent<Variable_Tracker>().max_population += 10;
-                GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
+                placing = true;
+            }
+            else if (building != null)
+            {
+                if (building.tag == "Marker" && GameManager.GetComponent<Variable_Tracker>().money >= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost)
+                {
+                    maker.Hide_markers();
+                    contents = map.GetComponent<MapPointer>().unplaceable_buildings;
+                    centerpoint = map.verts[center];
+                    GameObject instance = GameObject.Find("Map").GetComponent<MapPointer>().buildings[map.GetComponent<MapPointer>().unplaceable_buildings].prefab;
+                    building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
+                    building.gameObject.SetActive(true);
+                    building.GetComponentInChildren<Transparency>().ForceOpaque();
+                    GameManager.GetComponent<Variable_Tracker>().max_population += 10;
+                    GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
+                    GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
+                    placing = true;
+                }
+                else if(GameManager.GetComponent<Variable_Tracker>().money <= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost)
+                {
+                    Debug.LogWarning("You do not have enough money to purchase this item");
+                }
+            }
+            
+
+            if (placing) //Dome Connectors adding
+                {
+                    if (maker.mapCells[cell_number - 2].contents == map.GetComponent<MapPointer>().unplaceable_buildings)
+                    {
+                        if (maker.mapCells[cell_number - 1].building == null)
+                        {
+                            maker.mapCells[cell_number - 1].Add_building(3);
+                        }
+                    }
+                    if (maker.mapCells[cell_number - (map_width * 2)].contents == map.GetComponent<MapPointer>().unplaceable_buildings)
+                    {
+                        if (maker.mapCells[cell_number - (map_width)].building == null) //Back
+                        {
+                            maker.mapCells[cell_number - (map_width)].Add_building(3);
+                            maker.mapCells[cell_number - (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0); //Null exception here
+                        }
+                    }
+                    if (maker.mapCells[cell_number + 2].contents == map.GetComponent<MapPointer>().unplaceable_buildings)
+                    {
+                        if (maker.mapCells[cell_number + 1].building == null)
+                        {
+                            maker.mapCells[cell_number + 1].Add_building(3);
+                        }
+                    }
+                    if (maker.mapCells[cell_number + (map_width * 2)].contents == map.GetComponent<MapPointer>().unplaceable_buildings)
+                    {
+                        if (maker.mapCells[cell_number + (map_width)].building == null)
+                        {
+                            maker.mapCells[cell_number + (map_width)].Add_building(3);
+                            maker.mapCells[cell_number + (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0);
+                        }
+                    }
+
+                }
                 GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
-           }
 
-            if (maker.mapCells[cell_number - 2].contents == 0)
-            {
-                if(maker.mapCells[cell_number - 1].building == null)
-                {
-                    maker.mapCells[cell_number - 1].Add_building(3);
-                } 
-            }
-            if (maker.mapCells[cell_number - (map_width * 2)].contents == 0)
-            {
-                if (maker.mapCells[cell_number - (map_width)].building == null)
-                {
-                    maker.mapCells[cell_number - (map_width)].Add_building(3);
-                    maker.mapCells[cell_number + (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0);
-                }
-            }
-            if (maker.mapCells[cell_number + 2].contents == 0)
-            {
-                if (maker.mapCells[cell_number + 1].building == null)
-                {
-                    maker.mapCells[cell_number + 1].Add_building(3);
-                }
-            }
-            if (maker.mapCells[cell_number + (map_width * 2)].contents == 0)
-            {
-                if (maker.mapCells[cell_number + (map_width)].building == null)
-                {
-                    maker.mapCells[cell_number + (map_width)].Add_building(3);
-                    maker.mapCells[cell_number + (map_width)].building.transform.eulerAngles = new Vector3(0, 90, 0);
-                }
-            }
-       
-        
+            
+            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
 
-            GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
 
         }
-        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
-        
-
-
     }
     public string encode_cell()
     {
