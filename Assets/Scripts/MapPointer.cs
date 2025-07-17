@@ -25,6 +25,7 @@ public class MapPointer : MonoBehaviour
     public GameObject SolarPanelPanel;
     public GameObject DomePanel;
     public GameObject NuclearPanel;
+    public GameObject RoverPanel;
     public bool clickable;
     public int unplaceable_buildings;
 
@@ -110,9 +111,15 @@ public class MapPointer : MonoBehaviour
             else if (current_cell.building.tag == "Marker") 
             {
                 current_cell.Add_building(unplaceable_buildings, true);
-                Debug.Log("Adding via click");
-
-            }//Dont open the else panel
+            }
+            else if (current_cell.building.tag == "Rover Hub")
+            {
+                RoverPanel.SetActive(true);
+            }
+            else if (current_cell.building.tag == "Connector")
+            {
+                //Dont open the else panel
+            }
             else
             {
                 panel.gameObject.SetActive(true);
@@ -133,15 +140,14 @@ public class MapPointer : MonoBehaviour
                 }
             }
 
-            if(current_cell.building.tag != "Marker")
+            if(buildings != null && current_cell != null)
             {
-                audio_manager.PlayOpen();
+                if (current_cell.building.tag != "Marker" && current_cell.building.tag != "Connector")
+                {
+                    audio_manager.PlayOpen();
+                }
             }
             
-
-
-
-
 
         }
     }

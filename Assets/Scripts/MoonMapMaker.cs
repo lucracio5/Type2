@@ -403,6 +403,18 @@ public class MapCell
             maker.mapCells[cell_number - map_width * 2 + 2].make_clickable(build_index, building); //up 2 Left 1
 
         }
+        else if (build_index == map.GetComponent<MapPointer>().unplaceable_buildings + 4)
+        {
+            maker.mapCells[cell_number + 1].make_clickable(build_index, building);//Left 1
+        }
+        else if (build_index ==  4)
+        {
+            maker.mapCells[cell_number + 1].make_clickable(build_index, building);//Left 1
+            maker.mapCells[cell_number + 2].make_clickable(build_index, building);//Left 2
+            maker.mapCells[cell_number + map_width].make_clickable(build_index, building); //back 1
+            maker.mapCells[cell_number + map_width + 1].make_clickable(build_index, building); //back 1 left 1
+            maker.mapCells[cell_number + map_width + 2].make_clickable(build_index, building); //back 1 left 2
+        }
         else if (build_index == map.GetComponent<MapPointer>().unplaceable_buildings)
         {
             bool placing = false;
@@ -435,13 +447,15 @@ public class MapCell
                 }
                 else if(GameManager.GetComponent<Variable_Tracker>().money <= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost)
                 {
+                    
                     Debug.LogWarning("You do not have enough money to purchase this item");
                 }
             }
             
+            
 
             if (placing) //Dome Connectors adding
-                {
+            {
                     if (maker.mapCells[cell_number - 2].contents == map.GetComponent<MapPointer>().unplaceable_buildings)
                     {
                         if (maker.mapCells[cell_number - 1].building == null)
@@ -473,14 +487,12 @@ public class MapCell
                         }
                     }
 
-                }
-                GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
-
-            
-            GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
-
-
+            }
+            maker.Hide_markers();
         }
+        GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
+        GameObject.Find("Map").GetComponent<MapPointer>().ChangeActiveCursor(0);
+
     }
     public string encode_cell()
     {

@@ -11,6 +11,7 @@ public class Imports2 : MonoBehaviour
     public TMP_Text foodText;
     public TMP_Text waterText;
     public TMP_Text regolithText;
+    public TMP_Text crewText;
     public TMP_Text import1;
     public TMP_Text import2;
     public TMP_Text import3;
@@ -75,6 +76,7 @@ public class Imports2 : MonoBehaviour
         foodText.text = $"Food at {tracker.food}%";
         waterText.text = $"Water at {tracker.water}%";
         regolithText.text = $"You have {tracker.regolith} Regolith";
+        crewText.text = $"You have {tracker.population} population out of a max of {tracker.max_population}";
 
         import1.text = importQueue.Count > 0 ? $"{importQueue[0].label} - ${importQueue[0].cost}" : "";
         import2.text = importQueue.Count > 1 ? $"{importQueue[1].label} - ${importQueue[1].cost}" : "";
@@ -117,6 +119,16 @@ public class Imports2 : MonoBehaviour
         else
             audio_manager.PlayFailedClick();
     }
+    public void QueueCrewImport()
+    {
+        if (tracker.money >= 100 && tracker.population < tracker.max_population && importQueue.Count < max_queue)
+        {
+            importQueue.Add(new ImportItem("Crew", 100, () => tracker.population = Mathf.Min(tracker.population + 10, tracker.max_population)));
+            audio_manager.PlayUIclick();
+        }
+        else
+            audio_manager.PlayFailedClick();
+    }
     public void QueueRegoligthExport()
     {
         if (tracker.regolith - outputQueue.Count >= 1 && outputQueue.Count < 3)
@@ -130,7 +142,6 @@ public class Imports2 : MonoBehaviour
 
     private void ProcessShip()
     {
-        Debug.Log("Ship has arrived!");
         audio_manager.PlayLanding();
         StartCoroutine(ShowShipArrivalMessage());
 
