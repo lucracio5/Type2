@@ -22,6 +22,8 @@ TagManager:
   - UIPanel
   - Power Plant
   - Marker
+  - Rover Hub
+  - Connector
   layers:
   - Default
   - TransparentFX
