@@ -27,6 +27,7 @@ public class BallTest : MonoBehaviour
         }
     }
 
+    //Shoots the ball
     void ShootBall()
     {
         // Generate ray from camera through mouse position
