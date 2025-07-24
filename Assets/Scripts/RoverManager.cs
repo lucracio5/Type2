@@ -22,6 +22,7 @@ public class RoverManager : MonoBehaviour
 
     // Reference to the UI panel that displays rover stats
     [SerializeField] private GameObject RoverStatsPanel;
+    [SerializeField] private GameObject RoverHubPanel;
 
     // UI elements for displaying the rover's image and stats
     public TMP_Text roverStatsPanelTitleText; // Text field for displaying the rover's name
@@ -34,6 +35,7 @@ public class RoverManager : MonoBehaviour
     public Sprite Rover1Sprite;
     public Sprite Rover2Sprite;
     public Sprite Rover3Sprite;
+    public Vector2[] roverSlotPositions; // Positions for each rover slot on the canvas
 
     // Array holding the stats for each rover slot.
     // Each int[] contains: [movementSpeed, miningSpeed, batteryLife]
@@ -71,6 +73,7 @@ public class RoverManager : MonoBehaviour
     void Start()
     {
         variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
+        AddSpriteToCanvas(Rover1Sprite, new Vector2(-185, 0), RoverHubPanel.transform); // Adds to RoverHubPanel
     }
 
     void Update()
@@ -134,14 +137,82 @@ public class RoverManager : MonoBehaviour
         RoverStatsPanel.SetActive(true);
     }
 
-    
 
+    public void UpdateRoverHubPanel()
+    {
+        //Loops through all children of the canvas, only destroys the rover sprites
+        foreach (Transform child in RoverStatsPanel.transform)
+        {
+            if (child.name == "DynamicRoverSprite")
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+        for (int i = 0; i < roverSlotStats.Length; i++)
+        {
+            // Calculate the position for each rover slot based on its index
+            Vector2 position = roverSlotPositions[i];
+
+            // Add a sprite to the canvas for each rover slot
+            if (i < roverSlotStats.Length)
+            {
+                AddSpriteToCanvas(roverDisplayImage.sprite, position, RoverHubPanel.transform);
+            }
+        }
+    }
+
+    void AddSpriteToCanvas(Sprite sprite, Vector2 anchoredPosition, Transform parentCanvas)
+    {
+        //create a new GameObject with an Image component
+        GameObject go = new GameObject("DynamicRoverSprite", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
+        go.transform.SetParent(parentCanvas, false); // Set as child of the canvas
+
+        //set the sprite
+        Image img = go.GetComponent<Image>();
+        img.sprite = sprite;
+
+        // Set the anchored position (UI coordinates)
+        RectTransform rt = go.GetComponent<RectTransform>();
+        rt.anchoredPosition = anchoredPosition;
+        rt.sizeDelta = new Vector2(100, 100); // Set size as needed
+    }
+
+
+    void ReloadStatsPanel(int roverSlot)
+    {
+        // Retrieve the stats for the selected rover slot
+        int[] stats = roverSlotStats[roverSlot];
+        int movement = stats[0];
+        int mining = stats[1];
+        int battery = stats[2];
+
+        // Update the UI text fields with the current stats
+        movementSpeedText.text = "Movement Speed: " + movement.ToString();
+        miningSpeedText.text = "Mining Speed: " + mining.ToString();
+        batteryLifeText.text = "Battery Life: " + battery.ToString();
+
+        // Choose the appropriate sprite based on the rover's overall level
+        if (OverallLevel(stats) < 3)
+        {
+            roverDisplayImage.sprite = Rover1Sprite;
+        }
+        else if (OverallLevel(stats) < 6)
+        {
+            roverDisplayImage.sprite = Rover2Sprite;
+        }
+        else
+        {
+            roverDisplayImage.sprite = Rover3Sprite;
+        }
+    }
 
 
     public void IncreaseStat(int whichStat)
     {
         // Extract the rover ID from the title text
         int roverID = int.Parse(roverStatsPanelTitleText.text.Split(' ')[1]) - 1; // Convert "Rover X" to index X-1
+        Debug.Log("Increasing stat for Rover " + (roverID + 1) + ", Stat: " + whichStat);
 
         if (whichStat == 0) // Movement Speed
         {
@@ -158,6 +229,7 @@ public class RoverManager : MonoBehaviour
 
         // Update the roverSlotStats in Variable_Tracker after modifying stats
         variableTracker.roverSlotStats = roverSlotStats;
+        ReloadStatsPanel(roverID); // Reload the stats panel to reflect changes
     }
 
 
@@ -180,7 +252,7 @@ public class RoverManager : MonoBehaviour
         // Increase the movement speed of the specified rover
         if (roverID >= 0 && roverID < roverSlotStats.Length)
         {
-            roverSlotStats[roverID][1] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
+            roverSlotStats[roverID][1] = Mathf.Min(roverSlotStats[roverID][1] + 1, maxMiningSpeed);
             Debug.Log("Increased mining speed for Rover " + (roverID + 1));
         }
         else
@@ -194,7 +266,7 @@ public class RoverManager : MonoBehaviour
         // Increase the movement speed of the specified rover
         if (roverID >= 0 && roverID < roverSlotStats.Length)
         {
-            roverSlotStats[roverID][2] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
+            roverSlotStats[roverID][2] = Mathf.Min(roverSlotStats[roverID][2] + 1, maxBatteryLife);
             Debug.Log("Increased battery life for Rover " + (roverID + 1));
         }
         else
