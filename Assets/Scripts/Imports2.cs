@@ -13,6 +13,8 @@ public class Imports2 : MonoBehaviour
     public TMP_Text waterText;
     public TMP_Text regolithText;
     public TMP_Text crewText;
+    public TMP_Text lithium_text;
+    public TMP_Text titanium_text;
     public TMP_Text import1;
     public TMP_Text import2;
     public TMP_Text import3;
@@ -77,6 +79,8 @@ public class Imports2 : MonoBehaviour
         foodText.text = $"Food at {tracker.food}%";
         waterText.text = $"Water at {tracker.water}%";
         regolithText.text = $"You have {tracker.regolith} Regolith";
+        lithium_text.text = $"You have {tracker.lithium} Lithium";
+        titanium_text.text = $"You have {tracker.titanium} titanium";
         crewText.text = $"You have {tracker.population} population out of a max of {tracker.max_population}";
 
         import1.text = importQueue.Count > 0 ? $"{importQueue[0].label} - ${importQueue[0].cost}" : "";
@@ -134,7 +138,27 @@ public class Imports2 : MonoBehaviour
     {
         if (tracker.regolith - outputQueue.Count >= 1 && outputQueue.Count < 3)
         {
-            outputQueue.Add(new OutputItem("Regolith Export", 25));
+            outputQueue.Add(new OutputItem("Regolith Export", 25,() => tracker.regolith = Mathf.Min(tracker.regolith - 1, tracker.max_mining)));
+            audio_manager.PlayUIclick();
+        }
+        else
+            audio_manager.PlayFailedClick();
+    }
+    public void QueueTitaniumExport()
+    {
+        if (tracker.titanium - outputQueue.Count >= 1 && outputQueue.Count < 3)
+        {
+            outputQueue.Add(new OutputItem("Titanium Export", 40, () => tracker.titanium = Mathf.Min(tracker.titanium - 1, tracker.max_titanium)));
+            audio_manager.PlayUIclick();
+        }
+        else
+            audio_manager.PlayFailedClick();
+    }
+    public void QueueLithiumExport()
+    {
+        if (tracker.lithium - outputQueue.Count >= 1 && outputQueue.Count < 3)
+        {
+            outputQueue.Add(new OutputItem("Lithium Export", 80, () => tracker.lithium = Mathf.Min(tracker.lithium - 1, tracker.max_lithium)));
             audio_manager.PlayUIclick();
         }
         else
@@ -157,11 +181,22 @@ public class Imports2 : MonoBehaviour
         }
         foreach (var item in outputQueue)
         {
-            if (tracker.regolith >= 1)
+            if((item.label == "Regolith Export")&&(tracker.regolith >= 1))
+            {
+               tracker.money += item.value;
+               item.Apply();
+            }
+            else if ((item.label == "Titanium Export") && (tracker.titanium >= 1))
             {
                 tracker.money += item.value;
-                tracker.regolith -= 1;
+                item.Apply();
             }
+            else if ((item.label == "Lithium Export") && (tracker.lithium >= 1))
+            {
+                tracker.money += item.value;
+                item.Apply();
+            }   
+
         }
 
         // Clear both queues
@@ -203,11 +238,14 @@ public class OutputItem
 {
     public string label;
     public int value;
+    private System.Action applyEffect;
 
-    public OutputItem(string label, int value)
+    public OutputItem(string label, int value, System.Action applyEffect)
     {
         this.label = label;
         this.value = value;
+        this.applyEffect = applyEffect;
     }
+    public void Apply() => applyEffect?.Invoke();
 }
 
