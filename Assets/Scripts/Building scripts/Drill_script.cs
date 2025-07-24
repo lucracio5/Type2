@@ -30,10 +30,10 @@ public class Drill_script: MonoBehaviour
 
             if(num <= 10) //15% change
             {
-                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_uranium > Gamemanager.GetComponent<Variable_Tracker>().uranium)//checks if you have space
+                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_titanium > Gamemanager.GetComponent<Variable_Tracker>().titanium)//checks if you have space
                 {
                     Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
-                    Gamemanager.GetComponent<Variable_Tracker>().uranium += 1;
+                    Gamemanager.GetComponent<Variable_Tracker>().titanium += 1;
                     total_collected++;
                 }
             }

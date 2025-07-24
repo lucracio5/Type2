@@ -26,6 +26,7 @@ public class Variable_Tracker : MonoBehaviour
     public int fuel;
     public float masterTime;
     public int uranium;
+    public int titanium;
     public int lithium;
     
 
@@ -38,7 +39,7 @@ public class Variable_Tracker : MonoBehaviour
     public UISlider population_slider;
     public UISlider energy2_slider;
     public UISlider fuel_slider;
-    public UISlider uranium_slider;
+    public UISlider titanium_slider;
     public UISlider lithium_slider;
 
 
@@ -54,7 +55,7 @@ public class Variable_Tracker : MonoBehaviour
     public Text money_text;
     public Text energy2_text;
     public Text fuel_text;
-    public Text uranium_text;
+    public Text titanium_text;
     public Text lithium_text;
 
 
@@ -62,7 +63,7 @@ public class Variable_Tracker : MonoBehaviour
     
     public int max_energy = 100;
     public int max_mining = 10;
-    public int max_uranium = 10;
+    public int max_titanium = 10;
     public int max_lithium = 5;
 
 
@@ -160,7 +161,7 @@ public class Variable_Tracker : MonoBehaviour
         water_text.text = water.ToString() + "/" + max_water.ToString();
         food_text.text = food.ToString() + "/" + max_food.ToString();
         population_text.text = population.ToString() + "/" + max_population.ToString();
-        uranium_text.text = uranium.ToString() + "/" + max_uranium.ToString();
+        titanium_text.text = titanium.ToString() + "/" + max_titanium.ToString();
         lithium_text.text = lithium.ToString() + "/" + max_lithium.ToString();
 
         energy_slider.value = energy; //updating the slider values
@@ -172,7 +173,7 @@ public class Variable_Tracker : MonoBehaviour
         O2_slider.value = O2;
         fuel_slider.value = fuel;
         lithium_slider.value = lithium;
-        uranium_slider.value = uranium;
+        titanium_slider.value = titanium;
 
 
         population_slider.maxValue = max_population;
