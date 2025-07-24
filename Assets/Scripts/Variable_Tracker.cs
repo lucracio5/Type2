@@ -59,6 +59,7 @@ public class Variable_Tracker : MonoBehaviour
     Audio_manager audio_manager;
     Jobs jobs;
     ScienceTree tree;
+    RoverManager roverManager;
     public GameObject GameoverText;
 
     public int speed;
@@ -109,8 +110,11 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Load();
         speed = 1;
         Time.timeScale = 1;
+
         jobs = GetComponent<Jobs>();
         tree = GetComponent<ScienceTree>();
+        roverManager = GetComponent<RoverManager>();
+
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
         audio_manager = GetComponent<Audio_manager>();
@@ -187,6 +191,7 @@ public class Variable_Tracker : MonoBehaviour
         Hydro_Unlock = tree.Hydro_unlock;
         SaveSystem.Save();
         audio_manager.PlayUIclick();
+        roverSlotStats = roverManager.roverSlotStats;
     }
     public void Test()
     {
@@ -243,6 +248,7 @@ public class Variable_Tracker : MonoBehaviour
         data.science_jobs = science_jobs;
         data.cleaning_jobs = cleaning_jobs;
         data.hydro_unlock = Hydro_Unlock;
+        data.roverSlotStats = roverSlotStats;
 
         foreach (MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
         {
@@ -250,13 +256,13 @@ public class Variable_Tracker : MonoBehaviour
         }
         data.Map = data.Map.Remove(data.Map.Length - 1);
     }
-        
 
-   public void LoadData(VariableSaveData data)
-   {
+
+    public void LoadData(VariableSaveData data)
+    {
         MoonMapMaker map = GameObject.Find("Map").GetComponent<MoonMapMaker>(); ;
         string[] cells = data.Map.Split(',');
-        for(int i = 0; i < cells.Length;i++)
+        for (int i = 0; i < cells.Length; i++)
         {
             if (cells[i] != "-1")// && map.mapCells[i].building == null
             {
@@ -275,6 +281,7 @@ public class Variable_Tracker : MonoBehaviour
         science_jobs = data.science_jobs;
         cleaning_jobs = data.cleaning_jobs;
         Hydro_Unlock = data.hydro_unlock;
+        roverSlotStats = data.roverSlotStats;
    }
     
 
@@ -294,7 +301,7 @@ public class Variable_Tracker : MonoBehaviour
         public int science_jobs;
         public int cleaning_jobs;
         public bool hydro_unlock;
-
+        public int[][] roverSlotStats;
 
     }
 

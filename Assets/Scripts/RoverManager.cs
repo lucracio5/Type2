@@ -24,7 +24,7 @@ public class RoverManager : MonoBehaviour
     [SerializeField] private GameObject RoverStatsPanel;
 
     // UI elements for displaying the rover's image and stats
-    public TMP_Text roverNameText; // Text field for displaying the rover's name
+    public TMP_Text roverStatsPanelTitleText; // Text field for displaying the rover's name
     public Image roverDisplayImage;
     public TMP_Text movementSpeedText;
     public TMP_Text miningSpeedText;
@@ -37,7 +37,7 @@ public class RoverManager : MonoBehaviour
 
     // Array holding the stats for each rover slot.
     // Each int[] contains: [movementSpeed, miningSpeed, batteryLife]
-    private int[][] roverSlotStats;
+    public int[][] roverSlotStats;
 
     /// Unity Awake method. Initializes the roverSlotStats array with default values for each rover slot.
     /// Each slot starts with the base stats.
@@ -80,9 +80,10 @@ public class RoverManager : MonoBehaviour
             for (int i = 0; i < variableTracker.roverSlotStats.Length; i++)
             {
                 // Log the stats of each rover slot to the console
-                Debug.Log("Rover Stats: Movement: " + variableTracker.roverSlotStats[i][0] + ", Mining: " + variableTracker.roverSlotStats[i][1] + ", Battery: " + variableTracker.roverSlotStats[i][2]);
+                Debug.Log("Rover Stats of " + i + ": Movement: " + variableTracker.roverSlotStats[i][0] + ", Mining: " + variableTracker.roverSlotStats[i][1] + ", Battery: " + variableTracker.roverSlotStats[i][2]);
             }
         }
+
     }
 
     /// Calculates the overall level of a rover based on its stats.
@@ -113,7 +114,7 @@ public class RoverManager : MonoBehaviour
         movementSpeedText.text = "Movement Speed: " + movement.ToString();
         miningSpeedText.text = "Mining Speed: " + mining.ToString();
         batteryLifeText.text = "Battery Life: " + battery.ToString();
-        roverNameText.text = "Rover " + (roverSlot + 1).ToString() + " Stats:"; // Display the rover slot number
+        roverStatsPanelTitleText.text = "Rover " + (roverSlot + 1).ToString() + " Stats:"; // Display the rover slot number
 
         // Choose the appropriate sprite based on the rover's overall level
         if (OverallLevel(stats) < 3)
@@ -133,7 +134,34 @@ public class RoverManager : MonoBehaviour
         RoverStatsPanel.SetActive(true);
     }
 
-    /*public void increaseMovement(GameObject RoverStatsPanel)
+    
+
+
+
+    public void IncreaseStat(int whichStat)
+    {
+        // Extract the rover ID from the title text
+        int roverID = int.Parse(roverStatsPanelTitleText.text.Split(' ')[1]) - 1; // Convert "Rover X" to index X-1
+
+        if (whichStat == 0) // Movement Speed
+        {
+            IncreaseMovement(roverID);
+        }
+        else if (whichStat == 1) // Mining Speed
+        {
+            IncreaseMining(roverID);
+        }
+        else if (whichStat == 2) // Battery Life
+        {
+            IncreaseBattery(roverID);
+        }
+
+        // Update the roverSlotStats in Variable_Tracker after modifying stats
+        variableTracker.roverSlotStats = roverSlotStats;
+    }
+
+
+    void IncreaseMovement(int roverID)
     {
         // Increase the movement speed of the specified rover
         if (roverID >= 0 && roverID < roverSlotStats.Length)
@@ -145,15 +173,15 @@ public class RoverManager : MonoBehaviour
         {
             Debug.LogError("Invalid rover ID: " + roverID);
         }
-    }*/
+    }
 
-    public void increaseMining(int roverID)
+    void IncreaseMining(int roverID)
     {
         // Increase the movement speed of the specified rover
         if (roverID >= 0 && roverID < roverSlotStats.Length)
         {
             roverSlotStats[roverID][1] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
-            Debug.Log("Increased movement speed for Rover " + (roverID + 1));
+            Debug.Log("Increased mining speed for Rover " + (roverID + 1));
         }
         else
         {
@@ -161,13 +189,13 @@ public class RoverManager : MonoBehaviour
         }
     }
 
-    public void increaseBattery(int roverID)
+    void IncreaseBattery(int roverID)
     {
         // Increase the movement speed of the specified rover
         if (roverID >= 0 && roverID < roverSlotStats.Length)
         {
             roverSlotStats[roverID][2] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
-            Debug.Log("Increased movement speed for Rover " + (roverID + 1));
+            Debug.Log("Increased battery life for Rover " + (roverID + 1));
         }
         else
         {
