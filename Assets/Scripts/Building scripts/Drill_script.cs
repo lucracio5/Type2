@@ -26,7 +26,9 @@ public class Drill_script: MonoBehaviour
         if (GetComponent<Transparency>().placed && timer > 1)
         {
             int num = Random.Range(0, 100); //Random chance to get materials
-            if(num <= 6) //15% change
+
+
+            if(num <= 10) //15% change
             {
                 if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_uranium > Gamemanager.GetComponent<Variable_Tracker>().uranium)//checks if you have space
                 {
@@ -35,7 +37,7 @@ public class Drill_script: MonoBehaviour
                     total_collected++;
                 }
             }
-            if(num == 7)//1% chance
+            if(num == 11)//1% chance
             {
                 if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_lithium > Gamemanager.GetComponent<Variable_Tracker>().lithium)//checks if you have space
                 {
