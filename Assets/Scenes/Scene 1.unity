@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0, g: 0, b: 0, a: 1}
+  m_IndirectSpecularColor: {r: 0.049111515, g: 0.04672604, b: 0.035155322, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17566,7 +17566,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variableTracker: {fileID: 1013954939}
   RoverStatsPanel: {fileID: 663762762}
-  roverNameText: {fileID: 1854270714}
+  roverStatsPanelTitleText: {fileID: 1854270714}
   roverDisplayImage: {fileID: 1969542781}
   movementSpeedText: {fileID: 524325485}
   miningSpeedText: {fileID: 1825132951}
@@ -18864,7 +18864,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: -2.8105774}
+  m_AnchoredPosition: {x: 0.00024414062, y: -2.810669}
   m_SizeDelta: {x: -0.048828125, y: -5.6190796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062847516
@@ -25519,7 +25519,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 1233062567}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1013954953}
+        m_TargetAssemblyTypeName: RoverManager, Assembly-CSharp
+        m_MethodName: increaseStat
+        m_Mode: 3
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &1233062567
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29430,7 +29442,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1487082101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -35919,7 +35931,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.53601, y: -2.8102112}
+  m_AnchoredPosition: {x: 16.53601, y: -2.8103027}
   m_SizeDelta: {x: -33.072, y: -5.6199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1602442616
