@@ -17020,6 +17020,7 @@ GameObject:
   - component: {fileID: 1013954951}
   - component: {fileID: 1013954952}
   - component: {fileID: 1013954953}
+  - component: {fileID: 1013954954}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -17574,6 +17575,20 @@ MonoBehaviour:
   Rover1Sprite: {fileID: 21300000, guid: e3e75dbcd6ee00041b4166a6dd306974, type: 3}
   Rover2Sprite: {fileID: 21300000, guid: dd5567479df97f64f8437a1807f29004, type: 3}
   Rover3Sprite: {fileID: 21300000, guid: fd7521bc1d9df394e9eeba374e0b7cb5, type: 3}
+--- !u!114 &1013954954
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013954937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1dbabf49858433d408c2eb4eff0fcacc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variable_Tracker: {fileID: 1013954939}
+  masterTime: 0
 --- !u!1 &1019172834
 GameObject:
   m_ObjectHideFlags: 0
@@ -29442,7 +29457,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1487082101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -41649,7 +41664,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1972879672
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43922,6 +43937,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PauseUI: {fileID: 1972879671}
+  variableTracker: {fileID: 1013954939}
 --- !u!4 &248362322329561109
 Transform:
   m_ObjectHideFlags: 0
