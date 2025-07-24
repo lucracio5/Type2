@@ -74,18 +74,14 @@ public class RoverManager : MonoBehaviour
     void Start()
     {
         variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
-        UpdateRoverHubPanel(); // Initialize the rover hub panel with current stats
+        UpdateRoverHubPanel(); //Update the rover hub panel with current stats
     }
 
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.S)) // Check if the S key is pressed
+        if (Input.GetKeyDown(KeyCode.R)) // Check if the S key is pressed
         {
-            for (int i = 0; i < variableTracker.roverSlotStats.Length; i++)
-            {
-                // Log the stats of each rover slot to the console
-                Debug.Log("Rover Stats of " + i + ": Movement: " + variableTracker.roverSlotStats[i][0] + ", Mining: " + variableTracker.roverSlotStats[i][1] + ", Battery: " + variableTracker.roverSlotStats[i][2]);
-            }
+            UpdateRoverHubPanel(); //Update the rover hub panel with current stats
         }
 
 
@@ -155,14 +151,33 @@ public class RoverManager : MonoBehaviour
             }
         }
 
+        Sprite spriteToDisplay;
+
         for (int i = 0; i < roverSlotStats.Length; i++)
         {
+
+            // Choose the appropriate sprite based on the rover's overall level
+            if (OverallLevel(roverSlotStats[i]) < 3)
+            {
+                spriteToDisplay = Rover1Sprite;
+            }
+            else if (OverallLevel(roverSlotStats[i]) < 6)
+            {
+                spriteToDisplay = Rover2Sprite;
+            }
+            else
+            {
+                spriteToDisplay = Rover3Sprite;
+            }
+
             // Add a sprite to the canvas for each rover slot
             if (i < roverSlotStats.Length)
             {
-                AddSpriteToCanvas(roverDisplayImage.sprite, new Vector2(0, 0), RoverSlots.transform, i);
+                AddSpriteToCanvas(spriteToDisplay, new Vector2(0, 0), RoverSlots.transform, i);
             }
         }
+
+        
     }
 
     void AddSpriteToCanvas(Sprite sprite, Vector2 anchoredPosition, Transform parentCanvas, int roverSlot)
@@ -220,7 +235,7 @@ public class RoverManager : MonoBehaviour
     {
         // Extract the rover ID from the title text
         int roverID = int.Parse(roverStatsPanelTitleText.text.Split(' ')[1]) - 1; // Convert "Rover X" to index X-1
-        Debug.Log("Increasing stat for Rover " + (roverID + 1) + ", Stat: " + whichStat);
+        //Debug.Log("Increasing stat for Rover " + (roverID + 1) + ", Stat: " + whichStat);
 
         if (whichStat == 0) // Movement Speed
         {
@@ -247,7 +262,6 @@ public class RoverManager : MonoBehaviour
         if (roverID >= 0 && roverID < roverSlotStats.Length)
         {
             roverSlotStats[roverID][0] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
-            Debug.Log("Increased movement speed for Rover " + (roverID + 1));
         }
         else
         {
@@ -261,7 +275,6 @@ public class RoverManager : MonoBehaviour
         if (roverID >= 0 && roverID < roverSlotStats.Length)
         {
             roverSlotStats[roverID][1] = Mathf.Min(roverSlotStats[roverID][1] + 1, maxMiningSpeed);
-            Debug.Log("Increased mining speed for Rover " + (roverID + 1));
         }
         else
         {
@@ -275,7 +288,6 @@ public class RoverManager : MonoBehaviour
         if (roverID >= 0 && roverID < roverSlotStats.Length)
         {
             roverSlotStats[roverID][2] = Mathf.Min(roverSlotStats[roverID][2] + 1, maxBatteryLife);
-            Debug.Log("Increased battery life for Rover " + (roverID + 1));
         }
         else
         {
