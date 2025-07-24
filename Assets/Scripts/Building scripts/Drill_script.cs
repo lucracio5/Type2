@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
 public class Drill_script: MonoBehaviour
@@ -22,15 +23,26 @@ public class Drill_script: MonoBehaviour
     void Update()
     {
         timer += Time.deltaTime * Gamemanager.GetComponent<Variable_Tracker>().speed;
-        if (GetComponent<Transparency>().placed && timer > 10)
+        if (GetComponent<Transparency>().placed && timer > 1)
         {
-            if (Gamemanager.GetComponent<Variable_Tracker>().energy > 50 && Gamemanager.GetComponent<Variable_Tracker>().max_mining > Gamemanager.GetComponent<Variable_Tracker>().regolith)
+            int num = Random.Range(0, 100); //Random chance to get materials
+            if(num <= 6) //15% change
             {
-                Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
-
-                Gamemanager.GetComponent<Variable_Tracker>().regolith += 1;
-                total_collected++;
-                //Debug.Log(total_collected);
+                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_uranium > Gamemanager.GetComponent<Variable_Tracker>().uranium)//checks if you have space
+                {
+                    Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
+                    Gamemanager.GetComponent<Variable_Tracker>().uranium += 1;
+                    total_collected++;
+                }
+            }
+            if(num == 7)//1% chance
+            {
+                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_lithium > Gamemanager.GetComponent<Variable_Tracker>().lithium)//checks if you have space
+                {
+                    Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
+                    Gamemanager.GetComponent<Variable_Tracker>().lithium += 1;
+                    total_collected++;
+                }
             }
             timer = 0f;
             

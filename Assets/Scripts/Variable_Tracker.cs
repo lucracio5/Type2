@@ -24,7 +24,10 @@ public class Variable_Tracker : MonoBehaviour
     public int O2 = 100;
     public int money;
     public int fuel;
+    public int uranium;
+    public int lithium;
     
+
 
     public UISlider energy_slider;
     public UISlider mining_slider;
@@ -50,6 +53,11 @@ public class Variable_Tracker : MonoBehaviour
     
     public int max_energy = 100;
     public int max_mining = 10;
+    public int max_uranium;
+    public int max_lithium;
+
+
+
     public int max_water = 100;
     public int max_food = 100;
     public int max_O2 = 100;
