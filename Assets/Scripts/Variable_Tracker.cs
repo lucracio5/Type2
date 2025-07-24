@@ -24,6 +24,8 @@ public class Variable_Tracker : MonoBehaviour
     public int O2 = 100;
     public int money;
     public int fuel;
+    public float masterTime;
+    public int uranium;
     public int titanium;
     public int lithium;
     
@@ -76,6 +78,7 @@ public class Variable_Tracker : MonoBehaviour
     Jobs jobs;
     ScienceTree tree;
     RoverManager roverManager;
+    MasterTimer masterTimer;
     public GameObject GameoverText;
 
     public int speed;
@@ -130,6 +133,7 @@ public class Variable_Tracker : MonoBehaviour
         jobs = GetComponent<Jobs>();
         tree = GetComponent<ScienceTree>();
         roverManager = GetComponent<RoverManager>();
+        masterTimer = GetComponent<MasterTimer>();
 
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
@@ -212,6 +216,8 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Save();
         audio_manager.PlayUIclick();
         roverSlotStats = roverManager.roverSlotStats;
+        masterTime = masterTimer.masterTime; 
+
     }
     public void Test()
     {
@@ -241,7 +247,6 @@ public class Variable_Tracker : MonoBehaviour
     }
     public void map_cancel()
     {
-        
         if (cancel)
         {
             map = GameObject.Find("Map");
@@ -269,6 +274,7 @@ public class Variable_Tracker : MonoBehaviour
         data.cleaning_jobs = cleaning_jobs;
         data.hydro_unlock = Hydro_Unlock;
         data.roverSlotStats = roverSlotStats;
+        data.masterTime = masterTime;
 
         foreach (MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
         {
@@ -302,8 +308,9 @@ public class Variable_Tracker : MonoBehaviour
         cleaning_jobs = data.cleaning_jobs;
         Hydro_Unlock = data.hydro_unlock;
         roverSlotStats = data.roverSlotStats;
+        masterTime = data.masterTime;
    }
-    
+
 
     [System.Serializable]
     public struct VariableSaveData
@@ -322,6 +329,7 @@ public class Variable_Tracker : MonoBehaviour
         public int cleaning_jobs;
         public bool hydro_unlock;
         public int[][] roverSlotStats;
+        public float masterTime;
 
     }
 

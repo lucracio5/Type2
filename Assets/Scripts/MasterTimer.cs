@@ -13,13 +13,14 @@ public class MasterTimer : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        
+        masterTime = variable_Tracker.masterTime; // Initialize masterTime from Variable_Tracker
     }
 
     // Update is called once per frame
     void Update()
     {
         masterTime += Time.deltaTime;
+        variable_Tracker.masterTime = masterTime; // Update the master time in Variable_Tracker
 
         int currentMinute = Mathf.FloorToInt(masterTime / 60f);
 
