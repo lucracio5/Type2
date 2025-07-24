@@ -17066,6 +17066,7 @@ MonoBehaviour:
   fuel: 0
   masterTime: 0
   uranium: 0
+  titanium: 0
   lithium: 0
   energy_slider: {fileID: 579250712}
   mining_slider: {fileID: 328228469}
@@ -17075,7 +17076,7 @@ MonoBehaviour:
   population_slider: {fileID: 1697249712}
   energy2_slider: {fileID: 389288204}
   fuel_slider: {fileID: 159427325}
-  uranium_slider: {fileID: 0}
+  titanium_slider: {fileID: 0}
   lithium_slider: {fileID: 0}
   energy_text: {fileID: 1663703812}
   mining_text: {fileID: 150314387}
@@ -17086,12 +17087,12 @@ MonoBehaviour:
   money_text: {fileID: 1012479783}
   energy2_text: {fileID: 1861074514}
   fuel_text: {fileID: 758332002}
-  uranium_text: {fileID: 0}
+  titanium_text: {fileID: 0}
   lithium_text: {fileID: 0}
   crewNames: []
   max_energy: 0
   max_mining: 10
-  max_uranium: 10
+  max_titanium: 10
   max_lithium: 5
   max_water: 100
   max_food: 100
@@ -17131,6 +17132,8 @@ MonoBehaviour:
   waterText: {fileID: 1927144492}
   regolithText: {fileID: 403955132}
   crewText: {fileID: 936902304}
+  lithium_text: {fileID: 0}
+  titanium_text: {fileID: 0}
   import1: {fileID: 508830943}
   import2: {fileID: 1307338643}
   import3: {fileID: 917348572}
@@ -17577,6 +17580,7 @@ MonoBehaviour:
   variableTracker: {fileID: 1013954939}
   RoverStatsPanel: {fileID: 663762762}
   RoverHubPanel: {fileID: 1487082100}
+  RoverSlots: {fileID: 1523572642}
   roverStatsPanelTitleText: {fileID: 1854270714}
   roverDisplayImage: {fileID: 1969542781}
   movementSpeedText: {fileID: 524325485}
@@ -17586,11 +17590,11 @@ MonoBehaviour:
   Rover2Sprite: {fileID: 21300000, guid: dd5567479df97f64f8437a1807f29004, type: 3}
   Rover3Sprite: {fileID: 21300000, guid: fd7521bc1d9df394e9eeba374e0b7cb5, type: 3}
   roverSlotPositions:
-  - {x: -285, y: 0}
-  - {x: -165, y: 0}
-  - {x: -45, y: 0}
-  - {x: 75, y: 0}
-  - {x: 195, y: 0}
+  - {x: -275, y: 0}
+  - {x: -155, y: 0}
+  - {x: -35, y: 0}
+  - {x: 85, y: 0}
+  - {x: 205, y: 0}
 --- !u!114 &1013954954
 MonoBehaviour:
   m_ObjectHideFlags: 0

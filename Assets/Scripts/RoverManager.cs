@@ -23,6 +23,7 @@ public class RoverManager : MonoBehaviour
     // Reference to the UI panel that displays rover stats
     [SerializeField] private GameObject RoverStatsPanel;
     [SerializeField] private GameObject RoverHubPanel;
+    [SerializeField] private GameObject RoverSlots;
 
     // UI elements for displaying the rover's image and stats
     public TMP_Text roverStatsPanelTitleText; // Text field for displaying the rover's name
@@ -73,7 +74,7 @@ public class RoverManager : MonoBehaviour
     void Start()
     {
         variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
-        AddSpriteToCanvas(Rover1Sprite, new Vector2(-185, 0), RoverHubPanel.transform); // Adds to RoverHubPanel
+        UpdateRoverHubPanel(); // Initialize the rover hub panel with current stats
     }
 
     void Update()
@@ -87,6 +88,11 @@ public class RoverManager : MonoBehaviour
             }
         }
 
+
+        if (RoverHubPanel.activeInHierarchy)
+        {
+            //UpdateRoverHubPanel(); //Update the rover hub panel if it is active
+        }
     }
 
     /// Calculates the overall level of a rover based on its stats.
@@ -141,7 +147,7 @@ public class RoverManager : MonoBehaviour
     public void UpdateRoverHubPanel()
     {
         //Loops through all children of the canvas, only destroys the rover sprites
-        foreach (Transform child in RoverStatsPanel.transform)
+        foreach (Transform child in RoverHubPanel.transform)
         {
             if (child.name == "DynamicRoverSprite")
             {
@@ -151,22 +157,22 @@ public class RoverManager : MonoBehaviour
 
         for (int i = 0; i < roverSlotStats.Length; i++)
         {
-            // Calculate the position for each rover slot based on its index
-            Vector2 position = roverSlotPositions[i];
-
             // Add a sprite to the canvas for each rover slot
             if (i < roverSlotStats.Length)
             {
-                AddSpriteToCanvas(roverDisplayImage.sprite, position, RoverHubPanel.transform);
+                AddSpriteToCanvas(roverDisplayImage.sprite, new Vector2(0, 0), RoverSlots.transform, i);
             }
         }
     }
 
-    void AddSpriteToCanvas(Sprite sprite, Vector2 anchoredPosition, Transform parentCanvas)
+    void AddSpriteToCanvas(Sprite sprite, Vector2 anchoredPosition, Transform parentCanvas, int roverSlot)
     {
         //create a new GameObject with an Image component
         GameObject go = new GameObject("DynamicRoverSprite", typeof(RectTransform), typeof(CanvasRenderer), typeof(Image));
-        go.transform.SetParent(parentCanvas, false); // Set as child of the canvas
+        //go.transform.SetParent(parentCanvas, false); // Set as child of the canvas
+
+        Transform correctRoverSlot = RoverSlots.transform.Find("RoverSlot" + (roverSlot + 1).ToString());
+        go.transform.SetParent(correctRoverSlot, false); // Set as child of the canvas
 
         //set the sprite
         Image img = go.GetComponent<Image>();
@@ -175,7 +181,9 @@ public class RoverManager : MonoBehaviour
         // Set the anchored position (UI coordinates)
         RectTransform rt = go.GetComponent<RectTransform>();
         rt.anchoredPosition = anchoredPosition;
-        rt.sizeDelta = new Vector2(100, 100); // Set size as needed
+        rt.sizeDelta = new Vector2(308, 195); // Set size as needed
+        rt.localScale = new Vector3(1.2f, 1.2f, 0f); //Set scale correctly
+        rt.pivot = new Vector2(0.5f, 0.5f);      // Set pivot to center
     }
 
 
