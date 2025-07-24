@@ -24,7 +24,10 @@ public class Variable_Tracker : MonoBehaviour
     public int O2 = 100;
     public int money;
     public int fuel;
+    public int uranium;
+    public int lithium;
     
+
 
     public UISlider energy_slider;
     public UISlider mining_slider;
@@ -34,6 +37,12 @@ public class Variable_Tracker : MonoBehaviour
     public UISlider population_slider;
     public UISlider energy2_slider;
     public UISlider fuel_slider;
+    public UISlider uranium_slider;
+    public UISlider lithium_slider;
+
+
+
+
 
     public Text energy_text;
     public Text mining_text;
@@ -44,12 +53,19 @@ public class Variable_Tracker : MonoBehaviour
     public Text money_text;
     public Text energy2_text;
     public Text fuel_text;
+    public Text uranium_text;
+    public Text lithium_text;
 
 
     public List<string> crewNames = new List<string>();
     
     public int max_energy = 100;
     public int max_mining = 10;
+    public int max_uranium = 10;
+    public int max_lithium = 5;
+
+
+
     public int max_water = 100;
     public int max_food = 100;
     public int max_O2 = 100;
@@ -133,7 +149,7 @@ public class Variable_Tracker : MonoBehaviour
         // RenderSettings.skybox.SetFloat("_Rotation", rotate_speed * Time.time);
 
         money_text.text = money.ToString();
-        energy_text.text = energy.ToString() + "/" + max_energy.ToString();
+        energy_text.text = energy.ToString() + "/" + max_energy.ToString(); //Adding the numbers for the sliders
         energy2_text.text = energy.ToString() + "/" + max_energy.ToString();
         fuel_text.text = fuel.ToString() + "/" + max_fuel.ToString();
         mining_text.text = regolith.ToString() + "/" + max_mining.ToString();
@@ -141,8 +157,10 @@ public class Variable_Tracker : MonoBehaviour
         water_text.text = water.ToString() + "/" + max_water.ToString();
         food_text.text = food.ToString() + "/" + max_food.ToString();
         population_text.text = population.ToString() + "/" + max_population.ToString();
+        uranium_text.text = uranium.ToString() + "/" + max_uranium.ToString();
+        lithium_text.text = lithium.ToString() + "/" + max_lithium.ToString();
 
-        energy_slider.value = energy;
+        energy_slider.value = energy; //updating the slider values
         energy2_slider.value = energy;
         mining_slider.value = regolith;
         water_slider.value = water;
@@ -150,6 +168,8 @@ public class Variable_Tracker : MonoBehaviour
         population_slider.value = population;
         O2_slider.value = O2;
         fuel_slider.value = fuel;
+        lithium_slider.value = lithium;
+        uranium_slider.value = uranium;
 
 
         population_slider.maxValue = max_population;
