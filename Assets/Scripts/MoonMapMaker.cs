@@ -328,7 +328,7 @@ public class MapCell
     }
     public void Add_building(int build_index,bool transparency = false) //Add building without fade in called in the load part
     {
-        //Debug.Log("Adding " + GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index]);
+        Debug.Log("Adding " + GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index]);
         MoonMapMaker maker = map.GetComponent<MoonMapMaker>();
         
         GameObject GameManager = GameObject.Find("Game Manager");
