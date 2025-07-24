@@ -332,7 +332,10 @@ public class MapCell
         MoonMapMaker maker = map.GetComponent<MoonMapMaker>();
         
         GameObject GameManager = GameObject.Find("Game Manager");
-        if (build_index !=  map.GetComponent<MapPointer>().unplaceable_buildings && build_index != 100)
+        
+        Debug.Log("Adding building " + build_index + " to cell " + cell_number);
+        
+        if (build_index != map.GetComponent<MapPointer>().unplaceable_buildings && build_index != 100)
         {
             if (building != null)
             {
@@ -344,7 +347,7 @@ public class MapCell
             building = Object.Instantiate(instance, centerpoint, Quaternion.identity);
             building.gameObject.SetActive(true);
             GameManager.GetComponent<Variable_Tracker>().Shop_button_1();
-            
+
             if (transparency == false)
             {
                 if (building.GetComponentInChildren<Transparency>() != null)

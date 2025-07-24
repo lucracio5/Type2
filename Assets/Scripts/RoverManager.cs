@@ -133,7 +133,7 @@ public class RoverManager : MonoBehaviour
         RoverStatsPanel.SetActive(true);
     }
 
-    public void increaseMovement(int roverID)
+    /*public void increaseMovement(GameObject RoverStatsPanel)
     {
         // Increase the movement speed of the specified rover
         if (roverID >= 0 && roverID < roverSlotStats.Length)
@@ -145,7 +145,7 @@ public class RoverManager : MonoBehaviour
         {
             Debug.LogError("Invalid rover ID: " + roverID);
         }
-    }
+    }*/
 
     public void increaseMining(int roverID)
     {
