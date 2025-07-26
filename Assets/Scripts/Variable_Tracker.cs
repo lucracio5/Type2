@@ -146,7 +146,16 @@ public class Variable_Tracker : MonoBehaviour
             new int[] { 0, 0, 0 }  // Slot 5
         };*/
 
-        roverSlotStats = RandomJaggedIntArray();
+        roverSlotStats = new int[][]
+        {
+            new int[] { 1, 1, 1 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
+            new int[] { 0, 0, 0 }, // Slot 2
+            new int[] { 0, 0, 0 }, // Slot 3
+            new int[] { 0, 0, 0 }, // Slot 4
+            new int[] { 0, 0, 0 }  // Slot 5
+        };
+
+        //roverSlotStats = RandomJaggedIntArray();
     }
 
 
