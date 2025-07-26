@@ -28,7 +28,7 @@ public class Variable_Tracker : MonoBehaviour
     public int uranium;
     public int titanium;
     public int lithium;
-    
+
 
 
     public UISlider energy_slider;
@@ -60,7 +60,7 @@ public class Variable_Tracker : MonoBehaviour
 
 
     public List<string> crewNames = new List<string>();
-    
+
     public int max_energy = 100;
     public int max_mining = 10;
     public int max_titanium = 10;
@@ -87,8 +87,8 @@ public class Variable_Tracker : MonoBehaviour
     public GameObject panel;
     public GameObject map;
 
-    
-    
+
+
     public UnityEngine.UI.Button shop_button;
     public TMP_Text shop_text;
     public bool cancel = false;
@@ -101,19 +101,12 @@ public class Variable_Tracker : MonoBehaviour
     public int science_jobs;
     public int cleaning_jobs;
     public bool Hydro_Unlock;
-    public int[][] roverSlotStats = new int[][]
-    {
-        new int[] { 1, 1, 1 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
-        new int[] { 1, 1, 1 }, // Slot 2
-        new int[] { 1, 1, 1 }, // Slot 3
-        new int[] { 1, 1, 1 }, // Slot 4
-        new int[] { 1, 1, 1 }  // Slot 5
-    };
+    public int[][] roverSlotStats;
 
     public void Start()
     {
         Begin();
-
+        Debug.Log("roverSlotStats: " + roverSlotStats[0] + " " + roverSlotStats[1] + " " + roverSlotStats[2] + " " + roverSlotStats[3] + " " + roverSlotStats[4]);
     }
     public TMP_Text returnSolar1()
     {
@@ -145,8 +138,34 @@ public class Variable_Tracker : MonoBehaviour
         tree.Hydro_unlock = Hydro_Unlock;
         max_energy = 100;
 
+        roverSlotStats = new int[][]
+        {
+            new int[] { 0, 0, 0 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
+            new int[] { 0, 0, 0 }, // Slot 2
+            new int[] { 0, 0, 0 }, // Slot 3
+            new int[] { 0, 0, 0 }, // Slot 4
+            new int[] { 0, 0, 0 }  // Slot 5
+        };
 
     }
+
+
+
+
+    int[][] RandomJaggedIntArray()
+    {
+        int[][] jaggedArray = new int[5][];
+        for (int i = 0; i < jaggedArray.Length; i++)
+        {
+            jaggedArray[i] = new int[3]; // Each inner array has 3 elements
+            for (int j = 0; j < jaggedArray[i].Length; j++)
+            {
+                jaggedArray[i][j] = UnityEngine.Random.Range(0, 10); // Random values between 0 and 9
+            }
+        }
+        return jaggedArray;
+    }
+
     // Update is called once per frame
     void Update()
     {
@@ -187,14 +206,14 @@ public class Variable_Tracker : MonoBehaviour
             GameoverText.SetActive(true);
             Time.timeScale = 0;
         }
-        
-        
-        
+
+
+
     }
     public void speed1()
     {
         speed = 1;
-        
+
     }
     public void speed2()
     {
@@ -215,8 +234,7 @@ public class Variable_Tracker : MonoBehaviour
         Hydro_Unlock = tree.Hydro_unlock;
         SaveSystem.Save();
         audio_manager.PlayUIclick();
-        roverSlotStats = roverManager.roverSlotStats;
-        masterTime = masterTimer.masterTime; 
+        masterTime = masterTimer.masterTime;
 
     }
     public void Test()
@@ -269,7 +287,7 @@ public class Variable_Tracker : MonoBehaviour
         data.money = money;
         data.Map = "";
         data.xp = xp;
-        data.science_points = science_points; 
+        data.science_points = science_points;
         data.science_jobs = science_jobs;
         data.cleaning_jobs = cleaning_jobs;
         data.hydro_unlock = Hydro_Unlock;
@@ -309,7 +327,7 @@ public class Variable_Tracker : MonoBehaviour
         Hydro_Unlock = data.hydro_unlock;
         roverSlotStats = data.roverSlotStats;
         masterTime = data.masterTime;
-   }
+    }
 
 
     [System.Serializable]
@@ -328,9 +346,70 @@ public class Variable_Tracker : MonoBehaviour
         public int science_jobs;
         public int cleaning_jobs;
         public bool hydro_unlock;
-        public int[][] roverSlotStats;
+        public string roverSlotStats;
         public float masterTime;
 
+    }
+
+
+    string EncodeJaggedArray(int[][] jaggedArray)
+    {
+        if (jaggedArray == null)
+        {
+            Debug.LogWarning("Jagged array is null.");
+            return string.Empty;
+        }
+        else if (jaggedArray.Length == 0)
+        {
+            Debug.LogWarning("Jagged array is empty.");
+            return string.Empty;
+        }
+
+        string encodedString = string.Empty;
+        foreach (int[] innerArray in jaggedArray)
+        {
+            string encodedInner = string.Join(",", innerArray);
+            encodedString += encodedInner + ";";
+        }
+        Debug.Log("Encoded Jagged Array: " + encodedString);
+        return encodedString;
+    }
+
+    int[][] DecodeJaggedArray(string encodedString)
+    {
+        if (string.IsNullOrEmpty(encodedString))
+        {
+            Debug.LogWarning("Encoded string is null or empty.");
+            return new int[0][];
+        }
+
+        // Split by ';' to get each inner array as a string
+        string[] innerStrings = encodedString.Split(new char[] { ';' }, System.StringSplitOptions.RemoveEmptyEntries);
+
+        int[][] result = new int[innerStrings.Length][];
+
+        for (int i = 0; i < innerStrings.Length; i++)
+        {
+            // Split inner string by ',' to get string elements
+            string[] numberStrings = innerStrings[i].Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
+
+            // Parse each number string into int
+            int[] innerArray = new int[numberStrings.Length];
+            for (int j = 0; j < numberStrings.Length; j++)
+            {
+                if (int.TryParse(numberStrings[j], out int val))
+                    innerArray[j] = val;
+                else
+                {
+                    Debug.LogWarning($"Failed to parse '{numberStrings[j]}' to int.");
+                    innerArray[j] = 0; // fallback value
+                }
+            }
+
+            result[i] = innerArray;
+        }
+
+        return result;
     }
 
 

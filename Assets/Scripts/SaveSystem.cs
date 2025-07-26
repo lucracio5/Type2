@@ -1,13 +1,14 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 using System.IO;
 using static Variable_Tracker;
 using Unity.VisualScripting;
 using UnityEngine.Rendering;
 
 public class SaveSystem
-{   
+{
     public static SaveData _saveData = new SaveData();
     public static GameObject Gamemanager;
     public static void EnsureGameManager()
@@ -16,7 +17,7 @@ public class SaveSystem
         {
             Gamemanager = GameObject.Find("Game Manager");
         }
-            
+
     }
 
 
@@ -46,7 +47,7 @@ public class SaveSystem
         if (!File.Exists(SavefileName()))
         {
             Debug.LogWarning("Save file not found, creating new save data.");
-            _saveData = new SaveData(); 
+            _saveData = new SaveData();
             return;
         }
 
@@ -60,6 +61,23 @@ public class SaveSystem
         EnsureGameManager();
         Gamemanager.GetComponent<Variable_Tracker>().LoadData(_saveData.variableSave);
     }
+
+
+    [MenuItem("Tools/Clear Persistent Data")]
+    public static void ClearData()
+    {
+        var path = Application.persistentDataPath;
+        if (Directory.Exists(path))
+        {
+            Directory.Delete(path, true);
+            Debug.Log("Persistent data cleared.");
+        }
+        else
+        {
+            Debug.Log("No persistent data found.");
+        }
+    }
+    
    
   
 }

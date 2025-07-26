@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEditor;
 using TMPro;
 
 // Manages the stats and UI display for multiple rover slots in the game.
@@ -40,11 +41,11 @@ public class RoverManager : MonoBehaviour
 
     // Array holding the stats for each rover slot.
     // Each int[] contains: [movementSpeed, miningSpeed, batteryLife]
-    public int[][] roverSlotStats;
+    //public int[][] roverSlotStats;
 
     /// Unity Awake method. Initializes the roverSlotStats array with default values for each rover slot.
     /// Each slot starts with the base stats.
-    void Awake()
+    /*void Awake()
     {
         if (variableTracker.roverSlotStats.Length > 0) //if roverSlotStats is already set in Variable_Tracker
         {
@@ -54,26 +55,26 @@ public class RoverManager : MonoBehaviour
         {
             InitializeRoverStats(); // Initialize with default stats if not set
         }
-    }
+    } */
 
     // Initialize the roverSlotStats array with default stats for each rover slot.
     // Each rover starts with base movement speed, mining speed, and battery life.
-    void InitializeRoverStats()
+    /*void InitializeRoverStats()
     {
         roverSlotStats = new int[][]
         {
-            new int[] { baseMovementSpeed, baseMiningSpeed, baseBatteryLife },
-            new int[] { baseMovementSpeed, baseMiningSpeed, baseBatteryLife },
-            new int[] { baseMovementSpeed, baseMiningSpeed, baseBatteryLife },
-            new int[] { baseMovementSpeed, baseMiningSpeed, baseBatteryLife },
-            new int[] { baseMovementSpeed, baseMiningSpeed, baseBatteryLife }
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 }
         };
-    }
+    }*/
 
 
     void Start()
     {
-        variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
+        //variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
         UpdateRoverHubPanel(); //Update the rover hub panel with current stats
     }
 
@@ -107,19 +108,24 @@ public class RoverManager : MonoBehaviour
     // Opens the stats panel for a specific rover slot and updates the UI with its stats and image.
     public void OpenStatsPanel(int roverSlot)
     {
-        variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
+        if (OverallLevel(variableTracker.roverSlotStats[roverSlot]) < 0.001f)
+        {
+            Debug.LogWarning("Rover slot " + (roverSlot + 1) + " has no stats to display.");
+            return; // Exit if the rover slot has no stats
+        }
+        //variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
 
         // Retrieve the stats for the selected rover slot
-        int[] stats = roverSlotStats[roverSlot];
+        int[] stats = variableTracker.roverSlotStats[roverSlot];
         int movement = stats[0];
         int mining = stats[1];
         int battery = stats[2];
 
         // Update the UI text fields with the current stats
+        roverStatsPanelTitleText.text = "Rover " + (roverSlot + 1).ToString() + " Stats:"; // Display the rover slot number
         movementSpeedText.text = "Movement Speed: " + movement.ToString();
         miningSpeedText.text = "Mining Speed: " + mining.ToString();
         batteryLifeText.text = "Battery Life: " + battery.ToString();
-        roverStatsPanelTitleText.text = "Rover " + (roverSlot + 1).ToString() + " Stats:"; // Display the rover slot number
 
         // Choose the appropriate sprite based on the rover's overall level
         if (OverallLevel(stats) < 3)
@@ -153,15 +159,15 @@ public class RoverManager : MonoBehaviour
 
         Sprite spriteToDisplay;
 
-        for (int i = 0; i < roverSlotStats.Length; i++)
+        for (int i = 0; i < variableTracker.roverSlotStats.Length; i++)
         {
 
             // Choose the appropriate sprite based on the rover's overall level
-            if (OverallLevel(roverSlotStats[i]) < 3)
+            if (OverallLevel(variableTracker.roverSlotStats[i]) < 3) //if it is over nothing (it has been bought) and is less than 3
             {
                 spriteToDisplay = Rover1Sprite;
             }
-            else if (OverallLevel(roverSlotStats[i]) < 6)
+            else if (OverallLevel(variableTracker.roverSlotStats[i]) < 6)
             {
                 spriteToDisplay = Rover2Sprite;
             }
@@ -171,13 +177,14 @@ public class RoverManager : MonoBehaviour
             }
 
             // Add a sprite to the canvas for each rover slot
-            if (i < roverSlotStats.Length)
+            if (i < variableTracker.roverSlotStats.Length && OverallLevel(variableTracker.roverSlotStats[i]) > 0.001) // Check if the rover has been bought (overall level > 0) and is within bounds of how many rovers there are (5)
             {
+                Debug.Log("Overall Level for Rover Slot " + (i + 1) + ": " + OverallLevel(variableTracker.roverSlotStats[i]));
                 AddSpriteToCanvas(spriteToDisplay, new Vector2(0, 0), RoverSlots.transform, i);
             }
         }
 
-        
+
     }
 
     void AddSpriteToCanvas(Sprite sprite, Vector2 anchoredPosition, Transform parentCanvas, int roverSlot)
@@ -199,13 +206,15 @@ public class RoverManager : MonoBehaviour
         rt.sizeDelta = new Vector2(308, 195); // Set size as needed
         rt.localScale = new Vector3(1.2f, 1.2f, 0f); //Set scale correctly
         rt.pivot = new Vector2(0.5f, 0.5f);      // Set pivot to center
+
+        Debug.Log("Added sprite for Rover Slot " + (roverSlot + 1) + " at position: " + anchoredPosition);
     }
 
 
     void ReloadStatsPanel(int roverSlot)
     {
         // Retrieve the stats for the selected rover slot
-        int[] stats = roverSlotStats[roverSlot];
+        int[] stats = variableTracker.roverSlotStats[roverSlot];
         int movement = stats[0];
         int mining = stats[1];
         int battery = stats[2];
@@ -250,8 +259,6 @@ public class RoverManager : MonoBehaviour
             IncreaseBattery(roverID);
         }
 
-        // Update the roverSlotStats in Variable_Tracker after modifying stats
-        variableTracker.roverSlotStats = roverSlotStats;
         ReloadStatsPanel(roverID); // Reload the stats panel to reflect changes
     }
 
@@ -259,9 +266,9 @@ public class RoverManager : MonoBehaviour
     void IncreaseMovement(int roverID)
     {
         // Increase the movement speed of the specified rover
-        if (roverID >= 0 && roverID < roverSlotStats.Length)
+        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length)
         {
-            roverSlotStats[roverID][0] = Mathf.Min(roverSlotStats[roverID][0] + 1, maxMovementSpeed);
+            variableTracker.roverSlotStats[roverID][0] = Mathf.Min(variableTracker.roverSlotStats[roverID][0] + 1, maxMovementSpeed);
         }
         else
         {
@@ -272,9 +279,9 @@ public class RoverManager : MonoBehaviour
     void IncreaseMining(int roverID)
     {
         // Increase the movement speed of the specified rover
-        if (roverID >= 0 && roverID < roverSlotStats.Length)
+        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length)
         {
-            roverSlotStats[roverID][1] = Mathf.Min(roverSlotStats[roverID][1] + 1, maxMiningSpeed);
+            variableTracker.roverSlotStats[roverID][1] = Mathf.Min(variableTracker.roverSlotStats[roverID][1] + 1, maxMiningSpeed);
         }
         else
         {
@@ -285,14 +292,15 @@ public class RoverManager : MonoBehaviour
     void IncreaseBattery(int roverID)
     {
         // Increase the movement speed of the specified rover
-        if (roverID >= 0 && roverID < roverSlotStats.Length)
+        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length)
         {
-            roverSlotStats[roverID][2] = Mathf.Min(roverSlotStats[roverID][2] + 1, maxBatteryLife);
+            variableTracker.roverSlotStats[roverID][2] = Mathf.Min(variableTracker.roverSlotStats[roverID][2] + 1, maxBatteryLife);
         }
         else
         {
             Debug.LogError("Invalid rover ID: " + roverID);
         }
     }
+    
     
 }
