@@ -1,30 +1,40 @@
-using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
-using UnityEngine.UIElements;
 
 public class Nav_test : MonoBehaviour
 {
     public NavMeshAgent agent;
     public GameObject home;
-    public List <GameObject> targets;
+    public List<GameObject> targets;
     public int active_target = 0;
-    int min_distance = 5;
-    // Start is called before the first frame update
+    public float min_distance = 5f;
+
+    private List<int> passed = new List<int>();
+    private bool justArrived = false;
+
     void Start()
     {
-        
+        active_target = 0;
+        agent.destination = targets.Count > 0 ? targets[active_target].transform.position : home.transform.position;
     }
 
-    // Update is called once per frame
     void Update()
     {
-        agent.destination = home.transform.position;
-        if (Vector3.Distance(this.transform.position, agent.destination) < min_distance) //if it is within 5 units of destination
+        float dist = Vector3.Distance(this.transform.position, agent.destination);
+
+        if (dist < min_distance && !justArrived)
         {
-            active_target += 1; //Next target
-            if (active_target <= targets.Count) 
+            justArrived = true;
+
+            if (!passed.Contains(active_target))
+            {
+                passed.Add(active_target);
+            }
+
+            active_target++;
+
+            if (active_target < targets.Count)
             {
                 agent.destination = targets[active_target].transform.position;
             }
@@ -32,7 +42,12 @@ public class Nav_test : MonoBehaviour
             {
                 agent.destination = home.transform.position;
             }
-            
+        }
+
+        // Reset arrival flag if we move away again (so it can trigger at next arrival)
+        if (dist >= min_distance)
+        {
+            justArrived = false;
         }
     }
 }
