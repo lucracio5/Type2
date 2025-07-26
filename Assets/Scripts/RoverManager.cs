@@ -76,6 +76,10 @@ public class RoverManager : MonoBehaviour
             Debug.LogWarning("Rover slot " + (roverSlot + 1) + " has no stats to display.");
             return; // Exit if the rover slot has no stats
         }
+        else
+        {
+            RoverHubPanel.SetActive(false); // Hide the Rover Hub Panel when opening the stats panel
+        }
         //variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
 
         // Retrieve the stats for the selected rover slot
@@ -119,21 +123,13 @@ public class RoverManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-
         
 
         //Display the rover sprites in the RoverSlots panel based on their stats
         for (int i = 0; i < variableTracker.roverSlotStats.Length; i++)
         {
             Sprite spriteToDisplay;
-            
-            // Choose the appropriate sprite based on the rover's overall level
-            /*if (variableTracker.roverSlotStats[i] < 0.001f)
-            {
-                Debug.LogWarning("Rover slot " + (i + 1) + " has no stats to display.");
-                continue; // Skip this iteration if the rover slot has no stats
-            }
-            else*/
+
             if (OverallLevel(variableTracker.roverSlotStats[i]) < 3) //if it is over nothing (it has been bought) and is less than 3
             {
                 spriteToDisplay = Rover1Sprite;
