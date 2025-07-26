@@ -12,11 +12,21 @@ public class Nav_test : MonoBehaviour
 
     private List<int> passed = new List<int>();
     private bool justArrived = false;
+    private int roverID;
 
     void Start()
     {
         active_target = 0;
         agent.destination = targets.Count > 0 ? targets[active_target].transform.position : home.transform.position;
+
+    }
+
+    //returns the rover ID from the GameObject's name, assuming it ends with a number (ex. Rover_2)
+    int GetRoverID()
+    {
+        string roverName = this.gameObject.name;
+        string number = System.Text.RegularExpressions.Regex.Match(roverName, @"\d+$").Value;
+        return int.Parse(number);
     }
 
     void Update()
