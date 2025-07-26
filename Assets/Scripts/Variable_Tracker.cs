@@ -138,15 +138,16 @@ public class Variable_Tracker : MonoBehaviour
         tree.Hydro_unlock = Hydro_Unlock;
         max_energy = 100;
 
-        roverSlotStats = new int[][]
+        /*roverSlotStats = new int[][]
         {
             new int[] { 0, 0, 0 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
             new int[] { 0, 0, 0 }, // Slot 2
             new int[] { 0, 0, 0 }, // Slot 3
             new int[] { 0, 0, 0 }, // Slot 4
             new int[] { 0, 0, 0 }  // Slot 5
-        };
+        };*/
 
+        roverSlotStats = RandomJaggedIntArray();
     }
 
 
@@ -291,7 +292,7 @@ public class Variable_Tracker : MonoBehaviour
         data.science_jobs = science_jobs;
         data.cleaning_jobs = cleaning_jobs;
         data.hydro_unlock = Hydro_Unlock;
-        data.roverSlotStats = roverSlotStats;
+        data.roverSlotStats = EncodeJaggedArray(roverSlotStats);
         data.masterTime = masterTime;
 
         foreach (MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
@@ -325,7 +326,7 @@ public class Variable_Tracker : MonoBehaviour
         science_jobs = data.science_jobs;
         cleaning_jobs = data.cleaning_jobs;
         Hydro_Unlock = data.hydro_unlock;
-        roverSlotStats = data.roverSlotStats;
+        roverSlotStats = DecodeJaggedArray(data.roverSlotStats);
         masterTime = data.masterTime;
     }
 
