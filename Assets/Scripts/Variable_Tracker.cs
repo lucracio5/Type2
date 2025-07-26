@@ -106,6 +106,7 @@ public class Variable_Tracker : MonoBehaviour
     public void Start()
     {
         Begin();
+        Debug.Log("roverSlotStats: " + roverSlotStats[0] + " " + roverSlotStats[1] + " " + roverSlotStats[2] + " " + roverSlotStats[3] + " " + roverSlotStats[4]);
     }
     public TMP_Text returnSolar1()
     {
@@ -215,8 +216,10 @@ public class Variable_Tracker : MonoBehaviour
             GameoverText.SetActive(true);
             Time.timeScale = 0;
         }
-    }
 
+
+
+    }
     public void speed1()
     {
         speed = 1;
@@ -378,6 +381,7 @@ public class Variable_Tracker : MonoBehaviour
             string encodedInner = string.Join(",", innerArray);
             encodedString += encodedInner + ";";
         }
+        Debug.Log("Encoded Jagged Array: " + encodedString);
         return encodedString;
     }
 
@@ -417,4 +421,7 @@ public class Variable_Tracker : MonoBehaviour
 
         return result;
     }
+
+
+
 }

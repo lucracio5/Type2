@@ -11,6 +11,11 @@ public class RoverManager : MonoBehaviour
 {
     public Variable_Tracker variableTracker; // Reference to the Variable_Tracker script for accessing game variables
 
+    // Base stats for all rovers (used for initialization)
+    private int baseMovementSpeed = 1;
+    private int baseMiningSpeed = 1;
+    private int baseBatteryLife = 1;
+
     // Maximum possible stats for any rover (not currently used, but could be useful for upgrades or limits)
     private int maxMovementSpeed = 10;
     private int maxMiningSpeed = 10;
