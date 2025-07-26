@@ -92,7 +92,6 @@ public class ResourceHandler : MonoBehaviour
         { //If you have low energy and are not already playing the SFX
             Audio_manager.PlayLowEnergySiren(); // Plays the sound effect
             playingLowEnergySiren = true;
-            Debug.Log("playing");
         }
         else if (Gamemanager.GetComponent<Variable_Tracker>().water > lowFoodOrWater && playingLowEnergySiren == true)
         { // If you don't have low energy and are already playing the SFX

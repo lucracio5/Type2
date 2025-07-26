@@ -9,6 +9,7 @@ public class MasterTimer : MonoBehaviour
     public Variable_Tracker variable_Tracker;
     public float masterTime;
     private int lastMinute = -1; // Track the last minute we triggered
+    public bool autosave; //Turns on or off the autosave for working purposes MAKE SURE THIS IS TRUE BEFORE PUBLISH
 
     // Start is called before the first frame update
     void Start()
@@ -26,7 +27,10 @@ public class MasterTimer : MonoBehaviour
 
         if (currentMinute > lastMinute) //if a minute has passed
         {
-            variable_Tracker.Save_button(); //auto-save the game
+            if(autosave)
+            {
+                variable_Tracker.Save_button(); //auto-save the game
+            }
             lastMinute = currentMinute;
         }
 
