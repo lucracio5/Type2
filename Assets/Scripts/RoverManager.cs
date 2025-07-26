@@ -34,38 +34,6 @@ public class RoverManager : MonoBehaviour
     public Sprite Rover3Sprite;
     public Vector2[] roverSlotPositions; // Positions for each rover slot on the canvas
 
-    // Array holding the stats for each rover slot.
-    // Each int[] contains: [movementSpeed, miningSpeed, batteryLife]
-    //public int[][] roverSlotStats;
-
-    /// Unity Awake method. Initializes the roverSlotStats array with default values for each rover slot.
-    /// Each slot starts with the base stats.
-    /*void Awake()
-    {
-        if (variableTracker.roverSlotStats.Length > 0) //if roverSlotStats is already set in Variable_Tracker
-        {
-            roverSlotStats = variableTracker.roverSlotStats; // Use existing stats
-        }
-        else
-        {
-            InitializeRoverStats(); // Initialize with default stats if not set
-        }
-    } */
-
-    // Initialize the roverSlotStats array with default stats for each rover slot.
-    // Each rover starts with base movement speed, mining speed, and battery life.
-    /*void InitializeRoverStats()
-    {
-        roverSlotStats = new int[][]
-        {
-            new int[] { 0, 0, 0 },
-            new int[] { 0, 0, 0 },
-            new int[] { 0, 0, 0 },
-            new int[] { 0, 0, 0 },
-            new int[] { 0, 0, 0 }
-        };
-    }*/
-
 
     void Start()
     {
@@ -152,12 +120,20 @@ public class RoverManager : MonoBehaviour
             }
         }
 
-        Sprite spriteToDisplay;
+        
 
+        //Display the rover sprites in the RoverSlots panel based on their stats
         for (int i = 0; i < variableTracker.roverSlotStats.Length; i++)
         {
-
+            Sprite spriteToDisplay;
+            
             // Choose the appropriate sprite based on the rover's overall level
+            /*if (variableTracker.roverSlotStats[i] < 0.001f)
+            {
+                Debug.LogWarning("Rover slot " + (i + 1) + " has no stats to display.");
+                continue; // Skip this iteration if the rover slot has no stats
+            }
+            else*/
             if (OverallLevel(variableTracker.roverSlotStats[i]) < 3) //if it is over nothing (it has been bought) and is less than 3
             {
                 spriteToDisplay = Rover1Sprite;
@@ -176,6 +152,10 @@ public class RoverManager : MonoBehaviour
             {
                 Debug.Log("Overall Level for Rover Slot " + (i + 1) + ": " + OverallLevel(variableTracker.roverSlotStats[i]));
                 AddSpriteToCanvas(spriteToDisplay, new Vector2(0, 0), RoverSlots.transform, i);
+            }
+            else
+            {
+                Debug.LogWarning("Rover slot " + (i + 1) + " has no stats to display or is out of bounds.");
             }
         }
 
