@@ -6,7 +6,7 @@ public class Nav_test : MonoBehaviour
 {
     public NavMeshAgent agent;
     public GameObject home;
-    public List<GameObject> targets;
+    
     public int active_target = 0;
     public float min_distance = 5f;
     public Variable_Tracker tracker;
@@ -15,18 +15,31 @@ public class Nav_test : MonoBehaviour
     private bool justArrived = false;
     private int roverID;
     public int speed;
-    public int baterey_life;
+    public int batterey_life;
     public int mining_spped;
     public bool on_trip;
+
+
+    List<GameObject> south_targets;
+    List<GameObject> east_targets;
+    List<GameObject> west_targets;
+    List<GameObject> north_targets;
+
+
 
     void Start()
     {
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
         int RoverId = GetRoverID();
         speed = tracker.roverSlotStats[RoverId][0];
-        baterey_life = tracker.roverSlotStats[RoverId][1];
+        batterey_life = tracker.roverSlotStats[RoverId][1];
         mining_spped = tracker.roverSlotStats[RoverId][2];
         active_target = 0;
+        south_targets = tracker.south_points;
+        east_targets = tracker.east_points;
+        west_targets = tracker.west_points;
+        north_targets = tracker.north_points;
+        home = GameObject.Find("Rover Hub point");
 
     }
 
@@ -43,53 +56,77 @@ public class Nav_test : MonoBehaviour
         int num = Random.Range(0, 3);//Random to decide which direction
         if (num  == 0)
         {
-
+            agent.destination = south_targets[batterey_life].transform.position;
         }
         else if(num == 1)
         {
-
+            agent.destination = east_targets[batterey_life].transform.position;
         }
         else if (num == 2)
         {
-
+            agent.destination = west_targets[batterey_life].transform.position;
         }
-        else if (num == 3)
+        else
         {
-
+            agent.destination = north_targets[batterey_life].transform.position;
         }
-        agent.destination = targets[active_target].transform.position;
+        agent.speed = 7 + (speed * 3);
+        
 
     }
 
     void Update()
     {
-        float dist = Vector3.Distance(this.transform.position, agent.destination);
-
-        if (dist < min_distance && !justArrived)
+       if (on_trip)
         {
-            justArrived = true;
-
-            if (!passed.Contains(active_target))
+            float dist = Vector3.Distance(this.transform.position, agent.destination);
+            if (dist < min_distance)
             {
-                passed.Add(active_target);
+
             }
 
-            active_target++;
 
-            if (active_target < targets.Count)
-            {
-                agent.destination = targets[active_target].transform.position;
-            }
-            else
-            {
-                agent.destination = home.transform.position;
-            }
+
+
+
+
+
+
+
+
         }
-
-        // Reset arrival flag if we move away again (so it can trigger at next arrival)
-        if (dist >= min_distance)
-        {
-            justArrived = false;
-        }
+        
+        
+      
     }
 }
+/*
+float dist = Vector3.Distance(this.transform.position, agent.destination);
+
+if (dist < min_distance && !justArrived)
+{
+    justArrived = true;
+
+    if (!passed.Contains(active_target))
+    {
+        passed.Add(active_target);
+    }
+
+    active_target++;
+
+    if (active_target < targets.Count)
+    {
+        agent.destination = targets[active_target].transform.position;
+    }
+    else
+    {
+        agent.destination = home.transform.position;
+    }
+}
+
+// Reset arrival flag if we move away again (so it can trigger at next arrival)
+if (dist >= min_distance)
+{
+    justArrived = false;
+}
+*/

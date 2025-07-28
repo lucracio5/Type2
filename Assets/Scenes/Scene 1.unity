@@ -20215,10 +20215,50 @@ MonoBehaviour:
   science_jobs: 0
   cleaning_jobs: 0
   Hydro_Unlock: 0
-  south_points: []
-  west_points: []
-  east_points: []
-  north_points: []
+  south_points:
+  - {fileID: 1634918817}
+  - {fileID: 605755142}
+  - {fileID: 164460724}
+  - {fileID: 87438797}
+  - {fileID: 1029643882}
+  - {fileID: 844363022}
+  - {fileID: 216011493}
+  - {fileID: 1878717809}
+  - {fileID: 7470672}
+  - {fileID: 374676236}
+  west_points:
+  - {fileID: 1022391975}
+  - {fileID: 268588216}
+  - {fileID: 497109708}
+  - {fileID: 536411798}
+  - {fileID: 1131275889}
+  - {fileID: 544586595}
+  - {fileID: 1811752137}
+  - {fileID: 1724338627}
+  - {fileID: 829047342}
+  - {fileID: 348909828}
+  east_points:
+  - {fileID: 922461481}
+  - {fileID: 2112031474}
+  - {fileID: 1206565857}
+  - {fileID: 1826549734}
+  - {fileID: 357290772}
+  - {fileID: 526695156}
+  - {fileID: 1127028314}
+  - {fileID: 490506777}
+  - {fileID: 1948239699}
+  - {fileID: 731836778}
+  north_points:
+  - {fileID: 1761614160}
+  - {fileID: 1173570999}
+  - {fileID: 294022673}
+  - {fileID: 811208218}
+  - {fileID: 545360834}
+  - {fileID: 1600223262}
+  - {fileID: 199578379}
+  - {fileID: 1318836738}
+  - {fileID: 1902235591}
+  - {fileID: 1933898371}
 --- !u!114 &1013954941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -31077,7 +31117,7 @@ GameObject:
   - component: {fileID: 1289483873}
   - component: {fileID: 1289483872}
   m_Layer: 0
-  m_Name: Rover Hub
+  m_Name: Rover Hub point
   m_TagString: Untagged
   m_Icon: {fileID: 5721338939258241955, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -50599,22 +50639,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   agent: {fileID: 5316913771592620572}
   home: {fileID: 1289483871}
-  targets:
-  - {fileID: 1634918817}
-  - {fileID: 605755142}
-  - {fileID: 164460724}
-  - {fileID: 87438797}
-  - {fileID: 1029643882}
-  - {fileID: 844363022}
-  - {fileID: 216011493}
-  - {fileID: 1878717809}
-  - {fileID: 7470672}
-  - {fileID: 374676236}
   active_target: 0
   min_distance: 5
   tracker: {fileID: 0}
   speed: 0
-  baterey_life: 0
+  batterey_life: 0
   mining_spped: 0
   on_trip: 0
 --- !u!195 &5316913771592620572
