@@ -2916,7 +2916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.5477295, y: 15.263977}
+  m_AnchoredPosition: {x: -7.54776, y: 15.263977}
   m_SizeDelta: {x: -65.3817, y: -69.472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155305215
@@ -20775,6 +20775,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variable_Tracker: {fileID: 1013954939}
   masterTime: 0
+  masterGameTime: 0
   autosave: 0
 --- !u!1 &1019172834
 GameObject:
@@ -50630,7 +50631,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!54 &5316913771592620570
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -50679,6 +50680,7 @@ MonoBehaviour:
   battery_life: 0
   mining_speed: 0
   on_trip: 0
+  mining_time: 0
 --- !u!195 &5316913771592620572
 NavMeshAgent:
   m_ObjectHideFlags: 0

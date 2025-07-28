@@ -35,6 +35,7 @@ public class Nav_test : MonoBehaviour
 
 
 
+
     void Start()
     {
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
@@ -42,12 +43,22 @@ public class Nav_test : MonoBehaviour
         speed = tracker.roverSlotStats[RoverId][0];
         battery_life = tracker.roverSlotStats[RoverId][1];
         mining_speed = tracker.roverSlotStats[RoverId][2];
+
+        speed = 3;
+        battery_life = 4;
+        mining_speed = 5;
+
         active_target = 0;
         south_targets = tracker.south_points;
         east_targets = tracker.east_points;
         west_targets = tracker.west_points;
         north_targets = tracker.north_points;
         home = GameObject.Find("Rover Hub point");
+        charge_time = 60 - ((tracker.charge_speed + 1) * 15);
+        charging_timer = 0;
+        Debug.Log(speed);
+        Debug.Log(battery_life);
+        Debug.Log(mining_speed);
 
     }
 
@@ -101,6 +112,12 @@ public class Nav_test : MonoBehaviour
     }
     void Update()
     {
+        //Debug.Log(on_trip);
+        //Debug.Log(is_mining);
+        //Debug.Log(agent.destination);
+
+
+
         charging_timer += Time.deltaTime * tracker.speed;
         if (on_trip)
         {
