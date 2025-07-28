@@ -20740,9 +20740,9 @@ MonoBehaviour:
   roverCostScaleFactor: 2
   upgradeCost: 20
   RoverSpawnPoint: {x: 178, y: 1, z: -63}
-  rover1Prefab: {fileID: 5316913771449775443, guid: ea2b45aef702543d6a06098276d8c1b9, type: 3}
-  rover2Prefab: {fileID: 5677510306387119816, guid: 8b31be488c0e1477ba26b8daa7939d1a, type: 3}
-  rover3Prefab: {fileID: 4328880356581620031, guid: ad7bbcf9011fafa48b0e6ce9981fed34, type: 3}
+  rover1Prefab: {fileID: 2469464341647679966, guid: 9b08d3b7ce89f2d4eb0da3c8ec14c73d, type: 3}
+  rover2Prefab: {fileID: 2469464341647679966, guid: 9b08d3b7ce89f2d4eb0da3c8ec14c73d, type: 3}
+  rover3Prefab: {fileID: 2469464341647679966, guid: 9b08d3b7ce89f2d4eb0da3c8ec14c73d, type: 3}
   RoverStatsPanel: {fileID: 663762762}
   RoverHubPanel: {fileID: 1487082100}
   RoverSlots: {fileID: 1523572642}
