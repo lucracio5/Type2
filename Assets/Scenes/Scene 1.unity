@@ -778,7 +778,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 20303907}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1013954953}
+        m_TargetAssemblyTypeName: RoverManager, Assembly-CSharp
+        m_MethodName: BuyRover
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &20303907
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -4687,7 +4699,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &244898027
 RectTransform:
   m_ObjectHideFlags: 0
@@ -20163,7 +20175,7 @@ MonoBehaviour:
   population: 10
   food: 100
   O2: 100
-  money: 40
+  money: 600
   fuel: 0
   masterTime: 0
   uranium: 0
@@ -20723,6 +20735,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variableTracker: {fileID: 1013954939}
+  roverCost: 100
+  RoverSpawnPoint: {x: 178, y: 1, z: -63}
+  rover1Prefab: {fileID: 5316913771449775443, guid: ea2b45aef702543d6a06098276d8c1b9, type: 3}
+  rover2Prefab: {fileID: 5677510306387119816, guid: 8b31be488c0e1477ba26b8daa7939d1a, type: 3}
+  rover3Prefab: {fileID: 4328880356581620031, guid: ad7bbcf9011fafa48b0e6ce9981fed34, type: 3}
   RoverStatsPanel: {fileID: 663762762}
   RoverHubPanel: {fileID: 1487082100}
   RoverSlots: {fileID: 1523572642}
@@ -33849,7 +33866,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1487082101
 RectTransform:
   m_ObjectHideFlags: 0
