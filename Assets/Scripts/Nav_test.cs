@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -15,8 +16,8 @@ public class Nav_test : MonoBehaviour
     private bool justArrived = false;
     private int roverID;
     public int speed;
-    public int batterey_life;
-    public int mining_spped;
+    public int battery_life;
+    public int mining_speed;
     public bool on_trip;
 
 
@@ -26,6 +27,7 @@ public class Nav_test : MonoBehaviour
     List<GameObject> north_targets;
     float timer;
     int charge_time;
+    bool is_mining = false;
 
 
 
@@ -34,8 +36,8 @@ public class Nav_test : MonoBehaviour
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
         int RoverId = GetRoverID();
         speed = tracker.roverSlotStats[RoverId][0];
-        batterey_life = tracker.roverSlotStats[RoverId][1];
-        mining_spped = tracker.roverSlotStats[RoverId][2];
+        battery_life = tracker.roverSlotStats[RoverId][1];
+        mining_speed = tracker.roverSlotStats[RoverId][2];
         active_target = 0;
         south_targets = tracker.south_points;
         east_targets = tracker.east_points;
@@ -58,38 +60,39 @@ public class Nav_test : MonoBehaviour
         int num = Random.Range(0, 3);//Random to decide which direction
         if (num  == 0)
         {
-            agent.destination = south_targets[batterey_life].transform.position;
+            agent.destination = south_targets[battery_life-1].transform.position; 
         }
         else if(num == 1)
         {
-            agent.destination = east_targets[batterey_life].transform.position;
+            agent.destination = east_targets[battery_life-1].transform.position;
         }
         else if (num == 2)
         {
-            agent.destination = west_targets[batterey_life].transform.position;
+            agent.destination = west_targets[battery_life - 1].transform.position;
         }
         else
         {
-            agent.destination = north_targets[batterey_life].transform.position;
+            agent.destination = north_targets[battery_life - 1].transform.position;
         }
-        agent.speed = 7 + (speed * 3);
+        agent.speed = 8 + (speed * 2);
         
 
     }
     void arriving()
     {
-        if (tracker.charge_speed == 0)
-        {
-            charge_time = 45;
-        }
-        else if (tracker.charge_speed == 1)
-        {
-            charge_time = 30;
-        }
-        else if (tracker.charge_speed == 2)
-        {
-            charge_time = 15;
-        }
+       charge_time = 60-((tracker.charge_speed+1)*15);
+        timer = 0;
+    }
+    void mining()
+    {
+        
+        is_mining = true;
+        int mining_time = 15 - mining_speed;
+
+
+
+
+        agent.destination = home.transform.position; //If it is not ariving at home go home
 
     }
     void Update()
@@ -107,15 +110,17 @@ public class Nav_test : MonoBehaviour
                 }
                 else
                 {
-                    agent.destination = home.transform.position; //If it is not ariving at home go home
+                    mining();
                 }
             }
         }
         if (!on_trip)
         {
-
-            timer = 0;
-            
+            if(timer > charge_time)
+            {
+                start_trip();
+                on_trip=true;
+            }
         }
         
         
