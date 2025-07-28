@@ -2,6 +2,7 @@ using System.Collections.Generic;
 using System.Reflection;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.UIElements;
 
 public class Nav_test : MonoBehaviour
 {
@@ -19,15 +20,18 @@ public class Nav_test : MonoBehaviour
     public int battery_life;
     public int mining_speed;
     public bool on_trip;
+    public int mining_time;
 
 
     List<GameObject> south_targets;
     List<GameObject> east_targets;
     List<GameObject> west_targets;
     List<GameObject> north_targets;
-    float timer;
+    float charging_timer;
+    float mining_timer;
     int charge_time;
     bool is_mining = false;
+    int colected_regoltih;
 
 
 
@@ -81,23 +85,23 @@ public class Nav_test : MonoBehaviour
     void arriving()
     {
        charge_time = 60-((tracker.charge_speed+1)*15);
-        timer = 0;
+       charging_timer = 0;
     }
     void mining()
     {
         
         is_mining = true;
-        int mining_time = 15 - mining_speed;
+        mining_time = 15 - mining_speed;
+        mining_timer = 0;
 
 
 
-
-        agent.destination = home.transform.position; //If it is not ariving at home go home
+         //If it is not ariving at home go home
 
     }
     void Update()
     {
-        timer += Time.deltaTime * tracker.speed;
+        charging_timer += Time.deltaTime * tracker.speed;
         if (on_trip)
         {
             float dist = Vector3.Distance(this.transform.position, agent.destination);
@@ -108,23 +112,35 @@ public class Nav_test : MonoBehaviour
                     on_trip = false;
                     arriving();
                 }
-                else
+                else if(!is_mining)
                 {
                     mining();
                 }
             }
         }
-        if (!on_trip)
+        if (!on_trip)//If it is not on a trip and if it is passed its charge time start a new trip
         {
-            if(timer > charge_time)
+            if(charging_timer > charge_time)
             {
                 start_trip();
                 on_trip=true;
             }
         }
+        if(is_mining)
+        {
+            mining_timer += Time.deltaTime * tracker.speed;
+            if(mining_timer > mining_time)
+            {
+                agent.destination = home.transform.position;
+                is_mining = false;
+                float luckFactor = Random.Range(0.8f, 1.2f); //varies slightly
+                colected_regoltih = Mathf.RoundToInt((mining_speed + battery_life)*luckFactor);
+            }
+        }
         
-        
-      
+
+
+
     }
 }
 /*
