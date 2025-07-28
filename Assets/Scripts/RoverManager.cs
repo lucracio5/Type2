@@ -46,6 +46,7 @@ public class RoverManager : MonoBehaviour
     void Start()
     {
         UpdateRoverHubPanel(); //Update the rover hub panel with current stats
+        
     }
 
     void Update()
