@@ -46,6 +46,7 @@ public class RoverManager : MonoBehaviour
     void Start()
     {
         UpdateRoverHubPanel(); //Update the rover hub panel with current stats
+
     }
 
     void Update()
@@ -73,6 +74,7 @@ public class RoverManager : MonoBehaviour
         // Calculate the average as a float to avoid integer division
         return (movement + mining + battery) / 3f;
     }
+
 
 
     // Opens the stats panel for a specific rover slot and updates the UI with its stats and image.

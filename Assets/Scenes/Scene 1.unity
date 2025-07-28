@@ -20271,6 +20271,7 @@ MonoBehaviour:
   - {fileID: 1318836738}
   - {fileID: 1902235591}
   - {fileID: 1933898371}
+  charge_speed: 0
 --- !u!114 &1013954941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33869,7 +33870,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1487082101
 RectTransform:
   m_ObjectHideFlags: 0
@@ -47275,6 +47276,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
+      - m_Target: {fileID: 1013954953}
+        m_TargetAssemblyTypeName: RoverManager, Assembly-CSharp
+        m_MethodName: UpdateRoverHubPanel
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
 --- !u!114 &1946170922
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -50663,8 +50676,8 @@ MonoBehaviour:
   min_distance: 5
   tracker: {fileID: 0}
   speed: 0
-  batterey_life: 0
-  mining_spped: 0
+  battery_life: 0
+  mining_speed: 0
   on_trip: 0
 --- !u!195 &5316913771592620572
 NavMeshAgent:
