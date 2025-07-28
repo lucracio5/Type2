@@ -25,6 +25,7 @@ public class Nav_test : MonoBehaviour
     List<GameObject> west_targets;
     List<GameObject> north_targets;
     float timer;
+    int charge_time;
 
 
 
@@ -77,6 +78,18 @@ public class Nav_test : MonoBehaviour
     }
     void arriving()
     {
+        if (tracker.charge_speed == 0)
+        {
+            charge_time = 45;
+        }
+        else if (tracker.charge_speed == 1)
+        {
+            charge_time = 30;
+        }
+        else if (tracker.charge_speed == 2)
+        {
+            charge_time = 15;
+        }
 
     }
     void Update()
@@ -100,8 +113,9 @@ public class Nav_test : MonoBehaviour
         }
         if (!on_trip)
         {
-            timer = 0;
 
+            timer = 0;
+            
         }
         
         
