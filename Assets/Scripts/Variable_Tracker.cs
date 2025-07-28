@@ -137,23 +137,23 @@ public class Variable_Tracker : MonoBehaviour
         tree.Hydro_unlock = Hydro_Unlock;
         max_energy = 100;
 
-        /*roverSlotStats = new int[][]
+        roverSlotStats = new int[][]
         {
             new int[] { 0, 0, 0 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
             new int[] { 0, 0, 0 }, // Slot 2
             new int[] { 0, 0, 0 }, // Slot 3
             new int[] { 0, 0, 0 }, // Slot 4
             new int[] { 0, 0, 0 }  // Slot 5
-        };*/
+        };
 
-        roverSlotStats = new int[][]
+        /*roverSlotStats = new int[][]
         {
             new int[] { 1, 1, 1 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
             new int[] { 4, 4, 4 }, // Slot 2
             new int[] { 7, 7, 7 }, // Slot 3
             new int[] { 9, 9, 9 }, // Slot 4
             new int[] { 0, 0, 0 }  // Slot 5
-        };
+        }; */
 
         //roverSlotStats = RandomJaggedIntArray();
     }
