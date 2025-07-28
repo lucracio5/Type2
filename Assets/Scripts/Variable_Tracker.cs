@@ -103,6 +103,14 @@ public class Variable_Tracker : MonoBehaviour
     public bool Hydro_Unlock;
     public int[][] roverSlotStats;
 
+
+
+    public List<GameObject> south_points;
+    public List<GameObject> west_points;
+    public List<GameObject> east_points;
+    public List<GameObject> north_points;
+
+
     public void Start()
     {
         Begin();
