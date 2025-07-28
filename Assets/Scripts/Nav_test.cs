@@ -24,6 +24,7 @@ public class Nav_test : MonoBehaviour
     List<GameObject> east_targets;
     List<GameObject> west_targets;
     List<GameObject> north_targets;
+    float timer;
 
 
 
@@ -74,25 +75,32 @@ public class Nav_test : MonoBehaviour
         
 
     }
+    void arriving()
+    {
 
+    }
     void Update()
     {
-       if (on_trip)
+        timer += Time.deltaTime * tracker.speed;
+        if (on_trip)
         {
             float dist = Vector3.Distance(this.transform.position, agent.destination);
-            if (dist < min_distance)
+            if (dist < min_distance) //if it is close to its target
             {
-
+                if (agent.destination == home.transform.position) //If it is ariving at the base
+                {
+                    on_trip = false;
+                    arriving();
+                }
+                else
+                {
+                    agent.destination = home.transform.position; //If it is not ariving at home go home
+                }
             }
-
-
-
-
-
-
-
-
-
+        }
+        if (!on_trip)
+        {
+            timer = 0;
 
         }
         
