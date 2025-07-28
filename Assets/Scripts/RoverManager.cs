@@ -30,6 +30,7 @@ public class RoverManager : MonoBehaviour
 
     // UI elements for displaying the rover's image and stats
     public TMP_Text roverStatsPanelTitleText; // Text field for displaying the rover's name
+    public TMP_Text roverHubBuyRoverButtonText; // Text field for the button to buy a new rover
     public Image roverDisplayImage;
     public TMP_Text movementSpeedText;
     public TMP_Text miningSpeedText;
@@ -303,7 +304,8 @@ public class RoverManager : MonoBehaviour
 
         UpdateRoverHubPanel(); // Update the Rover Hub Panel to reflect the new rover purchase
 
-        Instantiate(rover1Prefab, RoverSpawnPoint, Quaternion.identity); // Instantiate the rover prefab at the specified position
+        GameObject newRover = Instantiate(rover1Prefab, RoverSpawnPoint, Quaternion.identity); // Instantiate the rover prefab at the specified position
+        newRover.name = "Rover_" + (roverSlot + 1).ToString(); // Set the name of the new rover to work with the GetRoverID method in Nav_test
 
         Debug.Log("Current Rover Slot: " + roverSlot + ", Current Rover Cost: " + CurrentRoverCost(roverSlot));
     }
@@ -326,6 +328,13 @@ public class RoverManager : MonoBehaviour
 
     int CurrentRoverCost(int roverSlot)
     {
-        return Mathf.RoundToInt(initialRoverCost * Mathf.Pow(roverCostScaleFactor, roverSlot)); // Update the cost for the next rover purchase
+        if (roverSlot >= variableTracker.roverSlotStats.Length)
+        {
+            return 0; // Return 0 if the rover slot is invalid
+        }
+
+        int curRoverCost = Mathf.RoundToInt(initialRoverCost * Mathf.Pow(roverCostScaleFactor, roverSlot + 1)); // Update the cost for the next rover purchase
+        roverHubBuyRoverButtonText.text = "Buy Rover: $" + curRoverCost; // Update the button text with the current cost
+        return curRoverCost;
     }
 }

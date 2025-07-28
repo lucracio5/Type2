@@ -2916,7 +2916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.54776, y: 15.263977}
+  m_AnchoredPosition: {x: -7.5477295, y: 15.263977}
   m_SizeDelta: {x: -65.3817, y: -69.472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155305215
@@ -5829,7 +5829,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'Buy Rover: 100$'
+  m_text: 'Buy Rover: $100'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e20c3549c9b09842ba0b574c906d420, type: 2}
   m_sharedMaterial: {fileID: -2056546081057257883, guid: 6e20c3549c9b09842ba0b574c906d420, type: 2}
@@ -20735,7 +20735,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   variableTracker: {fileID: 1013954939}
-  roverCost: 100
+  initialRoverCost: 100
+  roverCostScaleFactor: 2
+  upgradeCost: 20
   RoverSpawnPoint: {x: 178, y: 1, z: -63}
   rover1Prefab: {fileID: 5316913771449775443, guid: ea2b45aef702543d6a06098276d8c1b9, type: 3}
   rover2Prefab: {fileID: 5677510306387119816, guid: 8b31be488c0e1477ba26b8daa7939d1a, type: 3}
@@ -20744,6 +20746,7 @@ MonoBehaviour:
   RoverHubPanel: {fileID: 1487082100}
   RoverSlots: {fileID: 1523572642}
   roverStatsPanelTitleText: {fileID: 1854270714}
+  roverHubBuyRoverButtonText: {fileID: 323007290}
   roverDisplayImage: {fileID: 1969542781}
   movementSpeedText: {fileID: 524325485}
   miningSpeedText: {fileID: 1825132951}
@@ -33866,7 +33869,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1487082101
 RectTransform:
   m_ObjectHideFlags: 0
