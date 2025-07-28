@@ -28,7 +28,7 @@ public class Drill_script: MonoBehaviour
             int num = Random.Range(0, 100); //Random chance to get materials
 
 
-            if(num <= 10) //15% change
+            if(num <= 10) //10% change
             {
                 if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_titanium > Gamemanager.GetComponent<Variable_Tracker>().titanium)//checks if you have space
                 {

@@ -110,6 +110,8 @@ public class Variable_Tracker : MonoBehaviour
     public List<GameObject> east_points;
     public List<GameObject> north_points;
 
+    public int charge_speed;
+
 
     public void Start()
     {
