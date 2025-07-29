@@ -20134,6 +20134,7 @@ GameObject:
   - component: {fileID: 1013954952}
   - component: {fileID: 1013954953}
   - component: {fileID: 1013954954}
+  - component: {fileID: 1013954955}
   m_Layer: 0
   m_Name: Game Manager
   m_TagString: Untagged
@@ -20775,7 +20776,26 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   variable_Tracker: {fileID: 1013954939}
   masterTime: 0
+  masterGameTime: 0
   autosave: 0
+--- !u!114 &1013954955
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1013954937}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c70edc6a3edb024c9dc598e1f0d56f5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  variableTracker: {fileID: 1013954939}
+  stockMarketFluctuationRatioRange: {x: -10, y: 11}
+  fluctuationStrength: 1
+  RegolithStartingPrice: 25
+  TitaniumStartingPrice: 25
+  LithiumStartingPrice: 25
 --- !u!1 &1019172834
 GameObject:
   m_ObjectHideFlags: 0
@@ -29535,6 +29555,124 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1207664148}
   m_CullTransparentMesh: 1
+--- !u!1 &1221936857
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1221936860}
+  - component: {fileID: 1221936859}
+  - component: {fileID: 1221936858}
+  m_Layer: 0
+  m_Name: GraphHandler
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1221936858
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221936857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ae964f627e2ba5f4c826d6a6df7a85c0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updatePeriod: 5
+  graphSize: {x: 800, y: 400}
+  graphScale: {x: 100, y: 10}
+  backgroundColor: {r: 1, g: 1, b: 1, a: 1}
+  outlineWidth: 5
+  outlineColor: {r: 0.2830189, g: 0.2830189, b: 0.2830189, a: 1}
+  lineWidth: 5
+  lineColor: {r: 0.10064922, g: 0.7075472, b: 0, a: 1}
+  PointSprite: {fileID: 21300000, guid: 0c79af32f1f541d408999de938e16286, type: 3}
+  pointRadius: 8
+  pointColor: {r: 0, g: 0.20754719, b: 0.010799391, a: 1}
+  pointHoverRadius: 15
+  PointHoverSpeed: 5
+  pointHoverColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
+  pointLockedRadius: 17
+  PointLockedSpeed: 5
+  pointLockedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
+  unfixedPointOutlineWidth: 0
+  unfixedPointOutlineColor: {r: 0, g: 0.8, b: 1, a: 1}
+  unfixedPointOutlineHoverWidth: 15
+  UnfixedPointOutlineHoverSpeed: 5
+  unfixedPointOutlineHoverColor: {r: 0, g: 0.5, b: 1, a: 1}
+  fixedPointOutlineWidth: 17
+  FixedPointOutlineSpeed: 5
+  fixedPointOutlineColor: {r: 0, g: 0.8, b: 1, a: 1}
+  GridTextFont: {fileID: 11400000, guid: 6e20c3549c9b09842ba0b574c906d420, type: 2}
+  gridSpacing: {x: 1, y: 1}
+  xAxisWidth: 3
+  xAxisColor: {r: 0, g: 0, b: 0, a: 1}
+  xAxisTextColor: {r: 0.009433985, g: 0.009433985, b: 0.009433985, a: 1}
+  xAxisTextSize: 10
+  xAxisTextOffset: 15
+  yAxisWidth: 3
+  yAxisColor: {r: 0, g: 0, b: 0, a: 1}
+  yAxisTextColor: {r: 0, g: 0, b: 0, a: 1}
+  yAxisTextSize: 8
+  yAxisTextOffset: 15
+  xGridWidth: 1
+  xGridColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0.15686275}
+  yGridWidth: 1
+  yGridColor: {r: 0.2735849, g: 0.2735849, b: 0.2735849, a: 0.15686275}
+  zoomSelectionColor: {r: 0, g: 0.8, b: 1, a: 0.2}
+  zoomSelectionOutlineWidth: 5
+  zoomSelectionOutlineColor: {r: 0, g: 0.8, b: 1, a: 0.6}
+  pointSelectionColor: {r: 1, g: 0.35, b: 0, a: 0.2}
+  pointSelectionOutlineWidth: 5
+  pointSelectionOutlineColor: {r: 1, g: 0.35, b: 0, a: 0.4}
+  ZoomSpeed: 5
+  SmoothZoomSpeed: 50
+  SmoothMoveSpeed: 20
+--- !u!114 &1221936859
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221936857}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb64a76d5723abc49bb277e578bca146, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  updateGraph: 1
+  canvas: {fileID: 0}
+  activePointIndex: -1
+  fixedPointIndex: -1
+  mouseActionType: 2
+  rectangleType: 0
+  rectangleSelectionType: 0
+  rectangleSelectionPhase: 0
+  pointSelectionType: 0
+  targetZoom: {x: 1, y: 1}
+  targetMoveOffset: {x: 0, y: 0}
+--- !u!4 &1221936860
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1221936857}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1233062564
 GameObject:
   m_ObjectHideFlags: 0
@@ -51130,3 +51268,4 @@ SceneRoots:
   - {fileID: 1557069184}
   - {fileID: 4792577994283106467}
   - {fileID: 810008077}
+  - {fileID: 1221936860}

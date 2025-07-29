@@ -79,6 +79,7 @@ public class Variable_Tracker : MonoBehaviour
     ScienceTree tree;
     RoverManager roverManager;
     MasterTimer masterTimer;
+    StockMarket stockMarket;
     public GameObject GameoverText;
 
     public int speed;
@@ -102,6 +103,7 @@ public class Variable_Tracker : MonoBehaviour
     public int cleaning_jobs;
     public bool Hydro_Unlock;
     public int[][] roverSlotStats;
+    public int[][] resourcePrices;
 
 
 
@@ -128,15 +130,7 @@ public class Variable_Tracker : MonoBehaviour
 
     public void Begin()
     {
-        roverSlotStats = new int[][]
-        {
-            new int[] { 0, 0, 0 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
-            new int[] { 0, 0, 0 }, // Slot 2
-            new int[] { 0, 0, 0 }, // Slot 3
-            new int[] { 0, 0, 0 }, // Slot 4
-            new int[] { 0, 0, 0 }  // Slot 5
-        };
-
+        InitializeRoverSlotStats(); //creates the empty jagged array
 
         SaveSystem.Load();
         speed = 1;
@@ -146,6 +140,9 @@ public class Variable_Tracker : MonoBehaviour
         tree = GetComponent<ScienceTree>();
         roverManager = GetComponent<RoverManager>();
         masterTimer = GetComponent<MasterTimer>();
+        stockMarket = GetComponent<StockMarket>();
+
+        InitializeResourcePrices(); 
 
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);
@@ -158,7 +155,26 @@ public class Variable_Tracker : MonoBehaviour
         max_energy = 100;
     }
 
+    void InitializeRoverSlotStats()
+    {
+        roverSlotStats = new int[][]
+        {
+            new int[] { 0, 0, 0 }, // Slot 1: [movementSpeed, miningSpeed, batteryLife]
+            new int[] { 0, 0, 0 }, // Slot 2
+            new int[] { 0, 0, 0 }, // Slot 3
+            new int[] { 0, 0, 0 }, // Slot 4
+            new int[] { 0, 0, 0 }  // Slot 5
+        };
+    }
 
+    void InitializeResourcePrices()
+    {
+        resourcePrices = new int[][] {
+            new int[] { stockMarket.RegolithStartingPrice }, //resourcePrice[0] is Regolith
+            new int[] { stockMarket.TitaniumStartingPrice }, //resourcePrice[1] is Titanium
+            new int[] { stockMarket.LithiumStartingPrice } //resourcePrice[2] is Lithium
+        };
+    }
 
 
     int[][] RandomJaggedIntArray()
@@ -242,7 +258,6 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Save();
         audio_manager.PlayUIclick();
         masterTime = masterTimer.masterTime;
-
     }
     public void Test()
     {
@@ -300,6 +315,7 @@ public class Variable_Tracker : MonoBehaviour
         data.hydro_unlock = Hydro_Unlock;
         data.roverSlotStats = EncodeJaggedArray(roverSlotStats);
         data.masterTime = masterTime;
+        data.resourcePrices = EncodeJaggedArray(resourcePrices);
 
         foreach (MapCell cell in GameObject.Find("Map").GetComponent<MoonMapMaker>().mapCells)
         {
@@ -334,6 +350,7 @@ public class Variable_Tracker : MonoBehaviour
         Hydro_Unlock = data.hydro_unlock;
         roverSlotStats = DecodeJaggedArray(data.roverSlotStats);
         masterTime = data.masterTime;
+        resourcePrices = DecodeJaggedArray(data.resourcePrices);
     }
 
 
@@ -355,6 +372,7 @@ public class Variable_Tracker : MonoBehaviour
         public bool hydro_unlock;
         public string roverSlotStats;
         public float masterTime;
+        public string resourcePrices;
 
     }
 
