@@ -2916,7 +2916,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.54776, y: 15.263977}
+  m_AnchoredPosition: {x: -7.5477295, y: 15.263977}
   m_SizeDelta: {x: -65.3817, y: -69.472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155305215
@@ -20790,12 +20790,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70edc6a3edb024c9dc598e1f0d56f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  variableTracker: {fileID: 1013954939}
+  graphHandler: {fileID: 1221936859}
   stockMarketFluctuationRatioRange: {x: -10, y: 11}
   fluctuationStrength: 1
   RegolithStartingPrice: 25
-  TitaniumStartingPrice: 25
-  LithiumStartingPrice: 25
+  TitaniumStartingPrice: 40
+  LithiumStartingPrice: 80
 --- !u!1 &1019172834
 GameObject:
   m_ObjectHideFlags: 0
@@ -22387,7 +22387,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 0.00024414062, y: -2.810669}
+  m_AnchoredPosition: {x: 0.00024414062, y: -2.8105469}
   m_SizeDelta: {x: -0.048828125, y: -5.6190796}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1062847516
@@ -29595,15 +29595,15 @@ MonoBehaviour:
   lineColor: {r: 0.10064922, g: 0.7075472, b: 0, a: 1}
   PointSprite: {fileID: 21300000, guid: 0c79af32f1f541d408999de938e16286, type: 3}
   pointRadius: 8
-  pointColor: {r: 0, g: 0.20754719, b: 0.010799391, a: 1}
+  pointColor: {r: 0, g: 0.18867922, b: 0.010679936, a: 1}
   pointHoverRadius: 15
   PointHoverSpeed: 5
   pointHoverColor: {r: 0.7830189, g: 0.7830189, b: 0.7830189, a: 1}
   pointLockedRadius: 17
   PointLockedSpeed: 5
   pointLockedColor: {r: 0.3301887, g: 0.3301887, b: 0.3301887, a: 1}
-  unfixedPointOutlineWidth: 0
-  unfixedPointOutlineColor: {r: 0, g: 0.8, b: 1, a: 1}
+  unfixedPointOutlineWidth: 2
+  unfixedPointOutlineColor: {r: 0, g: 0.8, b: 1, a: 0.7019608}
   unfixedPointOutlineHoverWidth: 15
   UnfixedPointOutlineHoverSpeed: 5
   unfixedPointOutlineHoverColor: {r: 0, g: 0.5, b: 1, a: 1}
@@ -29648,7 +29648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   updateGraph: 1
-  canvas: {fileID: 0}
+  canvas: {fileID: 2136990375}
   activePointIndex: -1
   fixedPointIndex: -1
   mouseActionType: 2
@@ -40677,7 +40677,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: 16.53601, y: -2.8103027}
+  m_AnchoredPosition: {x: 16.53601, y: -2.8101807}
   m_SizeDelta: {x: -33.072, y: -5.6199}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1602442616

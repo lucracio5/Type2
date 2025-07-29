@@ -103,7 +103,7 @@ public class Variable_Tracker : MonoBehaviour
     public int cleaning_jobs;
     public bool Hydro_Unlock;
     public int[][] roverSlotStats;
-    public int[][] resourcePrices;
+    public int[][] resourcePrices; //the history for the market price of all resources
 
 
 

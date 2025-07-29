@@ -1,5 +1,3 @@
-//Source Video: https://www.youtube.com/watch?v=kGXV4MOVC0Y
-
 using System;
 using System.Linq;
 using System.Collections;
@@ -36,28 +34,8 @@ public class GraphHandler : MonoBehaviour
 
     private void ExampleFunction()
     {
-        /*for (float i = 0; i < 50; i += 0.2f)
+        for (float i = 0; i < 50; i += 0.2f)
             CreatePoint(new Vector2(i, 0.2f * i + Mathf.Sin(i)));
-        UpdateGraph();*/
-
-
-        
-
-        float amountOFPoints = 100f;
-        float curPrice = 25f;
-        float highestPoint = 0f;
-        for (int i = 0; i < amountOFPoints; i++)
-        {
-        //    CreatePoint(new Vector2(i, curPrice));
-
-            curPrice *= UnityEngine.Random.Range(0.7f, 1.35f);
-            if (curPrice > highestPoint) highestPoint = curPrice;
-        }
-
-
-
-        SetCornerValues(new Vector2(0f, 0f), new Vector2(amountOFPoints, highestPoint * 1.2f));
-
         UpdateGraph();
     }
     #endregion
@@ -228,14 +206,13 @@ public class GraphHandler : MonoBehaviour
             return;
         GS = GetComponent<GraphSettings>(); 
         PrepareGraph();
-        ExampleFunction();
+        //ExampleFunction();
     }
     private void Update()
     {
-
-        if (Input.GetKey(KeyCode.LeftShift))
+        if(Input.GetKey(KeyCode.LeftShift))
             mouseActionType = MouseActionType.SelectAreaToZoom;
-        else if (Input.GetKey(KeyCode.LeftControl))
+        else if(Input.GetKey(KeyCode.LeftControl))
             mouseActionType = MouseActionType.SelectPoints;
         else
             mouseActionType = MouseActionType.Move;
