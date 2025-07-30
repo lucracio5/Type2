@@ -200,11 +200,16 @@ public class GraphHandler : MonoBehaviour
 
     #region private methods
 
+    void OnEnable()
+    {
+        if (GS == null) GS = GetComponent<GraphSettings>();
+    }
+
     private void Start()
     {
-        if(CheckForErrors())
+        if (CheckForErrors())
             return;
-        GS = GetComponent<GraphSettings>(); 
+        GS = GetComponent<GraphSettings>();
         PrepareGraph();
         //ExampleFunction();
     }
@@ -548,6 +553,8 @@ public class GraphHandler : MonoBehaviour
     private void UpdatePositionAndScale()
     {
         contentScale = GS.GraphScale * zoom;
+        if (GS == null) Debug.Log("GS is Null");
+        if (maskObj == null) Debug.Log("maskObj is Null");
         maskObj.sizeDelta = GS.GraphSize;
         contentOffset = absoluteZoomPoint - zoomPoint * contentScale - moveOffset;
         graphContent.anchoredPosition = -GS.GraphSize / 2 + contentOffset;

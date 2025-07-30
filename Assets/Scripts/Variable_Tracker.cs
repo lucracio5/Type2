@@ -130,9 +130,6 @@ public class Variable_Tracker : MonoBehaviour
 
     public void Begin()
     {
-        InitializeRoverSlotStats(); //creates the empty jagged array
-
-        SaveSystem.Load();
         speed = 1;
         Time.timeScale = 1;
 
@@ -142,7 +139,10 @@ public class Variable_Tracker : MonoBehaviour
         masterTimer = GetComponent<MasterTimer>();
         stockMarket = GetComponent<StockMarket>();
 
-        InitializeResourcePrices(); 
+        InitializeResourcePrices(); //creates the empty jagged array
+        InitializeRoverSlotStats(); //creates the empty jagged array
+
+        SaveSystem.Load();
 
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSuport", 0f, 120f);

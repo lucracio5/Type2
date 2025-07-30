@@ -20790,12 +20790,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c70edc6a3edb024c9dc598e1f0d56f5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  graphHandlerObject: {fileID: 1221936857}
   graphHandler: {fileID: 1221936859}
   stockMarketFluctuationRatioRange: {x: -10, y: 11}
   fluctuationStrength: 1
   RegolithStartingPrice: 25
   TitaniumStartingPrice: 40
   LithiumStartingPrice: 80
+  GraphYStretchMultiplier: 1.2
 --- !u!1 &1019172834
 GameObject:
   m_ObjectHideFlags: 0
@@ -29620,7 +29622,7 @@ MonoBehaviour:
   yAxisWidth: 3
   yAxisColor: {r: 0, g: 0, b: 0, a: 1}
   yAxisTextColor: {r: 0, g: 0, b: 0, a: 1}
-  yAxisTextSize: 8
+  yAxisTextSize: 1
   yAxisTextOffset: 15
   xGridWidth: 1
   xGridColor: {r: 0.27450982, g: 0.27450982, b: 0.27450982, a: 0.15686275}
