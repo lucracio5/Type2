@@ -78,10 +78,10 @@ public class Imports2 : MonoBehaviour
         nextDeliveryText.text = $"Time Until Next Ship: {(int)(deliveryInterval - timer)}";
         foodText.text = $"Food at {tracker.food}%";
         waterText.text = $"Water at {tracker.water}%";
-        regolithText.text = $"You have {tracker.regolith} Regolith";
-        lithium_text.text = $"You have {tracker.lithium} Lithium";
-        titanium_text.text = $"You have {tracker.titanium} titanium";
-        crewText.text = $"You have {tracker.population} population out of a max of {tracker.max_population}";
+        regolithText.text = $"{tracker.regolith} Regolith";
+        lithium_text.text = $"{tracker.lithium} Lithium";
+        titanium_text.text = $"{tracker.titanium} Titanium";
+        crewText.text = $"{tracker.population}/{tracker.max_population} population";
 
         import1.text = importQueue.Count > 0 ? $"{importQueue[0].label} - ${importQueue[0].cost}" : "";
         import2.text = importQueue.Count > 1 ? $"{importQueue[1].label} - ${importQueue[1].cost}" : "";

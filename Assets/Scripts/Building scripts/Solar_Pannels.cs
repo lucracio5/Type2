@@ -62,7 +62,7 @@ public class Solar_Pannels: MonoBehaviour
             }
         }
         Solartext1.text = dirt_level_return();
-        Solartext2.text = "total colected ="+total_collected.ToString();
+        Solartext2.text = "Total Energey Collected ="+total_collected.ToString();
     }
     public void clean()
     {
@@ -73,19 +73,19 @@ public class Solar_Pannels: MonoBehaviour
        
         if(0 <= dirt_level && dirt_level <= 250)
         {
-            return "clean";
+            return "Dust level: clean";
         }
         else if (250 < dirt_level && dirt_level <= 500)
         {
-            return "mostly dirty";
+            return "Dust level: dirty";
         }
         else if (500 < dirt_level && dirt_level <= 750)
         {
-            return "dirty";
+            return "Dust level: dirty";
         }
         else
         {
-            return "filthy";
+            return "Dust level: filthy";
         }
     }
 }
