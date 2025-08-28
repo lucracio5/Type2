@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Security.Cryptography;
 using UnityEditor.ShaderKeywordFilter;
 using UnityEngine;
 
@@ -8,11 +9,15 @@ public class Drill_script: MonoBehaviour
     public GameObject Gamemanager;
     private float timer;
     public int total_collected;
+    public ParticleSystem lithium_particle_system;
+    public ParticleSystem titanium_particle_system;
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
         this.transform.eulerAngles = new Vector3(-90, -0, 0);
-
+        
+        lithium_particle_system = this.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>(); //finds the particle system based on where it is in the Hiarchy
+        titanium_particle_system = this.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
     }
 
     // Update is called once per frame
@@ -35,6 +40,7 @@ public class Drill_script: MonoBehaviour
                     Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
                     Gamemanager.GetComponent<Variable_Tracker>().titanium += 1;
                     total_collected++;
+                    TriggerOneTitanium();
                 }
             }
             if(num == 11)//1% chance
@@ -44,6 +50,7 @@ public class Drill_script: MonoBehaviour
                     Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
                     Gamemanager.GetComponent<Variable_Tracker>().lithium += 1;
                     total_collected++;
+                    TriggerOneLithium();
                 }
             }
             timer = 0f;
@@ -51,4 +58,17 @@ public class Drill_script: MonoBehaviour
         }
 
     }
+    public void TriggerOneLithium()
+    {
+        if (lithium_particle_system != null)
+            lithium_particle_system.Emit(1);
+        Debug.Log("running lithium");
+    }
+    public void TriggerOneTitanium()
+    {
+        if (titanium_particle_system != null)
+            titanium_particle_system.Emit(1);
+        Debug.Log("running titanium");
+    }
 }
+
