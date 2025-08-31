@@ -159,7 +159,7 @@ public class Imports2 : MonoBehaviour
     }
     public void QueueRegoligthExport()
     {
-        if (tracker.regolith - outputQueue.Count >= 1 && outputQueue.Count < 3)
+        if (tracker.regolith - outputQueue.Count >= 1 && outputQueue.Count < max_queue)
         {
             outputQueue.Add(new OutputItem("Regolith Export", 25,() => tracker.regolith = Mathf.Min(tracker.regolith - 1, tracker.max_mining)));
             audio_manager.PlayUIclick();
@@ -169,7 +169,7 @@ public class Imports2 : MonoBehaviour
     }
     public void QueueTitaniumExport()
     {
-        if (tracker.titanium - outputQueue.Count >= 1 && outputQueue.Count < 3)
+        if (tracker.titanium - outputQueue.Count >= 1 && outputQueue.Count < max_queue)
         {
             outputQueue.Add(new OutputItem("Titanium Export", 40, () => tracker.titanium = Mathf.Min(tracker.titanium - 1, tracker.max_titanium)));
             audio_manager.PlayUIclick();
@@ -179,7 +179,7 @@ public class Imports2 : MonoBehaviour
     }
     public void QueueLithiumExport()
     {
-        if (tracker.lithium - outputQueue.Count >= 1 && outputQueue.Count < 3)
+        if (tracker.lithium - outputQueue.Count >= 1 && outputQueue.Count < max_queue)
         {
             outputQueue.Add(new OutputItem("Lithium Export", 80, () => tracker.lithium = Mathf.Min(tracker.lithium - 1, tracker.max_lithium)));
             audio_manager.PlayUIclick();

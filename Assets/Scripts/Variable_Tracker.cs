@@ -234,18 +234,16 @@ public class Variable_Tracker : MonoBehaviour
 
 
 
-        Debug.Log(O2 <= 25);
-        Debug.Log(O2 <= 0);
-        Debug.Log(O2);
+        
 
         if (O2 <= 25)
         {
             audio_manager.PlayLowEnergySiren();
         }
-        else if(O2 <= 0)
+        if(O2 <= 0)
         {
             deathtimerO2 += Time.time*speed;
-            Debug.Log(deathtimerO2);
+            
             if (deathtimerO2 > 5)
             {
                 population = 0;
@@ -258,7 +256,7 @@ public class Variable_Tracker : MonoBehaviour
         {
             audio_manager.PlayLowEnergySiren();
         }
-        else if (food <= 0)
+        if (food <= 0)
         {
             deathtimerfood += Time.time * speed;
             if (deathtimerfood > 1)
@@ -282,7 +280,7 @@ public class Variable_Tracker : MonoBehaviour
         {
             audio_manager.PlayLowEnergySiren();
         }
-        else if (water <= 0)
+        if (water <= 0)
         {
             deathtimerwater += Time.time * speed;
             if (deathtimerwater > 1)
@@ -311,7 +309,7 @@ public class Variable_Tracker : MonoBehaviour
 
         }
 
-        if (population == 0 && canDie)
+        if (population <= 0 && canDie)
         {
             GameOver();
         }
