@@ -24382,6 +24382,7 @@ MonoBehaviour:
   - {fileID: 1902235591}
   - {fileID: 1933898371}
   charge_speed: 0
+  causeOfDeath: {fileID: 0}
 --- !u!114 &1013954941
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24917,10 +24918,17 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: db66e05c3b3fb934781b83c9cf5097b8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  GeraldGameObject: {fileID: 1268696240}
   introStoryText: {fileID: 1126149154}
   mainTextObject: {fileID: 1892045351}
   variableTracker: {fileID: 1013954939}
   curLine: 1
+  GeraldMouthOpen: {fileID: 21300000, guid: 6743d901995585441a79db5d8508387c, type: 3}
+  GeraldMouthClosed: {fileID: 21300000, guid: b5fed45d7609e9c4ca2ff45164a0b816, type: 3}
+  GeraldPointDownLeft: {fileID: 21300000, guid: d85f8a127ce91ef42a502271519af110, type: 3}
+  GeraldPointDownRight: {fileID: 21300000, guid: f6bdd46ba2c37ae459e45fedf90af3d2, type: 3}
+  GeraldPointUpLeft: {fileID: 21300000, guid: 699cba18865ba504ba233a061b0b6e46, type: 3}
+  GeraldPointUpRight: {fileID: 21300000, guid: 425556b6934a7704592c46851eabfc23, type: 3}
 --- !u!1 &1019172834
 GameObject:
   m_ObjectHideFlags: 0
@@ -34871,7 +34879,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 320, y: 75}
+  m_AnchoredPosition: {x: 160, y: 75}
   m_SizeDelta: {x: 258, y: 280}
   m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &1268696242
@@ -34894,7 +34902,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 6743d901995585441a79db5d8508387c, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 425556b6934a7704592c46851eabfc23, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
