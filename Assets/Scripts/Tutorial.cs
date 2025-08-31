@@ -1,15 +1,26 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 using TMPro;
 
 public class Tutorial : MonoBehaviour
 {
-
+    [SerializeField] GameObject GeraldGameObject;
     [SerializeField] TMP_Text introStoryText;
     [SerializeField] TMP_Text mainTextObject;
     [SerializeField] Variable_Tracker variableTracker;
     [SerializeField] int curLine = 0; //The line that the user is on
+
+
+    [Header("Gerald Sprites")]
+    [SerializeField] Sprite GeraldMouthOpen;
+    [SerializeField] Sprite GeraldMouthClosed;
+    [SerializeField] Sprite GeraldPointDownLeft;
+    [SerializeField] Sprite GeraldPointDownRight;
+    [SerializeField] Sprite GeraldPointUpLeft;
+    [SerializeField] Sprite GeraldPointUpRight;
+
 
     // Start is called before the first frame update
     void Start()
@@ -34,6 +45,16 @@ public class Tutorial : MonoBehaviour
     public void UpdateText(int lineIndex)
     {
         mainTextObject.text = GetLine(lineIndex);
+
+
+        if (lineIndex <= 1)
+        {
+            MoveGerald(320, 75, GeraldMouthOpen); //standard position
+        }
+        else if (lineIndex >= 2 || lineIndex <= 3) //food, water, air meters
+        {
+            MoveGerald(160, 75, GeraldPointUpRight);
+        }
     }
 
     //Returns the line based on the index
@@ -42,8 +63,10 @@ public class Tutorial : MonoBehaviour
         string[] lines = {
             /* ln0 */ "Welcome to the moon! I’m Gerald, and I’ll be your \"tour guide.\"",
             /* ln1 */ "I’ve been to the moon a few times for testing, so trust me, I know what I’m doing.",
+            
             /* ln2 */ "Firstly, see these meters up here? These keep track of your water, food, and air supplies.",
             /* ln3 */ "If you let any of these get to zero, then we’ll have to shut down the mission, and that’s no good, is it?",
+            
             /* ln4 */ "This one at the top shows your population. Each of those people will have a job to keep the mission running smoothly.",
             /* ln5 */ "Don't let that get too low, but keep in mind, more people means they need more food and water and all that jazz.",
             /* ln6 */ "This meter displays your energy levels. More on energy later.",
@@ -70,10 +93,10 @@ public class Tutorial : MonoBehaviour
         }
     }
 
-
+    //Runs each time the user clicks the right arrow on screen
     public void IncrementCurrentLine()
     {
-        Debug.Log("Incrementing Line");
+        Debug.Log("Incrementing Line to " + curLine);
         curLine += 1;
         UpdateText(curLine);
     }
@@ -82,6 +105,13 @@ public class Tutorial : MonoBehaviour
     {
         curLine -= 1;
         UpdateText(curLine);
+    }
+
+    void MoveGerald(float x, float y, Sprite GeraldSprite)
+    {
+        GeraldGameObject.GetComponent<Image>().sprite = GeraldSprite; //Updates geralds sprite to what it should be
+        GeraldGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y); //moves gerald to the desired position
+        Debug.Log("Moving Gerald to " + x + ", " + y + " in the position " + GeraldSprite.name);
     }
 
 
