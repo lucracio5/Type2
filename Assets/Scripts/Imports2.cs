@@ -22,6 +22,10 @@ public class Imports2 : MonoBehaviour
     public TMP_Text output2;
     public TMP_Text output3;
 
+    public TMP_Text importQueuetext;
+    public TMP_Text exportQueuetext;
+    
+
     public TMP_Text shipArrivalText;
 
     public float timer;
@@ -83,14 +87,23 @@ public class Imports2 : MonoBehaviour
         titanium_text.text = $"{tracker.titanium} Titanium";
         crewText.text = $"{tracker.population}/{tracker.max_population} population";
 
-        import1.text = importQueue.Count > 0 ? $"{importQueue[0].label} - ${importQueue[0].cost}" : "";
-        import2.text = importQueue.Count > 1 ? $"{importQueue[1].label} - ${importQueue[1].cost}" : "";
-        import3.text = importQueue.Count > 2 ? $"{importQueue[2].label} - ${importQueue[2].cost}" : "";
+        foreach (ImportItem item in importQueue)
+        {
+            importQueuetext.text = importQueuetext.text+" "+item.label+" - "+item.cost+"\n";
+        }
+
+
+
+
+        //import1.text = importQueue.Count > 0 ? $"{importQueue[0].label} - ${importQueue[0].cost}" : "";
+        //import2.text = importQueue.Count > 1 ? $"{importQueue[1].label} - ${importQueue[1].cost}" : "";
+       // import3.text = importQueue.Count > 2 ? $"{importQueue[2].label} - ${importQueue[2].cost}" : "";
 
         output1.text = outputQueue.Count > 0 ? $"{outputQueue[0].label} - ${outputQueue[0].value}" : "";
         output2.text = outputQueue.Count > 1 ? $"{outputQueue[1].label} - ${outputQueue[1].value}" : "";
         output3.text = outputQueue.Count > 2 ? $"{outputQueue[2].label} - ${outputQueue[2].value}" : "";
     }
+
 
 
     public void QueueFoodImport()
@@ -181,10 +194,10 @@ public class Imports2 : MonoBehaviour
         }
         foreach (var item in outputQueue)
         {
-            if((item.label == "Regolith Export")&&(tracker.regolith >= 1))
+            if ((item.label == "Regolith Export") && (tracker.regolith >= 1))
             {
-               tracker.money += item.value;
-               item.Apply();
+                tracker.money += item.value;
+                item.Apply();
             }
             else if ((item.label == "Titanium Export") && (tracker.titanium >= 1))
             {
@@ -195,13 +208,17 @@ public class Imports2 : MonoBehaviour
             {
                 tracker.money += item.value;
                 item.Apply();
-            }   
+            }
 
         }
 
         // Clear both queues
         importQueue.Clear();
         outputQueue.Clear(); // You can add logic here to sell items, etc.
+        importQueuetext.text = "";
+        Debug.Log("Hi There!");
+        //exportQueuetext;
+
     }
     private IEnumerator ShowShipArrivalMessage()
     {
