@@ -114,6 +114,10 @@ public class Variable_Tracker : MonoBehaviour
 
     public int charge_speed;
 
+    float deathtimerO2;
+    float deathtimerfood;
+    float deathtimerwater;
+
 
     public void Start()
     {
@@ -227,12 +231,34 @@ public class Variable_Tracker : MonoBehaviour
 
         if ((O2 <= 0 || food <= 0 || water <= 0) && canDie) //REMOVE CAN DIE AFTER DEBUGGING, NOT PART OF GAME
         {
+            
+            
+            
             Debug.Log("Game Over");
             GameoverText.SetActive(true);
             Time.timeScale = 0;
         }
+        
+        
+        
+        
+        if(O2 <= 25)
+        {
+            audio_manager.PlayLowEnergySiren();
+        }
+        else if(O2 <= 0)
+        {
+            deathtimerO2 += Time.time;
+            if (deathtimerO2 > 5)
+            {
+                population = 0;
+            }
+        }
     }
+    public void GameOver()
+    {
 
+    }
     public void speed1()
     {
         speed = 1;
