@@ -118,6 +118,9 @@ public class Variable_Tracker : MonoBehaviour
     float deathtimerfood;
     float deathtimerwater;
 
+    public TMP_Text causeOfDeath;
+
+
 
     public void Start()
     {
@@ -229,35 +232,95 @@ public class Variable_Tracker : MonoBehaviour
         energy2_slider.maxValue = max_energy;
 
 
-        if ((O2 <= 0 || food <= 0 || water <= 0) && canDie) //REMOVE CAN DIE AFTER DEBUGGING, NOT PART OF GAME
-        {
-            
-            
-            
-            Debug.Log("Game Over");
-            GameoverText.SetActive(true);
-            Time.timeScale = 0;
-        }
-        
-        
-        
-        
-        if(O2 <= 25)
+
+
+        Debug.Log(O2 <= 25);
+        Debug.Log(O2 <= 0);
+        Debug.Log(O2);
+
+        if (O2 <= 25)
         {
             audio_manager.PlayLowEnergySiren();
         }
         else if(O2 <= 0)
         {
-            deathtimerO2 += Time.time;
+            deathtimerO2 += Time.time*speed;
+            Debug.Log(deathtimerO2);
             if (deathtimerO2 > 5)
             {
                 population = 0;
+                causeOfDeath.text = "Cause of Death: Suffocation";
+                deathtimerO2 = 0;
             }
+        }
+
+        if (food <= 10)
+        {
+            audio_manager.PlayLowEnergySiren();
+        }
+        else if (food <= 0)
+        {
+            deathtimerfood += Time.time * speed;
+            if (deathtimerfood > 1)
+            {
+
+                deathtimerfood = 0;
+                causeOfDeath.text = "Cause of Death: Starvation";
+
+                if ((int)(population * 0.95) == population)
+                {
+                    population -= 1;
+                }
+                else
+                {
+                    population = (int)(population*0.95);
+                }
+
+            }
+        }
+        if (water <= 10)
+        {
+            audio_manager.PlayLowEnergySiren();
+        }
+        else if (water <= 0)
+        {
+            deathtimerwater += Time.time * speed;
+            if (deathtimerwater > 1)
+            {
+
+                deathtimerwater = 0;
+                causeOfDeath.text = "Cause of Death: Dehydration";
+
+                if ((int)(population * 0.80) == population)
+                {
+                    population -= 1;
+                }
+                else
+                {
+                    population = (int)(population * 0.80);
+                }
+
+            }
+        }
+
+        if ((O2 >= 25 && food >= 10 && water >= 10))
+        {
+
+            audio_manager.StopLowEnergySiren();
+
+
+        }
+
+        if (population == 0 && canDie)
+        {
+            GameOver();
         }
     }
     public void GameOver()
     {
-
+        Debug.Log("Game Over");
+        GameoverText.SetActive(true);
+        Time.timeScale = 0;
     }
     public void speed1()
     {
