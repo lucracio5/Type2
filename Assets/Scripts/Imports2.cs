@@ -15,16 +15,13 @@ public class Imports2 : MonoBehaviour
     public TMP_Text crewText;
     public TMP_Text lithium_text;
     public TMP_Text titanium_text;
-    public TMP_Text import1;
-    public TMP_Text import2;
-    public TMP_Text import3;
-    public TMP_Text output1;
-    public TMP_Text output2;
-    public TMP_Text output3;
 
     public TMP_Text importQueuetext;
     public TMP_Text exportQueuetext;
-    
+
+    public TMP_Text avalibleImportSlots;
+    public TMP_Text avalibleExportSlots;
+
 
     public TMP_Text shipArrivalText;
 
@@ -76,6 +73,20 @@ public class Imports2 : MonoBehaviour
     {
         shipAnimator.SetBool("Arriving", false);
     }
+    public void addSlot()
+    {
+        if (tracker.money >= 200)
+        {
+            tracker.money -= 200;
+            audio_manager.PlayUIclick();
+            max_queue += 1;
+        }
+        else
+        {
+            audio_manager.PlayFailedClick();
+        }
+
+    }
 
     private void UpdateUIText()
     {
@@ -87,21 +98,20 @@ public class Imports2 : MonoBehaviour
         titanium_text.text = $"{tracker.titanium} Titanium";
         crewText.text = $"{tracker.population}/{tracker.max_population} population";
 
+        importQueuetext.text = "";
+        exportQueuetext.text = "";
         foreach (ImportItem item in importQueue)
         {
-            importQueuetext.text = importQueuetext.text+" "+item.label+" - "+item.cost+"\n";
+            importQueuetext.text = importQueuetext.text + " " + item.label + " - " + item.cost + "\n";
         }
 
+        foreach (OutputItem item in outputQueue)
+        {
+            exportQueuetext.text = exportQueuetext.text + " " + item.label + " + " + item.value + "\n";
+        }
+        avalibleExportSlots.text = (max_queue - outputQueue.Count).ToString() +" Slots Avalible";
+        avalibleImportSlots.text = (max_queue - importQueue.Count).ToString()+ " Slots Avalible";
 
-
-
-        //import1.text = importQueue.Count > 0 ? $"{importQueue[0].label} - ${importQueue[0].cost}" : "";
-        //import2.text = importQueue.Count > 1 ? $"{importQueue[1].label} - ${importQueue[1].cost}" : "";
-       // import3.text = importQueue.Count > 2 ? $"{importQueue[2].label} - ${importQueue[2].cost}" : "";
-
-        output1.text = outputQueue.Count > 0 ? $"{outputQueue[0].label} - ${outputQueue[0].value}" : "";
-        output2.text = outputQueue.Count > 1 ? $"{outputQueue[1].label} - ${outputQueue[1].value}" : "";
-        output3.text = outputQueue.Count > 2 ? $"{outputQueue[2].label} - ${outputQueue[2].value}" : "";
     }
 
 
@@ -215,8 +225,8 @@ public class Imports2 : MonoBehaviour
         // Clear both queues
         importQueue.Clear();
         outputQueue.Clear(); // You can add logic here to sell items, etc.
-        importQueuetext.text = "";
-        Debug.Log("Hi There!");
+        
+        
         //exportQueuetext;
 
     }
