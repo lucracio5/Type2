@@ -99,6 +99,8 @@ public class Nav_test : MonoBehaviour
     {
        charge_time = 60-((tracker.charge_speed+1)*15);
        charging_timer = 0;
+       tracker.regolith += colected_regoltih;
+       Debug.Log("Arriving");
     }
     void mining()
     {
@@ -120,14 +122,15 @@ public class Nav_test : MonoBehaviour
 
 
 
-        charging_timer += Time.deltaTime * tracker.speed;
+        
         if (on_trip)
         {
             //Debug.Log("Start: "+agent.destination);
             float dist = Vector3.Distance(this.transform.position, agent.destination);
             if (dist < min_distance) //if it is close to its target
             {
-                if (agent.destination == home.transform.position) //If it is ariving at the base
+                Debug.Log("Destination: " + agent.destination + " Home is at: " + home.transform.position + " This evaluates to " + (agent.destination == home.transform.position));
+                if ((agent.destination.x == home.transform.position.x)&& (agent.destination.z ==home.transform.position.z)) //If it is ariving at the base
                 {
                     //Debug.Log("Arriving");
                     on_trip = false;
@@ -142,10 +145,14 @@ public class Nav_test : MonoBehaviour
         }
         if (!on_trip)//If it is not on a trip and if it is passed its charge time start a new trip
         {
-            if(charging_timer > charge_time)
+            charging_timer += Time.deltaTime * tracker.speed;
+
+
+            if (charging_timer > charge_time)
             {
                 start_trip();
                 on_trip=true;
+                charging_timer=0;
             }
         }
         if(is_mining)
