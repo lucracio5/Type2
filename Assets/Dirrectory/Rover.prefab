@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 1583702664194417349}
   - component: {fileID: 4548325870669667576}
   - component: {fileID: 295340198018243002}
-  - component: {fileID: 5353352980824187537}
+  - component: {fileID: 683291240667341877}
   m_Layer: 0
   m_Name: Rover
   m_TagString: Untagged
@@ -107,14 +107,14 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!65 &5353352980824187537
-BoxCollider:
+--- !u!135 &683291240667341877
+SphereCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2469464341647679966}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 3652dbb3fe814cf45bce7ffacc8258cd, type: 2}
   m_IncludeLayers:
     serializedVersion: 2
     m_Bits: 0
@@ -126,8 +126,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Radius: 3.6
+  m_Center: {x: 0, y: 2.7, z: 0.00970568}
 --- !u!1 &8249930543412839807
 GameObject:
   m_ObjectHideFlags: 0
