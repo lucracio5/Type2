@@ -39,14 +39,14 @@ public class Nav_test : MonoBehaviour
     void Start()
     {
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
-        int RoverId = GetRoverID();
+        int RoverId = GetRoverID()-1;
         speed = tracker.roverSlotStats[RoverId][0];
         battery_life = tracker.roverSlotStats[RoverId][1];
         mining_speed = tracker.roverSlotStats[RoverId][2];
 
-        speed = 3;
-        battery_life = 4;
-        mining_speed = 5;
+        //speed = 3;
+        //battery_life = 4;
+        //mining_speed = 5;
 
         active_target = 0;
         south_targets = tracker.south_points;
@@ -67,7 +67,9 @@ public class Nav_test : MonoBehaviour
     {
         string roverName = this.gameObject.name;
         string number = System.Text.RegularExpressions.Regex.Match(roverName, @"\d+$").Value;
+
         return int.Parse(number);
+
     }
     public void start_trip()
     {
@@ -90,7 +92,7 @@ public class Nav_test : MonoBehaviour
             agent.destination = north_targets[battery_life - 1].transform.position;
         }
         agent.speed = 8 + (speed * 2);
-        
+        Debug.Log("Batterey life is: "+battery_life);
 
     }
     void arriving()
@@ -121,16 +123,19 @@ public class Nav_test : MonoBehaviour
         charging_timer += Time.deltaTime * tracker.speed;
         if (on_trip)
         {
+            //Debug.Log("Start: "+agent.destination);
             float dist = Vector3.Distance(this.transform.position, agent.destination);
             if (dist < min_distance) //if it is close to its target
             {
                 if (agent.destination == home.transform.position) //If it is ariving at the base
                 {
+                    //Debug.Log("Arriving");
                     on_trip = false;
                     arriving();
                 }
                 else if(!is_mining)
                 {
+                    //Debug.Log("Starting to Mine");
                     mining();
                 }
             }
