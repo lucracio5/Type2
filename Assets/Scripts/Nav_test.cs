@@ -132,7 +132,7 @@ public class Nav_test : MonoBehaviour
             float dist = Vector3.Distance(this.transform.position, agent.destination);
             if (dist < min_distance) //if it is close to its target
             {
-                Debug.Log("Destination: " + agent.destination + " Home is at: " + home.transform.position + " This evaluates to " + (agent.destination == home.transform.position));
+               // Debug.Log("Destination: " + agent.destination + " Home is at: " + home.transform.position + " This evaluates to " + (agent.destination == home.transform.position));
                 if ((agent.destination.x == home.transform.position.x)&& (agent.destination.z ==home.transform.position.z)) //If it is ariving at the base
                 {
                     //Debug.Log("Arriving");
