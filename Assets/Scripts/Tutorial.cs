@@ -6,12 +6,17 @@ using TMPro;
 
 public class Tutorial : MonoBehaviour
 {
+    [Header("Canvas Stuff")]
+    [SerializeField] GameObject Canvas;
     [SerializeField] GameObject GeraldGameObject;
     [SerializeField] TMP_Text introStoryText;
     [SerializeField] TMP_Text mainTextObject;
     [SerializeField] Variable_Tracker variableTracker;
     [SerializeField] int curLine = 0; //The line that the user is on
 
+    [Header("Misc.")]
+    [SerializeField] Camera FlyDownCamera;
+    [SerializeField] Imports2 imports2;
 
     [Header("Gerald Sprites")]
     [SerializeField] Sprite GeraldMouthOpen;
@@ -70,7 +75,7 @@ public class Tutorial : MonoBehaviour
         else if (lineIndex == 6) MoveGerald(130, 14, GeraldPointUpRight); //energy
         else if (lineIndex == 7) MoveGerald(130, -80, GeraldMouthOpen); //enough of that jazz
         else if (lineIndex == 8) MoveGerald(-260, 15, GeraldPointUpLeft); //money
-        
+
         //else if (lineIndex == )
 
     }
@@ -78,8 +83,8 @@ public class Tutorial : MonoBehaviour
     //Returns the line based on the index
     string GetLine(int index)
     {
-        if (index < 0)  return lines[0]; //if the index is too small, return the first line
-        else if (index >= lines.Length)  return lines[lines.Length - 1]; //if the index is too big, return the last line
+        if (index < 0) return lines[0]; //if the index is too small, return the first line
+        else if (index >= lines.Length) return lines[lines.Length - 1]; //if the index is too big, return the last line
         else return lines[index]; //if it is good, return the correct one
     }
 
@@ -97,5 +102,24 @@ public class Tutorial : MonoBehaviour
         Debug.Log("Moving Gerald to " + x + ", " + y + " in the position " + GeraldSprite.name);
         Debug.Log("Gerald position: " + GeraldGameObject.GetComponent<RectTransform>().anchoredPosition);
         Debug.Log("Gerald image: " + GeraldGameObject.GetComponent<Image>().sprite.name);
+    }
+
+
+    //is called when the user clicks continue on the initial screen
+    public void RunSickCameraSequence()
+    {
+        FlyDownCamera.enabled = true;
+        Canvas.SetActive(false); //hide ui
+
+        imports2.Arrive(); //have the rocket come down
+
+        Invoke("DisableFlyDownCameraAndEnableCanvas", 8f);
+    }
+
+    //goofy ahh function
+    void DisableFlyDownCameraAndEnableCanvas()
+    {
+        FlyDownCamera.enabled = false;
+        Canvas.SetActive(true);
     }
 }
