@@ -120,9 +120,12 @@ public class Nav_test : MonoBehaviour
         //Debug.Log(is_mining);
         //Debug.Log(agent.destination);
 
+        int RoverId = GetRoverID() - 1;
+        speed = tracker.roverSlotStats[RoverId][0];
+        battery_life = tracker.roverSlotStats[RoverId][1];
+        mining_speed = tracker.roverSlotStats[RoverId][2];
 
 
-        
         if (on_trip)
         {
             //Debug.Log("Start: "+agent.destination);
