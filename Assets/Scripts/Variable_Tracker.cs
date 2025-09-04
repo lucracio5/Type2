@@ -125,6 +125,7 @@ public class Variable_Tracker : MonoBehaviour
     public void Start()
     {
         Begin();
+        GetComponent<ToolTips>().displayMessage("Test");
     }
     public TMP_Text returnSolar1()
     {
