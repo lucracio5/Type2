@@ -13,7 +13,9 @@ public class ToolTips : MonoBehaviour
         messageText.text = message;
         messageText.gameObject.SetActive(true);
         float alpha = 1f;
+        Debug.Log("Pre Sleep");
         Thread.Sleep(2000); //2 Seconds
+        Debug.Log("Post Sleep");
         while (alpha != 0)
         {
             messageText.color = new Color(255, 255, 255, alpha-2);

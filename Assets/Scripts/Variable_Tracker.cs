@@ -125,7 +125,7 @@ public class Variable_Tracker : MonoBehaviour
     public void Start()
     {
         Begin();
-        GetComponent<ToolTips>().displayMessage("Test");
+        
     }
     public TMP_Text returnSolar1()
     {
@@ -324,7 +324,13 @@ public class Variable_Tracker : MonoBehaviour
     public void speed1()
     {
         speed = 1;
+        
 
+    }
+    public void TooltipsTest()
+    {
+        Debug.Log(GetComponent<ToolTips>());
+        GetComponent<ToolTips>().displayMessage("Test");
     }
     public void speed2()
     {
