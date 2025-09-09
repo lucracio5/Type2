@@ -1,25 +1,47 @@
 using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using System.Threading;
 
 public class ToolTips : MonoBehaviour
 {
     public TMP_Text messageText;
 
-    public void displayMessage(string message)
+    public void DisplayMessage(string message)
     {
+        StopAllCoroutines(); // stop any running fades
+        StartCoroutine(ShowAndFade(message));
+    }
+
+    private IEnumerator ShowAndFade(string message)
+    {
+        // Set initial message
         messageText.text = message;
         messageText.gameObject.SetActive(true);
-        float alpha = 1f;
-        Debug.Log("Pre Sleep");
-        Thread.Sleep(2000); //2 Seconds
-        Debug.Log("Post Sleep");
-        while (alpha != 0)
+
+        // Fully visible
+        Color c = messageText.color;
+        c.a = 1f;
+        messageText.color = c;
+
+        // Wait 2 seconds
+        Debug.Log("Pre Wait");
+        yield return new WaitForSeconds(2f);
+        Debug.Log("Post Wait");
+
+        // Fade out over 1 second
+        float duration = 1f;
+        float t = 0f;
+
+        while (t < duration)
         {
-            messageText.color = new Color(255, 255, 255, alpha-2);
-            Thread.Sleep(100); // wait for .1 Seconds
+            t += Time.deltaTime;
+            float alpha = Mathf.Lerp(1f, 0f, t / duration);
+            c.a = alpha;
+            messageText.color = c;
+            yield return null; // wait a frame
         }
+
+        // Hide after fade
+        messageText.gameObject.SetActive(false);
     }
 }

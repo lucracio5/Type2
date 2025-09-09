@@ -324,18 +324,15 @@ public class Variable_Tracker : MonoBehaviour
     public void speed1()
     {
         speed = 1;
-        
-
+        audio_manager.PlayUIclick();
+        GetComponent<ToolTips>().DisplayMessage("Speed set to 1");
     }
-    public void TooltipsTest()
-    {
-        Debug.Log(GetComponent<ToolTips>());
-        GetComponent<ToolTips>().displayMessage("Test");
-    }
+   
     public void speed2()
     {
         speed = 2;
         audio_manager.PlayUIclick();
+        GetComponent<ToolTips>().DisplayMessage("Speed set to 2");
     }
     public void speed5()
     {
@@ -352,6 +349,7 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Save();
         audio_manager.PlayUIclick();
         masterTime = masterTimer.masterTime;
+        GetComponent<ToolTips>().DisplayMessage("Game Saved");
     }
     public void Test()
     {

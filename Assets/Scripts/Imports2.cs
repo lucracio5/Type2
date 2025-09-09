@@ -86,10 +86,12 @@ public class Imports2 : MonoBehaviour
             tracker.money -= 200;
             audio_manager.PlayUIclick();
             max_queue += 1;
+            GetComponent<ToolTips>().DisplayMessage("1 Slot Added");
         }
         else
         {
             audio_manager.PlayFailedClick();
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
         }
 
     }
@@ -124,10 +126,25 @@ public class Imports2 : MonoBehaviour
 
     public void QueueFoodImport()
     {
-        if (tracker.money >= 20 && tracker.food < tracker.max_food && importQueue.Count < max_queue)
+        if (tracker.money >= 20 && tracker.food+ GetQueuedAmount("Food Import", 10) < tracker.max_food && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Food Import", 20, () => tracker.food = Mathf.Min(tracker.food + 10, tracker.max_food)));
             audio_manager.PlayUIclick();
+        }
+        else if(!(tracker.money >= 20))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(tracker.food+ GetQueuedAmount("Food Import", 10) < tracker.max_food))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Food is Full");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(importQueue.Count < max_queue))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Queue is Full");
+            audio_manager.PlayFailedClick();
         }
         else
             audio_manager.PlayFailedClick();
@@ -135,20 +152,50 @@ public class Imports2 : MonoBehaviour
 
     public void QueueWaterImport()
     {
-        if (tracker.money >= 20 && tracker.water < tracker.max_water && importQueue.Count < max_queue)
+        if (tracker.money >= 20 && tracker.water+GetQueuedAmount("Water Import",10) < tracker.max_water && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Water Import", 20, () => tracker.water = Mathf.Min(tracker.water + 10, tracker.max_water)));
             audio_manager.PlayUIclick();
+        }
+        else if (!(tracker.money >= 20))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(tracker.water+ GetQueuedAmount("Water Import", 10) < tracker.max_water))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Water is Full");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(importQueue.Count < max_queue))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Queue is Full");
+            audio_manager.PlayFailedClick();
         }
         else
             audio_manager.PlayFailedClick();
     }
     public void QueueFuelImport()
     {
-        if (tracker.money >= 100 && tracker.fuel < tracker.max_fuel && importQueue.Count < max_queue)
+        if (tracker.money >= 100 && tracker.fuel + GetQueuedAmount("Nuclear Fuel", 500) < tracker.max_fuel && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Nuclear Fuel", 100, () => tracker.fuel = Mathf.Min(tracker.fuel + 500, tracker.max_fuel)));
             audio_manager.PlayUIclick();
+        }
+        else if (!(tracker.money >= 100))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(tracker.water + GetQueuedAmount("Nuclear Fuel", 500) < tracker.max_fuel))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Fuel is Full");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(importQueue.Count < max_queue))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Queue is Full");
+            audio_manager.PlayFailedClick();
         }
         else
             audio_manager.PlayFailedClick();
@@ -193,7 +240,16 @@ public class Imports2 : MonoBehaviour
         else
             audio_manager.PlayFailedClick();
     }
-
+    public int GetQueuedAmount(string label, int perImportAmount)
+    {
+        int total = 0;
+        foreach (var item in importQueue)
+        {
+            if (item.label == label)
+                total += perImportAmount;
+        }
+        return total;
+    }
     private void ProcessShip()
     {
         audio_manager.PlayLanding();
