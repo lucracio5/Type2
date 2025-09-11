@@ -62,7 +62,7 @@ public class SaveSystem
         Gamemanager.GetComponent<Variable_Tracker>().LoadData(_saveData.variableSave);
     }
 
-
+    
     [MenuItem("Tools/Clear Persistent Data")]
     public static void ClearData()
     {

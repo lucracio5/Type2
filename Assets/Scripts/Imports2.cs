@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using System.Collections;
-using static UnityEditor.Progress;
 
 
 public class Imports2 : MonoBehaviour
