@@ -79,7 +79,7 @@ public class StockMarket : MonoBehaviour
         }
         newPriceArray[newPriceArray.Length - 1] = resourcePriceChange; //Add the new value on the end
 
-        Debug.Log("New array for index " + resourceIndex + ": " + ArrayToString(newPriceArray));
+        //Debug.Log("New array for index " + resourceIndex + ": " + ArrayToString(newPriceArray));
         variableTracker.resourcePrices[resourceIndex] = newPriceArray; //Apply the new array to variableTracker
 
         /* Debugging stuff

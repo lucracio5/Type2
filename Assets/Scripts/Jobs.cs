@@ -31,7 +31,7 @@ public class Jobs : MonoBehaviour
         text.text = science_jobs + "/" + tracker.population;
         clean_text.text = cleaning_jobs + "/" + tracker.population;
         timer += Time.deltaTime * tracker.speed;
-        if (timer >= 2)
+        if (timer >= 5)
         {
             timer = 0;
             xp += science_jobs*2;

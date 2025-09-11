@@ -42,11 +42,15 @@ public class RoverManager : MonoBehaviour
     public Sprite Rover3Sprite;
     public Vector2[] roverSlotPositions; // Positions for each rover slot on the canvas
 
+    public Audio_manager audio_Manager;
+    public ToolTips toolTips;
+
 
     void Start()
     {
         UpdateRoverHubPanel(); //Update the rover hub panel with current stats
-
+        audio_Manager = GetComponent<Audio_manager>();
+        toolTips = GetComponent<ToolTips>();
     }
 
     void Update()
@@ -287,15 +291,17 @@ public class RoverManager : MonoBehaviour
 
         if (variableTracker.money < CurrentRoverCost(roverSlot))
         {
-            Debug.LogWarning("Not enough money to buy a new rover.");
+            toolTips.DisplayMessage("Not Enough Money to Purchase this item");
+            audio_Manager.PlayFailedClick();
             return; // Exit if the player doesn't have enough money
         }
 
         // Check if the rover slot is within bounds
         if (roverSlot < 0 || roverSlot >= variableTracker.roverSlotStats.Length)
         {
-            Debug.LogError("Invalid rover slot: " + roverSlot); //Call for an error message to be displayed in the UI
-
+            //Debug.LogError("Invalid rover slot: " + roverSlot); //Call for an error message to be displayed in the UI
+            toolTips.DisplayMessage("Invalid rover slot: " + roverSlot);
+            audio_Manager.PlayFailedClick();
             return;
         }
 

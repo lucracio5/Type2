@@ -126,12 +126,12 @@ public class Imports2 : MonoBehaviour
 
     public void QueueFoodImport()
     {
-        if (tracker.money >= 20 && tracker.food+ GetQueuedAmount("Food Import", 10) < tracker.max_food && importQueue.Count < max_queue)
+        if (tracker.money - GetQueuedImportCost() >= 20 && tracker.food+ GetQueuedAmount("Food Import", 10) < tracker.max_food && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Food Import", 20, () => tracker.food = Mathf.Min(tracker.food + 10, tracker.max_food)));
             audio_manager.PlayUIclick();
         }
-        else if(!(tracker.money >= 20))
+        else if(!(tracker.money - GetQueuedImportCost() >= 20))
         {
             GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
             audio_manager.PlayFailedClick();
@@ -152,12 +152,12 @@ public class Imports2 : MonoBehaviour
 
     public void QueueWaterImport()
     {
-        if (tracker.money >= 20 && tracker.water+GetQueuedAmount("Water Import",10) < tracker.max_water && importQueue.Count < max_queue)
+        if (tracker.money - GetQueuedImportCost() >= 20 && tracker.water+GetQueuedAmount("Water Import",10) < tracker.max_water && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Water Import", 20, () => tracker.water = Mathf.Min(tracker.water + 10, tracker.max_water)));
             audio_manager.PlayUIclick();
         }
-        else if (!(tracker.money >= 20))
+        else if (!(tracker.money - GetQueuedImportCost() >= 20))
         {
             GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
             audio_manager.PlayFailedClick();
@@ -177,12 +177,12 @@ public class Imports2 : MonoBehaviour
     }
     public void QueueFuelImport()
     {
-        if (tracker.money >= 100 && tracker.fuel + GetQueuedAmount("Nuclear Fuel", 500) < tracker.max_fuel && importQueue.Count < max_queue)
+        if (tracker.money- GetQueuedImportCost() >= 100 && tracker.fuel + GetQueuedAmount("Nuclear Fuel", 500) < tracker.max_fuel && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Nuclear Fuel", 100, () => tracker.fuel = Mathf.Min(tracker.fuel + 500, tracker.max_fuel)));
             audio_manager.PlayUIclick();
         }
-        else if (!(tracker.money >= 100))
+        else if (!(tracker.money - GetQueuedImportCost() >= 100))
         {
             GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
             audio_manager.PlayFailedClick();
@@ -202,40 +202,85 @@ public class Imports2 : MonoBehaviour
     }
     public void QueueCrewImport()
     {
-        if (tracker.money >= 100 && tracker.population < tracker.max_population && importQueue.Count < max_queue)
+        if (tracker.money - GetQueuedImportCost() >= 100 && tracker.population + GetQueuedAmount("Crew", 10) < tracker.max_population && importQueue.Count < max_queue)
         {
             importQueue.Add(new ImportItem("Crew", 100, () => tracker.population = Mathf.Min(tracker.population + 10, tracker.max_population)));
             audio_manager.PlayUIclick();
+        }
+        else if (!(tracker.money - GetQueuedImportCost() >= 100))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Money to Purchase this item");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(tracker.water + GetQueuedAmount("Crew", 10) < tracker.max_population))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Population is Full");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(importQueue.Count < max_queue))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Queue is Full");
+            audio_manager.PlayFailedClick();
         }
         else
             audio_manager.PlayFailedClick();
     }
     public void QueueRegoligthExport()
     {
-        if (tracker.regolith - outputQueue.Count >= 1 && outputQueue.Count < max_queue)
+        if (tracker.regolith - GetQueuedExports("Regolith Export",1) >= 1 && outputQueue.Count < max_queue)
         {
             outputQueue.Add(new OutputItem("Regolith Export", 25,() => tracker.regolith = Mathf.Min(tracker.regolith - 1, tracker.max_mining)));
             audio_manager.PlayUIclick();
+        }
+        else if(!(tracker.regolith - GetQueuedExports("Regolith Export", 1) >= 1))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Regolith");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(outputQueue.Count < max_queue))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Queue is Full");
+            audio_manager.PlayFailedClick();
         }
         else
             audio_manager.PlayFailedClick();
     }
     public void QueueTitaniumExport()
     {
-        if (tracker.titanium - outputQueue.Count >= 1 && outputQueue.Count < max_queue)
+        if (tracker.titanium - GetQueuedExports("Titanium Export", 1) >= 1 && outputQueue.Count < max_queue)
         {
             outputQueue.Add(new OutputItem("Titanium Export", 40, () => tracker.titanium = Mathf.Min(tracker.titanium - 1, tracker.max_titanium)));
             audio_manager.PlayUIclick();
+        }
+        else if (!(tracker.titanium - GetQueuedExports("Titanium Export", 1) >= 1))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Titanium");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(outputQueue.Count < max_queue))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Queue is Full");
+            audio_manager.PlayFailedClick();
         }
         else
             audio_manager.PlayFailedClick();
     }
     public void QueueLithiumExport()
     {
-        if (tracker.lithium - outputQueue.Count >= 1 && outputQueue.Count < max_queue)
+        if (tracker.lithium - GetQueuedExports("Lithium Export", 1) >= 1 && outputQueue.Count < max_queue)
         {
             outputQueue.Add(new OutputItem("Lithium Export", 80, () => tracker.lithium = Mathf.Min(tracker.lithium - 1, tracker.max_lithium)));
             audio_manager.PlayUIclick();
+        }
+        else if (!(tracker.lithium - GetQueuedExports("Lithium Export", 1) >= 1))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Not Enough Lithium");
+            audio_manager.PlayFailedClick();
+        }
+        else if (!(outputQueue.Count < max_queue))
+        {
+            GetComponent<ToolTips>().DisplayMessage("Queue is Full");
+            audio_manager.PlayFailedClick();
         }
         else
             audio_manager.PlayFailedClick();
@@ -247,6 +292,25 @@ public class Imports2 : MonoBehaviour
         {
             if (item.label == label)
                 total += perImportAmount;
+        }
+        return total;
+    }
+    private int GetQueuedExports(string label, int perExportAmount)
+    {
+        int total = 0;
+        foreach (var item in outputQueue)
+        {
+            if (item.label == label)
+                total += perExportAmount;
+        }
+        return total;
+    }
+    private int GetQueuedImportCost()
+    {
+        int total = 0;
+        foreach (var item in importQueue)
+        {
+            total += item.cost;
         }
         return total;
     }

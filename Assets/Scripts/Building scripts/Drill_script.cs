@@ -62,13 +62,11 @@ public class Drill_script: MonoBehaviour
     {
         if (lithium_particle_system != null)
             lithium_particle_system.Emit(1);
-        Debug.Log("running lithium");
     }
     public void TriggerOneTitanium()
     {
         if (titanium_particle_system != null)
             titanium_particle_system.Emit(1);
-        Debug.Log("running titanium");
     }
 }
 
