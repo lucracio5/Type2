@@ -40,8 +40,8 @@ public class Tutorial : MonoBehaviour
             /* ln6 */ "This meter displays your energy levels. More on energy later.",
             /* ln7 */ "But enough of that boring stuff, keep your eyes on the prize!",
             /* ln8 */ "Here shows how much money you have. You can make money by exporting all of our goodies.",
-            /* ln9 */ "All we are able to mine for now is regolith, which is pretty much just crusty moon rock.",
-            /* ln10 */ "But we’ll be able to expand to export more kinds of materials.",
+            /* ln9 */ "The first thing we are able to mine is regolith, which is pretty much just crusty moon rock. It goes for about 20 dollars",
+            /* ln10 */ "Speaking of regolith, this meter shows how much of it you’ve got.",
             /* ln11 */ "Speaking of regolith, this meter shows how much of it you’ve got.",
             /* ln12 */ "Now this is where you come in. Click that button that says \"Shop.\"",
             /* ln13 */ "Your main job is to manage these buildings.",
@@ -53,9 +53,19 @@ public class Tutorial : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        InitialStory(introStoryText);
-        UpdateText(curLine);
-        Debug.Log("From start curline: " + curLine);
+        //check if the tutorial has been seen before
+        //if (!PlayerPrefs.HasKey("TutorialSeen") || PlayerPrefs.GetInt("TutorialSeen") == 0)
+        //{
+            InitialStory(introStoryText);
+            UpdateText(curLine);
+            PlayerPrefs.SetInt("TutorialSeen", 1); //mark tutorial as seen
+            PlayerPrefs.Save();
+            Debug.Log("Tutorial started for the first time.");
+        //}
+        //else
+        //{
+        //    Debug.Log("Tutorial already seen, skipping initial story.");
+        //}
     }
 
     public void InitialStory(TMP_Text textObj)
@@ -121,5 +131,6 @@ public class Tutorial : MonoBehaviour
     {
         FlyDownCamera.enabled = false;
         Canvas.SetActive(true);
+        GeraldGameObject.SetActive(true);
     }
 }
