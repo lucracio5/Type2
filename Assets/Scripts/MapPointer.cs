@@ -98,6 +98,8 @@ public class MapPointer : MonoBehaviour
             else if (current_cell.building.tag == "Solar Panel")
             {
                 SolarPanelPanel.SetActive(true);
+                Gamemanager.GetComponent<Variable_Tracker>().Solartext2.text = current_cell.building.GetComponent<Solar_Pannels>().return_total().ToString();
+                Gamemanager.GetComponent<Variable_Tracker>().Solartext1.text = current_cell.building.GetComponent<Solar_Pannels>().dirt_level_return().ToString();
             }
             else if (current_cell.building.tag == "Dome")
             {

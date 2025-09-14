@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.04910943, g: 0.046724156, b: 0.035152275, a: 1}
+  m_IndirectSpecularColor: {r: 0.049111515, g: 0.04672604, b: 0.035155322, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -17917,7 +17917,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &629290695
 RectTransform:
   m_ObjectHideFlags: 0
@@ -17957,7 +17957,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &638786040
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -24920,16 +24920,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8e0a1f71fc1619e4497ab445acca8629, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  hydrobutton: {fileID: 1740378640}
-  nuclear_unlock_button: {fileID: 125055174}
-  Level2_panels_unlock_button: {fileID: 690690427}
-  Level3_panels_unlock_button: {fileID: 73645683}
-  Hydro_buy: {fileID: 1048778885}
-  Nuclear_buy: {fileID: 549151139}
-  Level2_panels_unlock: 0
-  Level3_panels_unlock: 0
-  Hydro_unlock: 0
-  Nuclear_unlock: 0
 --- !u!114 &1013954947
 MonoBehaviour:
   m_ObjectHideFlags: 0
