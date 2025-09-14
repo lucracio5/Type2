@@ -8,11 +8,12 @@ public class Tutorial : MonoBehaviour
 {
     [Header("Canvas Stuff")]
     [SerializeField] GameObject Canvas;
+    [SerializeField] GameObject TutorialPanel;
     [SerializeField] GameObject GeraldGameObject;
     [SerializeField] TMP_Text introStoryText;
     [SerializeField] TMP_Text mainTextObject;
     [SerializeField] Variable_Tracker variableTracker;
-    [SerializeField] int curLine = 0; //The line that the user is on
+    public int curLine = 0; //The line that the user is on
 
     [Header("Misc.")]
     [SerializeField] Camera FlyDownCamera;
@@ -29,7 +30,7 @@ public class Tutorial : MonoBehaviour
 
     private string[] lines = {
             /* ln0 */ "Welcome to the moon! I’m Gerald, and I’ll be your \"tour guide.\"",
-            /* ln1 */ "I’ve been to the moon a few times for testing, so trust me, I know what I’m doing.",
+            /* ln1 */ "I’ve already been to the moon around 6 or 7 times for testing, so trust me, I know what I’m doing.",
             
             /* ln2 */ "Firstly, see these meters up here? These keep track of your water, food, and air supplies.",
             /* ln3 */ "If you let any of these get to zero, then we’ll have to shut down the mission, and that’s no good, is it?",
@@ -40,13 +41,21 @@ public class Tutorial : MonoBehaviour
             /* ln6 */ "This meter displays your energy levels. More on energy later.",
             /* ln7 */ "But enough of that boring stuff, keep your eyes on the prize!",
             /* ln8 */ "Here shows how much money you have. You can make money by exporting all of our goodies.",
-            /* ln9 */ "The first thing we are able to mine is regolith, which is pretty much just crusty moon rock. It goes for about 20 dollars",
-            /* ln10 */ "Speaking of regolith, this meter shows how much of it you’ve got.",
-            /* ln11 */ "Speaking of regolith, this meter shows how much of it you’ve got.",
-            /* ln12 */ "Now this is where you come in. Click that button that says \"Shop.\"",
-            /* ln13 */ "Your main job is to manage these buildings.",
-            /* ln14 */ "As you can see, for now you can place domes, hydroponic plant nurseries, solar panels, drills, and O2 plants.",
-            /* ln15 */ "Try clicking on that little i button to learn more about each of the buildings."
+            /* ln9 */ "Remember to be as profitable as possible, while still keeping this old colony afloat.",
+            
+            /* ln10 */ "The first thing we are able to mine is regolith, which is pretty much just crusty moon rock. It goes for about 20 dollars.",
+            /* ln11 */ "This is titanium, which sells for 40 dollars.",
+            /* ln12 */ "Finally, we've got lithium, which sells for 80 dollars.",
+            
+            /* ln13 */ "Now this is where you come in. Click that button that says \"Shop.\"",
+            /* ln14 */ "Your main job is to manage these buildings.",
+            /* ln15 */ "As you can see, for now you can place domes, hydroponic plant nurseries, solar panels, drills, and O2 plants.",
+            /* ln16 */ "You can always click on that little i button to learn more about each of the buildings.",
+            
+            /* ln17 */ "You left click to select buildings, right click and drag to move around, scroll wheel to zoom, and scroll wheel drag to look around.",
+            /* ln18 */ "I'll leave the rest to you to figure out; If you ever want me to explain again, you can find me in settings by pressing escape.",
+            /* ln19 */ "Have fun, and I'll see you around!",
+            "",
     };
 
 
@@ -54,18 +63,20 @@ public class Tutorial : MonoBehaviour
     void Start()
     {
         //check if the tutorial has been seen before
-        //if (!PlayerPrefs.HasKey("TutorialSeen") || PlayerPrefs.GetInt("TutorialSeen") == 0)
-        //{
+        if (!PlayerPrefs.HasKey("TutorialSeen") || PlayerPrefs.GetInt("TutorialSeen") == 0)
+        {
+            TutorialPanel.SetActive(true); //activate panel
             InitialStory(introStoryText);
             UpdateText(curLine);
             PlayerPrefs.SetInt("TutorialSeen", 1); //mark tutorial as seen
             PlayerPrefs.Save();
             Debug.Log("Tutorial started for the first time.");
-        //}
-        //else
-        //{
-        //    Debug.Log("Tutorial already seen, skipping initial story.");
-        //}
+        }
+        else
+        {
+            Debug.Log("Tutorial already seen, skipping initial story.");
+            DisableFlyDownCameraAndEnableCanvas(); //resets scene to normal
+        }
     }
 
     public void InitialStory(TMP_Text textObj)
@@ -85,9 +96,12 @@ public class Tutorial : MonoBehaviour
         else if (lineIndex == 6) MoveGerald(130, 14, GeraldPointUpRight); //energy
         else if (lineIndex == 7) MoveGerald(130, -80, GeraldMouthOpen); //enough of that jazz
         else if (lineIndex == 8) MoveGerald(-260, 15, GeraldPointUpLeft); //money
-
-        //else if (lineIndex == )
-
+        else if (lineIndex == 10) MoveGerald(-260.4f, 37.3f, GeraldPointUpRight); //regolith meter
+        else if (lineIndex == 11) MoveGerald(-260.4f, 15.5f, GeraldPointUpRight); //titanium meter
+        else if (lineIndex == 12) MoveGerald(-260.4f, -16.8f, GeraldPointUpRight); //lithium meter
+        else if (lineIndex == 13) MoveGerald(296, -80, GeraldPointDownRight); //shop
+        else if (lineIndex == 14) MoveGerald(296, -80, GeraldMouthOpen); //shop yap
+        else if (lineIndex >= lines.Length - 1) TutorialPanel.SetActive(false); //if reached the end, then hide the canvas.
     }
 
     //Returns the line based on the index
@@ -109,9 +123,9 @@ public class Tutorial : MonoBehaviour
     {
         GeraldGameObject.GetComponent<Image>().sprite = GeraldSprite; //Updates geralds sprite to what it should be
         GeraldGameObject.GetComponent<RectTransform>().anchoredPosition = new Vector2(x, y); //moves gerald to the desired position
-        Debug.Log("Moving Gerald to " + x + ", " + y + " in the position " + GeraldSprite.name);
-        Debug.Log("Gerald position: " + GeraldGameObject.GetComponent<RectTransform>().anchoredPosition);
-        Debug.Log("Gerald image: " + GeraldGameObject.GetComponent<Image>().sprite.name);
+        //Debug.Log("Moving Gerald to " + x + ", " + y + " in the position " + GeraldSprite.name);
+        //Debug.Log("Gerald position: " + GeraldGameObject.GetComponent<RectTransform>().anchoredPosition);
+        //Debug.Log("Gerald image: " + GeraldGameObject.GetComponent<Image>().sprite.name);
     }
 
 
@@ -126,11 +140,21 @@ public class Tutorial : MonoBehaviour
         Invoke("DisableFlyDownCameraAndEnableCanvas", 8f);
     }
 
+
     //goofy ahh function
     void DisableFlyDownCameraAndEnableCanvas()
     {
         FlyDownCamera.enabled = false;
         Canvas.SetActive(true);
         GeraldGameObject.SetActive(true);
+    }
+
+
+    //replays the tutorial
+    public void ReplayTutorial()
+    {
+        curLine = 0;
+        TutorialPanel.SetActive(true);
+        UpdateText(curLine);
     }
 }
