@@ -11,16 +11,16 @@ public class Solar_Pannels: MonoBehaviour
     public int total_collected;
     public int dirt_level;
     public int dirt_chance;
-    public TMP_Text Solartext1;
-    public TMP_Text Solartext2;
+    public int collected_amount = 1;
+    public bool lvl2 = false;
+    public bool lvl3 = false;
 
     
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
         dirt_chance = 1;
-        Solartext1 = Gamemanager.GetComponent<Variable_Tracker>().returnSolar1();
-        Solartext2 = Gamemanager.GetComponent<Variable_Tracker>().returnSolar2();
+
 
         //Energy = Gamemanager.GetComponent<Variable_Tracker>().Energy;
     }
@@ -47,8 +47,8 @@ public class Solar_Pannels: MonoBehaviour
 
                 if (num > dirt_level)
                 {
-                    Gamemanager.GetComponent<Variable_Tracker>().energy += 1;
-                    total_collected = total_collected + 1;
+                    Gamemanager.GetComponent<Variable_Tracker>().energy += collected_amount;
+                    total_collected = total_collected + collected_amount;
                 }
                 if (num > dirt_chance && dirt_level < 1000)
                 {
@@ -61,8 +61,19 @@ public class Solar_Pannels: MonoBehaviour
 
             }
         }
-        Solartext1.text = dirt_level_return();
-        Solartext2.text = "Total Energey Collected ="+total_collected.ToString();
+
+    }
+    public void Level2Upgrade()
+    {
+        collected_amount = 2;
+        lvl2 = true;
+        Gamemanager.GetComponent<Audio_manager>().PlayUnlock();
+    }
+    public void Level3Upgrade()
+    {
+        collected_amount = 4;
+        lvl3 = true;
+        Gamemanager.GetComponent<Audio_manager>().PlayUnlock();
     }
     public void clean()
     {

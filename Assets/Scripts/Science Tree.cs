@@ -16,8 +16,11 @@ public class ScienceTree : MonoBehaviour
     [SerializeField] Button Level3_panels_unlock_button;
     [SerializeField] Button Hydro_buy;
     [SerializeField] Button Nuclear_buy;
-    
-    
+
+    [SerializeField] Button Level2_panels;
+    [SerializeField] Button Level3_panels;
+
+
     public bool Level2_panels_unlock = false;
     public bool Level3_panels_unlock = false;
     public bool Hydro_unlock = false;
@@ -30,6 +33,8 @@ public class ScienceTree : MonoBehaviour
         toolTips = GetComponent<ToolTips>();
         Hydro_buy.interactable = false;
         Nuclear_buy.interactable=false;
+        Level2_panels.interactable = false;
+        Level3_panels.interactable = false;
     }
 
     // Update is called once per frame
@@ -53,6 +58,23 @@ public class ScienceTree : MonoBehaviour
         {
             Nuclear_buy.interactable = false;
         }
+        if (Level2_panels_unlock)
+        {
+            Level2_panels.interactable = true;
+        }
+        else
+        {
+            Level2_panels.interactable = false;
+        }
+        if(Level3_panels_unlock)    
+        {
+            Level3_panels.interactable = true;
+        }
+        else
+        {
+            Level3_panels.interactable = false;
+        }
+
     }
     public void Hydroponics()
     {
@@ -81,6 +103,7 @@ public class ScienceTree : MonoBehaviour
             manager.PlayUnlock();
             Level2_panels_unlock = true;
             jobs.science_points -= 3;
+            Level2_panels.interactable = true;
             //Add Whatever will actually unlock the lvl 2 panels
         }
         else if (!(jobs.science_points >= 3))
@@ -101,6 +124,7 @@ public class ScienceTree : MonoBehaviour
             manager.PlayUnlock();
             Level3_panels_unlock = true;
             jobs.science_points -= 3;
+            Level3_panels.interactable = true;
             //Add Whatever will actually unlock the lvl 2 panels
         }
         else if (!(jobs.science_points >= 5))

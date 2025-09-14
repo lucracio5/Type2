@@ -120,6 +120,8 @@ public class Variable_Tracker : MonoBehaviour
 
     public TMP_Text causeOfDeath;
 
+    public MapCell selected_cell;
+
 
 
     public void Start()
@@ -127,13 +129,25 @@ public class Variable_Tracker : MonoBehaviour
         Begin();
         
     }
-    public TMP_Text returnSolar1()
+    public void solar_upgrade_2()
     {
-        return Solartext1;
+        if (selected_cell.building != null)
+        {
+            if (selected_cell.building.tag == "Solar Panel"&& tree.Level2_panels_unlock)
+            {
+                selected_cell.building.GetComponentInChildren<Solar_Pannels>().Level2Upgrade();
+            }
+        }
     }
-    public TMP_Text returnSolar2()
+    public void solar_upgrade_3()
     {
-        return Solartext2;
+        if (selected_cell.building != null)
+        {
+            if (selected_cell.building.tag == "Solar Panel" && tree.Level3_panels_unlock)
+            {
+                selected_cell.building.GetComponentInChildren<Solar_Pannels>().Level3Upgrade();
+            }
+        }
     }
 
     public void Begin()
