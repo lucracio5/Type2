@@ -32,11 +32,11 @@ public class Drill_script: MonoBehaviour
             int num = Random.Range(0, 100); //Random chance to get materials
 
 
-            if(num <= 10) //10% change
+            if(num <= 5) //10% change
             {
-                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_titanium > Gamemanager.GetComponent<Variable_Tracker>().titanium)//checks if you have space
+                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 20 && Gamemanager.GetComponent<Variable_Tracker>().max_titanium > Gamemanager.GetComponent<Variable_Tracker>().titanium)//checks if you have space
                 {
-                    Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
+                    Gamemanager.GetComponent<Variable_Tracker>().energy -= 20;
                     Gamemanager.GetComponent<Variable_Tracker>().titanium += 1;
                     total_collected++;
                     TriggerOneTitanium();
@@ -44,9 +44,9 @@ public class Drill_script: MonoBehaviour
             }
             if(num == 11)//1% chance
             {
-                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 30 && Gamemanager.GetComponent<Variable_Tracker>().max_lithium > Gamemanager.GetComponent<Variable_Tracker>().lithium)//checks if you have space
+                if (Gamemanager.GetComponent<Variable_Tracker>().energy > 20 && Gamemanager.GetComponent<Variable_Tracker>().max_lithium > Gamemanager.GetComponent<Variable_Tracker>().lithium)//checks if you have space
                 {
-                    Gamemanager.GetComponent<Variable_Tracker>().energy -= 50;
+                    Gamemanager.GetComponent<Variable_Tracker>().energy -= 20;
                     Gamemanager.GetComponent<Variable_Tracker>().lithium += 1;
                     total_collected++;
                     TriggerOneLithium();

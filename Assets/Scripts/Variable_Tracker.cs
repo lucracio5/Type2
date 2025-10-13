@@ -13,7 +13,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Variable_Tracker : MonoBehaviour
 {
-    public bool canDie = false; //only for tetsing / debugging
+    public bool canDie = true; //only for tetsing / debugging
 
 
     public int energy = 0;
@@ -175,6 +175,16 @@ public class Variable_Tracker : MonoBehaviour
         jobs.cleaning_jobs = cleaning_jobs;
         tree.Hydro_unlock = Hydro_Unlock;
         max_energy = 100;
+    }
+
+    public void ClearSaveData()
+    {
+
+        SaveSystem.ClearData();
+
+        GetComponent<ToolTips>().DisplayMessage("Data Cleared");
+        SaveSystem.ClearData();
+        UnityEngine.SceneManagement.SceneManager.LoadScene("Start Menu");
     }
 
     void InitializeRoverSlotStats()
@@ -437,7 +447,7 @@ public class Variable_Tracker : MonoBehaviour
         string[] cells = data.Map.Split(',');
         for (int i = 0; i < cells.Length; i++)
         {
-            if (cells[i] != "-1")// && map.mapCells[i].building == null
+            if ((cells[i] != "-1")&& (map.mapCells[i].building == null))
             {
                 map.mapCells[i].Add_building(Int32.Parse(cells[i]));
             }
