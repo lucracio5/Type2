@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 705507994}
-  m_IndirectSpecularColor: {r: 0.049111515, g: 0.04672604, b: 0.035155322, a: 1}
+  m_IndirectSpecularColor: {r: 0.04910943, g: 0.046724156, b: 0.035152275, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3134,7 +3134,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -7.54776, y: 15.263977}
+  m_AnchoredPosition: {x: -7.5477295, y: 15.263977}
   m_SizeDelta: {x: -65.3817, y: -69.472}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &155305215
@@ -25732,6 +25732,10 @@ MonoBehaviour:
   ui_open: {fileID: 8300000, guid: 052c4815414d7a742b3e1fa587e15bdf, type: 3}
   ship_takeoff: {fileID: 8300000, guid: 405fa4f252148094cbb2c3f409caf6c2, type: 3}
   low_energy_siren: {fileID: 8300000, guid: 51eaf878329cc054cbe4d91e1e532bd5, type: 3}
+  MusicList:
+  - {fileID: 8300000, guid: 62ad0a608c572ed4d976873d69e3becc, type: 3}
+  - {fileID: 8300000, guid: 7b24039f958fd864cb8f51958ca244e5, type: 3}
+  - {fileID: 8300000, guid: f548d22c40fbd6d488a90e527e9ed91e, type: 3}
   SFX: {fileID: 1013954942}
   Music: {fileID: 1013954944}
   LowEnergySiren: {fileID: 1013954948}
@@ -25745,7 +25749,7 @@ AudioSource:
   m_Enabled: 1
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: 0}
-  m_audioClip: {fileID: 8300000, guid: 62ad0a608c572ed4d976873d69e3becc, type: 3}
+  m_audioClip: {fileID: 0}
   m_PlayOnAwake: 1
   m_Volume: 0.743
   m_Pitch: 1
@@ -37848,6 +37852,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1013954956}
         m_TargetAssemblyTypeName: Tutorial, Assembly-CSharp
         m_MethodName: RunSickCameraSequence
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
+      - m_Target: {fileID: 1013954943}
+        m_TargetAssemblyTypeName: Audio_manager, Assembly-CSharp
+        m_MethodName: PlayLanding
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}

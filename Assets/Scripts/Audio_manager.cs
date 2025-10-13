@@ -11,6 +11,12 @@ public class Audio_manager : MonoBehaviour
     [SerializeField] AudioClip ui_open;
     [SerializeField] AudioClip ship_takeoff;
     [SerializeField] AudioClip low_energy_siren;
+
+
+    [SerializeField] List<AudioClip> MusicList = new();
+
+
+
     public AudioSource SFX;
     public AudioSource Music;
     public AudioSource LowEnergySiren;
@@ -18,11 +24,15 @@ public class Audio_manager : MonoBehaviour
     {
         if (!Music.isPlaying)
         {
+
+            int num = Random.Range(0, MusicList.Count);
+            Music.clip = MusicList[num];
             Music.Play();
         }
     }
     // credit Alexander Nakarada (CreatorChords)
     // Update is called once per frame
+    //Credit Audio Papkin
     public void PlayUIclick()
     {
         SFX.PlayOneShot(ui_click);
