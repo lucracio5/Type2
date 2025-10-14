@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 67c1a89b3c64f1e49b4f9b568fe55680, type: 3}
-  m_Name: Science Building
+  m_Name: Water Plant
   m_EditorClassIdentifier: 
-  prefab: {fileID: 4008418660276179125, guid: d6fb08976710a974e8c75685ed25f0cb, type: 3}
-  cost: 20
+  prefab: {fileID: 430506175575503887, guid: 5303bbec9d08c7247a881a16e284cd28, type: 3}
+  cost: 0
