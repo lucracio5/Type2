@@ -19,7 +19,7 @@ public class Solar_Pannels: MonoBehaviour
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
-        dirt_chance = 1;
+        dirt_chance = 300;
 
 
         //Energy = Gamemanager.GetComponent<Variable_Tracker>().Energy;
@@ -28,10 +28,10 @@ public class Solar_Pannels: MonoBehaviour
 
     // Update is called once per frame
 
-    public int return_total()
+    public string return_total()
     {
         Debug.Log("return" + total_collected.ToString());
-        return total_collected;
+        return "Total Energy colected:" + total_collected;
         
     }
 
@@ -50,7 +50,7 @@ public class Solar_Pannels: MonoBehaviour
                     Gamemanager.GetComponent<Variable_Tracker>().energy += collected_amount;
                     total_collected = total_collected + collected_amount;
                 }
-                if (num > dirt_chance && dirt_level < 1000)
+                if (num < dirt_chance && dirt_level < 1000)
                 {
                     dirt_level += 20;
                 }
@@ -77,7 +77,7 @@ public class Solar_Pannels: MonoBehaviour
     }
     public void clean()
     {
-        dirt_level = 0;
+        dirt_level -= Mathf.Max(0,dirt_level-250);
     }
     public string dirt_level_return()
     {

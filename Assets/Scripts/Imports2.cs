@@ -42,7 +42,7 @@ public class Imports2 : MonoBehaviour
         shipAnimator = GameObject.Find("Rocket").GetComponent<Animator>();
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
         audio_manager = GameObject.Find("Game Manager").GetComponent<Audio_manager>();
-        max_queue = 3;
+        max_queue = 10;
     }
 
     private void Update()

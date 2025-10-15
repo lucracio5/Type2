@@ -62,8 +62,8 @@ public class Variable_Tracker : MonoBehaviour
     public List<string> crewNames = new List<string>();
 
     public int max_energy = 100;
-    public int max_mining = 10;
-    public int max_titanium = 10;
+    public int max_mining = 30;
+    public int max_titanium = 20;
     public int max_lithium = 5;
 
 
@@ -175,6 +175,8 @@ public class Variable_Tracker : MonoBehaviour
         jobs.cleaning_jobs = cleaning_jobs;
         tree.Hydro_unlock = Hydro_Unlock;
         max_energy = 100;
+
+
     }
 
     public void ClearSaveData()
@@ -255,6 +257,9 @@ public class Variable_Tracker : MonoBehaviour
         population_slider.maxValue = max_population;
         energy_slider.maxValue = max_energy;
         energy2_slider.maxValue = max_energy;
+        titanium_slider.maxValue = max_titanium;
+        mining_slider.maxValue = max_mining;
+        lithium_slider.maxValue = max_lithium;
 
 
 

@@ -63,7 +63,7 @@ public class SaveSystem
     }
 
     
-    [MenuItem("Tools/Clear Persistent Data")]
+   // [MenuItem("Tools/Clear Persistent Data")]
     public static void ClearData()
     {
         var path = Application.persistentDataPath;
