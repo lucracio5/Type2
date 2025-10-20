@@ -167,7 +167,7 @@ public class Variable_Tracker : MonoBehaviour
         SaveSystem.Load();
 
         InvokeRepeating("Oxygen", 1f, 1f);
-        InvokeRepeating("LifeSuport", 0f, 120f);
+        InvokeRepeating("LifeSupport", 0f, 1f);
         audio_manager = GetComponent<Audio_manager>();
         jobs.xp = xp;
         jobs.science_points = science_points;
@@ -261,7 +261,7 @@ public class Variable_Tracker : MonoBehaviour
         mining_slider.maxValue = max_mining;
         lithium_slider.maxValue = max_lithium;
 
-
+        canDie = true;
 
 
         
@@ -388,10 +388,33 @@ public class Variable_Tracker : MonoBehaviour
     {
         O2 -= population;
     }
-    public void LifeSuport()
+    private float foodRemainder = 0f;
+    private float waterRemainder = 0f;
+
+    public void LifeSupport()
     {
-        food -= population;
-        water -= population;
+        // Calculate per-second consumption (e.g., each person eats 0.1 food per 12 seconds)
+        float foodConsumptionPerSecond = (population / 10f) / 16f;
+        float waterConsumptionPerSecond = (population / 10f) / 16f;
+
+        // Accumulate fractional loss
+        foodRemainder += foodConsumptionPerSecond;
+        waterRemainder += waterConsumptionPerSecond;
+
+        // Subtract only full units when accumulated >= 1
+        if (foodRemainder >= 1f)
+        {
+            int consumed = Mathf.FloorToInt(foodRemainder);
+            food -= consumed;
+            foodRemainder -= consumed;
+        }
+
+        if (waterRemainder >= 1f)
+        {
+            int consumed = Mathf.FloorToInt(waterRemainder);
+            water -= consumed;
+            waterRemainder -= consumed;
+        }
     }
     public void Shop_button_1()
     {
