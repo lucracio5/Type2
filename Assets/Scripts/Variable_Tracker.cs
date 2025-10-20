@@ -22,7 +22,7 @@ public class Variable_Tracker : MonoBehaviour
     public int population = 10;
     public int food = 100;
     public int O2 = 100;
-    public int money;
+    public int money = 200;
     public int fuel;
     public float masterTime;
     public int uranium;

@@ -7,7 +7,8 @@ public class Drill_script: MonoBehaviour
 {
     public GameObject Gamemanager;
     private float timer;
-    public int total_collected;
+    public int total_titanium;
+    public int total_lithium;
     public ParticleSystem lithium_particle_system;
     public ParticleSystem titanium_particle_system;
     void Start()
@@ -17,12 +18,14 @@ public class Drill_script: MonoBehaviour
         
         lithium_particle_system = this.transform.GetChild(0).gameObject.GetComponent<ParticleSystem>(); //finds the particle system based on where it is in the Hiarchy
         titanium_particle_system = this.transform.GetChild(1).gameObject.GetComponent<ParticleSystem>();
+        Gamemanager.GetComponent<Variable_Tracker>().max_lithium += 1;
+        Gamemanager.GetComponent<Variable_Tracker>().max_titanium += 5;
     }
 
     // Update is called once per frame
-    public int return_total()
+    public string return_total()
     {
-        return total_collected;
+        return "Total Lithium Collected: "+total_lithium+"\n Total Titanium Collected: "+total_titanium;
     }
     void Update()
     {
@@ -32,13 +35,13 @@ public class Drill_script: MonoBehaviour
             int num = Random.Range(0, 100); //Random chance to get materials
 
 
-            if(num <= 5) //10% change
+            if(num <= 5) //5% change
             {
                 if (Gamemanager.GetComponent<Variable_Tracker>().energy > 20 && Gamemanager.GetComponent<Variable_Tracker>().max_titanium > Gamemanager.GetComponent<Variable_Tracker>().titanium)//checks if you have space
                 {
                     Gamemanager.GetComponent<Variable_Tracker>().energy -= 20;
                     Gamemanager.GetComponent<Variable_Tracker>().titanium += 1;
-                    total_collected++;
+                    total_titanium++;
                     TriggerOneTitanium();
                 }
             }
@@ -48,7 +51,7 @@ public class Drill_script: MonoBehaviour
                 {
                     Gamemanager.GetComponent<Variable_Tracker>().energy -= 20;
                     Gamemanager.GetComponent<Variable_Tracker>().lithium += 1;
-                    total_collected++;
+                    total_lithium++;
                     TriggerOneLithium();
                 }
             }

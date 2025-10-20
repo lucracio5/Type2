@@ -129,8 +129,8 @@ public class MapPointer : MonoBehaviour
                 panel_text.text = current_cell.building.name;
                 if (current_cell.building.GetComponentInChildren<Drill_script>() != null)
                 {
-                    panel_text2.text = "Total Regolith colected: " + current_cell.building.GetComponentInChildren<Drill_script>().total_collected.ToString();
-                    Debug.Log(current_cell.building.GetComponentInChildren<Drill_script>().return_total().ToString());
+                    panel_text2.text = current_cell.building.GetComponentInChildren<Drill_script>().return_total();
+                    
                 }
                 else if (current_cell.building.GetComponentInChildren<Solar_Pannels>() != null)
                 {

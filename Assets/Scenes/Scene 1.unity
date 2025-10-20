@@ -619,7 +619,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $50
+  m_text: $100
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e20c3549c9b09842ba0b574c906d420, type: 2}
   m_sharedMaterial: {fileID: -2056546081057257883, guid: 6e20c3549c9b09842ba0b574c906d420, type: 2}
@@ -1353,8 +1353,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.0012355, y: 79.2721}
-  m_SizeDelta: {x: 242.41, y: 33.4562}
+  m_AnchoredPosition: {x: 16.779583, y: 74.37841}
+  m_SizeDelta: {x: 208.8533, y: 23.6688}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &60421288
 MonoBehaviour:
@@ -25462,7 +25462,7 @@ MonoBehaviour:
   population: 10
   food: 100
   O2: 100
-  money: 600
+  money: 200
   fuel: 0
   masterTime: 0
   uranium: 0
@@ -25492,8 +25492,8 @@ MonoBehaviour:
   crewNames: []
   max_energy: 0
   max_mining: 30
-  max_titanium: 20
-  max_lithium: 5
+  max_titanium: 5
+  max_lithium: 4
   max_water: 100
   max_food: 100
   max_O2: 100
@@ -29256,7 +29256,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: $150
+  m_text: $1000
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 6e20c3549c9b09842ba0b574c906d420, type: 2}
   m_sharedMaterial: {fileID: -2056546081057257883, guid: 6e20c3549c9b09842ba0b574c906d420, type: 2}
@@ -47709,7 +47709,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!224 &1602442615
 RectTransform:
   m_ObjectHideFlags: 0
@@ -59607,7 +59607,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Gamemanager: {fileID: 0}
-  total_collected: 0
+  total_titanium: 0
+  total_lithium: 0
   lithium_particle_system: {fileID: 0}
   titanium_particle_system: {fileID: 0}
 --- !u!4 &6376300616720045486
