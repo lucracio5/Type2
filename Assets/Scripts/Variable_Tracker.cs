@@ -164,7 +164,11 @@ public class Variable_Tracker : MonoBehaviour
         InitializeResourcePrices(); //creates the empty jagged array
         InitializeRoverSlotStats(); //creates the empty jagged array
 
+
         SaveSystem.Load();
+
+       
+
 
         InvokeRepeating("Oxygen", 1f, 1f);
         InvokeRepeating("LifeSupport", 0f, 1f);
@@ -467,12 +471,32 @@ public class Variable_Tracker : MonoBehaviour
         }
         data.Map = data.Map.Remove(data.Map.Length - 1);
     }
-
+    public void DefaultValues(VariableSaveData data)
+    {
+        Debug.Log(!SaveSystem.has_loaded);
+        if (!SaveSystem.has_loaded)
+        {
+            science_jobs = 5;
+            cleaning_jobs = 5;
+        }
+        else
+        {
+            science_jobs = data.science_jobs;
+            cleaning_jobs = data.cleaning_jobs;
+        }
+    }
 
     public void LoadData(VariableSaveData data)
     {
+
         MoonMapMaker map = GameObject.Find("Map").GetComponent<MoonMapMaker>(); ;
         string[] cells = data.Map.Split(',');
+
+       
+
+
+
+
         for (int i = 0; i < cells.Length; i++)
         {
             if ((cells[i] != "-1")&& (map.mapCells[i].building == null))
@@ -480,6 +504,8 @@ public class Variable_Tracker : MonoBehaviour
                 map.mapCells[i].Add_building(Int32.Parse(cells[i]));
             }
         }
+        science_jobs = data.science_jobs;
+        cleaning_jobs = data.cleaning_jobs;
         energy = data.energy;
         regolith = data.regolith;
         water = data.water;
@@ -489,8 +515,7 @@ public class Variable_Tracker : MonoBehaviour
         money = data.money;
         xp = data.xp;
         science_points = data.science_points;
-        science_jobs = data.science_jobs;
-        cleaning_jobs = data.cleaning_jobs;
+        
         Hydro_Unlock = data.hydro_unlock;
         roverSlotStats = DecodeJaggedArray(data.roverSlotStats);
         masterTime = data.masterTime;
