@@ -203,7 +203,7 @@ public class Imports2 : MonoBehaviour
     {
         if (tracker.money - GetQueuedImportCost() >= 100 && tracker.population + GetQueuedAmount("Crew", 10) < tracker.max_population && importQueue.Count < max_queue)
         {
-            importQueue.Add(new ImportItem("Crew", 100, () => tracker.population = Mathf.Min(tracker.population + 10, tracker.max_population)));
+            importQueue.Add(new ImportItem("Crew", 100, () => CrewImportArival()));
             audio_manager.PlayUIclick();
         }
         else if (!(tracker.money - GetQueuedImportCost() >= 100))
@@ -223,6 +223,13 @@ public class Imports2 : MonoBehaviour
         }
         else
             audio_manager.PlayFailedClick();
+    }
+    public void CrewImportArival()
+    {
+        tracker.population = Mathf.Min(tracker.population + 10, tracker.max_population);
+        tracker.max_food += 50;
+        tracker.max_water += 50;
+        tracker.max_O2 += 50;
     }
     public void QueueRegoligthExport()
     {
