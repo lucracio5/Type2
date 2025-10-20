@@ -24,10 +24,10 @@ public class ResourceHandler : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        CheckEnergy();
-        CheckO2();
-        CheckFood();
-        CheckWater();
+        //CheckEnergy();
+        //CheckO2();
+        //CheckFood();
+       // CheckWater();
     }
 
     void CheckEnergy() {

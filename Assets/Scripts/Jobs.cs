@@ -8,8 +8,8 @@ using UnityEngine.UI;
 public class Jobs : MonoBehaviour
 {
     public Slider xp_bar;
-    public int science_jobs;
-    public int cleaning_jobs;
+    public int science_jobs = 5;
+    public int cleaning_jobs = 5;
     public int open_jobs;
     public Variable_Tracker tracker;
     public TMP_Text text;
@@ -34,7 +34,7 @@ public class Jobs : MonoBehaviour
         if (timer >= 5)
         {
             timer = 0;
-            xp += science_jobs*2;
+            xp += science_jobs*10;
             CleanDirtyPanels();
 
         }
