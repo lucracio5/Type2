@@ -51,7 +51,12 @@ public class MenuManager : MonoBehaviour
     }
 
 
-   
+    public void ReturnCamHome()
+    {
+        Debug.Log("Returning Camera Home");
+        MoveCamToCredits = false;
+        MoveCamToHome = true;
+    }
 
     void MoveCamera(Vector3 location, Vector3 rotation)
     {
