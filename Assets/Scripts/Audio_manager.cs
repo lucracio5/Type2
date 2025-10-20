@@ -20,14 +20,31 @@ public class Audio_manager : MonoBehaviour
     public AudioSource SFX;
     public AudioSource Music;
     public AudioSource LowEnergySiren;
-    void Start()
+
+    int last_clip = -1;
+  
+    void Update()
     {
         if (!Music.isPlaying)
         {
+            if (last_clip == -1)
+            {
+                int num = Random.Range(0, MusicList.Count);
+                Music.PlayOneShot(MusicList[num]);
+                num = last_clip;
+            }
+            else
+            {
+                int num = Random.Range(0, MusicList.Count);
+                while(num != last_clip)
+                {
+                    num = Random.Range(0, MusicList.Count);
+                }
 
-            int num = Random.Range(0, MusicList.Count);
-            Music.clip = MusicList[num];
-            Music.Play();
+                Music.PlayOneShot(MusicList[num]);
+                num = last_clip;
+            }
+            
         }
     }
     // credit Alexander Nakarada (CreatorChords)
