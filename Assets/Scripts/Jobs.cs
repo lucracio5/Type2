@@ -34,7 +34,7 @@ public class Jobs : MonoBehaviour
         if (timer >= 5)
         {
             timer = 0;
-            xp += science_jobs*2;
+            xp += science_jobs*10;
             CleanDirtyPanels();
 
         }
