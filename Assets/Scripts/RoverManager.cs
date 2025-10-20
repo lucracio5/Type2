@@ -219,6 +219,12 @@ public class RoverManager : MonoBehaviour
 
     public void IncreaseStat(int whichStat)
     {
+        if (variableTracker.money < upgradeCost) //if you don't have enough money
+        {
+            toolTips.DisplayMessage("Not enough money to purchase this item");
+            return; //stop calling function
+        }
+
         // Extract the rover ID from the title text
         int roverID = int.Parse(roverStatsPanelTitleText.text.Split(' ')[1]) - 1; // Convert "Rover X" to index X-1
         //Debug.Log("Increasing stat for Rover " + (roverID + 1) + ", Stat: " + whichStat);
@@ -291,7 +297,7 @@ public class RoverManager : MonoBehaviour
 
         if (variableTracker.money < CurrentRoverCost(roverSlot))
         {
-            toolTips.DisplayMessage("Not Enough Money to Purchase this item");
+            toolTips.DisplayMessage("Not enough money to purchase this item");
             audio_Manager.PlayFailedClick();
             return; // Exit if the player doesn't have enough money
         }
