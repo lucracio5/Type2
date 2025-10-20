@@ -6,10 +6,10 @@ using UnityEngine.SceneManagement;
 
 public class MenuManager : MonoBehaviour
 {
-    private Camera mainCamera; // Declare a variable to hold the camera reference
+    [SerializeField] private Camera mainCamera;
 
-    [HideInInspector] public bool MoveCamToCredits = false;
-    [HideInInspector] public bool MoveCamToHome = false;
+    public bool MoveCamToCredits = false;
+    public bool MoveCamToHome = false;
 
     [SerializeField] private Vector3 OriginalCameraPosition = new Vector3(0f, 2.55f, -8.15f);
     [SerializeField] private Vector3 OriginalCameraRotation = new Vector3(15f, 0f, 0f);
@@ -22,9 +22,8 @@ public class MenuManager : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        mainCamera = Camera.main;
+        Debug.Log("Main camera: " + mainCamera.name);
     }
-
 
     void Update()
     {
@@ -60,14 +59,14 @@ public class MenuManager : MonoBehaviour
 
     void MoveCamera(Vector3 location, Vector3 rotation)
     {
-        Camera.main.transform.position = Vector3.SmoothDamp(
+        mainCamera.transform.position = Vector3.SmoothDamp(
             Camera.main.transform.position,
             location,
             ref velocity,
             smoothTime
         );
 
-        Camera.main.transform.rotation = Quaternion.Slerp(
+        mainCamera.transform.rotation = Quaternion.Slerp(
             Camera.main.transform.rotation,
             Quaternion.Euler(rotation),
             Time.deltaTime * (1f / smoothTime)
