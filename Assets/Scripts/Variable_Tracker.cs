@@ -96,12 +96,16 @@ public class Variable_Tracker : MonoBehaviour
 
     public TMP_Text Solartext1;
     public TMP_Text Solartext2;
+    public TMP_Text Solartext3;
 
     public int xp;
     public int science_points;
     public int science_jobs = 5;
     public int cleaning_jobs = 5;
     public bool Hydro_Unlock;
+    public bool Level2_panels_unlock;
+    public bool Level3_panels_unlock;
+    public bool Nuclear_unlock;
     public int[][] roverSlotStats;
     public int[][] resourcePrices; //the history for the market price of all resources
 
@@ -124,6 +128,7 @@ public class Variable_Tracker : MonoBehaviour
 
 
 
+
     public void Start()
     {
         Begin();
@@ -131,9 +136,9 @@ public class Variable_Tracker : MonoBehaviour
     }
     public void solar_upgrade_2()
     {
-        if (selected_cell.building != null)
+        if (selected_cell.building != null && selected_cell != null)
         {
-            if (selected_cell.building.tag == "Solar Panel"&& tree.Level2_panels_unlock)
+            if (selected_cell.building.tag == "Solar Panel")
             {
                 selected_cell.building.GetComponentInChildren<Solar_Pannels>().Level2Upgrade();
             }
@@ -141,9 +146,9 @@ public class Variable_Tracker : MonoBehaviour
     }
     public void solar_upgrade_3()
     {
-        if (selected_cell.building != null)
+        if (selected_cell.building != null && selected_cell != null)
         {
-            if (selected_cell.building.tag == "Solar Panel" && tree.Level3_panels_unlock)
+            if (selected_cell.building.tag == "Solar Panel")
             {
                 selected_cell.building.GetComponentInChildren<Solar_Pannels>().Level3Upgrade();
             }
@@ -178,6 +183,9 @@ public class Variable_Tracker : MonoBehaviour
         jobs.science_jobs = science_jobs;
         jobs.cleaning_jobs = cleaning_jobs;
         tree.Hydro_unlock = Hydro_Unlock;
+        tree.Level2_panels_unlock = Level2_panels_unlock;
+        tree.Level3_panels_unlock = Level3_panels_unlock;
+        tree.Nuclear_unlock = Nuclear_unlock;
         max_energy = 100;
 
 
@@ -232,7 +240,7 @@ public class Variable_Tracker : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // RenderSettings.skybox.SetFloat("_Rotation", rotate_speed * Time.time);
+         RenderSettings.skybox.SetFloat("_Rotation", rotate_speed * Time.time);
 
         money_text.text = money.ToString();
         energy_text.text = energy.ToString() + "/" + max_energy.ToString(); //Adding the numbers for the sliders
@@ -379,6 +387,12 @@ public class Variable_Tracker : MonoBehaviour
         science_jobs = jobs.science_jobs;
         cleaning_jobs = jobs.cleaning_jobs;
         Hydro_Unlock = tree.Hydro_unlock;
+        Nuclear_unlock = tree.Nuclear_unlock;
+        Level3_panels_unlock = tree.Level3_panels_unlock;
+        Level2_panels_unlock = tree.Level2_panels_unlock;
+
+
+
         SaveSystem.Save();
         audio_manager.PlayUIclick();
         masterTime = masterTimer.masterTime;
@@ -398,8 +412,8 @@ public class Variable_Tracker : MonoBehaviour
     public void LifeSupport()
     {
         // Calculate per-second consumption (e.g., each person eats 0.1 food per 12 seconds)
-        float foodConsumptionPerSecond = (population / 10f) / 16f;
-        float waterConsumptionPerSecond = (population / 10f) / 16f;
+        float foodConsumptionPerSecond = (population / 10f) / 12f;
+        float waterConsumptionPerSecond = (population / 10f) / 12f;
 
         // Accumulate fractional loss
         foodRemainder += foodConsumptionPerSecond;
@@ -461,6 +475,10 @@ public class Variable_Tracker : MonoBehaviour
         data.science_jobs = science_jobs;
         data.cleaning_jobs = cleaning_jobs;
         data.hydro_unlock = Hydro_Unlock;
+        data.Nuclear_unlock = Nuclear_unlock;
+        data.Level2_panels_unlock = Level2_panels_unlock;
+        data.Level3_panels_unlock = Level3_panels_unlock;
+
         data.roverSlotStats = EncodeJaggedArray(roverSlotStats);
         data.masterTime = masterTime;
         data.resourcePrices = EncodeJaggedArray(resourcePrices);
@@ -470,6 +488,11 @@ public class Variable_Tracker : MonoBehaviour
             data.Map += cell.contents.ToString() + ",";
         }
         data.Map = data.Map.Remove(data.Map.Length - 1);
+        data.solarPanels = EncodeSolarPanels();
+
+
+
+
     }
     public void DefaultValues(VariableSaveData data)
     {
@@ -491,11 +514,6 @@ public class Variable_Tracker : MonoBehaviour
 
         MoonMapMaker map = GameObject.Find("Map").GetComponent<MoonMapMaker>(); ;
         string[] cells = data.Map.Split(',');
-
-       
-
-
-
 
         for (int i = 0; i < cells.Length; i++)
         {
@@ -520,9 +538,16 @@ public class Variable_Tracker : MonoBehaviour
         roverSlotStats = DecodeJaggedArray(data.roverSlotStats);
         masterTime = data.masterTime;
         resourcePrices = DecodeJaggedArray(data.resourcePrices);
+        DecodeSolarPanels(data.solarPanels);
+
+        Level2_panels_unlock = data.Level2_panels_unlock;
+        Level3_panels_unlock = data.Level3_panels_unlock;
+        Nuclear_unlock = data.Nuclear_unlock;
+        fuel = data.fuel;
+
     }
 
-
+   
     [System.Serializable]
     public struct VariableSaveData
     {
@@ -542,7 +567,93 @@ public class Variable_Tracker : MonoBehaviour
         public string roverSlotStats;
         public float masterTime;
         public string resourcePrices;
+        public string solarPanels;
+        public bool Nuclear_unlock;
+        public bool Level2_panels_unlock;
+        public bool Level3_panels_unlock;
+        public int fuel;
 
+    }
+    // ----- Solar panels encoding: per-cell string -----
+    // Format per cell: "-1" (no solar panel) OR "level:dirt:collected"
+    // Whole string: entry0,entry1,entry2,... matching mapCells order
+
+    string EncodeSolarPanels()
+    {
+        var mapObj = GameObject.Find("Map");
+        if (mapObj == null) return "";
+
+        MoonMapMaker map = mapObj.GetComponent<MoonMapMaker>();
+        int cellCount = map.mapCells.Count;
+        string[] entries = new string[cellCount];
+
+        for (int i = 0; i < cellCount; i++)
+        {
+            var cell = map.mapCells[i];
+            if (cell.building != null && cell.building.tag == "Solar Panel")
+            {
+                Solar_Pannels sp = cell.building.GetComponentInChildren<Solar_Pannels>();
+                if (sp != null)
+                {
+                    // level : dirt_level : collected_amount
+                    entries[i] = sp.level + ":" + sp.dirt_level + ":" + sp.collected_amount;
+                }
+                else
+                {
+                    entries[i] = "-1";
+                }
+            }
+            else
+            {
+                entries[i] = "-1";
+            }
+        }
+
+        return string.Join(",", entries);
+    }
+
+    void DecodeSolarPanels(string data)
+    {
+        if (string.IsNullOrEmpty(data)) return;
+
+        var mapObj = GameObject.Find("Map");
+        if (mapObj == null) return;
+
+        MoonMapMaker map = mapObj.GetComponent<MoonMapMaker>();
+        string[] entries = data.Split(new char[] { ',' }, System.StringSplitOptions.RemoveEmptyEntries);
+        int limit = Mathf.Min(entries.Length, map.mapCells.Count);
+
+        for (int i = 0; i < limit; i++)
+        {
+            if (entries[i] == "-1") continue;
+
+            string[] parts = entries[i].Split(':');
+            if (parts.Length < 3) continue;
+
+            if (!int.TryParse(parts[0], out int level)) continue;
+            if (!int.TryParse(parts[1], out int dirt)) continue;
+            if (!int.TryParse(parts[2], out int collected)) continue;
+
+            MapCell cell = map.mapCells[i];
+            if (cell.building == null) continue; // no building to apply to
+
+            if (cell.building.tag == "Solar Panel")
+            {
+                Solar_Pannels sp = cell.building.GetComponentInChildren<Solar_Pannels>();
+                if (sp != null)
+                {
+                    // Directly restore fields to avoid triggering upgrade cost checks
+                    sp.level = level;
+                    sp.dirt_level = dirt;
+                    sp.collected_amount = collected;
+
+                    // Optional: ensure collected_amount matches level if you want to enforce consistency
+                    // if (level == 1) sp.collected_amount = 1;
+                    // else if (level == 2) sp.collected_amount = 2;
+                    // else if (level == 3) sp.collected_amount = 4;
+                }
+            }
+        }
     }
 
 

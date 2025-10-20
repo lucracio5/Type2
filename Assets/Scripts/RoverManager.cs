@@ -51,6 +51,7 @@ public class RoverManager : MonoBehaviour
         UpdateRoverHubPanel(); //Update the rover hub panel with current stats
         audio_Manager = GetComponent<Audio_manager>();
         toolTips = GetComponent<ToolTips>();
+        
     }
 
     void Update()
@@ -127,6 +128,8 @@ public class RoverManager : MonoBehaviour
 
     public void UpdateRoverHubPanel()
     {
+        CurrentRoverCost(CurrentRoverSlot());
+
         //Loops through all children of the canvas, only destroys the rover sprites
         foreach (Transform child in RoverHubPanel.transform)
         {
@@ -135,6 +138,8 @@ public class RoverManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
+        
+
 
 
         //Display the rover sprites in the RoverSlots panel based on their stats
@@ -162,6 +167,7 @@ public class RoverManager : MonoBehaviour
                 AddSpriteToCanvas(spriteToDisplay, new Vector2(0, 0), RoverSlots.transform, i);
             }
         }
+
     }
 
     void AddSpriteToCanvas(Sprite sprite, Vector2 anchoredPosition, Transform parentCanvas, int roverSlot)
@@ -316,12 +322,14 @@ public class RoverManager : MonoBehaviour
         // Initialize the stats for the new rover
         variableTracker.roverSlotStats[roverSlot] = new int[] { 1, 1, 1 }; // Set initial stats to 1 for movement, mining, and battery
 
-        UpdateRoverHubPanel(); // Update the Rover Hub Panel to reflect the new rover purchase
+        
 
         GameObject newRover = Instantiate(rover1Prefab, RoverSpawnPoint, Quaternion.identity); // Instantiate the rover prefab at the specified position
         newRover.name = "Rover_" + (roverSlot + 1).ToString(); // Set the name of the new rover to work with the GetRoverID method in Nav_test
 
         Debug.Log("Current Rover Slot: " + roverSlot + ", Current Rover Cost: " + CurrentRoverCost(roverSlot));
+
+        UpdateRoverHubPanel(); // Update the Rover Hub Panel to reflect the new rover purchase
     }
 
     int CurrentRoverSlot()

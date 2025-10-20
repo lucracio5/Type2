@@ -33,8 +33,7 @@ public class ScienceTree : MonoBehaviour
         toolTips = GetComponent<ToolTips>();
         Hydro_buy.interactable = false;
         Nuclear_buy.interactable=false;
-        Level2_panels.interactable = false;
-        Level3_panels.interactable = false;
+      
     }
 
     // Update is called once per frame
@@ -58,22 +57,7 @@ public class ScienceTree : MonoBehaviour
         {
             Nuclear_buy.interactable = false;
         }
-        if (Level2_panels_unlock)
-        {
-            Level2_panels.interactable = true;
-        }
-        else
-        {
-            Level2_panels.interactable = false;
-        }
-        if(Level3_panels_unlock)    
-        {
-            Level3_panels.interactable = true;
-        }
-        else
-        {
-            Level3_panels.interactable = false;
-        }
+        
 
     }
     public void Hydroponics()
@@ -106,15 +90,15 @@ public class ScienceTree : MonoBehaviour
             Level2_panels.interactable = true;
             //Add Whatever will actually unlock the lvl 2 panels
         }
-        else if (!(jobs.science_points >= 3))
-        {
-            manager.PlayFailedClick();
-            toolTips.DisplayMessage("Not Enough Science Points to unlock this item");
-        }
         else if (Level2_panels_unlock)
         {
             manager.PlayFailedClick();
             toolTips.DisplayMessage("This item has already been unlocked");
+        }
+        else if (!(jobs.science_points >= 3))
+        {
+            manager.PlayFailedClick();
+            toolTips.DisplayMessage("Not enough science points to unlock this item");
         }
     }
     public void Lvl3Solar()
@@ -127,11 +111,7 @@ public class ScienceTree : MonoBehaviour
             Level3_panels.interactable = true;
             //Add Whatever will actually unlock the lvl 2 panels
         }
-        else if (!(jobs.science_points >= 5))
-        {
-            manager.PlayFailedClick();
-            toolTips.DisplayMessage("Not Enough Science Points to unlock this item");
-        }
+        
         else if (Level3_panels_unlock)
         {
             manager.PlayFailedClick();
@@ -142,20 +122,36 @@ public class ScienceTree : MonoBehaviour
             manager.PlayFailedClick();
             toolTips.DisplayMessage("All previous items in a category must be unlocked before unlocking this item");
         }
+        else if (!(jobs.science_points >= 5))
+        {
+            manager.PlayFailedClick();
+            toolTips.DisplayMessage("Not enough science points to unlock this item");
+        }
 
     }
     public void NUKE()
     {
-        if (jobs.science_points >= 20 && !Nuclear_unlock)
+        if (jobs.science_points >= 20 && !Nuclear_unlock && Level2_panels_unlock && Level3_panels_unlock)
         {
             manager.PlayUnlock();
             Nuclear_unlock = true;
             nuclear_unlock_button.interactable = false;
             jobs.science_points -= 20;
         }
-        else
+        else if(!Level2_panels_unlock || !Level3_panels_unlock)
         {
             manager.PlayFailedClick();
+            toolTips.DisplayMessage("All previous items in a category must be unlocked before unlocking this item");
+        }
+        else if (!(jobs.science_points >= 20))
+        {
+            manager.PlayFailedClick();
+            toolTips.DisplayMessage("Not enough science points to unlock this item");
+        }
+        else if(Nuclear_unlock)
+        {
+            manager.PlayFailedClick();
+            toolTips.DisplayMessage("This item has already been unlocked");
         }
     }
 }

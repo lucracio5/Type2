@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Data.SqlTypes;
 using TMPro;
 using Unity.VisualScripting;
 using UnityEngine;
@@ -12,15 +13,17 @@ public class Solar_Pannels: MonoBehaviour
     public int dirt_level;
     public int dirt_chance;
     public int collected_amount = 1;
-    public bool lvl2 = false;
-    public bool lvl3 = false;
+    public int level;
+    public int panelID; // set when placed on map
 
-    
+
+
+
     void Start()
     {
         Gamemanager = GameObject.Find("Game Manager");
         dirt_chance = 300;
-
+        level = 1;
 
         //Energy = Gamemanager.GetComponent<Variable_Tracker>().Energy;
     }
@@ -30,7 +33,6 @@ public class Solar_Pannels: MonoBehaviour
 
     public string return_total()
     {
-        Debug.Log("return" + total_collected.ToString());
         return "Total Energy colected:" + total_collected;
         
     }
@@ -56,7 +58,14 @@ public class Solar_Pannels: MonoBehaviour
                 }
 
                 time = 0;
-
+                if (level == 2)
+                {
+                    collected_amount = 2;
+                }
+                if (level == 3)
+                {
+                    collected_amount = 4;
+                }
 
 
             }
@@ -65,15 +74,55 @@ public class Solar_Pannels: MonoBehaviour
     }
     public void Level2Upgrade()
     {
-        collected_amount = 2;
-        lvl2 = true;
-        Gamemanager.GetComponent<Audio_manager>().PlayUnlock();
+        if (Gamemanager.GetComponent<ScienceTree>().Level2_panels_unlock && !(level == 2) && (Gamemanager.GetComponent<Variable_Tracker>().money >= 20))
+        {
+            collected_amount = 2;
+            level = 2;
+            Gamemanager.GetComponent<Audio_manager>().PlayUnlock();
+            Gamemanager.GetComponent<Variable_Tracker>().money -= 20;
+        }
+        else if(!Gamemanager.GetComponent<ScienceTree>().Level2_panels_unlock)
+        {
+            Gamemanager.GetComponent<ToolTips>().DisplayMessage("You haven't unlocked level 2 solar panels yet");
+            Gamemanager.GetComponent<Audio_manager>().PlayFailedClick();
+
+        }
+        else if(level == 2)
+        {
+            Gamemanager.GetComponent<ToolTips>().DisplayMessage("This solar panel is already level 2");
+            Gamemanager.GetComponent<Audio_manager>().PlayFailedClick();
+        }
+        else if(!(Gamemanager.GetComponent<Variable_Tracker>().money >= 20))
+        {
+            Gamemanager.GetComponent<ToolTips>().DisplayMessage("You do not have enough money to purchase this upgrade");
+            Gamemanager.GetComponent<Audio_manager>().PlayFailedClick();
+        }
+        
     }
     public void Level3Upgrade()
     {
-        collected_amount = 4;
-        lvl3 = true;
-        Gamemanager.GetComponent<Audio_manager>().PlayUnlock();
+        if (Gamemanager.GetComponent<ScienceTree>().Level3_panels_unlock && !(level == 3) && (Gamemanager.GetComponent<Variable_Tracker>().money >= 20))
+        {
+            collected_amount = 4;
+            level = 3;
+            Gamemanager.GetComponent<Audio_manager>().PlayUnlock();
+            Gamemanager.GetComponent<Variable_Tracker>().money -= 20;
+        }
+        else if (!Gamemanager.GetComponent<ScienceTree>().Level3_panels_unlock)
+        {
+            Gamemanager.GetComponent<ToolTips>().DisplayMessage("You haven't unlocked level 3 solar panels yet");
+            Gamemanager.GetComponent<Audio_manager>().PlayFailedClick();
+        }
+        else if (level == 3)
+        {
+            Gamemanager.GetComponent<ToolTips>().DisplayMessage("This solar panel is already level 3");
+            Gamemanager.GetComponent<Audio_manager>().PlayFailedClick();
+        }
+        else if (!(Gamemanager.GetComponent<Variable_Tracker>().money >= 20))
+        {
+            Gamemanager.GetComponent<ToolTips>().DisplayMessage("You do not have enough money to purchase this upgrade");
+            Gamemanager.GetComponent<Audio_manager>().PlayFailedClick();
+        }
     }
     public void clean()
     {
