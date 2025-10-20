@@ -3451,6 +3451,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c2141188029a4614aa86657cb51157b1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mainCamera: {fileID: 2097373780}
   MoveCamToCredits: 0
   MoveCamToHome: 0
   OriginalCameraPosition: {x: 0, y: 2.55, z: -8.15}
