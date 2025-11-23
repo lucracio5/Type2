@@ -15,8 +15,9 @@ public class Solar_Pannels: MonoBehaviour
     public int collected_amount = 1;
     public int level;
     public int panelID; // set when placed on map
-
-
+    public Material cleanPanelMaterial;
+    public Material dirtyPanelMaterial;
+    public Material filthyPanelMaterial;
 
 
     void Start()
@@ -25,6 +26,11 @@ public class Solar_Pannels: MonoBehaviour
         dirt_chance = 300;
         level = 1;
 
+
+        cleanPanelMaterial = Resources.Load<Material>("SolarPanel");
+        dirtyPanelMaterial = Resources.Load<Material>("SolarPanelDirty");
+        filthyPanelMaterial = Resources.Load<Material>("SolarPanelFilthy");
+        
         //Energy = Gamemanager.GetComponent<Variable_Tracker>().Energy;
     }
   
@@ -34,7 +40,6 @@ public class Solar_Pannels: MonoBehaviour
     public string return_total()
     {
         return "Total Energy colected:" + total_collected;
-        
     }
 
 
@@ -66,12 +71,25 @@ public class Solar_Pannels: MonoBehaviour
                 {
                     collected_amount = 4;
                 }
-
-
             }
         }
 
+        UpdateAppearance();
     }
+
+    //checks each frame to change the appearance to dirty (or clean)
+    void UpdateAppearance()
+    {
+        string dirt_level = dirt_level_return();
+        Material materialToChange = cleanPanelMaterial;
+
+        if (dirt_level == "Dust level: clean") materialToChange = cleanPanelMaterial;
+        else if (dirt_level == "Dust level: dirty") materialToChange = dirtyPanelMaterial;
+        else if (dirt_level == "Dust level: filthy") materialToChange = filthyPanelMaterial;
+
+        ChangeMaterial(materialToChange);
+    }
+
     public void Level2Upgrade()
     {
         if (Gamemanager.GetComponent<ScienceTree>().Level2_panels_unlock && !(level == 2) && (Gamemanager.GetComponent<Variable_Tracker>().money >= 20))
@@ -128,6 +146,19 @@ public class Solar_Pannels: MonoBehaviour
     {
         dirt_level -= Mathf.Max(0,dirt_level-250);
     }
+
+
+    //Changes the material of the solar panel, to dirty or clean depending on argument
+    public void ChangeMaterial(Material material)
+    {
+        Renderer objectRenderer = GetComponent<Renderer>();
+        if (objectRenderer != null && material != null)
+        {
+            Debug.Log("Material changed to " + material.name);
+            objectRenderer.material = material;
+        }
+    }
+
     public string dirt_level_return()
     {
        
