@@ -22,6 +22,16 @@ public class Imports2 : MonoBehaviour
     public TMP_Text avalibleExportSlots;
 
 
+    public TMP_Text lithiumPriceText;
+    public TMP_Text titaniumPriceText;
+    public TMP_Text regolithPriceText;
+
+    public int lithiumPrice;
+    public int titaniumPrice;
+    public int regolithPrice;
+
+
+
     public TMP_Text shipArrivalText;
 
     public float timer;
@@ -32,6 +42,7 @@ public class Imports2 : MonoBehaviour
     private List<ImportItem> importQueue = new();
     private List<OutputItem> outputQueue = new();
     Audio_manager audio_manager;
+    SimpleStockMarket market;
 
     public Animator shipAnimator;
 
@@ -43,6 +54,8 @@ public class Imports2 : MonoBehaviour
         tracker = GameObject.Find("Game Manager").GetComponent<Variable_Tracker>();
         audio_manager = GameObject.Find("Game Manager").GetComponent<Audio_manager>();
         max_queue = 10;
+        market = GameObject.Find("Game Manager").GetComponent<SimpleStockMarket>();
+
     }
 
     private void Update()
@@ -61,9 +74,16 @@ public class Imports2 : MonoBehaviour
         {
             Arrive();
         }
+        lithiumPrice = market.GetCurrentPrice(2);
+        titaniumPrice = market.GetCurrentPrice(1);
+        regolithPrice = market.GetCurrentPrice(0);
+        lithiumPriceText.text = "Curent Price: "+lithiumPrice.ToString();
+        titaniumPriceText.text = "Curent Price: "+titaniumPrice.ToString();
+        regolithPriceText.text = "Curent Price: " +regolithPrice.ToString();
+
     }
 
-    public void Arrive()
+public void Arrive()
     {
         shipAnimator.SetBool("Arriving", true);
         Invoke("PlayLanding", 8f);
@@ -338,29 +358,24 @@ public class Imports2 : MonoBehaviour
         {
             if ((item.label == "Regolith Export") && (tracker.regolith >= 1))
             {
-                tracker.money += item.value;
+                tracker.money += regolithPrice;
                 item.Apply();
             }
             else if ((item.label == "Titanium Export") && (tracker.titanium >= 1))
             {
-                tracker.money += item.value;
+                tracker.money += titaniumPrice;
                 item.Apply();
             }
             else if ((item.label == "Lithium Export") && (tracker.lithium >= 1))
             {
-                tracker.money += item.value;
+                tracker.money += lithiumPrice;
                 item.Apply();
             }
 
         }
 
-        // Clear both queues
         importQueue.Clear();
-        outputQueue.Clear(); // You can add logic here to sell items, etc.
-        
-        
-        //exportQueuetext;
-
+        outputQueue.Clear();
     }
     private IEnumerator ShowShipArrivalMessage()
     {
