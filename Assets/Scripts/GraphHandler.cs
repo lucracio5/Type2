@@ -32,6 +32,40 @@ public class GraphHandler : MonoBehaviour
         UpdateGraphInternal(UpdateMethod.All);
     }
 
+    public void ClearAllPoints()
+    {
+        for (int i = points.Count - 1; i >= 0; i--)
+        {
+            if (points[i] != null)
+                Destroy(points[i]);
+            if (pointOutlines[i] != null)
+                Destroy(pointOutlines[i]);
+        }
+        
+        for (int i = lines.Count - 1; i >= 0; i--)
+        {
+            if (lines[i] != null)
+                Destroy(lines[i]);
+        }
+        
+        values.Clear();
+        sortedIndices.Clear();
+        points.Clear();
+        pointImages.Clear();
+        pointRects.Clear();
+        pointOutlines.Clear();
+        pointOutlineRects.Clear();
+        pointOutlineImages.Clear();
+        lines.Clear();
+        lineRects.Clear();
+        lineImages.Clear();
+        lockedHoveredPoints.Clear();
+        lockedPoints.Clear();
+        fixedHoveredPoints.Clear();
+        activePointIndex = -1;
+        fixedPointIndex = -1;
+    }
+
     private void ExampleFunction()
     {
         for (float i = 0; i < 50; i += 0.2f)

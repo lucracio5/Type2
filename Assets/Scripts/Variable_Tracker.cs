@@ -79,7 +79,7 @@ public class Variable_Tracker : MonoBehaviour
     ScienceTree tree;
     RoverManager roverManager;
     MasterTimer masterTimer;
-    StockMarket stockMarket;
+    SimpleStockMarket stockMarket;
     public GameObject GameoverText;
 
     public int speed;
@@ -164,10 +164,10 @@ public class Variable_Tracker : MonoBehaviour
         tree = GetComponent<ScienceTree>();
         roverManager = GetComponent<RoverManager>();
         masterTimer = GetComponent<MasterTimer>();
-        stockMarket = GetComponent<StockMarket>();
+        stockMarket = GetComponent<SimpleStockMarket>();
 
-        InitializeResourcePrices(); //creates the empty jagged array
-        InitializeRoverSlotStats(); //creates the empty jagged array
+        InitializeResourcePrices();
+        InitializeRoverSlotStats();
 
 
         SaveSystem.Load();
@@ -215,10 +215,21 @@ public class Variable_Tracker : MonoBehaviour
 
     void InitializeResourcePrices()
     {
+        if (stockMarket == null)
+        {
+            Debug.LogError("Variable_Tracker: SimpleStockMarket component not found! Make sure it's on the same GameObject.");
+            resourcePrices = new int[][] {
+                new int[] { 25 },
+                new int[] { 40 },
+                new int[] { 80 }
+            };
+            return;
+        }
+        
         resourcePrices = new int[][] {
-            new int[] { stockMarket.RegolithStartingPrice }, //resourcePrice[0] is Regolith
-            new int[] { stockMarket.TitaniumStartingPrice }, //resourcePrice[1] is Titanium
-            new int[] { stockMarket.LithiumStartingPrice } //resourcePrice[2] is Lithium
+            new int[] { stockMarket.RegolithStartingPrice },
+            new int[] { stockMarket.TitaniumStartingPrice },
+            new int[] { stockMarket.LithiumStartingPrice }
         };
     }
 
@@ -346,7 +357,7 @@ public class Variable_Tracker : MonoBehaviour
         if ((O2 >= 25 && food >= 10 && water >= 10))
         {
 
-            audio_manager.StopLowEnergySiren();
+            
 
 
         }

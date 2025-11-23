@@ -48,10 +48,30 @@ public class RoverManager : MonoBehaviour
 
     void Start()
     {
-        UpdateRoverHubPanel(); //Update the rover hub panel with current stats
-        audio_Manager = GetComponent<Audio_manager>();
-        toolTips = GetComponent<ToolTips>();
+        if (variableTracker == null)
+            variableTracker = GetComponent<Variable_Tracker>();
         
+        if (audio_Manager == null)
+            audio_Manager = GetComponent<Audio_manager>();
+        
+        if (toolTips == null)
+            toolTips = GetComponent<ToolTips>();
+        
+        StartCoroutine(InitializeAfterVariableTracker());
+    }
+    
+    IEnumerator InitializeAfterVariableTracker()
+    {
+        yield return new WaitForEndOfFrame();
+        
+        if (variableTracker != null && variableTracker.roverSlotStats != null)
+        {
+            UpdateRoverHubPanel();
+        }
+        else
+        {
+            Debug.LogWarning("RoverManager: Variable_Tracker not ready, skipping UpdateRoverHubPanel");
+        }
     }
 
     void Update()
@@ -128,6 +148,12 @@ public class RoverManager : MonoBehaviour
 
     public void UpdateRoverHubPanel()
     {
+        if (variableTracker == null)
+        {
+            Debug.LogError("RoverManager: variableTracker is not assigned!");
+            return;
+        }
+        
         CurrentRoverCost(CurrentRoverSlot());
 
         //Loops through all children of the canvas, only destroys the rover sprites
@@ -334,13 +360,18 @@ public class RoverManager : MonoBehaviour
 
     int CurrentRoverSlot()
     {
-        //finds the first empty rover slot 
+        if (variableTracker == null || variableTracker.roverSlotStats == null)
+        {
+            Debug.LogError("RoverManager: variableTracker or roverSlotStats is null!");
+            return 0;
+        }
+        
         int roverSlot = 0;
         foreach (int[] stats in variableTracker.roverSlotStats)
         {
-            if (OverallLevel(stats) < 0.001f) // Find the first empty rover slot
+            if (OverallLevel(stats) < 0.001f)
             {
-                break; // Found an empty slot, exit the loop
+                break;
             }
             roverSlot++;
         }

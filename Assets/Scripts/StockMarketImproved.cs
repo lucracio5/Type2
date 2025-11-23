@@ -4,13 +4,14 @@ using UnityEngine;
 using System.Linq;
 using TMPro;
 
-public class StockMarket : MonoBehaviour
+public class StockMarketImproved : MonoBehaviour
 {
     Variable_Tracker variableTracker;
     public GameObject graphHandlerObject;
     public GraphHandler graphHandler;
     public TMP_Text graphTitleText;
     public TMP_Text currentPriceText;
+    public TMP_Text instructionsText;
     
     [SerializeField] private Vector2 stockMarketFluctuationRatioRange = new Vector2(-10f, 11f);
     [SerializeField] private float fluctuationStrength = 1f;
@@ -29,6 +30,11 @@ public class StockMarket : MonoBehaviour
         for (int i = 0; i < 3; i++)
         {
             AddUpdatedPrices();
+        }
+        
+        if (instructionsText != null)
+        {
+            instructionsText.text = "Press R to open graph | Arrow Keys to switch resources | ESC to close";
         }
     }
 
@@ -162,16 +168,15 @@ public class StockMarket : MonoBehaviour
         }
     }
 
-    //Adds a new random value to any resource (given the index in the resourcePrices jagged array)
     void UpdateResource(int resourceIndex)
     {
-        float fluctuationFloat = Random.Range(stockMarketFluctuationRatioRange.x, stockMarketFluctuationRatioRange.y);  //Generate a random fluctuation (positive or negative)
-        int resourcePriceChange = Mathf.RoundToInt(fluctuationFloat * fluctuationStrength); //what the price affect will be (could be positive or negative)
+        float fluctuationFloat = Random.Range(stockMarketFluctuationRatioRange.x, stockMarketFluctuationRatioRange.y);
+        int resourcePriceChange = Mathf.RoundToInt(fluctuationFloat * fluctuationStrength);
 
-        int[] newPriceArray = new int[variableTracker.resourcePrices[resourceIndex].Length + 1]; //make a new array that is 1 longer than it was before
-        for (int i = 0; i < variableTracker.resourcePrices[resourceIndex].Length; i++) //for the length of the original array
+        int[] newPriceArray = new int[variableTracker.resourcePrices[resourceIndex].Length + 1];
+        for (int i = 0; i < variableTracker.resourcePrices[resourceIndex].Length; i++)
         {
-            newPriceArray[i] = variableTracker.resourcePrices[resourceIndex][i]; //copy over the original array
+            newPriceArray[i] = variableTracker.resourcePrices[resourceIndex][i];
         }
         
         int lastPrice = variableTracker.resourcePrices[resourceIndex][variableTracker.resourcePrices[resourceIndex].Length - 1];
@@ -179,17 +184,6 @@ public class StockMarket : MonoBehaviour
         newPriceArray[newPriceArray.Length - 1] = newPrice;
 
         variableTracker.resourcePrices[resourceIndex] = newPriceArray;
-    }
-
-
-    string ArrayToString(int[] arr)
-    {
-        string String = string.Empty;
-        foreach (int element in arr)
-        {
-            String += element.ToString() + ", ";
-        }
-        return String;
     }
 
     void FormatGraph(int resourceIndex)
@@ -215,7 +209,4 @@ public class StockMarket : MonoBehaviour
         }
         graphHandler.UpdateGraph();
     }
-
-    
-
 }
