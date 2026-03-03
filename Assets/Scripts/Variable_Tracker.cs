@@ -13,7 +13,7 @@ using Unity.VisualScripting.Antlr3.Runtime.Tree;
 
 public class Variable_Tracker : MonoBehaviour
 {
-    public bool canDie = true; //only for tetsing / debugging
+    public bool canDie = false; //only for tetsing / debugging
 
 
     public int energy = 0;
