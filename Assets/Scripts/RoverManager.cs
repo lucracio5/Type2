@@ -10,13 +10,11 @@ using TMPro;
 public class RoverManager : MonoBehaviour
 {
     public Variable_Tracker variableTracker; // Reference to the Variable_Tracker script for accessing game variables
-    public int initialRoverCost = 100; // Cost to buy a new rover
-    public float roverCostScaleFactor = 2f; // Factor by which the cost increases with each new rover
-    public int upgradeCost = 20; // Cost to upgrade a rover's stats
-    public Vector3 RoverSpawnPoint; // Position where new rovers will be instantiated
-    public GameObject rover1Prefab; // Prefab for the rover to instantiate when a new rover is bought
-    public GameObject rover2Prefab; // Prefab for the second type of rover
-    public GameObject rover3Prefab; // Prefab for the third type of rover
+
+    // Base stats for all rovers (used for initialization)
+    private int baseMovementSpeed = 1;
+    private int baseMiningSpeed = 1;
+    private int baseBatteryLife = 1;
 
     // Maximum possible stats for any rover (not currently used, but could be useful for upgrades or limits)
     private int maxMovementSpeed = 10;
@@ -30,7 +28,6 @@ public class RoverManager : MonoBehaviour
 
     // UI elements for displaying the rover's image and stats
     public TMP_Text roverStatsPanelTitleText; // Text field for displaying the rover's name
-    public TMP_Text roverHubBuyRoverButtonText; // Text field for the button to buy a new rover
     public Image roverDisplayImage;
     public TMP_Text movementSpeedText;
     public TMP_Text miningSpeedText;
@@ -42,36 +39,43 @@ public class RoverManager : MonoBehaviour
     public Sprite Rover3Sprite;
     public Vector2[] roverSlotPositions; // Positions for each rover slot on the canvas
 
-    public Audio_manager audio_Manager;
-    public ToolTips toolTips;
+    // Array holding the stats for each rover slot.
+    // Each int[] contains: [movementSpeed, miningSpeed, batteryLife]
+    //public int[][] roverSlotStats;
+
+    /// Unity Awake method. Initializes the roverSlotStats array with default values for each rover slot.
+    /// Each slot starts with the base stats.
+    /*void Awake()
+    {
+        if (variableTracker.roverSlotStats.Length > 0) //if roverSlotStats is already set in Variable_Tracker
+        {
+            roverSlotStats = variableTracker.roverSlotStats; // Use existing stats
+        }
+        else
+        {
+            InitializeRoverStats(); // Initialize with default stats if not set
+        }
+    } */
+
+    // Initialize the roverSlotStats array with default stats for each rover slot.
+    // Each rover starts with base movement speed, mining speed, and battery life.
+    /*void InitializeRoverStats()
+    {
+        roverSlotStats = new int[][]
+        {
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 },
+            new int[] { 0, 0, 0 }
+        };
+    }*/
 
 
     void Start()
     {
-        if (variableTracker == null)
-            variableTracker = GetComponent<Variable_Tracker>();
-        
-        if (audio_Manager == null)
-            audio_Manager = GetComponent<Audio_manager>();
-        
-        if (toolTips == null)
-            toolTips = GetComponent<ToolTips>();
-        
-        StartCoroutine(InitializeAfterVariableTracker());
-    }
-    
-    IEnumerator InitializeAfterVariableTracker()
-    {
-        yield return new WaitForEndOfFrame();
-        
-        if (variableTracker != null && variableTracker.roverSlotStats != null)
-        {
-            UpdateRoverHubPanel();
-        }
-        else
-        {
-            Debug.LogWarning("RoverManager: Variable_Tracker not ready, skipping UpdateRoverHubPanel");
-        }
+        //variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
+        UpdateRoverHubPanel(); //Update the rover hub panel with current stats
     }
 
     void Update()
@@ -101,17 +105,13 @@ public class RoverManager : MonoBehaviour
     }
 
 
-
     // Opens the stats panel for a specific rover slot and updates the UI with its stats and image.
     public void OpenStatsPanel(int roverSlot)
     {
         if (OverallLevel(variableTracker.roverSlotStats[roverSlot]) < 0.001f)
         {
+            Debug.LogWarning("Rover slot " + (roverSlot + 1) + " has no stats to display.");
             return; // Exit if the rover slot has no stats
-        }
-        else
-        {
-            RoverHubPanel.SetActive(false); // Hide the Rover Hub Panel when opening the stats panel
         }
         //variableTracker.roverSlotStats = roverSlotStats; // Link the roverSlotStats to the Variable_Tracker
 
@@ -148,14 +148,6 @@ public class RoverManager : MonoBehaviour
 
     public void UpdateRoverHubPanel()
     {
-        if (variableTracker == null)
-        {
-            Debug.LogError("RoverManager: variableTracker is not assigned!");
-            return;
-        }
-        
-        CurrentRoverCost(CurrentRoverSlot());
-
         //Loops through all children of the canvas, only destroys the rover sprites
         foreach (Transform child in RoverHubPanel.transform)
         {
@@ -164,15 +156,13 @@ public class RoverManager : MonoBehaviour
                 Destroy(child.gameObject);
             }
         }
-        
 
+        Sprite spriteToDisplay;
 
-
-        //Display the rover sprites in the RoverSlots panel based on their stats
         for (int i = 0; i < variableTracker.roverSlotStats.Length; i++)
         {
-            Sprite spriteToDisplay;
 
+            // Choose the appropriate sprite based on the rover's overall level
             if (OverallLevel(variableTracker.roverSlotStats[i]) < 3) //if it is over nothing (it has been bought) and is less than 3
             {
                 spriteToDisplay = Rover1Sprite;
@@ -193,6 +183,7 @@ public class RoverManager : MonoBehaviour
                 AddSpriteToCanvas(spriteToDisplay, new Vector2(0, 0), RoverSlots.transform, i);
             }
         }
+
 
     }
 
@@ -251,12 +242,6 @@ public class RoverManager : MonoBehaviour
 
     public void IncreaseStat(int whichStat)
     {
-        if (variableTracker.money < upgradeCost) //if you don't have enough money
-        {
-            toolTips.DisplayMessage("Not enough money to purchase this item");
-            return; //stop calling function
-        }
-
         // Extract the rover ID from the title text
         int roverID = int.Parse(roverStatsPanelTitleText.text.Split(' ')[1]) - 1; // Convert "Rover X" to index X-1
         //Debug.Log("Increasing stat for Rover " + (roverID + 1) + ", Stat: " + whichStat);
@@ -281,113 +266,41 @@ public class RoverManager : MonoBehaviour
     void IncreaseMovement(int roverID)
     {
         // Increase the movement speed of the specified rover
-        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length && variableTracker.roverSlotStats[roverID][0] < maxMovementSpeed)
+        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length)
         {
-            variableTracker.roverSlotStats[roverID][0] = Mathf.Min(variableTracker.roverSlotStats[roverID][0] + 1, maxMovementSpeed); //Add 1 movement, but do not exceed the maximum movement speed
-            variableTracker.money -= upgradeCost; // Deduct the cost of the upgrade from the player's money
+            variableTracker.roverSlotStats[roverID][0] = Mathf.Min(variableTracker.roverSlotStats[roverID][0] + 1, maxMovementSpeed);
         }
         else
         {
-            Debug.LogError("Invalid rover ID: " + roverID + " or already at max movement speed.");
+            Debug.LogError("Invalid rover ID: " + roverID);
         }
     }
 
     void IncreaseMining(int roverID)
     {
-        // Increase the mining speed of the specified rover
-        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length && variableTracker.roverSlotStats[roverID][1] < maxMovementSpeed)
+        // Increase the movement speed of the specified rover
+        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length)
         {
-            variableTracker.roverSlotStats[roverID][1] = Mathf.Min(variableTracker.roverSlotStats[roverID][1] + 1, maxMovementSpeed); //Add 1 movement, but do not exceed the maximum movement speed
-            variableTracker.money -= upgradeCost; // Deduct the cost of the upgrade from the player's money
+            variableTracker.roverSlotStats[roverID][1] = Mathf.Min(variableTracker.roverSlotStats[roverID][1] + 1, maxMiningSpeed);
         }
         else
         {
-            Debug.LogError("Invalid rover ID: " + roverID + " or already at max mining speed.");
+            Debug.LogError("Invalid rover ID: " + roverID);
         }
     }
 
     void IncreaseBattery(int roverID)
     {
-       // Increase the battery life speed of the specified rover
-        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length && variableTracker.roverSlotStats[roverID][2] < maxMovementSpeed)
+        // Increase the movement speed of the specified rover
+        if (roverID >= 0 && roverID < variableTracker.roverSlotStats.Length)
         {
-            variableTracker.roverSlotStats[roverID][2] = Mathf.Min(variableTracker.roverSlotStats[roverID][2] + 1, maxMovementSpeed); //Add 1 movement, but do not exceed the maximum movement speed
-            variableTracker.money -= upgradeCost; // Deduct the cost of the upgrade from the player's money
+            variableTracker.roverSlotStats[roverID][2] = Mathf.Min(variableTracker.roverSlotStats[roverID][2] + 1, maxBatteryLife);
         }
         else
         {
-            Debug.LogError("Invalid rover ID: " + roverID + " or already at max battery life.");
+            Debug.LogError("Invalid rover ID: " + roverID);
         }
     }
-
-
-
-    public void BuyRover()
-    {
-        int roverSlot = CurrentRoverSlot(); // Get the current rover slot to buy a new rover        
-
-
-        if (variableTracker.money < CurrentRoverCost(roverSlot))
-        {
-            toolTips.DisplayMessage("Not enough money to purchase this item");
-            audio_Manager.PlayFailedClick();
-            return; // Exit if the player doesn't have enough money
-        }
-
-        // Check if the rover slot is within bounds
-        if (roverSlot < 0 || roverSlot >= variableTracker.roverSlotStats.Length)
-        {
-            //Debug.LogError("Invalid rover slot: " + roverSlot); //Call for an error message to be displayed in the UI
-            toolTips.DisplayMessage("Invalid rover slot: " + roverSlot);
-            audio_Manager.PlayFailedClick();
-            return;
-        }
-
-        variableTracker.money -= CurrentRoverCost(roverSlot); // Deduct the cost of the rover from the player's money
-
-        // Initialize the stats for the new rover
-        variableTracker.roverSlotStats[roverSlot] = new int[] { 1, 1, 1 }; // Set initial stats to 1 for movement, mining, and battery
-
-        
-
-        GameObject newRover = Instantiate(rover1Prefab, RoverSpawnPoint, Quaternion.identity); // Instantiate the rover prefab at the specified position
-        newRover.name = "Rover_" + (roverSlot + 1).ToString(); // Set the name of the new rover to work with the GetRoverID method in Nav_test
-
-        Debug.Log("Current Rover Slot: " + roverSlot + ", Current Rover Cost: " + CurrentRoverCost(roverSlot));
-
-        UpdateRoverHubPanel(); // Update the Rover Hub Panel to reflect the new rover purchase
-    }
-
-    int CurrentRoverSlot()
-    {
-        if (variableTracker == null || variableTracker.roverSlotStats == null)
-        {
-            Debug.LogError("RoverManager: variableTracker or roverSlotStats is null!");
-            return 0;
-        }
-        
-        int roverSlot = 0;
-        foreach (int[] stats in variableTracker.roverSlotStats)
-        {
-            if (OverallLevel(stats) < 0.001f)
-            {
-                break;
-            }
-            roverSlot++;
-        }
-
-        return roverSlot; // Return the index of the first empty rover slot
-    }
-
-    int CurrentRoverCost(int roverSlot)
-    {
-        if (roverSlot >= variableTracker.roverSlotStats.Length)
-        {
-            return 0; // Return 0 if the rover slot is invalid
-        }
-
-        int curRoverCost = Mathf.RoundToInt(initialRoverCost * Mathf.Pow(roverCostScaleFactor, roverSlot + 1)); // Update the cost for the next rover purchase
-        roverHubBuyRoverButtonText.text = "Buy Rover: $" + curRoverCost; // Update the button text with the current cost
-        return curRoverCost;
-    }
+    
+    
 }
