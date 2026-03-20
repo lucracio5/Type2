@@ -8,6 +8,7 @@ public class MasterTimer : MonoBehaviour
 {
     public Variable_Tracker variable_Tracker;
     public float masterTime;
+    public float masterGameTime; // This is the time in the game, which is affected by the times speed setting
     private int lastMinute = -1; // Track the last minute we triggered
     public bool autosave; //Turns on or off the autosave for working purposes MAKE SURE THIS IS TRUE BEFORE PUBLISH
 

@@ -361,6 +361,14 @@ public class MapCell
                 GameManager.GetComponent<Variable_Tracker>().money -= GameObject.Find("Map").GetComponent<MapPointer>().buildings[build_index].cost;
             }
         }
+        if(building != null)
+        {
+            if(building.GetComponentInChildren<Solar_Pannels>() != null)
+            {
+                building.GetComponentInChildren<Solar_Pannels>().panelID = cell_number;
+                
+            }
+        }
         if (build_index == 1)
         {
             maker.mapCells[cell_number - 1].building = building;//left 1

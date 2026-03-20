@@ -11,6 +11,7 @@ public class SaveSystem
 {
     public static SaveData _saveData = new SaveData();
     public static GameObject Gamemanager;
+    public static bool has_loaded;
     public static void EnsureGameManager()
     {
         if (Gamemanager == null)
@@ -48,7 +49,14 @@ public class SaveSystem
         {
             Debug.LogWarning("Save file not found, creating new save data.");
             _saveData = new SaveData();
+            has_loaded = false;
+            EnsureGameManager();
+            Gamemanager.GetComponent<Variable_Tracker>().DefaultValues(_saveData.variableSave);
             return;
+        }
+        else
+        {
+            has_loaded = true;
         }
 
         string saveContent = File.ReadAllText(SavefileName());
@@ -62,8 +70,8 @@ public class SaveSystem
         Gamemanager.GetComponent<Variable_Tracker>().LoadData(_saveData.variableSave);
     }
 
-
-    [MenuItem("Tools/Clear Persistent Data")]
+    
+   // [MenuItem("Tools/Clear Persistent Data")]
     public static void ClearData()
     {
         var path = Application.persistentDataPath;

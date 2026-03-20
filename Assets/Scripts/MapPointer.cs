@@ -30,8 +30,10 @@ public class MapPointer : MonoBehaviour
     public int unplaceable_buildings;
 
     public float cursorYOffset;
-    public UIDarkener uiDarkener; 
-    
+    public UIDarkener uiDarkener;
+
+    public bool last_tick_active;
+    public MapCell openCell;
 
     void Start()
     {
@@ -84,6 +86,7 @@ public class MapPointer : MonoBehaviour
             }
         }
 
+       
         if (Input.GetMouseButtonDown(0) && current_cell != null && current_cell.building != null && clickable)
         {
             
@@ -98,6 +101,9 @@ public class MapPointer : MonoBehaviour
             else if (current_cell.building.tag == "Solar Panel")
             {
                 SolarPanelPanel.SetActive(true);
+                Gamemanager.GetComponent<Variable_Tracker>().Solartext3.text = "Level "+current_cell.building.GetComponentInChildren<Solar_Pannels>().level.ToString();
+                Gamemanager.GetComponent<Variable_Tracker>().Solartext2.text = current_cell.building.GetComponentInChildren<Solar_Pannels>().return_total().ToString();
+                Gamemanager.GetComponent<Variable_Tracker>().Solartext1.text = current_cell.building.GetComponentInChildren<Solar_Pannels>().dirt_level_return().ToString();
             }
             else if (current_cell.building.tag == "Dome")
             {
@@ -126,13 +132,8 @@ public class MapPointer : MonoBehaviour
                 panel_text.text = current_cell.building.name;
                 if (current_cell.building.GetComponentInChildren<Drill_script>() != null)
                 {
-                    panel_text2.text = "Total Regolith colected: " + current_cell.building.GetComponentInChildren<Drill_script>().total_collected.ToString();
-                    Debug.Log(current_cell.building.GetComponentInChildren<Drill_script>().return_total().ToString());
-                }
-                else if (current_cell.building.GetComponentInChildren<Solar_Pannels>() != null)
-                {
-                    panel_text2.text = "Total Energy colected: " + current_cell.building.GetComponentInChildren<Solar_Pannels>().total_collected.ToString();
-                    Debug.Log(current_cell.building.GetComponentInChildren<Solar_Pannels>().return_total().ToString());
+                    panel_text2.text = current_cell.building.GetComponentInChildren<Drill_script>().return_total();
+                    
                 }
                 else
                 {
@@ -147,9 +148,38 @@ public class MapPointer : MonoBehaviour
                     audio_manager.PlayOpen();
                 }
             }
-            
+            Gamemanager.GetComponent<Variable_Tracker>().selected_cell = current_cell;
 
         }
+        if (Gamemanager != null && SolarPanelPanel != null)
+        {
+            
+            if (SolarPanelPanel.activeSelf == true)
+            {
+                if (last_tick_active)
+                {
+                    Gamemanager.GetComponent<Variable_Tracker>().Solartext3.text = "Level " + openCell.building.GetComponentInChildren<Solar_Pannels>().level.ToString();
+                    Gamemanager.GetComponent<Variable_Tracker>().Solartext2.text = openCell.building.GetComponentInChildren<Solar_Pannels>().return_total().ToString();
+                    Gamemanager.GetComponent<Variable_Tracker>().Solartext1.text = openCell.building.GetComponentInChildren<Solar_Pannels>().dirt_level_return().ToString();
+                }
+                else
+                {
+                    if(current_cell != null && current_cell.building != null)
+                    {
+                        openCell = current_cell;
+                        last_tick_active = true;
+
+                    }
+                     
+                }
+                   
+            }
+            else
+            {
+                last_tick_active = false;
+            }
+        }
+        
     }
     public void temp_off_ui()
     {

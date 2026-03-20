@@ -23,6 +23,7 @@ public class DomeBuilding : MonoBehaviour
     void Start()
     {
         tracker = Gamemanager.GetComponent<Variable_Tracker>();
+        tracker.crewNames.Add("Gerald Johnson");
     }
 
     void Update() 

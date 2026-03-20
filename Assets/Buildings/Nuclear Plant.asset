@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: Nuclear Plant
   m_EditorClassIdentifier: 
   prefab: {fileID: 7896072848060120249, guid: a2ef243f8cb644c49a6a1d3326a92e80, type: 3}
-  cost: 150
+  cost: 1000
