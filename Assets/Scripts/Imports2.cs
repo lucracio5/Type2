@@ -64,7 +64,6 @@ public class Imports2 : MonoBehaviour
 
         UpdateUIText();
 
-
         if (timer >= deliveryInterval)
         {
             timer = 0;
@@ -74,13 +73,17 @@ public class Imports2 : MonoBehaviour
         {
             Arrive();
         }
-        lithiumPrice = market.GetCurrentPrice(2);
-        titaniumPrice = market.GetCurrentPrice(1);
-        regolithPrice = market.GetCurrentPrice(0);
-        lithiumPriceText.text = "Curent Price: "+lithiumPrice.ToString();
-        titaniumPriceText.text = "Curent Price: "+titaniumPrice.ToString();
-        regolithPriceText.text = "Curent Price: " +regolithPrice.ToString();
 
+        if (market != null)
+        {
+            lithiumPrice = market.GetCurrentPrice(2);
+            titaniumPrice = market.GetCurrentPrice(1);
+            regolithPrice = market.GetCurrentPrice(0);
+        }
+
+        if (lithiumPriceText != null)   lithiumPriceText.text  = "Current Price: " + lithiumPrice;
+        if (titaniumPriceText != null)  titaniumPriceText.text = "Current Price: " + titaniumPrice;
+        if (regolithPriceText != null)  regolithPriceText.text = "Current Price: " + regolithPrice;
     }
 
 public void Arrive()
@@ -134,7 +137,8 @@ public void Arrive()
 
         foreach (OutputItem item in outputQueue)
         {
-            exportQueuetext.text = exportQueuetext.text + " " + item.label + " + " + item.value + "\n";
+            int displayPrice = GetCurrentPriceForLabel(item.label);
+            exportQueuetext.text = exportQueuetext.text + " " + item.label + " + " + displayPrice + "\n";
         }
         avalibleExportSlots.text = (max_queue - outputQueue.Count).ToString() +" Slots Avalible";
         avalibleImportSlots.text = (max_queue - importQueue.Count).ToString()+ " Slots Avalible";
@@ -340,11 +344,24 @@ public void Arrive()
         }
         return total;
     }
+    /// <summary>Returns the current market price for a queued export label.</summary>
+    private int GetCurrentPriceForLabel(string label)
+    {
+        return label switch
+        {
+            "Regolith Export" => regolithPrice,
+            "Titanium Export" => titaniumPrice,
+            "Lithium Export"  => lithiumPrice,
+            _                 => 0
+        };
+    }
+
     private void ProcessShip()
     {
         audio_manager.PlayLanding();
         StartCoroutine(ShowShipArrivalMessage());
 
+        
 
         foreach (var item in importQueue)
         {

@@ -1,11 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 using System.IO;
 using static Variable_Tracker;
-using Unity.VisualScripting;
-using UnityEngine.Rendering;
 
 public class SaveSystem
 {
@@ -71,18 +68,20 @@ public class SaveSystem
     }
 
     
-   // [MenuItem("Tools/Clear Persistent Data")]
+    /// <summary>
+    /// Deletes the save file. Safe to call at runtime on all platforms.
+    /// </summary>
     public static void ClearData()
     {
-        var path = Application.persistentDataPath;
-        if (Directory.Exists(path))
+        string path = SavefileName();
+        if (File.Exists(path))
         {
-            Directory.Delete(path, true);
-            Debug.Log("Persistent data cleared.");
+            File.Delete(path);
+            Debug.Log("Save data cleared.");
         }
         else
         {
-            Debug.Log("No persistent data found.");
+            Debug.Log("No save file found to clear.");
         }
     }
     

@@ -191,13 +191,13 @@ public class Variable_Tracker : MonoBehaviour
 
     }
 
+    /// <summary>
+    /// Clears all save data and returns to the Start Menu. Safe to call from the death screen.
+    /// </summary>
     public void ClearSaveData()
     {
-
         SaveSystem.ClearData();
-
-        GetComponent<ToolTips>().DisplayMessage("Data Cleared");
-        SaveSystem.ClearData();
+        Time.timeScale = 1;
         UnityEngine.SceneManagement.SceneManager.LoadScene("Start Menu");
     }
 
@@ -372,6 +372,17 @@ public class Variable_Tracker : MonoBehaviour
         Debug.Log("Game Over");
         GameoverText.SetActive(true);
         Time.timeScale = 0;
+    }
+
+    /// <summary>
+    /// Resets time scale and reloads the current scene. Wire this to the death screen restart button.
+    /// </summary>
+    public void RestartGame()
+    {
+        Time.timeScale = 1;
+        UnityEngine.SceneManagement.SceneManager.LoadScene(
+            UnityEngine.SceneManagement.SceneManager.GetActiveScene().buildIndex
+        );
     }
     public void speed1()
     {

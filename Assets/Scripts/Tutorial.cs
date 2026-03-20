@@ -30,7 +30,7 @@ public class Tutorial : MonoBehaviour
 
     private string[] lines = {
             /* ln0 */ "Welcome to the moon! I’m Gerald, and I’ll be your \"tour guide.\"",
-            /* ln1 */ "I’ve already been to the moon around 6 or 7 times for testing, so trust me, I know what I’m doing.",
+            /* ln1 */ "I’ve already been to the moon around a few times for testing, so trust me, I know what I’m doing.",
             
             /* ln2 */ "Firstly, see these meters up here? These keep track of your water, food, and air supplies.",
             /* ln3 */ "If you let any of these get to zero, then we’ll have to shut down the mission, and that’s no good, is it?",

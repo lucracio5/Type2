@@ -15,8 +15,9 @@ public class SimpleStockMarket : MonoBehaviour
     public int LithiumStartingPrice = 80;
     
     [Header("Market Settings")]
-    [SerializeField] private Vector2 stockMarketFluctuationRatioRange = new Vector2(-10f, 11f);
-    [SerializeField] private float fluctuationStrength = 1f;
+    [SerializeField] private Vector2 stockMarketFluctuationRatioRange = new Vector2(-3f, 4f);
+    [SerializeField] private float fluctuationStrength = 0.5f;
+    [SerializeField] private float priceUpdateInterval = 30f;
 
     private int currentResourceIndex = 0;
     private string[] resourceNames = { "Regolith", "Titanium", "Lithium" };
@@ -75,7 +76,7 @@ public class SimpleStockMarket : MonoBehaviour
         }
         timer += Time.deltaTime * variableTracker.speed;
 
-        if (timer >= 10)
+        if (timer >= priceUpdateInterval)
         {
             timer = 0;
             AddUpdatedPrices();
@@ -173,12 +174,25 @@ public class SimpleStockMarket : MonoBehaviour
 
     public int GetCurrentPrice(int resourceIndex)
     {
+        if (variableTracker == null || variableTracker.resourcePrices == null)
+        {
+            Debug.LogWarning("SimpleStockMarket.GetCurrentPrice: variableTracker or resourcePrices is null.");
+            return 0;
+        }
+
         if (resourceIndex < 0 || resourceIndex >= variableTracker.resourcePrices.Length)
+        {
+            Debug.LogWarning($"SimpleStockMarket.GetCurrentPrice: invalid index {resourceIndex}.");
             return 0;
-        
-        if (variableTracker.resourcePrices[resourceIndex].Length == 0)
+        }
+
+        int[] history = variableTracker.resourcePrices[resourceIndex];
+        if (history == null || history.Length == 0)
+        {
+            Debug.LogWarning($"SimpleStockMarket.GetCurrentPrice: price history is empty for index {resourceIndex}.");
             return 0;
-            
-        return variableTracker.resourcePrices[resourceIndex][variableTracker.resourcePrices[resourceIndex].Length - 1];
+        }
+
+        return history[history.Length - 1];
     }
 }
