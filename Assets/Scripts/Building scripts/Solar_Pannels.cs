@@ -154,7 +154,7 @@ public class Solar_Pannels: MonoBehaviour
         Renderer objectRenderer = GetComponent<Renderer>();
         if (objectRenderer != null && material != null)
         {
-            Debug.Log("Material changed to " + material.name);
+            //Debug.Log("Material changed to " + material.name);
             objectRenderer.material = material;
         }
     }
